@@ -1,0 +1,191 @@
+Protocol to Access WS database (paws)
+
+https://www.ietf.org/wg/concluded/paws.html
+
+Last modified: 2015-05-22
+Chair(s)
+
+    Gabor Bajko <gaborbajko@gmail.com>
+    Brian Rosen <br@brianrosen.net>
+
+AREA Area Director(s)
+
+    Barry Leiba <barryleiba@computer.org>
+
+Mailing Lists:
+
+General Discussion: paws@ietf.org
+To Subscribe: https://www.ietf.org/mailman/listinfo/paws
+Archive: http://www.ietf.org/mail-archive/web/paws/
+Description of Working Group:
+
+Background
+
+Radio spectrum is a limited resource. National and international
+bodies assign different frequencies for specific uses, and in
+most cases license the rights to use these frequencies. Locally
+unused spectrum is commonly called "white space" and may be made
+available to other services on a basis of non-interference with
+the primary user of the frequencies concerned (if any). This
+technique can help "unlock" existing spectrum, for example to
+enable the wireless communications industry to provide more
+services over frequencies associated with unused television
+channels. An obvious requirement is that white space uses must
+not interfere with the primary use of the spectrum. This is
+achieved through spatial and/or temporal separation of the
+primary user and whitespace user with due consideration made to
+the radio characteristics of the two uses.
+
+Problem Statement
+
+The fundamental problem is enabling a radio device to determine, in
+a specific location and at specific time, if any white space is
+available for secondary use. There are two parties to such an
+interaction:
+
+1. A database containing records about the protected contours (in
+space and time) of primary spectrum users. Typically, such databases
+will be populated by information provided by the appropriate spectrum
+regulation bodies and by spectrum licensees.
+
+2. A radio device that wishes to query such a database. Typically, the
+nature of the query will depend on the needs of the device.
+
+The contents of white space databases, and the needs of radio devices,
+are being defined elsewhere. However, these parties need a protocol
+for communication that will enable radio devices to find out what white
+space is available at a given time in a given location.
+
+It is expected that white space databases will be reachable via the
+Internet, and that radio devices too will have some form of Internet
+connectivity, directly or indirectly. Therefore, it is appropriate
+to define an Internet-based protocol for querying white space databases
+and receiving responses from such databases.
+
+In rough outline, such a protocol would enable a radio device that
+knows its location and the current time to complete the following tasks:
+
+1. Determine the relevant white space database to query.
+
+2. Connect to the database using a well-defined communication method.
+
+3. Provide its geolocation and perhaps other data to the database
+using a well-defined format for querying the database.
+
+4. Receive in return a list of available white space spectrum
+with their characteristics, using a well-defined format for
+returning information.
+
+5. Report to the white space database anticipated spectrum usage
+at a suitable granularity.
+
+Once the device learns of the available white space (e.g., in a TV
+white space implementation, the list of available channels at that
+location), it can then select one of the bands from the list and
+begin to transmit and receive on the selected band. If the device's
+parameters have changed (e.g., if some amount of time has passed or if
+the device has changed location beyond a specified threshold), it might
+need to query the database again to determine what white space is still
+available.
+
+Objectives
+
+The overall goals of this working group are to:
+
+1. Standardize a mechanism for discovering a white space database.
+
+2. Standardize a method for communicating with a white space
+database.
+
+3. Standardize the data formats to be carried over the defined
+database communication method.
+
+4. Ensure that the discovery mechanism, database access method,
+and query/response formats have appropriate security levels in place.
+
+By "standardize" is not meant that the working group will necessarily
+develop new technologies. In completing its work, the group will:
+
+- Evaluate existing discovery mechanisms to determine if one of
+them provides the necessary application features and security
+properties (or can be extended to do so) for discovering a
+white space database. Examples might include DNS.
+
+- Evaluate existing application-layer transport protocols to
+determine if one of them provides the necessary application
+features and security properties (or can be extended to do so)
+for use as a building block for communication between location-
+aware devices and white space databases. If such a method
+exists, the group will reuse it; if not, the group will develop
+one. Examples might include HTTP.
+
+- Develop a method for querying a white space database. Such
+a method will utilize, so far as possible, the features of
+the application-layer transport protocol and not re-implement
+them in the new protocol. It will include mechanisms to verify
+that the requests and responses come from authorized sources,
+and that they have not been modified in transit. Examples might
+include LDAP.
+
+- Define extensible formats for both location-specific queries and
+location-specific responses for interaction with radio white
+space databases. The group will consider whether existing data
+formats can be reused.
+
+The protocol must protect both the channel enablement process and the
+privacy of users. Robust privacy and security mechanisms are needed
+to prevent: device identity spoofing, modification of device requests,
+modification of channel enablement information, impersonation of
+registered database services, and unauthorized disclosure of a device's
+location. The group will consider whether existing privacy and
+security mechanisms can be reused.
+
+The task of defining the structure and contents of the databases
+themselves is out of scope. The group will standardize formats for
+communication between devices and databases, but not the information
+models for the databases, since those models are likely to be
+country-specific or application-specific. In addition, the particular
+data exchanged between a device and a database might depend on the
+ranges of radio spectrum that are to be used, the requirements of the
+database operators and their governing regulations, and other factors.
+Therefore, the database access method and the query/response data
+formats that are exchanged using that method need to be designed for
+extensibility rather than being tied to any specific spectrum, country,
+or phy/mac/air interface. For example, the working group should define
+extension points for the database access method and the query/response
+formats, so that use cases other than those currently envisioned can be
+addressed in the future if a community of interest wishes to do so.
+However, the access method and query/response formats will incorporate
+relevant aspects of the parameters needed for the currently envisioned
+use cases to ensure proper operation.
+
+In accordance with existing IETF processes, the group will communicate
+and invite participation with other relevant standards bodies and
+groups, and if necessary reuse existing liaison relationships or
+request the establishment of new liaison relationships, including but
+not limited to IEEE 802.11af and IEEE 802.22. In order to ensure that
+it takes into account a broad range of possible use cases and
+requirements, the group should also reach out to other potential
+"customers" for a white space database access method and consider input
+from regulatory entities that are involved in the specification of the
+rules for secondary use of spectrum in specific radio bands.
+
+Deliverables
+
+1. A description of the relevant use cases and requirements. This
+document shall be Informational. Subject to working group consensus,
+draft-probasco-paws-overview-usecases and draft-patil-paws-problem-stmt
+might be used as a starting point.
+
+2. A specification of the mechanism for discovering a white space
+database, the method for accessing a white space database, and the
+query/response formats for interacting with a white space database.
+This document shall be Standards Track.
+Goals and Milestones
+Aug 2012 	Submit 'Use Cases and Requirements for Accessing a Radio White Space Database' to the IESG for publication as Informational
+Apr 2013 	Submit 'Accessing a Radio White Space Database' to the IESG for publication as Proposed Standard
+Request for Comments
+
+    RFC 6953 Protocol to Access White-Space (PAWS) Databases: Use Cases and Requirements (Informational)
+    RFC 7545 Protocol to Access White-Space (PAWS) Database (Proposed Standard)
+
