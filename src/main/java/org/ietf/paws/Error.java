@@ -13,7 +13,7 @@
  */
 package org.ietf.paws;
 
-import ch.keybridge.lib.paws.PAWSError;
+import ch.keybridge.lib.paws.PawsError;
 import java.util.Objects;
 import javax.xml.bind.annotation.*;
 
@@ -134,7 +134,7 @@ public class Error {
    */
   private Object data;
 
-  public static Error getInstance(PAWSError pawsError) {
+  public static Error getInstance(PawsError pawsError) {
     Error error = new Error();
     error.setCode(pawsError.getCode());
     error.setMessage(pawsError.getDescription());
