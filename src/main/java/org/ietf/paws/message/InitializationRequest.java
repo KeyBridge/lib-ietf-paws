@@ -47,7 +47,7 @@ import org.ietf.paws.GeoLocation;
 @XmlRootElement(name = "INIT_REQ")
 @XmlType(name = "INIT_REQ")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class InitializationRequest {
+public class InitializationRequest extends AbstractRequest {
 
   /**
    * The DeviceDescriptor (Section 5.2) for the device is REQUIRED. If the

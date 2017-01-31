@@ -48,7 +48,7 @@ import org.ietf.paws.RulesetInfo;
 @XmlRootElement(name = "REGISTRATION_RESP")
 @XmlType(name = "REGISTRATION_RESP")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class RegistrationResponse {
+public class RegistrationResponse extends AbstractResponse {
 
   /**
    * A RulesetInfo (Section 5.6) list MUST be included in the response. Each

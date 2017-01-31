@@ -47,7 +47,7 @@ import org.ietf.paws.RulesetInfo;
 @XmlRootElement(name = "INIT_RESP")
 @XmlType(name = "INIT_RESP")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class InititializationResponse {
+public class InititializationResponse extends AbstractResponse {
 
   /**
    * A RulesetInfo (Section 5.6) list MUST be included in the response. Each

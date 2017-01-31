@@ -95,7 +95,7 @@ import org.ietf.paws.SpectrumSpec;
 @XmlRootElement(name = "AVAIL_SPECTRUM_RESP")
 @XmlType(name = "AVAIL_SPECTRUM_RESP")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class AvailableSpectrumResponse {
+public class AvailableSpectrumResponse extends AbstractResponse {
 
   /**
    * Timestamp of the response is expressed in UTC using the form,
@@ -127,6 +127,11 @@ public class AvailableSpectrumResponse {
    * Database with the alternate Databases listed in the DbUpdateSpec.
    */
   private DbUpdateSpec databaseChange;
+
+  public AvailableSpectrumResponse() {
+    super();
+    this.timestamp = new Date();
+  }
 
   public Date getTimestamp() {
     return timestamp;

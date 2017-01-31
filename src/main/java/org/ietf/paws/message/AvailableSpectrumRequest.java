@@ -50,7 +50,7 @@ import org.ietf.paws.*;
 @XmlRootElement(name = "AVAIL_SPECTRUM_REQ")
 @XmlType(name = "AVAIL_SPECTRUM_REQ")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class AvailableSpectrumRequest {
+public class AvailableSpectrumRequest extends AbstractRequest {
 
   /**
    * The DeviceDescriptor (Section 5.2) for the device requesting available

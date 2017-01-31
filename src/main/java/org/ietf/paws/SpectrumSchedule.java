@@ -13,6 +13,7 @@
  */
 package org.ietf.paws;
 
+import ch.keybridge.lib.paws.PawsChannel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
@@ -49,12 +50,18 @@ public class SpectrumSchedule {
   @XmlElement(required = true)
   private EventTime eventTime;
   /**
+   * @deprecated use {@link #channels}
+   *
    * The Spectrum (Section 5.11) list is REQUIRED to specify the available
    * spectrum and permissible power levels, one per resolutionBwHz. The list MAY
    * be empty when there is no available spectrum.
    */
   @XmlElement(required = true)
   private List<Spectrum> spectra;
+
+  @XmlElementWrapper(name = "channels")
+  @XmlElement(name = "channel", required = true)
+  private List<PawsChannel> channels;
 
   public EventTime getEventTime() {
     return eventTime;
@@ -74,4 +81,16 @@ public class SpectrumSchedule {
   public void setSpectra(List<Spectrum> spectra) {
     this.spectra = spectra;
   }
+
+  public List<PawsChannel> getChannels() {
+    if (channels == null) {
+      channels = new ArrayList<>();
+    }
+    return channels;
+  }
+
+  public void setChannels(List<PawsChannel> channels) {
+    this.channels = channels;
+  }
+
 }

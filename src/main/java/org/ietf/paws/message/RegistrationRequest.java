@@ -49,7 +49,7 @@ import org.ietf.paws.GeoLocation;
 @XmlRootElement(name = "REGISTRATION_REQ")
 @XmlType(name = "REGISTRATION_REQ")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class RegistrationRequest {
+public class RegistrationRequest extends AbstractRequest {
 
   /**
    * The DeviceDescriptor (Section 5.2) for the Master Device is REQUIRED. The
