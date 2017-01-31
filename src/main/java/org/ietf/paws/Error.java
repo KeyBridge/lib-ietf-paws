@@ -13,6 +13,8 @@
  */
 package org.ietf.paws;
 
+import ch.keybridge.lib.paws.PAWSError;
+import java.util.Objects;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -132,6 +134,13 @@ public class Error {
    */
   private Object data;
 
+  public static Error getInstance(PAWSError pawsError) {
+    Error error = new Error();
+    error.setCode(pawsError.getCode());
+    error.setMessage(pawsError.getDescription());
+    return error;
+  }
+
   public Integer getCode() {
     return code;
   }
@@ -155,4 +164,27 @@ public class Error {
   public void setData(Object data) {
     this.data = data;
   }
+
+  @Override
+  public int hashCode() {
+    int hash = 3;
+    hash = 97 * hash + Objects.hashCode(this.code);
+    return hash;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Error other = (Error) obj;
+    return Objects.equals(this.code, other.code);
+  }
+
 }
