@@ -73,6 +73,7 @@ public class SpectrumSpec {
    */
   @XmlElement(required = true)
   private List<SpectrumSchedule> spectrumSchedules;
+
   /**
    * The time range for which the specification is comprehensive is OPTIONAL.
    * When specified, any gaps in time intervals within the spectrumSchedules
@@ -119,17 +120,6 @@ public class SpectrumSpec {
    * spectrum has bandwidth that exceeds this value.
    */
   private Double maxContiguousBwHz;
-  /**
-   * 9.2.2.7. ETSI Simultaneous Channel Operation Restriction
-   * <p>
-   * Specification document(s): Specifies the constraint on the device maximum
-   * total EIRP, as defined by the ETSI Harmonised Standard [ETSI-EN-301-598].
-   * The values are represented by numeric strings, such as "0", "1", etc.
-   * Consult the documentation for the specification of the power constraint
-   * corresponding to each parameter value.
-   * <p>
-   */
-  private String etsiEnSimultaneousChannelOperationRestriction;
 
   public RulesetInfo getRulesetInfo() {
     return rulesetInfo;
@@ -191,14 +181,6 @@ public class SpectrumSpec {
 
   public void setMaxContiguousBwHz(Double maxContiguousBwHz) {
     this.maxContiguousBwHz = maxContiguousBwHz;
-  }
-
-  public String getEtsiEnSimultaneousChannelOperationRestriction() {
-    return etsiEnSimultaneousChannelOperationRestriction;
-  }
-
-  public void setEtsiEnSimultaneousChannelOperationRestriction(String etsiEnSimultaneousChannelOperationRestriction) {
-    this.etsiEnSimultaneousChannelOperationRestriction = etsiEnSimultaneousChannelOperationRestriction;
   }
 
 }
