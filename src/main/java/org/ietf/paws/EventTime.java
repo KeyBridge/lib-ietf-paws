@@ -14,6 +14,7 @@
 package org.ietf.paws;
 
 import ch.keybridge.lib.xml.adapter.XmlDateTimeAdapter;
+import java.util.Calendar;
 import java.util.Date;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -61,13 +62,24 @@ public class EventTime {
    */
   @XmlJavaTypeAdapter(XmlDateTimeAdapter.class)
   @XmlElement(required = true)
-  public Date startTime;
+  private Date startTime;
   /**
    * The exclusive end of the event is REQUIRED.
    */
   @XmlJavaTypeAdapter(XmlDateTimeAdapter.class)
   @XmlElement(required = true)
-  public Date stopTime;
+  private Date stopTime;
+
+  public EventTime() {
+    this.startTime = new Date();
+  }
+
+  public void setDuration(int seconds) {
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(startTime);
+    calendar.add(Calendar.SECOND, seconds);
+    this.stopTime = calendar.getTime();
+  }
 
   public Date getStartTime() {
     return startTime;
