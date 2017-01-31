@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name = "PAWSError")
 @XmlEnum
-public enum PAWSError {
+public enum PawsError {
 
   /**
    * The Database does not support the specified version of the message. This
@@ -53,7 +53,7 @@ public enum PAWSError {
    * location. See OUTSIDE_COVERAGE Error (Section 5.17.1 of [RFC7545]) for more
    * details.
    */
-  OUTSIDE_COVERAGE(-104, "The specified geolocation is outside the coverage area of the Database. See OUTSIDE_COVERAGE Error (Section 5.17.1 of [RFC7545]) for more details."),
+  OUTSIDE_COVERAGE(-104, "The specified geolocation is outside the coverage area of the Database."),
   /**
    * The Database has changed its URI. The Database MAY include a DbUpdateSpec
    * (Section 5.7 of [RFC7545]) in the error response to provide devices with
@@ -62,7 +62,7 @@ public enum PAWSError {
    * databases listed in the DbUpdateSpec. See DATABASE_CHANGE Error (Section
    * 5.17.2 of [RFC7545]) for more details.
    */
-  DATABASE_CHANGE(-105, "The Database has changed its URI. See DATABASE_CHANGE Error (Section 5.17.2 of [RFC7545]) for more details."),
+  DATABASE_CHANGE(-105, "The Database has changed its URI."),
   /**
    * A required parameter is missing. The Database MUST include a list of the
    * required parameter names. The Database MAY include only names of parameters
@@ -70,7 +70,7 @@ public enum PAWSError {
    * missing parameters may reduce the number of re-queries from the device. See
    * MISSING Error (Section 5.17.3 of [RFC7545]) for more details.
    */
-  MISSING(-201, "A required parameter is missing. See MISSING Error (Section 5.17.3 of [RFC7545]) for more details."),
+  MISSING(-201, "A required parameter is missing."),
   /**
    * A parameter value is invalid in some way. The Database SHOULD include a
    * message indicating which parameter and why its value is invalid. This error
@@ -87,12 +87,27 @@ public enum PAWSError {
    * Device registration required, but the device is not registered. This error
    * does not use any additional data.
    */
-  NOT_REGISTERED(-302, "Device registration required, but the device is not registered.");
+  NOT_REGISTERED(-302, "Device registration required, but the device is not registered."),
+  /**
+   * The request failed due to an internal error in the database.
+   */
+  INTERNAL_DATABASE_ERROR(500, "The request failed due to an internal error in the database."),
+  /**
+   * The request was invalid for some other reason. For example, the API key was
+   * invalid.
+   */
+  BAD_REQUEST(400, "The request was invalid for some other reason. For example, the API key was invalid."),
+  /**
+   * The number of queries has exceeded the quota allocated to the project
+   * associated with the API key. This may also be triggered if the API key
+   * wasn't present in the request.
+   */
+  QUOTA(403, "The number of queries has exceeded the API key quota. This may also be triggered if the API key wasn't present in the request. ");
 
   private final int code;
   private final String description;
 
-  private PAWSError(int code, String description) {
+  private PawsError(int code, String description) {
     this.code = code;
     this.description = description;
   }
@@ -105,8 +120,8 @@ public enum PAWSError {
     return description;
   }
 
-  public static PAWSError fromCode(int code) {
-    for (PAWSError error : PAWSError.values()) {
+  public static PawsError fromCode(int code) {
+    for (PawsError error : PawsError.values()) {
       if (error.getCode() == code) {
         return error;
       }
