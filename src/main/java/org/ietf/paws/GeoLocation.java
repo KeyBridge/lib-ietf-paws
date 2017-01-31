@@ -25,10 +25,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * GeoLocation is used to specify a single point with optional uncertainty or a
  * region described by a polygon.
  * <p>
- * These are represented using geometric shapes defined in Section 5 of "GEOPRIV
- * Presence Information Data Format Location Object" [RFC5491], where a "point"
- * with uncertainty is represented using the Ellipse shape; and a region is
- * represented using the Polygon shape.
+ * Key Bridge: These are represented using geometries encoded using SFA Well
+ * Known Text.
+ * <p>
+ * Deprecated: <em> These are represented using geometric shapes defined in
+ * Section 5 of "GEOPRIV Presence Information Data Format Location Object"
+ * [RFC5491], where a "point" with uncertainty is represented using the Ellipse
+ * shape; and a region is represented using the Polygon shape.</em>
  * <p>
  * The coordinates are expressed using the WGS84 datum [WGS-84], and units are
  * degrees or meters. GeoLocation MAY also include a confidence level, expressed
