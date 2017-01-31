@@ -75,52 +75,55 @@ public class DeviceDescriptor {
 
   /**
    * Specifies a device's government certification ID (Section 9.2.2.1).
+   * <p>
+   * Specifies the device's FCC certification identifier. A valid FCC ID is
+   * limited to 19 characters in the ASCII value range, as proposed in FCC
+   * Administration Topics Review [FCC-Review-2012-10]. For the purposes of the
+   * PAWS protocol, the maximum length of the fccId value is 32 octets.
    */
   @XmlElement(required = true)
   private String id;
   /**
    * Specifies the Device Type (Section 9.2.2.2) of TV-band white-space device,
-   * as defined by rule.
+   * as defined by rule. See 9.2.2.2. FCC Device Type:
+   * {@code fccTvbdDeviceType}: Specifies the TV-band white-space device type.
+   * <p>
+   * Deprecated: <i>FCC Valid values are "FIXED", "MODE_1", and for
+   * "MODE_2".</i>
+   * <p>
+   * See also 9.2.2.3. ETSI Device Type: Specification document(s): Specifies
+   * the white-space device type, as defined by the ETSI Harmonised Standard
+   * [ETSI-EN-301-598]. Valid values are single-letter strings, such as "A",
+   * "B", etc. Consult the documentation for details about the device types.
+   * <p>
+   * Key Bridge: Valid values are "FIXED", "MODE2_HP" for high power, "MODE2_LP"
+   * for low power, "MODE1".
    */
   @XmlElement(required = true)
   private String tvbdDeviceType;
 
   /**
-   * 9.2.2.3. ETSI Device Type
+   * This transmitter's wireless emission designator.
    * <p>
-   * Specification document(s): Specifies the white-space device type, as
-   * defined by the ETSI Harmonised Standard [ETSI-EN-301-598]. Valid values are
-   * single-letter strings, such as "A", "B", etc. Consult the documentation for
-   * details about the device types.
-   */
-  private String etsiEnDeviceType;
-  /**
-   * 9.2.2.4. ETSI Device Emissions Class
+   * Each type of radio emission is classified according to its bandwidth,
+   * method of modulation, nature of the modulating signal, and type of
+   * information transmitted on the carrier signal. It is based on
+   * characteristics of the signal, not on the transmitter used.
    * <p>
-   * Specification document(s): Specifies the white-space device emissions
-   * class, as defined by the ETSI Harmonised Standard [ETSI-EN-301-598], that
-   * characterizes the out-of-block emissions of the device. The values are
-   * represented by numeric strings, such as "1", "2", "3", etc. Consult the
-   * documentation for details about emissions classes.
-   */
-  private String etsiEnDeviceEmissionsClass;
-  /**
-   * 9.2.2.5. ETSI Technology Identifier
+   * This value is typically associated with licensed services, and is used to
+   * encode the type of modulation of the main carrier, the nature of the
+   * modulating signals, and the type of information to be transmitted.
    * <p>
-   * Specification document(s): Specifies the white-space device technology
-   * identifier, as defined by the ETSI Harmonised Standard [ETSI-EN-301-598].
-   * The maximum length of the string value is 64 octets. Consult the
-   * documentation for valid values.
+   * An emission designation is of the form 'BBBB 123 45', where BBBB is the
+   * bandwidth of the signal, 1 is a letter indicating the type of modulation
+   * used of the main carrier (not including any subcarriers. 2 is a digit
+   * representing the type of modulating signal again of the main carrier, 3 is
+   * a letter corresponding to the type of information transmitted, 4 is a
+   * letter indicating the practical details of the transmitted information, and
+   * 5 is a letter that represents the method of multiplexing. The 4 and 5
+   * fields are optional.
    */
-  private String etsiEnTechnologyId;
-  /**
-   * 9.2.2.6. ETSI Device Category
-   * <p>
-   * Specification document(s): Specifies the white-space device category, as
-   * defined by the ETSI Harmonised Standard [ETSI-EN-301-598]. Valid values are
-   * the strings "master" and "slave". It is case insensitive.
-   */
-  private String etsiEnDeviceCategory;
+  protected String emissionDesignator;
 
   public String getSerialNumber() {
     return serialNumber;
@@ -170,36 +173,12 @@ public class DeviceDescriptor {
     this.tvbdDeviceType = tvbdDeviceType;
   }
 
-  public String getEtsiEnDeviceType() {
-    return etsiEnDeviceType;
+  public String getEmissionDesignator() {
+    return emissionDesignator;
   }
 
-  public void setEtsiEnDeviceType(String etsiEnDeviceType) {
-    this.etsiEnDeviceType = etsiEnDeviceType;
-  }
-
-  public String getEtsiEnDeviceEmissionsClass() {
-    return etsiEnDeviceEmissionsClass;
-  }
-
-  public void setEtsiEnDeviceEmissionsClass(String etsiEnDeviceEmissionsClass) {
-    this.etsiEnDeviceEmissionsClass = etsiEnDeviceEmissionsClass;
-  }
-
-  public String getEtsiEnTechnologyId() {
-    return etsiEnTechnologyId;
-  }
-
-  public void setEtsiEnTechnologyId(String etsiEnTechnologyId) {
-    this.etsiEnTechnologyId = etsiEnTechnologyId;
-  }
-
-  public String getEtsiEnDeviceCategory() {
-    return etsiEnDeviceCategory;
-  }
-
-  public void setEtsiEnDeviceCategory(String etsiEnDeviceCategory) {
-    this.etsiEnDeviceCategory = etsiEnDeviceCategory;
+  public void setEmissionDesignator(String emissionDesignator) {
+    this.emissionDesignator = emissionDesignator;
   }
 
 }
