@@ -19,6 +19,8 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
+ * <img src="doc-files/eventTime.png">
+ * <p>
  * 5.14. EventTime
  * <p>
  * The EventTime element specifies the start and stop times of an "event". This

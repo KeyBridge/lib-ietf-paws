@@ -17,6 +17,8 @@ import javax.xml.bind.annotation.*;
 import org.ietf.paws.*;
 
 /**
+ * <img src="doc-files/avail_spectrum_req.png">
+ * <p>
  * 4.5.1. AVAIL_SPECTRUM_REQ
  * <p>
  * The request message for the Available Spectrum Query protocol MUST include a

@@ -18,6 +18,8 @@ import org.ietf.paws.DeviceDescriptor;
 import org.ietf.paws.GeoLocation;
 
 /**
+ * <img src="doc-files/init_req.png">
+ * <p>
  * 4.3.1. INIT_REQ
  * <p>
  * The initialization request message allows the Master Device to initiate

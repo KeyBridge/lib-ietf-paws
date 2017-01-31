@@ -16,6 +16,8 @@ package org.ietf.paws;
 import javax.xml.bind.annotation.*;
 
 /**
+ * <img src="doc-files/deviceValidity.png">
+ * <p>
  * 5.16. DeviceValidity
  * <p>
  * The DeviceValidity element is used to indicate whether a device is valid. See

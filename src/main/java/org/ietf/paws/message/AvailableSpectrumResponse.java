@@ -24,6 +24,8 @@ import org.ietf.paws.DeviceDescriptor;
 import org.ietf.paws.SpectrumSpec;
 
 /**
+ * <img src="doc-files/avail_spectrum_resp.png">
+ * <p>
  * 4.5.2. AVAIL_SPECTRUM_RESP
  * <p>
  * The response message for the Available Spectrum Query contains one or more

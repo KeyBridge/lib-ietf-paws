@@ -19,6 +19,7 @@ import java.util.Objects;
 import javax.xml.bind.annotation.*;
 
 /**
+ * <img src="doc-files/contact.png">
  * A database entity class to manage, store and retrieve user contact
  * information.
  * <p>

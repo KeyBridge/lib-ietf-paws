@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>keybridge.lib</groupId>
   <artifactId>protocol-paws</artifactId>
-  <version>0.0.1</version>
+  <version>0.1.0</version>
   <packaging>jar</packaging>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,6 +17,7 @@
 
     History
     v0.0.1 - first draft of implementation from RFC 7545; basic beans with annotation
+    v0.1.0 - complete beans, add images to documentation
   </description>
   <dependencies>
     <dependency>

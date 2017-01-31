@@ -16,6 +16,8 @@ package org.ietf.paws;
 import javax.xml.bind.annotation.*;
 
 /**
+ * <img src="doc-files/rulesetInfo.png">
+ * <p>
  * 5.6. RulesetInfo
  * <p>
  * RulesetInfo contains parameters for the ruleset of a regulatory domain that

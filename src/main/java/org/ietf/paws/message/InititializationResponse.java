@@ -20,6 +20,8 @@ import org.ietf.paws.DbUpdateSpec;
 import org.ietf.paws.RulesetInfo;
 
 /**
+ * <img src="doc-files/init_resp.png">
+ * <p>
  * 4.3.2. INIT_RESP
  * <p>
  * The initialization response message communicates database parameters to the
@@ -35,9 +37,7 @@ import org.ietf.paws.RulesetInfo;
  * |.......................................|
  * |*other:any                  | OPTIONAL |
  * +----------------------------+----------+
- * </pre>
- * <p>
- * other: The Database MAY include additional handshake parameters in the
+ * </pre> other: The Database MAY include additional handshake parameters in the
  * INIT_RESP (Section 4.3.2) message. The Master Device MUST ignore all
  * parameters it does not understand. Consult the PAWS Parameters Registry
  * (Section 9.2) for possible additional parameters.

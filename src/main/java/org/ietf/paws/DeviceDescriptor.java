@@ -17,6 +17,8 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 
 /**
+ * <img src="doc-files/deviceDescriptor.png">
+ * <p>
  * 5.2. DeviceDescriptor
  * <p>
  * The device descriptor contains parameters that identify the specific device,

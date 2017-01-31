@@ -21,6 +21,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
+ * <img src="doc-files/deviceCapabilities.png">
+ * <p>
  * 5.4. DeviceCapabilities
  * <p>
  * Device capabilities provide additional information that may be used by the

@@ -20,6 +20,8 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
+ * <img src="doc-files/geoLocation.png">
+ * <p>
  * GeoLocation is used to specify a single point with optional uncertainty or a
  * region described by a polygon.
  * <p>

@@ -18,7 +18,9 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 
 /**
- * 5.12. SpectrumProfilePoint
+ * <img src="doc-files/spectrumProfile.png">
+ * <p>
+ * 5.12. SpectrumProfile (Point)
  * <p>
  * A spectrum profile is characterized by an ordered list of (frequency, power)
  * points that represents the shape of maximum permissible power levels over a

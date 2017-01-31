@@ -16,6 +16,8 @@ package org.ietf.paws;
 import javax.xml.bind.annotation.*;
 
 /**
+ * <img src="doc-files/error.png">
+ * <p>
  * 5.17. Error Element
  * <p>
  * If the Database responds to a PAWS request message with an error, it MUST

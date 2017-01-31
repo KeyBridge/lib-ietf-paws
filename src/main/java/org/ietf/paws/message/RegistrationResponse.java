@@ -20,6 +20,8 @@ import org.ietf.paws.DbUpdateSpec;
 import org.ietf.paws.RulesetInfo;
 
 /**
+ * <img src="doc-files/registration_resp.png">
+ * <p>
  * 4.4.2. REGISTRATION_RESP
  * <p>
  * The registration response message acknowledges successful registration by

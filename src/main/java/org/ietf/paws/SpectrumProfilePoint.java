@@ -16,6 +16,8 @@ package org.ietf.paws;
 import javax.xml.bind.annotation.*;
 
 /**
+ * <img src="doc-files/spectrumProfilePoint.png">
+ * <p>
  * 5.12. SpectrumProfilePoint
  * <p>
  * A spectrum profile is characterized by an ordered list of (frequency, power)

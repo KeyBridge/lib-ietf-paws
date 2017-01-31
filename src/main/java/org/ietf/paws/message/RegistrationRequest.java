@@ -20,6 +20,8 @@ import org.ietf.paws.DeviceOwner;
 import org.ietf.paws.GeoLocation;
 
 /**
+ * <img src="doc-files/registration_req.png">
+ * <p>
  * 4.4.1. REGISTRATION_REQ
  * <p>
  * The registration request message contains the required registration

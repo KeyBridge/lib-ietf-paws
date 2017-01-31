@@ -18,6 +18,7 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 
 /**
+ * <img src="doc-files/spectrumSpec.png">
  * 5.9. SpectrumSpec
  * <p>
  * The SpectrumSpec element encapsulates the schedule of available spectrum for

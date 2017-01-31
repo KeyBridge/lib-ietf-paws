@@ -16,6 +16,8 @@ package org.ietf.paws;
 import javax.xml.bind.annotation.*;
 
 /**
+ * <img src="doc-files/frequencyRange.png">
+ * <p>
  * 5.13. FrequencyRange
  * <p>
  * FrequencyRange specifies a frequency range.

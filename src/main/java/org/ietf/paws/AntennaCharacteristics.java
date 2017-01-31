@@ -19,6 +19,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
+ * <img src="doc-files/antennaCharacteristics.png">
+ * <p>
  * 5.3. AntennaCharacteristics
  * <p>
  * Antenna characteristics provide additional information, such as the antenna

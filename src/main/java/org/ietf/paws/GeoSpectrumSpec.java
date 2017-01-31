@@ -18,6 +18,8 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 
 /**
+ * <img src="doc-files/geoSpectrumSpec.png">
+ * <p>
  * 5.15. GeoSpectrumSpec
  * <p>
  * The GeoSpectrumSpec element encapsulates the available spectrum for a

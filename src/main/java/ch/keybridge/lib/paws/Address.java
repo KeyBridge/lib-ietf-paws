@@ -20,6 +20,8 @@ import java.util.Objects;
 import javax.xml.bind.annotation.*;
 
 /**
+ * <img src="doc-files/address.png">
+ * <p>
  * Address is a standardized container for physical (e.g. mailing) street
  * information. This is a simplified implementation similar to the IETF ‘civic
  * street’ concept.
