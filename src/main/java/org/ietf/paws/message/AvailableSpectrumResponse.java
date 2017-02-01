@@ -13,15 +13,14 @@
  */
 package org.ietf.paws.message;
 
+import ch.keybridge.lib.paws.PawsChannel;
 import ch.keybridge.lib.xml.adapter.XmlDateTimeAdapter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.ietf.paws.DbUpdateSpec;
-import org.ietf.paws.DeviceDescriptor;
-import org.ietf.paws.SpectrumSpec;
+import org.ietf.paws.*;
 
 /**
  * <img src="doc-files/avail_spectrum_resp.png">
@@ -91,6 +90,8 @@ import org.ietf.paws.SpectrumSpec;
  * additional parameters and requirements they place on the device.
  *
  * @author Key Bridge LLC
+ * @since v0.2.0 rewritten 01/31/17 to use a simple list of PawsChannel instead
+ * of the SpectrumSpec list of lists of lists of lists of lists.
  */
 @XmlRootElement(name = "AVAIL_SPECTRUM_RESP")
 @XmlType(name = "AVAIL_SPECTRUM_RESP")
@@ -113,12 +114,18 @@ public class AvailableSpectrumResponse extends AbstractResponse {
   @XmlElement(required = true)
   private DeviceDescriptor deviceDesc;
   /**
-   * The SpectrumSpec (Section 5.9) list MUST include at least one entry. Each
-   * entry contains the schedules of available spectrum for a ruleset. The
-   * Database MAY return more than one SpectrumSpec to represent available
-   * spectrum for multiple rulesets at the specified location.
+   * @deprecated This silly list of lists is deprecated. The Response is
+   * flattened.
+   *
+   * Deprecated: <em> The SpectrumSpec (Section 5.9) list MUST include at least
+   * one entry. Each entry contains the schedules of available spectrum for a
+   * ruleset. The Database MAY return more than one SpectrumSpec to represent
+   * available spectrum for multiple rulesets at the specified location.</em>
+   * <p>
+   * Key Bridge: This is not used. Instead the components are FLATTENED into
+   * this message.
    */
-  @XmlElement(required = true)
+//  @XmlElement(required = true)
   private List<SpectrumSpec> spectrumSpecs;
   /**
    * The Database MAY include a DbUpdateSpec (Section 5.7) to notify the device
@@ -127,6 +134,57 @@ public class AvailableSpectrumResponse extends AbstractResponse {
    * Database with the alternate Databases listed in the DbUpdateSpec.
    */
   private DbUpdateSpec databaseChange;
+
+  // Key Bridge Modifications.
+  /**
+   * Key Bridge Modification. This is moved from {@code SpectrumSpec}.
+   * <p>
+   * RulesetInfo (Section 5.6) is REQUIRED to identify the regulatory domain and
+   * ruleset to which the spectrum schedule applies (see Ruleset ID Registry
+   * (Section 9.1)). The device needs to use the corresponding ruleset to
+   * interpret the response. Values provided within rulesetInfo, such as
+   * maxLocationChange, take precedence over the values provided by the
+   * Initialization Procedure (Section 4.3).
+   */
+  @XmlElement(required = true)
+  private RulesetInfo rulesetInfo;
+  /**
+   * Key Bridge Modification. This is moved from {@code SpectrumSpec}.
+   * <p>
+   * The time range for which the specification is comprehensive is OPTIONAL.
+   * When specified, any gaps in time intervals within the spectrumSchedules
+   * element that overlap with the range specified by "timeRange" are
+   * interpreted by the device as time intervals in which there is no available
+   * spectrum.
+   */
+  @XmlElement(required = true)
+  private EventTime timeRange;
+  /**
+   * Key Bridge Modification. This is moved from {@code SpectrumSpec}.
+   * <p>
+   * The Database MAY return true for this parameter if spectrumSchedules list
+   * is non-empty; otherwise, the Database MAY omit this parameter altogether,
+   * in which case, the default value is false. If this parameter is present and
+   * its value is true, the device sends a SPECTRUM_USE_NOTIFY (Section 4.5.5)
+   * message to the Database; otherwise, the device SHOULD NOT send the
+   * SPECTRUM_USE_NOTIFY message. Some rulesets mandate this value be set to
+   * true.
+   */
+  private Boolean needsSpectrumReport;
+
+  /**
+   * Key Bridge Modification. This is a custom component replacing the
+   * thrice-buried list of {@code SpectrumSpec / SpectrumSchedule / Spectrum},
+   * and then on to another set of buried lists under
+   * {@code SpectrumProfile / SpectrumProfilePoint}. Seriously, who designed
+   * that garbage? Here we use a simple list to provide all the frequency
+   * information. Neat and easy.
+   * <p>
+   * This replaces the Spectrum list silliness (Section 5.11).
+   */
+  @XmlElementWrapper(name = "channels", required = true)
+  @XmlElement(name = "channel", required = true)
+  private List<PawsChannel> channels;
 
   public AvailableSpectrumResponse() {
     super();
@@ -166,5 +224,40 @@ public class AvailableSpectrumResponse extends AbstractResponse {
 
   public void setDatabaseChange(DbUpdateSpec databaseChange) {
     this.databaseChange = databaseChange;
+  }
+
+  public RulesetInfo getRulesetInfo() {
+    return rulesetInfo;
+  }
+
+  public void setRulesetInfo(RulesetInfo rulesetInfo) {
+    this.rulesetInfo = rulesetInfo;
+  }
+
+  public EventTime getTimeRange() {
+    return timeRange;
+  }
+
+  public void setTimeRange(EventTime timeRange) {
+    this.timeRange = timeRange;
+  }
+
+  public Boolean getNeedsSpectrumReport() {
+    return needsSpectrumReport;
+  }
+
+  public void setNeedsSpectrumReport(Boolean needsSpectrumReport) {
+    this.needsSpectrumReport = needsSpectrumReport;
+  }
+
+  public List<PawsChannel> getChannels() {
+    if (channels == null) {
+      channels = new ArrayList<>();
+    }
+    return channels;
+  }
+
+  public void setChannels(List<PawsChannel> channels) {
+    this.channels = channels;
   }
 }
