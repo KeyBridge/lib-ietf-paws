@@ -13,13 +13,27 @@
  */
 package ch.keybridge.lib.paws;
 
+import ch.keybridge.lib.xml.adapter.XmlPrecisionAdapter02;
+import ch.keybridge.lib.xml.adapter.XmlPrecisionAdapter06;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
+ * A PAWS channel description.
+ * <p>
+ * The {@code PawsChannel} is used in the {@code AvailableSpectrumResponse}
+ * object to convey channel availability information..
+ * <p>
+ * Notes: This is a Key Bridge custom component replacing the twice-buried list
+ * of {@code SpectrumSchedule / Spectrum}, and then also the subsequent set of
+ * buried lists under {@code SpectrumProfile / SpectrumProfilePoint}.
+ * (Seriously, who designed that garbage?) This presents a simple container with
+ * all the frequency information you need in a simple package. Neat and easy.
  *
  * @author Key Bridge LLC
+ * @since v0.2.0 added 01/31/17
  */
 @XmlType(name = "PawsChannel")
 @XmlRootElement(name = "PawsChannel")
@@ -37,22 +51,25 @@ public class PawsChannel {
    * The maximum (or end) frequency of the indicated name in MHz.
    */
   @XmlElement(required = true)
-  private double frequencyMax;
+  @XmlJavaTypeAdapter(XmlPrecisionAdapter06.class)
+  private Double frequencyMax;
   /**
    * The minimum (or start) frequency of the indicated name in MHz.
    */
   @XmlElement(required = true)
-  private double frequencyMin;
+  @XmlJavaTypeAdapter(XmlPrecisionAdapter06.class)
+  private Double frequencyMin;
   /**
    * Indicator that the device operation is allowed or forbidden.
    */
-  @XmlElement(required = true)
-  private boolean allowed;
+  @XmlAttribute(name = "allowed", required = true)
+  private Boolean allowed;
   /**
    * The maximum allowable EIRP value on this channel. (dBW)
    */
   @XmlElement(required = true)
-  private double maxPowerDBW;
+  @XmlJavaTypeAdapter(XmlPrecisionAdapter02.class)
+  private Double maxPowerDBW;
 
   /**
    * A list of co-channel services.
