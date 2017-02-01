@@ -37,6 +37,8 @@
 
   <xs:element name="INIT_RESP" type="INIT_RESP"/>
 
+  <xs:element name="PawsChannel" type="PawsChannel"/>
+
   <xs:element name="REGISTRATION_REQ" type="REGISTRATION_REQ"/>
 
   <xs:element name="REGISTRATION_RESP" type="REGISTRATION_RESP"/>
@@ -221,55 +223,125 @@
   </xs:complexType>
 
   <xs:complexType name="INIT_REQ">
-    <xs:sequence>
-      <xs:element name="deviceDesc" type="DeviceDescriptor"/>
-      <xs:element name="location" type="GeoLocation"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="abstractRequest">
+        <xs:sequence>
+          <xs:element name="deviceDesc" type="DeviceDescriptor"/>
+          <xs:element name="location" type="GeoLocation"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="abstractRequest">
+    <xs:sequence/>
+    <xs:attribute name="version" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="INIT_RESP">
-    <xs:sequence>
-      <xs:element name="rulesetInfos" type="RulesetInfo" maxOccurs="unbounded"/>
-      <xs:element name="databaseChange" type="DbUpdateSpec" minOccurs="0"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="abstractResponse">
+        <xs:sequence>
+          <xs:element name="rulesetInfos" type="RulesetInfo" maxOccurs="unbounded"/>
+          <xs:element name="databaseChange" type="DbUpdateSpec" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="abstractResponse">
+    <xs:sequence/>
+    <xs:attribute name="version" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="REGISTRATION_REQ">
-    <xs:sequence>
-      <xs:element name="deviceDesc" type="DeviceDescriptor"/>
-      <xs:element name="location" type="GeoLocation"/>
-      <xs:element name="deviceOwner" type="DeviceOwner" minOccurs="0"/>
-      <xs:element name="antenna" type="AntennaCharacteristics" minOccurs="0"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="abstractRequest">
+        <xs:sequence>
+          <xs:element name="deviceDesc" type="DeviceDescriptor"/>
+          <xs:element name="location" type="GeoLocation"/>
+          <xs:element name="deviceOwner" type="DeviceOwner" minOccurs="0"/>
+          <xs:element name="antenna" type="AntennaCharacteristics" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="REGISTRATION_RESP">
-    <xs:sequence>
-      <xs:element name="rulesetInfos" type="RulesetInfo" maxOccurs="unbounded"/>
-      <xs:element name="databaseChange" type="DbUpdateSpec" minOccurs="0"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="abstractResponse">
+        <xs:sequence>
+          <xs:element name="rulesetInfos" type="RulesetInfo" maxOccurs="unbounded"/>
+          <xs:element name="databaseChange" type="DbUpdateSpec" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="AVAIL_SPECTRUM_REQ">
-    <xs:sequence>
-      <xs:element name="deviceDesc" type="DeviceDescriptor"/>
-      <xs:element name="location" type="GeoLocation"/>
-      <xs:element name="owner" type="DeviceOwner" minOccurs="0"/>
-      <xs:element name="antenna" type="AntennaCharacteristics" minOccurs="0"/>
-      <xs:element name="capabilities" type="DeviceCapabilities" minOccurs="0"/>
-      <xs:element name="masterDeviceDesc" type="DeviceDescriptor" minOccurs="0"/>
-      <xs:element name="masterDeviceLocation" type="GeoLocation" minOccurs="0"/>
-      <xs:element name="requestType" type="xs:string" minOccurs="0"/>
-    </xs:sequence>
+    <xs:complexContent>
+      <xs:extension base="abstractRequest">
+        <xs:sequence>
+          <xs:element name="deviceDesc" type="DeviceDescriptor"/>
+          <xs:element name="location" type="GeoLocation"/>
+          <xs:element name="owner" type="DeviceOwner" minOccurs="0"/>
+          <xs:element name="antenna" type="AntennaCharacteristics" minOccurs="0"/>
+          <xs:element name="capabilities" type="DeviceCapabilities" minOccurs="0"/>
+          <xs:element name="masterDeviceDesc" type="DeviceDescriptor" minOccurs="0"/>
+          <xs:element name="masterDeviceLocation" type="GeoLocation" minOccurs="0"/>
+          <xs:element name="requestType" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="AVAIL_SPECTRUM_RESP">
+    <xs:complexContent>
+      <xs:extension base="abstractResponse">
+        <xs:sequence>
+          <xs:element name="timestamp" type="xs:string"/>
+          <xs:element name="deviceDesc" type="DeviceDescriptor"/>
+          <xs:element name="spectrumSpecs" type="SpectrumSpec" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="databaseChange" type="DbUpdateSpec" minOccurs="0"/>
+          <xs:element name="rulesetInfo" type="RulesetInfo"/>
+          <xs:element name="timeRange" type="EventTime"/>
+          <xs:element name="needsSpectrumReport" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="channels" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="channel" type="PawsChannel" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="PawsChannel">
     <xs:sequence>
-      <xs:element name="timestamp" type="xs:string"/>
-      <xs:element name="deviceDesc" type="DeviceDescriptor"/>
-      <xs:element name="spectrumSpecs" type="SpectrumSpec" maxOccurs="unbounded"/>
-      <xs:element name="databaseChange" type="DbUpdateSpec" minOccurs="0"/>
+      <xs:element name="frequencyMax" type="xs:double"/>
+      <xs:element name="frequencyMin" type="xs:double"/>
+      <xs:element name="allowed" type="xs:boolean"/>
+      <xs:element name="maxPowerDBW" type="xs:double"/>
+      <xs:element name="servicesCo" minOccurs="0">
+        <xs:simpleType>
+          <xs:list itemType="xs:string"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="servicesAdj" minOccurs="0">
+        <xs:simpleType>
+          <xs:list itemType="xs:string"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="servicesTaboo" minOccurs="0">
+        <xs:simpleType>
+          <xs:list itemType="xs:string"/>
+        </xs:simpleType>
+      </xs:element>
     </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
   </xs:complexType>
 </xs:schema>
 
