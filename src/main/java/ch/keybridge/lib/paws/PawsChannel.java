@@ -21,6 +21,8 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
+ * <img src="doc-files/pawsChannel.png">
+ * <p>
  * A PAWS channel description.
  * <p>
  * The {@code PawsChannel} is used in the {@code AvailableSpectrumResponse}

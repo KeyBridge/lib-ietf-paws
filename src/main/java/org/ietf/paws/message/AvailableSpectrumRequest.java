@@ -17,6 +17,12 @@ import javax.xml.bind.annotation.*;
 import org.ietf.paws.*;
 
 /**
+ * Current: Key Bridge protocol {@code version} attribute added.
+ * <p>
+ * <img src="doc-files/avail_spectrum_req_1.png">
+ * <p>
+ * Original:
+ * <p>
  * <img src="doc-files/avail_spectrum_req.png">
  * <p>
  * 4.5.1. AVAIL_SPECTRUM_REQ

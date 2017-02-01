@@ -23,6 +23,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.paws.*;
 
 /**
+ * Current: {@code spectrumSpec} is deprecated and replaced by {@code channels}.
+ * Other objects moved here. Key Bridge protocol {@code version} and
+ * {@code message} UUID fields attributes added.
+ * <p>
+ * <img src="doc-files/avail_spectrum_resp_1.png">
+ * <p>
+ * Original:
+ * <p>
  * <img src="doc-files/avail_spectrum_resp.png">
  * <p>
  * 4.5.2. AVAIL_SPECTRUM_RESP

@@ -20,6 +20,12 @@ import org.ietf.paws.DeviceOwner;
 import org.ietf.paws.GeoLocation;
 
 /**
+ * Current: Key Bridge protocol {@code version} attribute added.
+ * <p>
+ * <img src="doc-files/registration_req_1.png">
+ * <p>
+ * Original:
+ * <p>
  * <img src="doc-files/registration_req.png">
  * <p>
  * 4.4.1. REGISTRATION_REQ

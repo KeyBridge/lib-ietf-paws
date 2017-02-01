@@ -20,6 +20,13 @@ import org.ietf.paws.DbUpdateSpec;
 import org.ietf.paws.RulesetInfo;
 
 /**
+ * Current: Key Bridge protocol {@code version} and {@code message} UUID fields
+ * attributes added.
+ * <p>
+ * <img src="doc-files/registration_resp_1.png">
+ * <p>
+ * Original:
+ * <p>
  * <img src="doc-files/registration_resp.png">
  * <p>
  * 4.4.2. REGISTRATION_RESP
