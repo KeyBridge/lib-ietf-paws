@@ -5,11 +5,7 @@
   <artifactId>protocol-paws</artifactId>
   <version>0.2.0</version>
   <packaging>jar</packaging>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-  </properties>
+
   <name>lib-protocol-paws</name>
   <description>Implementation of RFC 7545: Protocol to Access White-Space (PAWS) Databases
 
@@ -20,6 +16,18 @@
     v0.1.0 - complete beans, add images to documentation
     v0.2.0 - add custom PawsChannel object, reorganize AVAIL_SPECTRUM_RESP to make it usable
   </description>
+
+  <organization>
+    <name>Key Bridge</name>
+    <url>http://keybridge.ch</url>
+  </organization>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.vividsolutions</groupId>
@@ -44,4 +52,12 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <distributionManagement>
+    <repository>
+      <id>${repository.name}</id>
+      <url>${repository.url}</url>
+    </repository>
+  </distributionManagement>
+
 </project>
