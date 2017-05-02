@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * A PAWS channel description.
  * <p>
  * The {@code PawsChannel} is used in the {@code AvailableSpectrumResponse}
- * object to convey channel availability information..
+ * object to convey channel availability information.
  * <p>
  * Notes: This is a Key Bridge custom component replacing the twice-buried list
  * of {@code SpectrumSchedule / Spectrum}, and then also the subsequent set of
