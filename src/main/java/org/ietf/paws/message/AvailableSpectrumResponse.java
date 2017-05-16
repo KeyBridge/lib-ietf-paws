@@ -107,6 +107,14 @@ import org.ietf.paws.*;
 public class AvailableSpectrumResponse extends AbstractResponse {
 
   /**
+   * Key Bridge Modification.
+   * <p>
+   * Messages provides information about the white space channel build process.
+   */
+  @XmlElement(name = "message")
+  private String message;
+
+  /**
    * Timestamp of the response is expressed in UTC using the form,
    * YYYY-MM-DDThh:mm:ssZ, as defined by "Date and Time on the Internet:
    * Timestamps" [RFC3339]. This can be used by the device as a reference for
@@ -181,12 +189,13 @@ public class AvailableSpectrumResponse extends AbstractResponse {
   private Boolean needsSpectrumReport;
 
   /**
-   * Key Bridge Modification. This is a custom component replacing the
-   * thrice-buried list of {@code SpectrumSpec / SpectrumSchedule / Spectrum},
-   * and then on to another set of buried lists under
-   * {@code SpectrumProfile / SpectrumProfilePoint}. Seriously, who designed
-   * that garbage? Here we use a simple list to provide all the frequency
-   * information. Neat and easy.
+   * Key Bridge Modification.
+   * <p>
+   * This is a custom component replacing the thrice-buried list of
+   * {@code SpectrumSpec / SpectrumSchedule / Spectrum}, and then on to another
+   * set of buried lists under {@code SpectrumProfile / SpectrumProfilePoint}.
+   * Seriously, who designed that garbage? Here we use a simple list to provide
+   * all the frequency information. Neat and easy.
    * <p>
    * This replaces the Spectrum list silliness (Section 5.11).
    */
@@ -267,6 +276,14 @@ public class AvailableSpectrumResponse extends AbstractResponse {
 
   public void setChannels(List<PawsChannel> channels) {
     this.channels = channels;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
   }
 
   @Override
