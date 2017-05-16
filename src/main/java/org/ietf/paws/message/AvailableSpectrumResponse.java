@@ -268,4 +268,16 @@ public class AvailableSpectrumResponse extends AbstractResponse {
   public void setChannels(List<PawsChannel> channels) {
     this.channels = channels;
   }
+
+  @Override
+  public String toString() {
+    List<PawsChannel> allowedChannels = new ArrayList<>();
+    for (PawsChannel channel : getChannels()) {
+      if (channel.isAllowed()) {
+        allowedChannels.add(channel);
+      }
+    }
+    return allowedChannels.toString();
+  }
+
 }
