@@ -232,4 +232,9 @@ public class PawsChannel {
     return Double.doubleToLongBits(this.frequencyMin) == Double.doubleToLongBits(other.frequencyMin);
   }
 
+  @Override
+  public String toString() {
+    return name;
+  }
+
 }
