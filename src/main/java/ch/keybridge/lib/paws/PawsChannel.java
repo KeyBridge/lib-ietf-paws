@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.ietf.paws.EventTime;
 
 /**
  * <img src="doc-files/pawsChannel.png">
@@ -74,20 +75,40 @@ public class PawsChannel {
   private Double maxPowerDBW;
 
   /**
+   * The time range for which this specific channel is available.
+   * <p>
+   * When specified, any gaps in time intervals within the element that overlap
+   * with the range specified by "timeRange" are interpreted by the device as
+   * time intervals in which there is no available spectrum.
+   */
+  @XmlElement(name = "maxTimeRange", required = true)
+  private EventTime timeRange;
+
+  /**
    * A list of co-channel services.
    */
-  @XmlList
+  @XmlElementWrapper(name = "servicesCo")
+  @XmlElement(name = "uuid")
   private List<String> servicesCo;
   /**
    * A list of blocking adjacent channel services.
    */
-  @XmlList
+  @XmlElementWrapper(name = "servicesAdj")
+  @XmlElement(name = "uuid")
   private List<String> servicesAdj;
   /**
    * A list of blocking taboo-channel services.
    */
-  @XmlList
+  @XmlElementWrapper(name = "servicesTaboo")
+  @XmlElement(name = "uuid")
   private List<String> servicesTaboo;
+
+  /**
+   * Messages provides information about the white space channel build process.
+   */
+  @XmlElementWrapper(name = "messages")
+  @XmlElement(name = "message")
+  private List<String> messages;
 
   public String getName() {
     return name;
@@ -129,6 +150,14 @@ public class PawsChannel {
     this.maxPowerDBW = maxPowerDBW;
   }
 
+  public EventTime getTimeRange() {
+    return timeRange;
+  }
+
+  public void setTimeRange(EventTime timeRange) {
+    this.timeRange = timeRange;
+  }
+
   public List<String> getServicesCo() {
     if (servicesCo == null) {
       servicesCo = new ArrayList<>();
@@ -160,6 +189,21 @@ public class PawsChannel {
 
   public void setServicesTaboo(List<String> servicesTaboo) {
     this.servicesTaboo = servicesTaboo == null || servicesTaboo.isEmpty() ? null : servicesTaboo;
+  }
+
+  public List<String> getMessages() {
+    if (messages == null) {
+      messages = new ArrayList<>();
+    }
+    return messages;
+  }
+
+  public void setMessages(List<String> messages) {
+    this.messages = messages;
+  }
+
+  public void addMessage(String message) {
+    getMessages().add(message);
   }
 
   @Override
