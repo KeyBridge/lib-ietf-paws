@@ -189,6 +189,13 @@ public class AvailableSpectrumResponse extends AbstractResponse {
   private Boolean needsSpectrumReport;
 
   /**
+   * Key Bridge Modification. This is added.
+   * <p>
+   * The device query position, echoed back to the device.
+   */
+  private String position;
+
+  /**
    * Key Bridge Modification.
    * <p>
    * This is a custom component replacing the thrice-buried list of
@@ -265,6 +272,14 @@ public class AvailableSpectrumResponse extends AbstractResponse {
 
   public void setNeedsSpectrumReport(Boolean needsSpectrumReport) {
     this.needsSpectrumReport = needsSpectrumReport;
+  }
+
+  public String getPosition() {
+    return position;
+  }
+
+  public void setPosition(String position) {
+    this.position = position;
   }
 
   public List<PawsChannel> getChannels() {
