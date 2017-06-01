@@ -85,6 +85,14 @@ public class PawsChannel {
   private EventTime timeRange;
 
   /**
+   * Indicator that this channel is subject to an Enforcement record and should
+   * NOT be included in a channel availability list. When this is configured the
+   * enforcement message may be found in the messages list.
+   */
+  @XmlAttribute(name = "enforcement")
+  private Boolean enforcement;
+
+  /**
    * A list of co-channel services.
    */
   @XmlElementWrapper(name = "servicesCo")
@@ -102,6 +110,12 @@ public class PawsChannel {
   @XmlElementWrapper(name = "servicesTaboo")
   @XmlElement(name = "uuid")
   private List<String> servicesTaboo;
+  /**
+   * A list of blocking second adjacent channel services. (RRBS only)
+   */
+  @XmlElementWrapper(name = "services2ndAdj")
+  @XmlElement(name = "uuid")
+  private List<String> services2ndAdj;
 
   /**
    * Messages provides information about the white space channel build process.
@@ -158,6 +172,14 @@ public class PawsChannel {
     this.timeRange = timeRange;
   }
 
+  public Boolean getEnforcement() {
+    return enforcement;
+  }
+
+  public void setEnforcement(Boolean enforcement) {
+    this.enforcement = enforcement;
+  }
+
   public List<String> getServicesCo() {
     if (servicesCo == null) {
       servicesCo = new ArrayList<>();
@@ -189,6 +211,17 @@ public class PawsChannel {
 
   public void setServicesTaboo(List<String> servicesTaboo) {
     this.servicesTaboo = servicesTaboo == null || servicesTaboo.isEmpty() ? null : servicesTaboo;
+  }
+
+  public List<String> getServices2ndAdj() {
+    if (services2ndAdj == null) {
+      services2ndAdj = new ArrayList<>();
+    }
+    return services2ndAdj;
+  }
+
+  public void setServices2ndAdj(List<String> services2ndAdj) {
+    this.services2ndAdj = services2ndAdj;
   }
 
   public List<String> getMessages() {
