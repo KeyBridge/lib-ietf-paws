@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>keybridge.lib</groupId>
   <artifactId>protocol-paws</artifactId>
-  <version>0.2.1</version>
+  <version>0.2.2</version>
   <packaging>jar</packaging>
 
   <name>lib-protocol-paws</name>
@@ -15,7 +15,9 @@
     v0.0.1 - first draft of implementation from RFC 7545; basic beans with annotation
     v0.1.0 - complete beans, add images to documentation
     v0.2.0 - add custom PawsChannel object, reorganize AVAIL_SPECTRUM_RESP to make it usable
-    v0.2.1 - add timeRange field (EventTime object) to PawsChannel</description>
+    v0.2.1 - add timeRange field (EventTime object) to PawsChannel
+    v0.2.2 - add fields second adj channel, query position, enforcement attribute
+  </description>
 
   <organization>
     <name>Key Bridge</name>
