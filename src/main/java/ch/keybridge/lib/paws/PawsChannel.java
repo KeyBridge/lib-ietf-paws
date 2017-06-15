@@ -93,6 +93,14 @@ public class PawsChannel {
   private Boolean enforcement;
 
   /**
+   * Indicator that an exception occurred when calculating the availability of
+   * this channel and it is therefore disabled. Inspect the messages for more
+   * information. Default is FALSE.
+   */
+  @XmlAttribute(name = "exception")
+  private Boolean exception = false;
+
+  /**
    * A list of co-channel services.
    */
   @XmlElementWrapper(name = "servicesCo")
@@ -178,6 +186,14 @@ public class PawsChannel {
 
   public void setEnforcement(Boolean enforcement) {
     this.enforcement = enforcement;
+  }
+
+  public Boolean getException() {
+    return exception;
+  }
+
+  public void setException(Boolean exception) {
+    this.exception = exception;
   }
 
   public List<String> getServicesCo() {
