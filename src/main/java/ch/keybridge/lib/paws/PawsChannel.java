@@ -98,7 +98,7 @@ public class PawsChannel {
    * information. Default is FALSE.
    */
   @XmlAttribute(name = "exception")
-  private Boolean exception = false;
+  private Boolean exception;
 
   /**
    * A list of co-channel services.
