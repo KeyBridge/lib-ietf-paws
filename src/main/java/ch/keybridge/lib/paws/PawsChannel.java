@@ -85,12 +85,19 @@ public class PawsChannel {
   private EventTime timeRange;
 
   /**
-   * Indicator that this channel is subject to an Enforcement record and should
-   * NOT be included in a channel availability list. When this is configured the
-   * enforcement message may be found in the messages list.
+   * Indicator that this channel is subject to a BLOCKING Enforcement record and
+   * should NOT be included in a channel availability list. When not configured
+   * this may be assumed to be FALSE.
    */
-  @XmlAttribute(name = "enforcement")
-  private Boolean enforcement;
+  @XmlAttribute(name = "enforcementBlocking")
+  private Boolean enforcementBlocking;
+  /**
+   * Indicator that this channel is subject to a FAST POLLING Enforcement record
+   * and the default (48 hour maximum) schedule should be shortened. When not
+   * configured this may be assumed to be FALSE.
+   */
+  @XmlAttribute(name = "enforcementFastPoll")
+  private Boolean enforcementFastPoll;
 
   /**
    * Indicator that an exception occurred when calculating the availability of
@@ -131,6 +138,33 @@ public class PawsChannel {
   @XmlElementWrapper(name = "messages")
   @XmlElement(name = "message")
   private List<String> messages;
+
+  /**
+   * Make the empty constructor protected directing users to the
+   * {@code getInstance} constructor.
+   */
+  protected PawsChannel() {
+  }
+
+  /**
+   * PAWS Channel constructor with minimum required configuration.
+   *
+   * @param name         The colloquial channel name. This corresponds to the
+   *                     channel number identified in rule or regulation. e.g.
+   *                     "VHF4"
+   * @param frequencyMin The minimum (or start) frequency of the indicated name
+   *                     in MHz.
+   * @param frequencyMax The maximum (or end) frequency of the indicated name in
+   *                     MHz.
+   * @return a new PawsChannel instance
+   */
+  public static PawsChannel getInstance(String name, double frequencyMin, double frequencyMax) {
+    PawsChannel pc = new PawsChannel();
+    pc.setName(name);
+    pc.setFrequencyMax(frequencyMax);
+    pc.setFrequencyMin(frequencyMin);
+    return pc;
+  }
 
   public String getName() {
     return name;
@@ -180,20 +214,46 @@ public class PawsChannel {
     this.timeRange = timeRange;
   }
 
-  public Boolean getEnforcement() {
-    return enforcement;
+  public Boolean getEnforcementBlocking() {
+    return enforcementBlocking;
   }
 
-  public void setEnforcement(Boolean enforcement) {
-    this.enforcement = enforcement;
+  /**
+   * Remark if there is a BLOCKING enforcement action on this channel. If FALSE
+   * set then leave empty.
+   *
+   * @param enforcementBlocking blocking enforcement flag
+   */
+  public void setEnforcementBlocking(boolean enforcementBlocking) {
+    this.enforcementBlocking = enforcementBlocking ? enforcementBlocking : null;
+  }
+
+  public Boolean getEnforcementFastPoll() {
+    return enforcementFastPoll;
+  }
+
+  /**
+   * Remark if there is a FAST POLL enforcement action on this channel. If FALSE
+   * set then leave empty.
+   *
+   * @param enforcementFastPoll blocking enforcement flag
+   */
+  public void setEnforcementFastPoll(boolean enforcementFastPoll) {
+    this.enforcementFastPoll = enforcementFastPoll ? enforcementFastPoll : null;
   }
 
   public Boolean getException() {
     return exception;
   }
 
-  public void setException(Boolean exception) {
-    this.exception = exception;
+  /**
+   * Remark if there is an exception error on this channel. If FALSE set then
+   * leave empty.
+   *
+   * @param exception blocking enforcement flag
+   */
+  public void setException(boolean exception) {
+    this.exception = exception ? exception : null;
   }
 
   public List<String> getServicesCo() {
@@ -204,7 +264,11 @@ public class PawsChannel {
   }
 
   public void setServicesCo(List<String> servicesCo) {
-    this.servicesCo = servicesCo == null || servicesCo.isEmpty() ? null : servicesCo;
+    /**
+     * Only set the collection if the source is not empty. This produces a
+     * cleaner XML output.
+     */
+    this.servicesCo = (servicesCo == null || servicesCo.isEmpty()) ? null : servicesCo;
   }
 
   public List<String> getServicesAdj() {
@@ -215,7 +279,11 @@ public class PawsChannel {
   }
 
   public void setServicesAdj(List<String> servicesAdj) {
-    this.servicesAdj = servicesAdj == null || servicesAdj.isEmpty() ? null : servicesAdj;
+    /**
+     * Only set the collection if the source is not empty. This produces a
+     * cleaner XML output.
+     */
+    this.servicesAdj = (servicesAdj == null || servicesAdj.isEmpty()) ? null : servicesAdj;
   }
 
   public List<String> getServicesTaboo() {
@@ -226,7 +294,11 @@ public class PawsChannel {
   }
 
   public void setServicesTaboo(List<String> servicesTaboo) {
-    this.servicesTaboo = servicesTaboo == null || servicesTaboo.isEmpty() ? null : servicesTaboo;
+    /**
+     * Only set the collection if the source is not empty. This produces a
+     * cleaner XML output.
+     */
+    this.servicesTaboo = (servicesTaboo == null || servicesTaboo.isEmpty()) ? null : servicesTaboo;
   }
 
   public List<String> getServices2ndAdj() {
@@ -237,7 +309,11 @@ public class PawsChannel {
   }
 
   public void setServices2ndAdj(List<String> services2ndAdj) {
-    this.services2ndAdj = services2ndAdj;
+    /**
+     * Only set the collection if the source is not empty. This produces a
+     * cleaner XML output.
+     */
+    this.services2ndAdj = (services2ndAdj == null || services2ndAdj.isEmpty()) ? null : services2ndAdj;
   }
 
   public List<String> getMessages() {
@@ -248,7 +324,11 @@ public class PawsChannel {
   }
 
   public void setMessages(List<String> messages) {
-    this.messages = messages;
+    /**
+     * Only set the collection if the source is not empty. This produces a
+     * cleaner XML output.
+     */
+    this.messages = (messages == null || messages.isEmpty()) ? null : messages;
   }
 
   public void addMessage(String message) {
