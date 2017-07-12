@@ -13,8 +13,8 @@
  */
 package ch.keybridge.lib.paws;
 
-import ch.keybridge.lib.xml.adapter.XmlPrecisionAdapter02;
-import ch.keybridge.lib.xml.adapter.XmlPrecisionAdapter06;
+import ch.keybridge.lib.xml.adapter.XmlDouble02PrecisionAdapter;
+import ch.keybridge.lib.xml.adapter.XmlDouble06PrecisionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
@@ -54,13 +54,13 @@ public class PawsChannel {
    * The maximum (or end) frequency of the indicated name in MHz.
    */
   @XmlElement(required = true)
-  @XmlJavaTypeAdapter(XmlPrecisionAdapter06.class)
+  @XmlJavaTypeAdapter(XmlDouble06PrecisionAdapter.class)
   private Double frequencyMax;
   /**
    * The minimum (or start) frequency of the indicated name in MHz.
    */
   @XmlElement(required = true)
-  @XmlJavaTypeAdapter(XmlPrecisionAdapter06.class)
+  @XmlJavaTypeAdapter(XmlDouble06PrecisionAdapter.class)
   private Double frequencyMin;
   /**
    * Indicator that the device operation is allowed or forbidden.
@@ -71,7 +71,7 @@ public class PawsChannel {
    * The maximum allowable EIRP value on this channel. (dBW)
    */
   @XmlElement(required = true)
-  @XmlJavaTypeAdapter(XmlPrecisionAdapter02.class)
+  @XmlJavaTypeAdapter(XmlDouble02PrecisionAdapter.class)
   private Double maxPowerDBW;
 
   /**
