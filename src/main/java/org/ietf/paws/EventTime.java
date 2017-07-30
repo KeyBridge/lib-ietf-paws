@@ -14,6 +14,9 @@
 package org.ietf.paws;
 
 import ch.keybridge.lib.xml.adapter.XmlDateTimeAdapter;
+import ch.keybridge.lib.xml.adapter.XmlDurationAdapter;
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import javax.xml.bind.annotation.*;
@@ -70,15 +73,28 @@ public class EventTime {
   @XmlElement(required = true)
   private Date stopTime;
 
+  @XmlJavaTypeAdapter(XmlDurationAdapter.class)
+  @XmlAttribute(name = "duration")
+  private Duration duration;
+
   public EventTime() {
     this.startTime = new Date();
   }
 
-  public void setDuration(int seconds) {
+  public void setInterval(int seconds) {
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(startTime);
     calendar.add(Calendar.SECOND, seconds);
     this.stopTime = calendar.getTime();
+    this.duration = Duration.of(seconds, ChronoUnit.SECONDS);
+  }
+
+  public Duration getDuration() {
+    return duration;
+  }
+
+  public void setDuration(Duration duration) {
+    this.duration = duration;
   }
 
   public Date getStartTime() {
