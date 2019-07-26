@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.ietf.paws.EventTime;
+import org.ietf.lib.paws.EventTime;
 
 /**
  * <img src="doc-files/pawsChannel.png">
