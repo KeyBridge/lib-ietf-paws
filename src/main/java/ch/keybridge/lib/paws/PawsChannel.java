@@ -32,8 +32,9 @@ import org.ietf.lib.paws.EventTime;
  * Notes: This is a Key Bridge custom component replacing the twice-buried list
  * of {@code SpectrumSchedule / Spectrum}, and then also the subsequent set of
  * buried lists under {@code SpectrumProfile / SpectrumProfilePoint}.
- * (Seriously, who designed that garbage?) This presents a simple container with
- * all the frequency information you need in a simple package. Neat and easy.
+ * (Seriously, who designed that garbage?) This implementation presents a simple
+ * container with all the frequency information you need in a simple package.
+ * Neat and easy.
  *
  * @author Key Bridge LLC
  * @since v0.2.0 added 01/31/17
@@ -110,33 +111,29 @@ public class PawsChannel {
   /**
    * A list of co-channel services.
    */
-  @XmlElementWrapper(name = "servicesCo")
-  @XmlElement(name = "uuid")
+  @XmlElement(name = "servicesCo")
   private List<String> servicesCo;
   /**
    * A list of blocking adjacent channel services.
    */
-  @XmlElementWrapper(name = "servicesAdj")
-  @XmlElement(name = "uuid")
+  @XmlElement(name = "servicesAdj")
   private List<String> servicesAdj;
   /**
    * A list of blocking taboo-channel services.
    */
   @XmlElementWrapper(name = "servicesTaboo")
-  @XmlElement(name = "uuid")
+  @XmlElement(name = "servicesTaboo")
   private List<String> servicesTaboo;
   /**
    * A list of blocking second adjacent channel services. (RRBS only)
    */
-  @XmlElementWrapper(name = "services2ndAdj")
-  @XmlElement(name = "uuid")
+  @XmlElement(name = "services2ndAdj")
   private List<String> services2ndAdj;
 
   /**
    * Messages provides information about the white space channel build process.
    */
-  @XmlElementWrapper(name = "messages")
-  @XmlElement(name = "message")
+  @XmlElement(name = "messages")
   private List<String> messages;
 
   /**

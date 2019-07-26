@@ -13,11 +13,6 @@
  */
 package org.ietf.lib.paws.message;
 
-import org.ietf.lib.paws.EventTime;
-import org.ietf.lib.paws.RulesetInfo;
-import org.ietf.lib.paws.SpectrumSpec;
-import org.ietf.lib.paws.DeviceDescriptor;
-import org.ietf.lib.paws.DbUpdateSpec;
 import ch.keybridge.lib.paws.PawsChannel;
 import ch.keybridge.lib.xml.adapter.XmlDateTimeAdapter;
 import java.util.ArrayList;
@@ -25,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.ietf.lib.paws.*;
 
 /**
  * Current: {@code spectrumSpec} is deprecated and replaced by {@code channels}.
@@ -210,8 +206,7 @@ public class AvailableSpectrumResponse extends AbstractResponse {
    * <p>
    * This replaces the Spectrum list silliness (Section 5.11).
    */
-  @XmlElementWrapper(name = "channels", required = true)
-  @XmlElement(name = "channel", required = true)
+  @XmlElement(name = "channels", required = true)
   private List<PawsChannel> channels;
 
   public AvailableSpectrumResponse() {
