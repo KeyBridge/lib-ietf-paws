@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>keybridge.lib</groupId>
-  <artifactId>protocol-paws</artifactId>
-  <version>0.2.3</version>
+  <artifactId>ietf-paws</artifactId>
+  <version>0.4.0</version>
   <packaging>jar</packaging>
 
-  <name>lib-protocol-paws</name>
+  <name>lib-ietf-paws</name>
   <description>Implementation of RFC 7545: Protocol to Access White-Space (PAWS) Databases
 
     https://www.rfc-editor.org/rfc/rfc7545.txt
@@ -19,6 +19,9 @@
     v0.2.2 - add fields second adj channel, query position, enforcement attribute
     v0.2.3 - add exception attribute to paws channel to indicate processing error
     v0.3.0 - upgrade JTS to 1.16.1 refctor to org.locationtech.jts
+    v0.4.0 - rename project to from `lib-protocol-paws` to `lib-ietf-paws` 2019-07/26
+
+
   </description>
 
   <organization>
