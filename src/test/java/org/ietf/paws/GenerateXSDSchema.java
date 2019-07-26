@@ -9,6 +9,30 @@
  */
 package org.ietf.paws;
 
+import org.ietf.lib.paws.message.InitializationRequest;
+import org.ietf.lib.paws.message.AvailableSpectrumRequest;
+import org.ietf.lib.paws.message.RegistrationRequest;
+import org.ietf.lib.paws.message.InititializationResponse;
+import org.ietf.lib.paws.message.AvailableSpectrumResponse;
+import org.ietf.lib.paws.message.RegistrationResponse;
+import org.ietf.lib.paws.SpectrumSpec;
+import org.ietf.lib.paws.Spectrum;
+import org.ietf.lib.paws.EventTime;
+import org.ietf.lib.paws.SpectrumProfile;
+import org.ietf.lib.paws.GeoLocation;
+import org.ietf.lib.paws.DeviceValidity;
+import org.ietf.lib.paws.DeviceOwner;
+import org.ietf.lib.paws.SpectrumSchedule;
+import org.ietf.lib.paws.FrequencyRange;
+import org.ietf.lib.paws.AntennaCharacteristics;
+import org.ietf.lib.paws.DeviceDescriptor;
+import org.ietf.lib.paws.DbUpdateSpec;
+import org.ietf.lib.paws.RulesetInfo;
+import org.ietf.lib.paws.GeoSpectrumSpec;
+import org.ietf.lib.paws.Error;
+import org.ietf.lib.paws.SpectrumProfilePoint;
+import org.ietf.lib.paws.DatabaseSpec;
+import org.ietf.lib.paws.DeviceCapabilities;
 import ch.keybridge.lib.paws.Address;
 import ch.keybridge.lib.paws.Contact;
 import java.io.File;
@@ -23,7 +47,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.SchemaOutputResolver;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
-import org.ietf.paws.message.*;
 import org.junit.Test;
 
 /**
