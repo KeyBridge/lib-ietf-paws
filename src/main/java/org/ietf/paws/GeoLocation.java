@@ -14,8 +14,8 @@
 package org.ietf.paws;
 
 import ch.keybridge.lib.xml.adapter.XmlGeometryAdapter;
-import com.vividsolutions.jts.geom.Point;
-import com.vividsolutions.jts.geom.Polygon;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.Polygon;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
