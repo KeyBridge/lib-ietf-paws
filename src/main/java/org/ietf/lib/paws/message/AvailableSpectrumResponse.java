@@ -142,6 +142,7 @@ public class AvailableSpectrumResponse extends AbstractResponse {
    * this message.
    */
 //  @XmlElement(required = true)
+  @XmlTransient
   private List<SpectrumSpec> spectrumSpecs;
   /**
    * The Database MAY include a DbUpdateSpec (Section 5.7) to notify the device
@@ -151,7 +152,9 @@ public class AvailableSpectrumResponse extends AbstractResponse {
    */
   private DbUpdateSpec databaseChange;
 
+  //
   // Key Bridge Modifications.
+  //
   /**
    * Key Bridge Modification. This is moved from {@code SpectrumSpec}.
    * <p>
