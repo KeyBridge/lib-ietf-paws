@@ -15,8 +15,6 @@ package ch.keybridge.lib.paws;
 
 import ch.keybridge.lib.xml.adapter.XmlDouble02PrecisionAdapter;
 import ch.keybridge.lib.xml.adapter.XmlDouble06PrecisionAdapter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.EventTime;
@@ -38,6 +36,7 @@ import org.ietf.lib.paws.EventTime;
  *
  * @author Key Bridge LLC
  * @since v0.2.0 added 01/31/17
+ * @since v0.7.0 move informational fields to `PawsInfo` class
  */
 @XmlType(name = "PawsChannel")
 @XmlRootElement(name = "PawsChannel")
@@ -86,58 +85,7 @@ public class PawsChannel {
   private EventTime timeRange;
 
   /**
-   * Indicator that this channel is subject to a BLOCKING Enforcement record and
-   * should NOT be included in a channel availability list. When not configured
-   * this may be assumed to be FALSE.
-   */
-  @XmlAttribute(name = "enforcementBlocking")
-  private Boolean enforcementBlocking;
-  /**
-   * Indicator that this channel is subject to a FAST POLLING Enforcement record
-   * and the default (48 hour maximum) schedule should be shortened. When not
-   * configured this may be assumed to be FALSE.
-   */
-  @XmlAttribute(name = "enforcementFastPoll")
-  private Boolean enforcementFastPoll;
-
-  /**
-   * Indicator that an exception occurred when calculating the availability of
-   * this channel and it is therefore disabled. Inspect the messages for more
-   * information. Default is FALSE.
-   */
-  @XmlAttribute(name = "exception")
-  private Boolean exception;
-
-  /**
-   * A list of co-channel services.
-   */
-  @XmlElement(name = "servicesCo")
-  private List<String> servicesCo;
-  /**
-   * A list of blocking adjacent channel services.
-   */
-  @XmlElement(name = "servicesAdj")
-  private List<String> servicesAdj;
-  /**
-   * A list of blocking taboo-channel services.
-   */
-  @XmlElementWrapper(name = "servicesTaboo")
-  @XmlElement(name = "servicesTaboo")
-  private List<String> servicesTaboo;
-  /**
-   * A list of blocking second adjacent channel services. (RRBS only)
-   */
-  @XmlElement(name = "services2ndAdj")
-  private List<String> services2ndAdj;
-
-  /**
-   * Messages provides information about the white space channel build process.
-   */
-  @XmlElement(name = "messages")
-  private List<String> messages;
-
-  /**
-   * Make the empty constructor protected directing users to the
+   * Make the empty constructor protected to encourage use of the
    * {@code getInstance} constructor.
    */
   protected PawsChannel() {
@@ -209,127 +157,6 @@ public class PawsChannel {
 
   public void setTimeRange(EventTime timeRange) {
     this.timeRange = timeRange;
-  }
-
-  public Boolean getEnforcementBlocking() {
-    return enforcementBlocking;
-  }
-
-  /**
-   * Remark if there is a BLOCKING enforcement action on this channel. If FALSE
-   * set then leave empty.
-   *
-   * @param enforcementBlocking blocking enforcement flag
-   */
-  public void setEnforcementBlocking(boolean enforcementBlocking) {
-    this.enforcementBlocking = enforcementBlocking ? enforcementBlocking : null;
-  }
-
-  public Boolean getEnforcementFastPoll() {
-    return enforcementFastPoll;
-  }
-
-  /**
-   * Remark if there is a FAST POLL enforcement action on this channel. If FALSE
-   * set then leave empty.
-   *
-   * @param enforcementFastPoll blocking enforcement flag
-   */
-  public void setEnforcementFastPoll(boolean enforcementFastPoll) {
-    this.enforcementFastPoll = enforcementFastPoll ? enforcementFastPoll : null;
-  }
-
-  public Boolean getException() {
-    return exception;
-  }
-
-  /**
-   * Remark if there is an exception error on this channel. If FALSE set then
-   * leave empty.
-   *
-   * @param exception blocking enforcement flag
-   */
-  public void setException(boolean exception) {
-    this.exception = exception ? exception : null;
-  }
-
-  public List<String> getServicesCo() {
-    if (servicesCo == null) {
-      servicesCo = new ArrayList<>();
-    }
-    return servicesCo;
-  }
-
-  public void setServicesCo(List<String> servicesCo) {
-    /**
-     * Only set the collection if the source is not empty. This produces a
-     * cleaner XML output.
-     */
-    this.servicesCo = (servicesCo == null || servicesCo.isEmpty()) ? null : servicesCo;
-  }
-
-  public List<String> getServicesAdj() {
-    if (servicesAdj == null) {
-      servicesAdj = new ArrayList<>();
-    }
-    return servicesAdj;
-  }
-
-  public void setServicesAdj(List<String> servicesAdj) {
-    /**
-     * Only set the collection if the source is not empty. This produces a
-     * cleaner XML output.
-     */
-    this.servicesAdj = (servicesAdj == null || servicesAdj.isEmpty()) ? null : servicesAdj;
-  }
-
-  public List<String> getServicesTaboo() {
-    if (servicesTaboo == null) {
-      servicesTaboo = new ArrayList<>();
-    }
-    return servicesTaboo;
-  }
-
-  public void setServicesTaboo(List<String> servicesTaboo) {
-    /**
-     * Only set the collection if the source is not empty. This produces a
-     * cleaner XML output.
-     */
-    this.servicesTaboo = (servicesTaboo == null || servicesTaboo.isEmpty()) ? null : servicesTaboo;
-  }
-
-  public List<String> getServices2ndAdj() {
-    if (services2ndAdj == null) {
-      services2ndAdj = new ArrayList<>();
-    }
-    return services2ndAdj;
-  }
-
-  public void setServices2ndAdj(List<String> services2ndAdj) {
-    /**
-     * Only set the collection if the source is not empty. This produces a
-     * cleaner XML output.
-     */
-    this.services2ndAdj = (services2ndAdj == null || services2ndAdj.isEmpty()) ? null : services2ndAdj;
-  }
-
-  public List<String> getMessages() {
-    if (messages == null) {
-      messages = new ArrayList<>();
-    }
-    return messages;
-  }
-
-  public void setMessages(List<String> messages) {
-    /**
-     * Only set the collection if the source is not empty. This produces a
-     * cleaner XML output.
-     */
-    this.messages = (messages == null || messages.isEmpty()) ? null : messages;
-  }
-
-  public void addMessage(String message) {
-    getMessages().add(message);
   }
 
   @Override
