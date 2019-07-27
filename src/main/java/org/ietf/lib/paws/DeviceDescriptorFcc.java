@@ -48,7 +48,7 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
   /**
    * "Part 15-H". The default rule set for this type.
    */
-  private static final PawsRulesetType RULESET_TYPE = PawsRulesetType.FCC_Part15H;
+  private static final PawsRulesetType RULESET_TYPE = PawsRulesetType.FCC_Part15H_2019;
 
   /**
    * Specifies a device's government certification ID (Section 9.2.2.1).
