@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>keybridge.lib</groupId>
   <artifactId>ietf-paws</artifactId>
-  <version>0.8.0</version>
+  <version>0.9.0</version>
   <packaging>jar</packaging>
 
   <name>lib-ietf-paws</name>
@@ -24,7 +24,7 @@
     v0.6.0 - add etsi and fcc enumerated types; rewrite device descriptor
     v0.7.0 - add PawsInfo class for information queries; extend AntennaCharacteristics
     v0.8.0 - update DeviceOwner to use LDAP distinguished names instead of VCARD format
-
+    v0.9.0 - add Ised device descriptor for Canada operation
 
 
   </description>

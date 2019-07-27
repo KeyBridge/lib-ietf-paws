@@ -24,7 +24,7 @@ import org.ietf.lib.paws.type.PawsRulesetType;
 /**
  * <img src="doc-files/deviceDescriptor.png">
  * <p>
- * 5.2. DeviceDescriptor for {@code ETSI-EN-301-598-1.1.1} PAWS Ruleset.
+ * 5.2. DeviceDescriptor for {@code ETSI_EN301_598_211} PAWS Ruleset.
  * <p>
  * The device descriptor contains parameters that identify the specific device,
  * such as its manufacturer serial number, manufacturer's ID, and any other

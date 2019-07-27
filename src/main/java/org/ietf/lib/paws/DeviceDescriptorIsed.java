@@ -21,7 +21,7 @@ import org.ietf.lib.paws.type.PawsRulesetType;
 /**
  * <img src="doc-files/deviceDescriptor.png">
  * <p>
- * 5.2. DeviceDescriptor for {@code FCC_Part15H_2019} PAWS Ruleset.
+ * 5.2. DeviceDescriptor for {@code ISED-DBS01-2015} PAWS Ruleset.
  * <p>
  * The device descriptor contains parameters that identify the specific device,
  * such as its manufacturer serial number, manufacturer's ID, and any other
@@ -39,27 +39,29 @@ import org.ietf.lib.paws.type.PawsRulesetType;
  * +---------------------+----------+
  * </pre>
  *
+ * @see
+ * <a href="https://www.ic.gc.ca/eic/site/smt-gst.nsf/eng/sf10930.html">RSS-222</a>
  * @author Key Bridge LLC
- * @since v0.6.0 created 07/26/19 to distinguish FCC vs. ETSI handling
+ * @since v0.9.0 created 07/27/19 to support operation in Canada
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DeviceDescriptorFcc extends DeviceDescriptor {
+public class DeviceDescriptorIsed extends DeviceDescriptor {
 
   /**
-   * "Part 15-H". The default rule set for this type.
+   * "DBS-01". The default rule set for this type.
    */
-  private static final PawsRulesetType RULESET_TYPE = PawsRulesetType.FCC_Part15H_2019;
+  private static final PawsRulesetType RULESET_TYPE = PawsRulesetType.ISED_DBS01_2015;
 
   /**
    * Specifies a device's government certification ID (Section 9.2.2.1).
    * <p>
-   * Specifies the device's FCC certification identifier. A valid FCC ID is
-   * limited to 19 characters in the ASCII value range, as proposed in FCC
-   * Administration Topics Review [FCC-Review-2012-10]. For the purposes of the
-   * PAWS protocol, the maximum length of the fccId value is 32 octets.
+   * Specifies the device's * Industry Canada Identification Number (IC ID). For
+   * the purposes of the PAWS protocol, the maximum length of the fccId value is
+   * 32 octets.
    */
   @XmlElement(required = true)
-  private String fccId;
+  private String icId;
   /**
    * Specifies the Device Type (Section 9.2.2.2) of TV-band white-space device,
    * as defined by rule. See 9.2.2.2. FCC Device Type:
@@ -77,29 +79,29 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    * for low power, "MODE1".
    */
   @XmlElement(required = true)
-  private String fccTvbdDeviceType;
+  private String isedTvbdDeviceType;
 
   /**
    * Default no-arg constructor. Sets the rule set type.
    */
-  public DeviceDescriptorFcc() {
+  public DeviceDescriptorIsed() {
     super(RULESET_TYPE);
   }
 
-  public String getFccId() {
-    return fccId;
+  public String getIcId() {
+    return icId;
   }
 
-  public void setFccId(String fccId) {
-    this.fccId = fccId;
+  public void setIcId(String icId) {
+    this.icId = icId;
   }
 
-  public String getFccTvbdDeviceType() {
-    return fccTvbdDeviceType;
+  public String getIsedTvbdDeviceType() {
+    return isedTvbdDeviceType;
   }
 
-  public void setFccTvbdDeviceType(String fccTvbdDeviceType) {
-    this.fccTvbdDeviceType = fccTvbdDeviceType;
+  public void setIsedTvbdDeviceType(String isedTvbdDeviceType) {
+    this.isedTvbdDeviceType = isedTvbdDeviceType;
   }
 
 }

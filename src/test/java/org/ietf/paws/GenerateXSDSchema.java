@@ -46,12 +46,25 @@ public class GenerateXSDSchema {
     System.out.println("Generate a XML Schema and store it in the docs/xsd directory");
 
     List<Class> classes = new ArrayList<>();
-    // main classes
+    // message classes
+    classes.add(InitializationRequest.class);
+    classes.add(InititializationResponse.class);
+    classes.add(RegistrationRequest.class);
+    classes.add(RegistrationResponse.class);
+    classes.add(AvailableSpectrumRequest.class);
+    classes.add(AvailableSpectrumResponse.class);
+
+    // object classes
     classes.add(AntennaCharacteristics.class);
     classes.add(DatabaseSpec.class);
     classes.add(DbUpdateSpec.class);
     classes.add(DeviceCapabilities.class);
+
     classes.add(DeviceDescriptor.class);
+    classes.add(DeviceDescriptorEtsi.class);
+    classes.add(DeviceDescriptorFcc.class);
+    classes.add(DeviceDescriptorIsed.class);
+
     classes.add(DeviceOwner.class);
     classes.add(DeviceValidity.class);
     classes.add(Error.class);
@@ -65,14 +78,6 @@ public class GenerateXSDSchema {
     classes.add(SpectrumProfilePoint.class);
     classes.add(SpectrumSchedule.class);
     classes.add(SpectrumSpec.class);
-
-    // message classes
-    classes.add(InitializationRequest.class);
-    classes.add(InititializationResponse.class);
-    classes.add(RegistrationRequest.class);
-    classes.add(RegistrationResponse.class);
-    classes.add(AvailableSpectrumRequest.class);
-    classes.add(AvailableSpectrumResponse.class);
 
     JAXBContext jaxb = JAXBContext.newInstance(classes.toArray(new Class[classes.size()]));
     SchemaOutputResolver resolver = new MySchemaOutputResolver();
