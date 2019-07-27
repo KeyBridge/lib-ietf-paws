@@ -16,6 +16,7 @@ package org.ietf.lib.paws;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.*;
+import org.ietf.lib.paws.type.EtsiChannelRestrictionType;
 
 /**
  * <img src="doc-files/spectrumSpec.png">
@@ -122,6 +123,17 @@ public class SpectrumSpec {
    */
   private Double maxContiguousBwHz;
 
+  /**
+   * 9.2.2.7. ETSI Simultaneous Channel Operation Restriction
+   * <p>
+   * Specifies the constraint on the device maximum total EIRP, as defined by
+   * the ETSI Harmonised Standard [ETSI-EN-301-598]. The values are represented
+   * by numeric strings, such as "0", "1", etc.
+   *
+   * @since v0.6.0 added 07/27/19 to support ETSI operation
+   */
+  private EtsiChannelRestrictionType etsiEnSimultaneousChannelOperationRestriction;
+
   public RulesetInfo getRulesetInfo() {
     return rulesetInfo;
   }
@@ -182,6 +194,14 @@ public class SpectrumSpec {
 
   public void setMaxContiguousBwHz(Double maxContiguousBwHz) {
     this.maxContiguousBwHz = maxContiguousBwHz;
+  }
+
+  public EtsiChannelRestrictionType getEtsiEnSimultaneousChannelOperationRestriction() {
+    return etsiEnSimultaneousChannelOperationRestriction;
+  }
+
+  public void setEtsiEnSimultaneousChannelOperationRestriction(EtsiChannelRestrictionType etsiEnSimultaneousChannelOperationRestriction) {
+    this.etsiEnSimultaneousChannelOperationRestriction = etsiEnSimultaneousChannelOperationRestriction;
   }
 
 }
