@@ -36,9 +36,26 @@ import javax.xml.bind.annotation.XmlEnumValue;
  * <a href="https://www.iana.org/assignments/paws/paws.xhtml#parameters">PAWS
  * Ruleset ID Registry</a>
  * @author Key Bridge
- * @since v0.5.0 added 07/26/19 *
+ * @since v0.5.0 created 07/26/19
+ * @since v0.6.0 add FCC_Part15H_2019, ISED_DBS01_2015
  */
 public enum PawsRulesetType {
+
+  /**
+   * @deprecated Part 15H updated ca. 2015-2019 fromm the 600 MHz repack.
+   *
+   * Title 47: Telecommunication PART 15—RADIO FREQUENCY DEVICES Subpart H—White
+   * Space Devices
+   * <p>
+   * Original rules ca. 2010.
+   *
+   * @see
+   * <a href="http://www.ecfr.gov/cgi-bin/text-idx?rgn=div6&view=text&node=47:1.0.1.1.16.8">Subpart
+   * H—White Space Devices</a>
+   */
+  @Deprecated
+  @XmlEnumValue("FccTvBandWhiteSpace-2010")
+  FCC_Part15H_2010("FccTvBandWhiteSpace-2010"),
 
   /**
    * Title 47: Telecommunication PART 15—RADIO FREQUENCY DEVICES Subpart H—White
@@ -48,8 +65,18 @@ public enum PawsRulesetType {
    * <a href="http://www.ecfr.gov/cgi-bin/text-idx?rgn=div6&view=text&node=47:1.0.1.1.16.8">Subpart
    * H—White Space Devices</a>
    */
-  @XmlEnumValue("FccTvBandWhiteSpace-2010")
-  FCC_Part15H("FccTvBandWhiteSpace-2010"),
+  @XmlEnumValue("FCC-Part15H-2019")
+  FCC_Part15H_2019("FCC-Part15H-2019"),
+
+  /**
+   * DBS-01 — White Space Database Specifications
+   *
+   * @see
+   * <a href="https://www.ic.gc.ca/eic/site/smt-gst.nsf/eng/sf10928.html">DBS-01</a>
+   */
+  @XmlEnumValue("ISED-DBS01-2015")
+  ISED_DBS01_2015("ISED-DBS01-2015"),
+
   /**
    * @deprecated superceded by "ETSI-EN-301-598-2.1.1"
    *
@@ -62,6 +89,7 @@ public enum PawsRulesetType {
    * @see
    * <a href="http://www.etsi.org/deliver/etsi_en/301500_301599/301598/01.01.01_60/en_301598v010101p.pdf">ETSI-EN-301-598</a>
    */
+  @Deprecated
   @XmlEnumValue("ETSI-EN-301-598-1.1.1")
   ETSI_EN301_598_111("ETSI-EN-301-598-1.1.1"),
 
@@ -105,7 +133,17 @@ public enum PawsRulesetType {
         return type;
       }
     }
-    throw new IllegalArgumentException("RFC7545 Unrecognized ruleset type: " + id);
+    throw new IllegalArgumentException("RFC7545 unrecognized ruleset type: " + id);
+  }
+
+  /**
+   * Returns the ID value.
+   *
+   * @return the id string value
+   */
+  @Override
+  public String toString() {
+    return id;
   }
 
 }
