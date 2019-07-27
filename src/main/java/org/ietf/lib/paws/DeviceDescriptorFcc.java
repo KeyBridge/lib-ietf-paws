@@ -17,9 +17,9 @@ import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
- * <img src="doc-files/deviceDescriptor.png">
- * <p>
  * 5.2. DeviceDescriptor for {@code FCC_Part15H_2019} PAWS Ruleset.
+ * <p>
+ * <img src="doc-files/deviceDescriptorFcc.png">
  * <p>
  * The device descriptor contains parameters that identify the specific device,
  * such as its manufacturer serial number, manufacturer's ID, and any other

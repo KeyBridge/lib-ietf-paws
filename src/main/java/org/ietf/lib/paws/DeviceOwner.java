@@ -16,9 +16,9 @@ package org.ietf.lib.paws;
 import javax.xml.bind.annotation.*;
 
 /**
- * <img src="doc-files/deviceOwner.png">
- * <p>
  * 5.5. DeviceOwner
+ * <p>
+ * <img src="doc-files/deviceOwner.png">
  * <p>
  * DeviceOwner contains information on device ownership that is provided as part
  * of device registration. Some rulesets may require additional parameters.

@@ -20,9 +20,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.EventTime;
 
 /**
- * <img src="doc-files/pawsChannel.png">
+ * Key Bridge PAWS channel description.
  * <p>
- * A PAWS channel description.
+ * <img src="doc-files/pawsChannel.png">
  * <p>
  * The {@code PawsChannel} is used in the {@code AvailableSpectrumResponse}
  * object to convey channel availability information.
@@ -47,9 +47,8 @@ public class PawsChannel {
    * The colloquial channel name. This corresponds to the channel number
    * identified in rule or regulation. e.g. "VHF4"
    */
-  @XmlAttribute(name = "name", required = true)
+  @XmlElement(required = true)
   private String name;
-
   /**
    * The maximum (or end) frequency of the indicated name in MHz.
    */
@@ -62,11 +61,13 @@ public class PawsChannel {
   @XmlElement(required = true)
   @XmlJavaTypeAdapter(XmlDouble06PrecisionAdapter.class)
   private Double frequencyMin;
+
   /**
    * Indicator that the device operation is allowed or forbidden.
    */
-  @XmlAttribute(name = "allowed", required = true)
+  @XmlElement(required = true)
   private Boolean allowed;
+
   /**
    * The maximum allowable EIRP value on this channel. (dBW)
    */

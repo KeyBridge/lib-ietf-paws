@@ -19,9 +19,9 @@ import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
- * <img src="doc-files/deviceDescriptor.png">
- * <p>
  * 5.2. DeviceDescriptor
+ * <p>
+ * <img src="doc-files/deviceDescriptor.png">
  * <p>
  * The device descriptor contains parameters that identify the specific device,
  * such as its manufacturer serial number, manufacturer's ID, and any other
@@ -44,7 +44,7 @@ import org.ietf.lib.paws.type.PawsRulesetType;
 @XmlRootElement(name = "DeviceDescriptor")
 @XmlType(name = "DeviceDescriptor")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso({DeviceDescriptorEtsi.class, DeviceDescriptorFcc.class})
+@XmlSeeAlso({DeviceDescriptorEtsi.class, DeviceDescriptorFcc.class, DeviceDescriptorIsed.class})
 public abstract class DeviceDescriptor {
 
   /**

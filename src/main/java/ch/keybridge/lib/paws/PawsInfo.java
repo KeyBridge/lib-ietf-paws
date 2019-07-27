@@ -15,13 +15,18 @@ package ch.keybridge.lib.paws;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
+ * Key Bridge White Space information data transfer object.
+ * <p>
  * <img src="doc-files/pawsInfo.png">
  * <p>
- * A PAWS channel information message providing a complete description of
- * spectrum availability and incumbent occupancy.
+ * A {@code PawInfo} channel information message providing a complete
+ * description of spectrum availability and incumbent occupancy.
  * <p>
  * The {@code PawsInfo} is provided in the {@code AvailableSpectrumResponse}
  * object to convey channel availability information for non-WSD consumers such
@@ -42,14 +47,12 @@ public class PawsInfo extends PawsChannel {
    * should NOT be included in a channel availability list. When not configured
    * this may be assumed to be FALSE.
    */
-  @XmlAttribute(name = "enforcementBlocking")
   private Boolean enforcementBlocking;
   /**
    * Indicator that this channel is subject to a FAST POLLING Enforcement record
    * and the default (48 hour maximum) schedule should be shortened. When not
    * configured this may be assumed to be FALSE.
    */
-  @XmlAttribute(name = "enforcementFastPoll")
   private Boolean enforcementFastPoll;
 
   /**
@@ -57,35 +60,28 @@ public class PawsInfo extends PawsChannel {
    * this channel and it is therefore disabled. Inspect the messages for more
    * information. Default is FALSE.
    */
-  @XmlAttribute(name = "exception")
   private Boolean exception;
 
   /**
    * A list of co-channel services.
    */
-  @XmlElement(name = "servicesCo")
   private List<String> servicesCo;
   /**
    * A list of blocking adjacent channel services.
    */
-  @XmlElement(name = "servicesAdj")
   private List<String> servicesAdj;
   /**
    * A list of blocking taboo-channel services.
    */
-  @XmlElementWrapper(name = "servicesTaboo")
-  @XmlElement(name = "servicesTaboo")
   private List<String> servicesTaboo;
   /**
    * A list of blocking second adjacent channel services. (RRBS only)
    */
-  @XmlElement(name = "services2ndAdj")
   private List<String> services2ndAdj;
 
   /**
    * Messages provides information about the white space channel build process.
    */
-  @XmlElement(name = "messages")
   private List<String> messages;
 
   /**

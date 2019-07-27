@@ -16,9 +16,9 @@ package org.ietf.lib.paws;
 import javax.xml.bind.annotation.*;
 
 /**
- * <img src="doc-files/databaseSpec.png">
- * <p>
  * 5.8. DatabaseSpec
+ * <p>
+ * <img src="doc-files/databaseSpec.png">
  * <p>
  * This element contains the name and URI of a Database.
  * <pre>

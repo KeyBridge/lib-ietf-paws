@@ -18,9 +18,9 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 
 /**
- * <img src="doc-files/dbUpdateSpec.png">
- * <p>
  * 5.7. DbUpdateSpec
+ * <p>
+ * <img src="doc-files/dbUpdateSpec.png">
  * <p>
  * This element is provided by the Database to notify devices of an upcoming
  * change to the database URI.
