@@ -76,4 +76,14 @@ public enum EtsiEmissionClassType {
     return EtsiEmissionClassType.valueOf("CLASS_" + code);
   }
 
+  /**
+   * Returns the code value.
+   *
+   * @return the code string value
+   */
+  @Override
+  public String toString() {
+    return String.valueOf(code);
+  }
+
 }

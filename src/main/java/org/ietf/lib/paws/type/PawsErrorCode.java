@@ -169,7 +169,17 @@ public enum PawsErrorCode {
         return error;
       }
     }
-    throw new IllegalArgumentException("RFC7545 Reserved or Unassigned code: " + code);
+    throw new IllegalArgumentException("RFC7545 reserved or unassigned code: " + code);
+  }
+
+  /**
+   * Returns the code value.
+   *
+   * @return the code string value
+   */
+  @Override
+  public String toString() {
+    return String.valueOf(code);
   }
 
 }

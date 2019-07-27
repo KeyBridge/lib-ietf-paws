@@ -87,4 +87,14 @@ public enum EtsiChannelRestrictionType {
   public static EtsiChannelRestrictionType fromCode(int code) {
     return EtsiChannelRestrictionType.valueOf("TYPE_" + code);
   }
+
+  /**
+   * Returns the code value.
+   *
+   * @return the code string value
+   */
+  @Override
+  public String toString() {
+    return String.valueOf(code);
+  }
 }
