@@ -13,20 +13,10 @@
  */
 package org.ietf.lib.paws.message;
 
-import ch.keybridge.lib.paws.Version;
-import javax.xml.bind.annotation.XmlAttribute;
-
 /**
  *
  * @author Key Bridge LLC
  */
 public class AbstractRequest {
-
-  @XmlAttribute
-  private final String version = Version.VERSION;
-
-  public String getVersion() {
-    return version;
-  }
 
 }

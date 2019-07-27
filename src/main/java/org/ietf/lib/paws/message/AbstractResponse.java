@@ -13,7 +13,6 @@
  */
 package org.ietf.lib.paws.message;
 
-import ch.keybridge.lib.paws.Version;
 import java.util.UUID;
 import javax.xml.bind.annotation.XmlAttribute;
 
@@ -24,16 +23,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 public class AbstractResponse {
 
   @XmlAttribute
-  private final String version = Version.VERSION;
-  @XmlAttribute
   private final String id;
 
   public AbstractResponse() {
     this.id = UUID.randomUUID().toString();
-  }
-
-  public String getVersion() {
-    return version;
   }
 
   public String getId() {
