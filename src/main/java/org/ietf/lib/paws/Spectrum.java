@@ -18,9 +18,9 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 
 /**
- * <img src="doc-files/spectrum.png">
- * <p>
  * 5.11. Spectrum
+ * <p>
+ * <img src="doc-files/spectrum.png">
  * <p>
  * Available spectrum can be characterized by an ordered list of spectrum
  * profiles that defines permissible power levels over a set of frequency

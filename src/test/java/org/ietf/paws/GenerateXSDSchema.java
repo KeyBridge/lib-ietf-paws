@@ -9,6 +9,8 @@
  */
 package org.ietf.paws;
 
+import ch.keybridge.lib.paws.PawsChannel;
+import ch.keybridge.lib.paws.PawsInfo;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -79,6 +81,10 @@ public class GenerateXSDSchema {
     classes.add(SpectrumSchedule.class);
     classes.add(SpectrumSpec.class);
 
+    // key bridge proprietary
+    classes.add(PawsChannel.class);
+    classes.add(PawsInfo.class);
+
     JAXBContext jaxb = JAXBContext.newInstance(classes.toArray(new Class[classes.size()]));
     SchemaOutputResolver resolver = new MySchemaOutputResolver();
     jaxb.generateSchema(resolver);
@@ -97,7 +103,7 @@ public class GenerateXSDSchema {
       /**
        * suggestedFileName is "schema1.xsd"
        */
-      java.nio.file.Path path = Paths.get("docs", "xsd", "lib-paws." + sdf.format(new Date()) + ".xsd");
+      java.nio.file.Path path = Paths.get("docs", "xsd", "lib-ietf-paws." + sdf.format(new Date()) + "." + suggestedFileName);// + ".xsd");
       File file = path.toFile();
       System.out.println("  Writing XSD Schema file to " + file);
       StreamResult result = new StreamResult(file);

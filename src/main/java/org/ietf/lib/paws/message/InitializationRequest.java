@@ -18,15 +18,9 @@ import org.ietf.lib.paws.DeviceDescriptor;
 import org.ietf.lib.paws.GeoLocation;
 
 /**
- * Current: Key Bridge protocol {@code version} attribute added.
- * <p>
- * <img src="doc-files/init_req_1.png">
- * <p>
- * Original
+ * 4.3.1. INIT_REQ
  * <p>
  * <img src="doc-files/init_req.png">
- * <p>
- * 4.3.1. INIT_REQ
  * <p>
  * The initialization request message allows the Master Device to initiate
  * exchange of capabilities with the Database.
@@ -53,7 +47,7 @@ import org.ietf.lib.paws.GeoLocation;
 @XmlRootElement(name = "INIT_REQ")
 @XmlType(name = "INIT_REQ")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class InitializationRequest extends AbstractRequest {
+public class InitializationRequest {
 
   /**
    * The DeviceDescriptor (Section 5.2) for the device is REQUIRED. If the

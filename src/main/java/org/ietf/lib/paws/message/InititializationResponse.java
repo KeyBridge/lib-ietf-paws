@@ -21,16 +21,9 @@ import org.ietf.lib.paws.DbUpdateSpec;
 import org.ietf.lib.paws.RulesetInfo;
 
 /**
- * Current: Key Bridge protocol {@code version} and {@code message} UUID fields
- * attributes added.
- * <p>
- * <img src="doc-files/init_resp_1.png">
- * <p>
- * Original:
+ * 4.3.2. INIT_RESP
  * <p>
  * <img src="doc-files/init_resp.png">
- * <p>
- * 4.3.2. INIT_RESP
  * <p>
  * The initialization response message communicates database parameters to the
  * requesting device. This response is returned only when there is at least one
@@ -55,7 +48,7 @@ import org.ietf.lib.paws.RulesetInfo;
 @XmlRootElement(name = "INIT_RESP")
 @XmlType(name = "INIT_RESP")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class InititializationResponse extends AbstractResponse {
+public class InititializationResponse {
 
   /**
    * A RulesetInfo (Section 5.6) list MUST be included in the response. Each
@@ -86,7 +79,11 @@ public class InititializationResponse extends AbstractResponse {
    */
   private DbUpdateSpec databaseChange;
 
-  public InititializationResponse() {
+  /**
+   * Make default no-arg constructor protected to encourage ruleset info
+   * setting.
+   */
+  protected InititializationResponse() {
   }
 
   public InititializationResponse(RulesetInfo rulesetInfo) {

@@ -18,6 +18,7 @@
  */
 package org.ietf.lib.paws.type;
 
+import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
 /**
@@ -39,6 +40,7 @@ import javax.xml.bind.annotation.XmlEnumValue;
  * @since v0.5.0 created 07/26/19
  * @since v0.6.0 add FCC_Part15H_2019, ISED_DBS01_2015
  */
+@XmlEnum
 public enum PawsRulesetType {
 
   /**

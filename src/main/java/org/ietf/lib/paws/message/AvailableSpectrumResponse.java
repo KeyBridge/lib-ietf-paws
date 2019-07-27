@@ -23,17 +23,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.*;
 
 /**
- * Current: {@code spectrumSpec} is deprecated and replaced by {@code channels}.
- * Other objects moved here. Key Bridge protocol {@code version} and
- * {@code message} UUID fields attributes added.
- * <p>
- * <img src="doc-files/avail_spectrum_resp_1.png">
- * <p>
- * Original:
- * <p>
- * <img src="doc-files/avail_spectrum_resp.png">
+ * Note: {@code spectrumSpec} is deprecated and replaced by {@code channels}.
  * <p>
  * 4.5.2. AVAIL_SPECTRUM_RESP
+ * <p>
+ * <img src="doc-files/avail_spectrum_resp.png">
  * <p>
  * The response message for the Available Spectrum Query contains one or more
  * SpectrumSpec (Section 5.9) elements, one for each ruleset supported at the
@@ -104,7 +98,7 @@ import org.ietf.lib.paws.*;
 @XmlRootElement(name = "AVAIL_SPECTRUM_RESP")
 @XmlType(name = "AVAIL_SPECTRUM_RESP")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class AvailableSpectrumResponse extends AbstractResponse {
+public class AvailableSpectrumResponse {
 
   /**
    * Key Bridge Modification.

@@ -18,8 +18,9 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 
 /**
- * <img src="doc-files/spectrumSchedule.png">
  * 5.10. SpectrumSchedule
+ * <p>
+ * <img src="doc-files/spectrumSchedule.png">
  * <p>
  * The SpectrumSchedule element combines EventTime (Section 5.14) with Spectrum
  * (Section 5.11) to define a time period in which the spectrum is valid.

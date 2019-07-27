@@ -15,7 +15,6 @@ package org.ietf.lib.paws.type;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  * Protocol to Access White-Space (PAWS) Error Code Registry.
@@ -30,7 +29,6 @@ import javax.xml.bind.annotation.XmlType;
  * @since v0.1.0 added 01/30/17
  * @since v0.5.0 rename 07/26/19 to PawsErrorCode, move to 'type' package
  */
-@XmlType(name = "PawsErrorCode")
 @XmlEnum
 public enum PawsErrorCode {
 

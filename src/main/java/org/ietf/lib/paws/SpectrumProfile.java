@@ -13,30 +13,26 @@
  */
 package org.ietf.lib.paws;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.TreeSet;
 import javax.xml.bind.annotation.*;
 
 /**
- * <img src="doc-files/spectrumProfile.png">
- * <p>
  * 5.12. SpectrumProfile (Point)
+ * <p>
+ * <img src="doc-files/spectrumProfile.png">
  * <p>
  * A spectrum profile is characterized by an ordered list of (frequency, power)
  * points that represents the shape of maximum permissible power levels over a
  * range of frequencies as a piecewise linear curve.
  * <ul>
- * <li> It MUST contain a minimum of two entries.
- * </li>
+ * <li> It MUST contain a minimum of two entries. </li>
  * <li> The entries in the list MUST be ordered in non-decreasing frequency
- * values.
- * </li>
+ * values. </li>
  * <li> Two consecutive points MAY have the same frequency value to represent a
- * "step function".
- * </li>
- * <li> Three or more points MUST NOT share the same frequency value.
- * </li>
- * <li> The first frequency is inclusive; the last frequency is exclusive.
+ * "step function". </li>
+ * <li> Three or more points MUST NOT share the same frequency value. </li>
+ * <li> The first frequency is inclusive; the last frequency is exclusive. </li>
  * </ul>
  * NOTE: This encoding allows presentation of "ramps" where the slope of a line
  * segment may be finite and non-zero.
@@ -65,17 +61,17 @@ import javax.xml.bind.annotation.*;
 public class SpectrumProfile {
 
   @XmlElement(required = true)
-  private List<SpectrumProfilePoint> list;
+  private Collection<SpectrumProfilePoint> list;
 
-  public List<SpectrumProfilePoint> getList() {
+  public Collection<SpectrumProfilePoint> getList() {
     if (list == null) {
-      list = new ArrayList<>();
+      list = new TreeSet<>(); // Use TreeSet to enforce sorting
     }
     return list;
   }
 
-  public void setList(List<SpectrumProfilePoint> list) {
-    this.list = list;
+  public void setList(Collection<SpectrumProfilePoint> list) {
+    this.list = list == null ? null : new TreeSet<>(this.list);
   }
 
 }

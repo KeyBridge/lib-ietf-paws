@@ -18,6 +18,8 @@
  */
 package org.ietf.lib.paws.type;
 
+import javax.xml.bind.annotation.XmlEnum;
+
 /**
  * 5.3. AntennaCharacteristics
  * <p>
@@ -31,6 +33,7 @@ package org.ietf.lib.paws.type;
  * @author Key Bridge
  * @since v0.6.0 created 07/26/19 to support ETSI operation
  */
+@XmlEnum
 public enum AntennaPolarizationType {
   /**
    * Horizontal polarization

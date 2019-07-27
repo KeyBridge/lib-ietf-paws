@@ -18,6 +18,7 @@
  */
 package org.ietf.lib.paws.type;
 
+import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 
 /**
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.XmlEnumValue;
  * @author Key Bridge
  * @since v0.6.0 created 07/26/19 to support ETSI operation
  */
+@XmlEnum
 public enum EtsiEmissionClassType {
 
   @XmlEnumValue("1")

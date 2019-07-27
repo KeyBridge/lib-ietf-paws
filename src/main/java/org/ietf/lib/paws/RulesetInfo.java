@@ -17,9 +17,9 @@ import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
- * <img src="doc-files/rulesetInfo.png">
- * <p>
  * 5.6. RulesetInfo
+ * <p>
+ * <img src="doc-files/rulesetInfo.png">
  * <p>
  * RulesetInfo contains parameters for the ruleset of a regulatory domain that
  * is communicated using the Initialization (Section 4.3), Device Registration

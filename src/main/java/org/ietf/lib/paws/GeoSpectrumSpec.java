@@ -18,9 +18,9 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 
 /**
- * <img src="doc-files/geoSpectrumSpec.png">
- * <p>
  * 5.15. GeoSpectrumSpec
+ * <p>
+ * <img src="doc-files/geoSpectrumSpec.png">
  * <p>
  * The GeoSpectrumSpec element encapsulates the available spectrum for a
  * location. It is returned within an AVAIL_SPECTRUM_BATCH_RESP (Section 4.5.4)

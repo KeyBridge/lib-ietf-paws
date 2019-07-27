@@ -23,9 +23,9 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- * <img src="doc-files/eventTime.png">
- * <p>
  * 5.14. EventTime
+ * <p>
+ * <img src="doc-files/eventTime.png">
  * <p>
  * The EventTime element specifies the start and stop times of an "event". This
  * is used to indicate the time period for which a Spectrum (Section 5.11) is
@@ -76,8 +76,10 @@ public class EventTime {
   @XmlElement(required = true)
   private Date stopTime;
 
+  /**
+   * Key Bridge: The calculated event duration.
+   */
   @XmlJavaTypeAdapter(XmlDurationAdapter.class)
-  @XmlAttribute(name = "duration")
   private Duration duration;
 
   public EventTime() {

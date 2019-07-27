@@ -20,15 +20,9 @@ import org.ietf.lib.paws.DeviceOwner;
 import org.ietf.lib.paws.GeoLocation;
 
 /**
- * Current: Key Bridge protocol {@code version} attribute added.
- * <p>
- * <img src="doc-files/registration_req_1.png">
- * <p>
- * Original:
+ * 4.4.1. REGISTRATION_REQ
  * <p>
  * <img src="doc-files/registration_req.png">
- * <p>
- * 4.4.1. REGISTRATION_REQ
  * <p>
  * The registration request message contains the required registration
  * parameters. A parameter marked as optional may be required by some rulesets.
@@ -55,7 +49,7 @@ import org.ietf.lib.paws.GeoLocation;
 @XmlRootElement(name = "REGISTRATION_REQ")
 @XmlType(name = "REGISTRATION_REQ")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class RegistrationRequest extends AbstractRequest {
+public class RegistrationRequest {
 
   /**
    * The DeviceDescriptor (Section 5.2) for the Master Device is REQUIRED. The

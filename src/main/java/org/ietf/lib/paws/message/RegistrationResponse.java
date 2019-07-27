@@ -20,16 +20,9 @@ import org.ietf.lib.paws.DbUpdateSpec;
 import org.ietf.lib.paws.RulesetInfo;
 
 /**
- * Current: Key Bridge protocol {@code version} and {@code message} UUID fields
- * attributes added.
- * <p>
- * <img src="doc-files/registration_resp_1.png">
- * <p>
- * Original:
+ * 4.4.2. REGISTRATION_RESP
  * <p>
  * <img src="doc-files/registration_resp.png">
- * <p>
- * 4.4.2. REGISTRATION_RESP
  * <p>
  * The registration response message acknowledges successful registration by
  * including a RulesetInfo message for each ruleset in which the registration is
@@ -55,7 +48,7 @@ import org.ietf.lib.paws.RulesetInfo;
 @XmlRootElement(name = "REGISTRATION_RESP")
 @XmlType(name = "REGISTRATION_RESP")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class RegistrationResponse extends AbstractResponse {
+public class RegistrationResponse {
 
   /**
    * A RulesetInfo (Section 5.6) list MUST be included in the response. Each

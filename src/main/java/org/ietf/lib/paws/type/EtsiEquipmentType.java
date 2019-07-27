@@ -18,6 +18,8 @@
  */
 package org.ietf.lib.paws.type;
 
+import javax.xml.bind.annotation.XmlEnum;
+
 /**
  * ETSI EN 301 598 V2.1.1 (2018-01)
  * <p>
@@ -33,6 +35,7 @@ package org.ietf.lib.paws.type;
  * @author Key Bridge
  * @since v0.6.0 created 07/26/19 to support ETSI operation
  */
+@XmlEnum
 public enum EtsiEquipmentType {
 
   /**

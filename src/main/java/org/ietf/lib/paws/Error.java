@@ -13,14 +13,14 @@
  */
 package org.ietf.lib.paws;
 
-import org.ietf.lib.paws.type.PawsErrorCode;
 import java.util.Objects;
 import javax.xml.bind.annotation.*;
+import org.ietf.lib.paws.type.PawsErrorCode;
 
 /**
- * <img src="doc-files/error.png">
- * <p>
  * 5.17. Error Element
+ * <p>
+ * <img src="doc-files/error.png">
  * <p>
  * If the Database responds to a PAWS request message with an error, it MUST
  * include an Error element.
