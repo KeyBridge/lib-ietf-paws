@@ -13,8 +13,10 @@
  */
 package org.ietf.lib.paws;
 
+import java.util.Arrays;
 import java.util.List;
 import javax.xml.bind.annotation.*;
+import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
  * <img src="doc-files/deviceDescriptor.png">
@@ -42,7 +44,8 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement(name = "DeviceDescriptor")
 @XmlType(name = "DeviceDescriptor")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DeviceDescriptor {
+@XmlSeeAlso({DeviceDescriptorEtsi.class, DeviceDescriptorFcc.class})
+public abstract class DeviceDescriptor {
 
   /**
    * The manufacturer’s device serial number is OPTIONAL, although rulesets
@@ -74,35 +77,8 @@ public class DeviceDescriptor {
   private List<String> rulesetIds;
 
   /**
-   * Specifies a device's government certification ID (Section 9.2.2.1).
+   * Key Bridge extension.
    * <p>
-   * Specifies the device's FCC certification identifier. A valid FCC ID is
-   * limited to 19 characters in the ASCII value range, as proposed in FCC
-   * Administration Topics Review [FCC-Review-2012-10]. For the purposes of the
-   * PAWS protocol, the maximum length of the fccId value is 32 octets.
-   */
-  @XmlElement(required = true)
-  private String id;
-  /**
-   * Specifies the Device Type (Section 9.2.2.2) of TV-band white-space device,
-   * as defined by rule. See 9.2.2.2. FCC Device Type:
-   * {@code fccTvbdDeviceType}: Specifies the TV-band white-space device type.
-   * <p>
-   * Deprecated: <i>FCC Valid values are "FIXED", "MODE_1", and for
-   * "MODE_2".</i>
-   * <p>
-   * See also 9.2.2.3. ETSI Device Type: Specification document(s): Specifies
-   * the white-space device type, as defined by the ETSI Harmonised Standard
-   * [ETSI-EN-301-598]. Valid values are single-letter strings, such as "A",
-   * "B", etc. Consult the documentation for details about the device types.
-   * <p>
-   * Key Bridge: Valid values are "FIXED", "MODE2_HP" for high power, "MODE2_LP"
-   * for low power, "MODE1".
-   */
-  @XmlElement(required = true)
-  private String tvbdDeviceType;
-
-  /**
    * This transmitter's wireless emission designator.
    * <p>
    * Each type of radio emission is classified according to its bandwidth,
@@ -124,6 +100,15 @@ public class DeviceDescriptor {
    * fields are optional.
    */
   protected String emissionDesignator;
+
+  /**
+   * Constructor declaring the PawsRulesetType of this device descriptor.
+   *
+   * @param rulesetId the device descriptor PawsRulesetType
+   */
+  public DeviceDescriptor(PawsRulesetType rulesetId) {
+    this.rulesetIds = Arrays.asList(rulesetId.getId());
+  }
 
   public String getSerialNumber() {
     return serialNumber;
@@ -153,24 +138,23 @@ public class DeviceDescriptor {
     return rulesetIds;
   }
 
+  /**
+   * Set the PAWS Ruleset ID Registry values.
+   *
+   * @param rulesetIds one or more IDs
+   */
   public void setRulesetIds(List<String> rulesetIds) {
     this.rulesetIds = rulesetIds;
   }
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getTvbdDeviceType() {
-    return tvbdDeviceType;
-  }
-
-  public void setTvbdDeviceType(String tvbdDeviceType) {
-    this.tvbdDeviceType = tvbdDeviceType;
+  /**
+   * Convenience method to set the PAWS Ruleset ID Registry values to a single
+   * enumerated type.
+   *
+   * @param rulesetId the enumerated PawsRulesetType
+   */
+  public void setRulesetId(PawsRulesetType rulesetId) {
+    this.rulesetIds = Arrays.asList(rulesetId.getId());
   }
 
   public String getEmissionDesignator() {
