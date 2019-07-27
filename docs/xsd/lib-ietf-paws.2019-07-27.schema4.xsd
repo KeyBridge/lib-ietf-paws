@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://ietf.org/lib/paws" xmlns:tns="http://ietf.org/lib/paws" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ietf.org/lib/paws/type">
+
+  <xs:import namespace="http://ietf.org/lib/paws/type" schemaLocation="lib-ietf-paws.2019-07-27.schema2.xsd"/>
+
+  <xs:element name="AntennaCharacteristics" type="tns:AntennaCharacteristics"/>
+
+  <xs:element name="DatabaseSpec" type="tns:DatabaseSpec"/>
+
+  <xs:element name="DbUpdateSpec" type="tns:DbUpdateSpec"/>
+
+  <xs:element name="DeviceCapabilities" type="tns:DeviceCapabilities"/>
+
+  <xs:element name="DeviceDescriptor" type="tns:DeviceDescriptor"/>
+
+  <xs:element name="DeviceDescriptorEtsi" type="tns:DeviceDescriptorEtsi"/>
+
+  <xs:element name="DeviceDescriptorFcc" type="tns:DeviceDescriptorFcc"/>
+
+  <xs:element name="DeviceDescriptorIsed" type="tns:DeviceDescriptorIsed"/>
+
+  <xs:element name="DeviceOwner" type="tns:DeviceOwner"/>
+
+  <xs:element name="DeviceValidity" type="tns:DeviceValidity"/>
+
+  <xs:element name="Error" type="tns:Error"/>
+
+  <xs:element name="EventTime" type="tns:EventTime"/>
+
+  <xs:element name="FrequencyRange" type="tns:FrequencyRange"/>
+
+  <xs:element name="GeoLocation" type="tns:GeoLocation"/>
+
+  <xs:element name="GeoSpectrumSpec" type="tns:GeoSpectrumSpec"/>
+
+  <xs:element name="RulesetInfo" type="tns:RulesetInfo"/>
+
+  <xs:element name="Spectrum" type="tns:Spectrum"/>
+
+  <xs:element name="SpectrumProfile" type="tns:SpectrumProfile"/>
+
+  <xs:element name="SpectrumProfilePoint" type="tns:SpectrumProfilePoint"/>
+
+  <xs:element name="SpectrumSchedule" type="tns:SpectrumSchedule"/>
+
+  <xs:element name="SpectrumSpec" type="tns:SpectrumSpec"/>
+
+  <xs:complexType name="DeviceDescriptor" abstract="true">
+    <xs:sequence>
+      <xs:element name="serialNumber" type="xs:string" minOccurs="0"/>
+      <xs:element name="manufacturerId" type="xs:string" minOccurs="0"/>
+      <xs:element name="modelId" type="xs:string" minOccurs="0"/>
+      <xs:element name="rulesetIds" minOccurs="0">
+        <xs:simpleType>
+          <xs:list itemType="xs:string"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="emissionDesignator" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DeviceDescriptorEtsi">
+    <xs:complexContent>
+      <xs:extension base="tns:DeviceDescriptor">
+        <xs:sequence>
+          <xs:element name="etsiEnDeviceType" type="ns1:etsiEquipmentType"/>
+          <xs:element name="etsiEnTechnologyId" type="xs:string"/>
+          <xs:element name="etsiEnDeviceCategory" type="ns1:etsiDeviceCategory"/>
+          <xs:element name="etsiEnDeviceEmissionsClass" type="xs:int"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeviceDescriptorFcc">
+    <xs:complexContent>
+      <xs:extension base="tns:DeviceDescriptor">
+        <xs:sequence>
+          <xs:element name="fccId" type="xs:string"/>
+          <xs:element name="fccTvbdDeviceType" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeviceDescriptorIsed">
+    <xs:complexContent>
+      <xs:extension base="tns:DeviceDescriptor">
+        <xs:sequence>
+          <xs:element name="icId" type="xs:string"/>
+          <xs:element name="isedTvbdDeviceType" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="GeoLocation">
+    <xs:sequence>
+      <xs:element name="point" type="xs:string"/>
+      <xs:element name="region" type="xs:string" minOccurs="0"/>
+      <xs:element name="confidence" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RulesetInfo">
+    <xs:sequence>
+      <xs:element name="authority" type="xs:string"/>
+      <xs:element name="rulesetId" type="ns1:pawsRulesetType"/>
+      <xs:element name="maxLocationChange" type="xs:double"/>
+      <xs:element name="maxPollingSecs" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DbUpdateSpec">
+    <xs:sequence>
+      <xs:element name="databases" type="tns:DatabaseSpec" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DatabaseSpec">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="uri" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DeviceOwner">
+    <xs:sequence>
+      <xs:element name="owner" type="xs:string"/>
+      <xs:element name="operator" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AntennaCharacteristics">
+    <xs:sequence>
+      <xs:element name="height" type="xs:double" minOccurs="0"/>
+      <xs:element name="heightType" type="ns1:antennaHeightType" minOccurs="0"/>
+      <xs:element name="heightUncertainty" type="xs:double" minOccurs="0"/>
+      <xs:element name="polarization" type="ns1:antennaPolarizationType" minOccurs="0"/>
+      <xs:element name="radiationPattern" type="xs:string" minOccurs="0"/>
+      <xs:element name="gain" type="xs:double" minOccurs="0"/>
+      <xs:element name="rotation" type="xs:double" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DeviceCapabilities">
+    <xs:sequence>
+      <xs:element name="frequencyRanges" type="tns:FrequencyRange" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="FrequencyRange">
+    <xs:sequence>
+      <xs:element name="startHz" type="xs:double"/>
+      <xs:element name="stopHz" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="EventTime">
+    <xs:sequence>
+      <xs:element name="startTime" type="xs:string"/>
+      <xs:element name="stopTime" type="xs:string"/>
+      <xs:element name="duration" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DeviceValidity">
+    <xs:sequence>
+      <xs:element name="deviceDesc" type="tns:DeviceDescriptor"/>
+      <xs:element name="isValid" type="xs:boolean"/>
+      <xs:element name="reason" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Error">
+    <xs:sequence>
+      <xs:element name="code" type="xs:int"/>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+      <xs:element name="data" type="xs:anyType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="GeoSpectrumSpec">
+    <xs:sequence>
+      <xs:element name="location" type="tns:GeoLocation"/>
+      <xs:element name="spectrumSpecs" type="tns:SpectrumSpec" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SpectrumSpec">
+    <xs:sequence>
+      <xs:element name="rulesetInfo" type="tns:RulesetInfo"/>
+      <xs:element name="spectrumSchedules" type="tns:SpectrumSchedule" maxOccurs="unbounded"/>
+      <xs:element name="timeRange" type="tns:EventTime" minOccurs="0"/>
+      <xs:element name="frequencyRanges" type="tns:FrequencyRange" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="needsSpectrumReport" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="maxTotalBwHz" type="xs:double" minOccurs="0"/>
+      <xs:element name="maxContiguousBwHz" type="xs:double" minOccurs="0"/>
+      <xs:element name="etsiEnSimultaneousChannelOperationRestriction" type="ns1:etsiChannelRestrictionType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SpectrumSchedule">
+    <xs:sequence>
+      <xs:element name="eventTime" type="tns:EventTime"/>
+      <xs:element name="spectra" type="tns:Spectrum" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Spectrum">
+    <xs:sequence>
+      <xs:element name="resolutionBwHz" type="xs:double"/>
+      <xs:element name="profiles" type="tns:SpectrumProfile" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SpectrumProfile">
+    <xs:sequence>
+      <xs:element name="list" type="tns:SpectrumProfilePoint" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SpectrumProfilePoint">
+    <xs:sequence>
+      <xs:element name="hz" type="xs:double"/>
+      <xs:element name="dbm" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

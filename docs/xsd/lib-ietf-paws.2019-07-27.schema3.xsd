@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://ietf.org/lib/paws/message" xmlns:tns="http://ietf.org/lib/paws/message" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://ietf.org/lib/paws/type" xmlns:ns1="http://ietf.org/lib/paws" xmlns:ns3="http://keybridge.ch/lib/paws">
+
+  <xs:import namespace="http://ietf.org/lib/paws" schemaLocation="lib-ietf-paws.2019-07-27.schema4.xsd"/>
+
+  <xs:import namespace="http://ietf.org/lib/paws/type" schemaLocation="lib-ietf-paws.2019-07-27.schema2.xsd"/>
+
+  <xs:import namespace="http://keybridge.ch/lib/paws" schemaLocation="lib-ietf-paws.2019-07-27.schema1.xsd"/>
+
+  <xs:element name="AVAIL_SPECTRUM_REQ" type="tns:AVAIL_SPECTRUM_REQ"/>
+
+  <xs:element name="AVAIL_SPECTRUM_RESP" type="tns:AVAIL_SPECTRUM_RESP"/>
+
+  <xs:element name="INIT_REQ" type="tns:INIT_REQ"/>
+
+  <xs:element name="INIT_RESP" type="tns:INIT_RESP"/>
+
+  <xs:element name="REGISTRATION_REQ" type="tns:REGISTRATION_REQ"/>
+
+  <xs:element name="REGISTRATION_RESP" type="tns:REGISTRATION_RESP"/>
+
+  <xs:complexType name="INIT_REQ">
+    <xs:sequence>
+      <xs:element name="deviceDesc" type="ns1:DeviceDescriptor"/>
+      <xs:element name="location" type="ns1:GeoLocation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="INIT_RESP">
+    <xs:sequence>
+      <xs:element name="rulesetInfos" type="ns1:RulesetInfo" maxOccurs="unbounded"/>
+      <xs:element name="databaseChange" type="ns1:DbUpdateSpec" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="REGISTRATION_REQ">
+    <xs:sequence>
+      <xs:element name="deviceDesc" type="ns1:DeviceDescriptor"/>
+      <xs:element name="location" type="ns1:GeoLocation"/>
+      <xs:element name="deviceOwner" type="ns1:DeviceOwner" minOccurs="0"/>
+      <xs:element name="antenna" type="ns1:AntennaCharacteristics" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="REGISTRATION_RESP">
+    <xs:sequence>
+      <xs:element name="rulesetInfos" type="ns1:RulesetInfo" maxOccurs="unbounded"/>
+      <xs:element name="databaseChange" type="ns1:DbUpdateSpec" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AVAIL_SPECTRUM_REQ">
+    <xs:sequence>
+      <xs:element name="deviceDesc" type="ns1:DeviceDescriptor"/>
+      <xs:element name="location" type="ns1:GeoLocation"/>
+      <xs:element name="owner" type="ns1:DeviceOwner" minOccurs="0"/>
+      <xs:element name="antenna" type="ns1:AntennaCharacteristics" minOccurs="0"/>
+      <xs:element name="capabilities" type="ns1:DeviceCapabilities" minOccurs="0"/>
+      <xs:element name="masterDeviceDesc" type="ns1:DeviceDescriptor" minOccurs="0"/>
+      <xs:element name="masterDeviceLocation" type="ns1:GeoLocation" minOccurs="0"/>
+      <xs:element name="requestType" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AVAIL_SPECTRUM_RESP">
+    <xs:sequence>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+      <xs:element name="timestamp" type="xs:string"/>
+      <xs:element name="deviceDesc" type="ns1:DeviceDescriptor"/>
+      <xs:element name="databaseChange" type="ns1:DbUpdateSpec" minOccurs="0"/>
+      <xs:element name="rulesetInfo" type="ns1:RulesetInfo"/>
+      <xs:element name="timeRange" type="ns1:EventTime"/>
+      <xs:element name="needsSpectrumReport" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="position" type="xs:string" minOccurs="0"/>
+      <xs:element name="channels" type="ns3:PawsChannel" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

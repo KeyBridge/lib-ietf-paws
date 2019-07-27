@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://keybridge.ch/lib/paws" xmlns:tns="http://keybridge.ch/lib/paws" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ietf.org/lib/paws">
+
+  <xs:import namespace="http://ietf.org/lib/paws" schemaLocation="lib-ietf-paws.2019-07-27.schema4.xsd"/>
+
+  <xs:element name="PawsChannel" type="tns:PawsChannel"/>
+
+  <xs:element name="PawsInfo" type="tns:PawsInfo"/>
+
+  <xs:complexType name="PawsChannel">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="frequencyMax" type="xs:double"/>
+      <xs:element name="frequencyMin" type="xs:double"/>
+      <xs:element name="allowed" type="xs:boolean"/>
+      <xs:element name="maxPowerDBW" type="xs:double"/>
+      <xs:element name="maxTimeRange" type="ns1:EventTime"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PawsInfo">
+    <xs:complexContent>
+      <xs:extension base="tns:PawsChannel">
+        <xs:sequence>
+          <xs:element name="enforcementBlocking" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="enforcementFastPoll" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="exception" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="servicesCo" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="servicesAdj" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="servicesTaboo" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="services2ndAdj" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="messages" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>
+
