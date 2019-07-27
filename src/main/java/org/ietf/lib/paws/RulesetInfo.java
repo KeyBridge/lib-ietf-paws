@@ -14,6 +14,7 @@
 package org.ietf.lib.paws;
 
 import javax.xml.bind.annotation.*;
+import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
  * <img src="doc-files/rulesetInfo.png">
@@ -57,7 +58,7 @@ public class RulesetInfo {
    * "Defining Ruleset Identifiers" (Section 8.1).
    */
   @XmlElement(required = true)
-  private String rulesetId;
+  private PawsRulesetType rulesetId;
   /**
    * The maximum location change in meters is REQUIRED for the Initialization
    * Response (Section 4.3.2), but OPTIONAL otherwise. Some regulatory domains
@@ -89,11 +90,21 @@ public class RulesetInfo {
     this.authority = authority;
   }
 
-  public String getRulesetId() {
+  /**
+   * Get the PAWS Ruleset ID Registry values.
+   *
+   * @return the enumerated PawsRulesetType
+   */
+  public PawsRulesetType getRulesetId() {
     return rulesetId;
   }
 
-  public void setRulesetId(String rulesetId) {
+  /**
+   * Set the PAWS Ruleset ID Registry values.
+   *
+   * @param rulesetId the enumerated PawsRulesetType
+   */
+  public void setRulesetId(PawsRulesetType rulesetId) {
     this.rulesetId = rulesetId;
   }
 
