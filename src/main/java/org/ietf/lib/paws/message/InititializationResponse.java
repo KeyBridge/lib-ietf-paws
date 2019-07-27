@@ -14,6 +14,7 @@
 package org.ietf.lib.paws.message;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.DbUpdateSpec;
@@ -84,6 +85,10 @@ public class InititializationResponse extends AbstractResponse {
    * DbUpdateSpec.
    */
   private DbUpdateSpec databaseChange;
+
+  public InititializationResponse(RulesetInfo rulesetInfo) {
+    this.rulesetInfos = rulesetInfo == null ? null : Arrays.asList(rulesetInfo);
+  }
 
   public List<RulesetInfo> getRulesetInfos() {
     if (rulesetInfos == null) {
