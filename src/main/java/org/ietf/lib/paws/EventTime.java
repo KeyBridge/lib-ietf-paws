@@ -54,6 +54,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * no longer active and MUST be ignored.</li></ul>
  *
  * @author Key Bridge LLC
+ * @see <a href="https://tools.ietf.org/html/rfc3339">RFC3339 Timestamps</a>
  */
 @XmlRootElement(name = "EventTime")
 @XmlType(name = "EventTime")
@@ -61,13 +62,15 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class EventTime {
 
   /**
-   * The inclusive start of the event is REQUIRED.
+   * The inclusive start of the event expressed using the format
+   * "YYYY-MM-DDThh:mm:ssZ" in UTC.
    */
   @XmlJavaTypeAdapter(XmlDateTimeAdapter.class)
   @XmlElement(required = true)
   private Date startTime;
   /**
-   * The exclusive end of the event is REQUIRED.
+   * The exclusive end of the event expressed using the format
+   * "YYYY-MM-DDThh:mm:ssZ" in UTC.
    */
   @XmlJavaTypeAdapter(XmlDateTimeAdapter.class)
   @XmlElement(required = true)

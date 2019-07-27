@@ -14,10 +14,10 @@
 package org.ietf.lib.paws;
 
 import ch.keybridge.lib.xml.adapter.XmlGeometryAdapter;
-import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.geom.Polygon;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.Polygon;
 
 /**
  * <img src="doc-files/geoLocation.png">
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * GeoLocation is used to specify a single point with optional uncertainty or a
  * region described by a polygon.
  * <p>
- * Key Bridge: These are represented using geometries encoded using SFA Well
+ * Key Bridge implementation: GeoLocation values are encoded using SFA Well
  * Known Text.
  * <p>
  * Deprecated: <em> These are represented using geometric shapes defined in
@@ -39,6 +39,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * some rulesets (see also [RFC7459]).
  *
  * @author Key Bridge LLC
+ * @see <a href="http://www.opengeospatial.org/standards/sfa">Simple Feature
+ * Access</a>
+ * @see
+ * <a href="https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry">Well-known
+ * text</a>
+ * @see <a href="https://tools.ietf.org/html/rfc5491">RFC5491 (not used</a>
  */
 @XmlRootElement(name = "GeoLocation")
 @XmlType(name = "GeoLocation")
