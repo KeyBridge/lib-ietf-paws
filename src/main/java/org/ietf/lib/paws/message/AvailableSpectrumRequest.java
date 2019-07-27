@@ -13,12 +13,8 @@
  */
 package org.ietf.lib.paws.message;
 
-import org.ietf.lib.paws.AntennaCharacteristics;
-import org.ietf.lib.paws.GeoLocation;
-import org.ietf.lib.paws.DeviceCapabilities;
-import org.ietf.lib.paws.DeviceOwner;
-import org.ietf.lib.paws.DeviceDescriptor;
 import javax.xml.bind.annotation.*;
+import org.ietf.lib.paws.*;
 
 /**
  * Current: Key Bridge protocol {@code version} attribute added.
@@ -110,13 +106,14 @@ public class AvailableSpectrumRequest extends AbstractRequest {
    * compatible with the specified capabilities.
    */
   private DeviceCapabilities capabilities;
+
   /**
-   * When the request is made by the Master Device on behalf of a Slave Device,
+   * When the request is made by a Master Device on behalf of a Slave Device,
    * the Master Device MAY provide its own descriptor.
    */
   private DeviceDescriptor masterDeviceDesc;
   /**
-   * When the request is made by the Master Device on behalf of a Slave Device,
+   * When the request is made by a Master Device on behalf of a Slave Device,
    * the Master Device MUST provide its own GeoLocation (Section 5.1).
    */
   private GeoLocation masterDeviceLocation;
@@ -129,6 +126,12 @@ public class AvailableSpectrumRequest extends AbstractRequest {
    * (Master or Slave), so deviceDesc is REQUIRED. The maximum length of the
    * value is 64 octets. See the specifics in the Initial Registry Contents
    * (Section 9.1.2) for the Ruleset ID Registry.
+   * <p>
+   * 9.1.2.2. European Telecommunications Standards Institute (ETSI)
+   * <p>
+   * Modifies the available-spectrum request type. If specified, the only valid
+   * value is "Generic Slave" and the Database is required to respond with
+   * generic operating parameters for any Slave Device
    */
   private String requestType;
 
