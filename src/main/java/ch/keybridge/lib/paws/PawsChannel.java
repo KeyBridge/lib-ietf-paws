@@ -41,7 +41,7 @@ import org.ietf.lib.paws.EventTime;
 @XmlType(name = "PawsChannel")
 @XmlRootElement(name = "PawsChannel")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PawsChannel {
+public class PawsChannel implements Comparable<PawsChannel> {
 
   /**
    * The colloquial channel name. This corresponds to the channel number
@@ -186,9 +186,25 @@ public class PawsChannel {
     return Double.doubleToLongBits(this.frequencyMin) == Double.doubleToLongBits(other.frequencyMin);
   }
 
+  /**
+   * Return the channel name
+   *
+   * @return the name
+   */
   @Override
   public String toString() {
     return name;
+  }
+
+  /**
+   * Sort on the min frequency.
+   *
+   * @param o the other instance
+   * @return the sort order
+   */
+  @Override
+  public int compareTo(PawsChannel o) {
+    return frequencyMin.compareTo(o.getFrequencyMin());
   }
 
 }

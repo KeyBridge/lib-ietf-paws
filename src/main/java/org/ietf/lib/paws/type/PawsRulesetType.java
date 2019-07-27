@@ -44,8 +44,6 @@ import javax.xml.bind.annotation.XmlEnumValue;
 public enum PawsRulesetType {
 
   /**
-   * @deprecated Part 15H updated ca. 2015-2019 fromm the 600 MHz repack.
-   *
    * Title 47: Telecommunication PART 15—RADIO FREQUENCY DEVICES Subpart H—White
    * Space Devices
    * <p>
@@ -54,6 +52,7 @@ public enum PawsRulesetType {
    * @see
    * <a href="http://www.ecfr.gov/cgi-bin/text-idx?rgn=div6&view=text&node=47:1.0.1.1.16.8">Subpart
    * H—White Space Devices</a>
+   * @deprecated Part 15H updated ca. 2015-2019 fromm the 600 MHz repack.
    */
   @Deprecated
   @XmlEnumValue("FccTvBandWhiteSpace-2010")
@@ -80,8 +79,6 @@ public enum PawsRulesetType {
   ISED_DBS01_2015("ISED-DBS01-2015"),
 
   /**
-   * @deprecated superceded by "ETSI-EN-301-598-2.1.1"
-   *
    * ETSI EN 301 598 V1.1.1 (2014-04)
    * <p>
    * White Space Devices (WSD); Wireless Access Systems operating in the 470 MHz
@@ -90,6 +87,7 @@ public enum PawsRulesetType {
    *
    * @see
    * <a href="http://www.etsi.org/deliver/etsi_en/301500_301599/301598/01.01.01_60/en_301598v010101p.pdf">ETSI-EN-301-598</a>
+   * @deprecated superceded by "ETSI-EN-301-598-2.1.1"
    */
   @Deprecated
   @XmlEnumValue("ETSI-EN-301-598-1.1.1")

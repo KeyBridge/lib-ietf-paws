@@ -15,9 +15,7 @@ package org.ietf.lib.paws.message;
 
 import ch.keybridge.lib.paws.PawsChannel;
 import ch.keybridge.lib.xml.adapter.XmlDateTimeAdapter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.*;
@@ -124,19 +122,19 @@ public class AvailableSpectrumResponse {
   @XmlElement(required = true)
   private DeviceDescriptor deviceDesc;
   /**
-   * @deprecated This silly list of lists is deprecated. The Response is
-   * flattened.
-   *
    * Deprecated: <em> The SpectrumSpec (Section 5.9) list MUST include at least
    * one entry. Each entry contains the schedules of available spectrum for a
    * ruleset. The Database MAY return more than one SpectrumSpec to represent
    * available spectrum for multiple rulesets at the specified location.</em>
    * <p>
-   * Key Bridge: This is not used. Instead the components are FLATTENED into
-   * this message.
+   * Key Bridge: This is not used. Instead the various SpectrumSpec components
+   * are FLATTENED into this message and frequency information is provided in
+   * the {@code channels} collection.
+   *
+   * @deprecated This silly list of lists is deprecated. Reference instead the
+   * {@code channels} collection of sorted {@code PawsChannel} instances.
    */
 //  @XmlElement(required = true)
-  @XmlTransient
   private List<SpectrumSpec> spectrumSpecs;
   /**
    * The Database MAY include a DbUpdateSpec (Section 5.7) to notify the device
@@ -204,7 +202,7 @@ public class AvailableSpectrumResponse {
    * This replaces the Spectrum list silliness (Section 5.11).
    */
   @XmlElement(name = "channels", required = true)
-  private List<PawsChannel> channels;
+  private Collection<PawsChannel> channels;
 
   public AvailableSpectrumResponse() {
     super();
@@ -278,15 +276,24 @@ public class AvailableSpectrumResponse {
     this.position = position;
   }
 
-  public List<PawsChannel> getChannels() {
+  public Collection<PawsChannel> getChannels() {
     if (channels == null) {
-      channels = new ArrayList<>();
+      channels = new TreeSet<>();
     }
     return channels;
   }
 
-  public void setChannels(List<PawsChannel> channels) {
+  public void setChannels(Collection<PawsChannel> channels) {
     this.channels = channels;
+  }
+
+  /**
+   * Add a single PawsChannel instance to the internal sorted set.
+   *
+   * @param channel the PawsChannel instance to add
+   */
+  public void addChannel(PawsChannel channel) {
+    getChannels().add(channel);
   }
 
   public String getMessage() {
@@ -297,15 +304,14 @@ public class AvailableSpectrumResponse {
     this.message = message;
   }
 
+  /**
+   * Return a list of channels.
+   *
+   * @return a list of channels.
+   */
   @Override
   public String toString() {
-    List<PawsChannel> allowedChannels = new ArrayList<>();
-    for (PawsChannel channel : getChannels()) {
-      if (channel.isAllowed()) {
-        allowedChannels.add(channel);
-      }
-    }
-    return allowedChannels.toString();
+    return getChannels().toString();
   }
 
 }

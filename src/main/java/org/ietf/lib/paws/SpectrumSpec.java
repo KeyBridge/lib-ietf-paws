@@ -48,6 +48,7 @@ import org.ietf.lib.paws.type.EtsiChannelRestrictionType;
  * </pre>
  *
  * @author Key Bridge LLC
+ * @deprecated Instead use {@code PawsChannel}.
  */
 @XmlRootElement(name = "SpectrumSpec")
 @XmlType(name = "SpectrumSpec")
