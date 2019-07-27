@@ -13,7 +13,6 @@
  */
 package org.ietf.lib.paws;
 
-import ch.keybridge.lib.paws.Contact;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -43,6 +42,8 @@ import javax.xml.bind.annotation.*;
  * 9.1.2.1. Federal Communications Commission (FCC)
  *
  * @author Key Bridge LLC
+ * @since v0.8.0 update fields to contain LDAP distinguished names instead of
+ * VCARD format.
  */
 @XmlRootElement(name = "DeviceOwner")
 @XmlType(name = "DeviceOwner")
@@ -59,9 +60,11 @@ public class DeviceOwner {
    * organization using the "fn" property. When the name is that of an
    * organization, the entry also is required to contain the "kind" property,
    * with a value of "org".
+   * <p>
+   * Key Bridge: This is an LDAP distinguished name ("DN").
    */
   @XmlElement(required = true)
-  public Contact owner;
+  public String owner;
   /**
    * The vCard contact information for the device operator is OPTIONAL but may
    * be required by specific rulesets.
@@ -71,22 +74,54 @@ public class DeviceOwner {
    * The operator entry is required to contain the following properties for the
    * contact person responsible for the device's operation: "fn", "adr", "tel",
    * and "email".
+   * <p>
+   * Key Bridge: This is an LDAP distinguished name ("DN"). For FIXED type
+   * devices the DN should indicate the professional installer ID at the
+   * attribute `installerId`.
    */
-  public Contact operator;
+  public String operator;
 
-  public Contact getOwner() {
+  /**
+   * Get the owner information.
+   * <p>
+   * Key Bridge: This is an LDAP distinguished name ("DN").
+   *
+   * @return the owner information
+   */
+  public String getOwner() {
     return owner;
   }
 
-  public void setOwner(Contact owner) {
+  /**
+   * Set the owner information.
+   * <p>
+   * Key Bridge: This is an LDAP distinguished name ("DN").
+   *
+   * @param owner the owner information
+   */
+  public void setOwner(String owner) {
     this.owner = owner;
   }
 
-  public Contact getOperator() {
+  /**
+   * Get the device operator information.
+   * <p>
+   * Key Bridge: This is an LDAP distinguished name ("DN").
+   *
+   * @return the device operator information
+   */
+  public String getOperator() {
     return operator;
   }
 
-  public void setOperator(Contact operator) {
+  /**
+   * Set the device operator information. Key Bridge: This is an LDAP
+   * distinguished name ("DN"). For FIXED type devices the DN should indicate
+   * the professional installer ID at the attribute `installerId`.
+   *
+   * @param operator the device operator information
+   */
+  public void setOperator(String operator) {
     this.operator = operator;
   }
 
