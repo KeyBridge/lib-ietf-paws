@@ -39,7 +39,8 @@ import javax.xml.bind.annotation.*;
  * All contact information MUST be expressed using the structure defined by the
  * "vCard Format Specification" [RFC6350], encoded in JSON [RFC7095]. Note that
  * the vCard specification defines maximum lengths for each parameter.
- *
+ * <p>
+ * 9.1.2.1. Federal Communications Commission (FCC)
  *
  * @author Key Bridge LLC
  */
@@ -52,6 +53,8 @@ public class DeviceOwner {
    * The vCard contact information for the individual or business that owns the
    * device is REQUIRED.
    * <p>
+   * 9.1.2.1. Federal Communications Commission (FCC):
+   * <p>
    * The owner is required to contain the formatted name of an individual or
    * organization using the "fn" property. When the name is that of an
    * organization, the entry also is required to contain the "kind" property,
@@ -62,6 +65,8 @@ public class DeviceOwner {
   /**
    * The vCard contact information for the device operator is OPTIONAL but may
    * be required by specific rulesets.
+   * <p>
+   * 9.1.2.1. Federal Communications Commission (FCC):
    * <p>
    * The operator entry is required to contain the following properties for the
    * contact person responsible for the device's operation: "fn", "adr", "tel",
