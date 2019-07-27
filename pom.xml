@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>keybridge.lib</groupId>
   <artifactId>ietf-paws</artifactId>
-  <version>0.5.0</version>
+  <version>0.6.0</version>
   <packaging>jar</packaging>
 
   <name>lib-ietf-paws</name>
@@ -21,6 +21,7 @@
     v0.3.0 - upgrade JTS to 1.16.1 refctor to org.locationtech.jts
     v0.4.0 - rename project to from `lib-protocol-paws` to `lib-ietf-paws` 2019-07/26
     v0.5.0 - refactor code into 'lib' package, add package-info to specify namespace
+    v0.6.0 - add etsi and fcc enumerated types; rewrite device descriptor
 
 
 
