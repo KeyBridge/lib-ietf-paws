@@ -13,9 +13,7 @@
  */
 package org.ietf.lib.paws;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
@@ -45,6 +43,8 @@ import org.ietf.lib.paws.type.PawsRulesetType;
  * @since v0.9.0 created 07/27/19 to support operation in Canada
  *
  */
+@XmlRootElement(name = "DeviceDescriptorIsed")
+@XmlType(name = "DeviceDescriptorIsed")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DeviceDescriptorIsed extends DeviceDescriptor {
 

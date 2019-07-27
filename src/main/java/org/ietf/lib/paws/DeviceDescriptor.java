@@ -101,6 +101,9 @@ public abstract class DeviceDescriptor {
    */
   protected String emissionDesignator;
 
+  public DeviceDescriptor() {
+  }
+
   /**
    * Constructor declaring the PawsRulesetType of this device descriptor.
    *

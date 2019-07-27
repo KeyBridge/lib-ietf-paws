@@ -86,6 +86,9 @@ public class InititializationResponse extends AbstractResponse {
    */
   private DbUpdateSpec databaseChange;
 
+  public InititializationResponse() {
+  }
+
   public InititializationResponse(RulesetInfo rulesetInfo) {
     this.rulesetInfos = rulesetInfo == null ? null : Arrays.asList(rulesetInfo);
   }

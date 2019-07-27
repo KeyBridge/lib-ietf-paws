@@ -13,9 +13,7 @@
  */
 package org.ietf.lib.paws;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
@@ -42,6 +40,8 @@ import org.ietf.lib.paws.type.PawsRulesetType;
  * @author Key Bridge LLC
  * @since v0.6.0 created 07/26/19 to distinguish FCC vs. ETSI handling
  */
+@XmlRootElement(name = "DeviceDescriptorFcc")
+@XmlType(name = "DeviceDescriptorFcc")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DeviceDescriptorFcc extends DeviceDescriptor {
 
