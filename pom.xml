@@ -26,7 +26,7 @@
     v0.8.0 - update DeviceOwner to use LDAP distinguished names instead of VCARD format
     v0.9.0 - add Ised device descriptor for Canada operation
     v0.10.0 - update element vs. attribute use; use TreeSet to ensure proper sorting
-    v0.11.0 add spectrum use nofity and response messages
+    v0.11.0 - add spectrum use; registration; validation request and response messages
 
   </description>
 

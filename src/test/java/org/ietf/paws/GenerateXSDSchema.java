@@ -50,7 +50,7 @@ public class GenerateXSDSchema {
     List<Class> classes = new ArrayList<>();
     // message classes
     classes.add(InitializationRequest.class);
-    classes.add(InititializationResponse.class);
+    classes.add(InitializationResponse.class);
     classes.add(RegistrationRequest.class);
     classes.add(RegistrationResponse.class);
     classes.add(AvailableSpectrumRequest.class);
