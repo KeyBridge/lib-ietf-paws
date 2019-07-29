@@ -22,7 +22,7 @@ import ch.keybridge.lib.paws.PawsChannel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeSet;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.DeviceDescriptor;
 import org.ietf.lib.paws.GeoLocation;
 import org.ietf.lib.paws.Spectrum;
@@ -32,14 +32,35 @@ import org.ietf.lib.paws.Spectrum;
  * <p>
  * The spectrum-use notification message indicates the spectrum anticipated to
  * be used by the device.
- * <p>
- * other: Depending on the ruleset, other parameters may be required. To
+ * <pre>
+ *   +---------------------------------------------------+
+ *   |SPECTRUM_USE_NOTIFY                                |
+ *   +---------------------------------+-----------------+
+ *   |deviceDesc:DeviceDescriptor      | REQUIRED        |
+ *   |location:GeoLocation             | see description |
+ *   |masterDeviceDesc:DeviceDescriptor| OPTIONAL        |
+ *   |masterDeviceLocation:GeoLocation | see description |
+ *   |spectra:list                     | REQUIRED        |--+
+ *   |...................................................|  |
+ *   |*other:any                       | OPTIONAL        |  |
+ *   +---------------------------------+-----------------+  | 0..*
+ *                                                          V
+ *                                 +--------------------------------+
+ *                                 |Spectrum                        |
+ *                                 +---------------------+----------+
+ *                                 |resolutionBwHz:float | REQUIRED |
+ *                                 |profiles:list        | REQUIRED |
+ *                                 +---------------------+----------+
+ * </pre> other: Depending on the ruleset, other parameters may be required. To
  * simplify its logic, the device MAY include the union of all parameters
  * required by all supported rulesets. The Database MUST ignore all parameters
  * it does not understand.
  *
  * @author Key Bridge
  */
+@XmlRootElement(name = "SPECTRUM_USE_NOTIFY")
+@XmlType(name = "SPECTRUM_USE_NOTIFY")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SpectrumUseNotify {
 
   /**

@@ -18,6 +18,10 @@
  */
 package org.ietf.lib.paws.message;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import org.ietf.lib.paws.DbUpdateSpec;
 
 /**
@@ -25,13 +29,23 @@ import org.ietf.lib.paws.DbUpdateSpec;
  * <p>
  * The spectrum-use response message simply acknowledges receipt of the
  * notification.
- * <p>
- * other: Database implementations MAY return additional parameters in the
- * response. Consult the PAWS Parameters Registry (Section 9.2) for possible
+ * <pre>
+ *   +---------------------------------------+
+ *   |SPECTRUM_USE_RESP                      |
+ *   +----------------------------+----------+
+ *   |databaseChange:DbUpdateSpec | OPTIONAL |
+ *   |.......................................|
+ *   |*other:any                  | OPTIONAL |
+ *   +----------------------------+----------+
+ * </pre> other: Database implementations MAY return additional parameters in
+ * the response. Consult the PAWS Parameters Registry (Section 9.2) for possible
  * additional parameters.
  *
  * @author Key Bridge
  */
+@XmlRootElement(name = "SPECTRUM_USE_RESP")
+@XmlType(name = "SPECTRUM_USE_RESP")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SpectrumUseResponse {
 
   /**
