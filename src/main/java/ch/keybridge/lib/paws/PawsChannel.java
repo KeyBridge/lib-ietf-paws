@@ -22,7 +22,7 @@ import org.ietf.lib.paws.EventTime;
 /**
  * Key Bridge PAWS channel description.
  * <p>
- * <img src="doc-files/pawsChannel.png">
+ * <img alt="clazz" src="doc-files/pawsChannel.png">
  * <p>
  * The {@code PawsChannel} is used in the {@code AvailableSpectrumResponse}
  * object to convey channel availability information.

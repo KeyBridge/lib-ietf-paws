@@ -22,7 +22,7 @@ import org.ietf.lib.paws.RulesetInfo;
 /**
  * 4.4.2. REGISTRATION_RESP
  * <p>
- * <img src="doc-files/registration_resp.png">
+ * <img alt="clazz" src="doc-files/registration_resp.png">
  * <p>
  * The registration response message acknowledges successful registration by
  * including a RulesetInfo message for each ruleset in which the registration is
@@ -33,7 +33,7 @@ import org.ietf.lib.paws.RulesetInfo;
  *   +---------------------------------------+
  *   |REGISTRATION_RESP                      |
  *   +----------------------------+----------+   1..* +-------------+
- *   |rulesetInfos:list           | REQUIRED |------->| RulesetInfo |
+ *   |rulesetInfos:list           | REQUIRED |-------=| RulesetInfo |
  *   |databaseChange:DbUpdateSpec | OPTIONAL |        +-------------+
  *   |............................|..........|
  *   |*other:any                  | OPTIONAL |

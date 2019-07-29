@@ -26,7 +26,7 @@ import org.ietf.lib.paws.type.AntennaPolarizationType;
 /**
  * 5.3. AntennaCharacteristics
  * <p>
- * <img src="doc-files/antennaCharacteristics.png">
+ * <img alt="clazz" src="doc-files/antennaCharacteristics.png">
  * <p>
  * Antenna characteristics provide additional information, such as the antenna
  * height, antenna type, etc. Whether antenna characteristics must be provided

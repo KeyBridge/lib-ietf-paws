@@ -23,7 +23,7 @@ import org.ietf.lib.paws.RulesetInfo;
 /**
  * 4.3.2. INIT_RESP
  * <p>
- * <img src="doc-files/init_resp.png">
+ * <img alt="clazz" src="doc-files/init_resp.png">
  * <p>
  * The initialization response message communicates database parameters to the
  * requesting device. This response is returned only when there is at least one
@@ -33,7 +33,7 @@ import org.ietf.lib.paws.RulesetInfo;
  * +---------------------------------------+
  * |INIT_RESP                              |
  * +----------------------------+----------+   1..* +-------------+
- * |rulesetInfos:list           | REQUIRED |------->| RulesetInfo |
+ * |rulesetInfos:list           | REQUIRED |-------=| RulesetInfo |
  * |databaseChange:DbUpdateSpec | OPTIONAL |        +-------------+
  * |.......................................|
  * |*other:any                  | OPTIONAL |

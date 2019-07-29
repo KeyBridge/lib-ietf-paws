@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.*;
 /**
  * 5.7. DbUpdateSpec
  * <p>
- * <img src="doc-files/dbUpdateSpec.png">
+ * <img alt="clazz" src="doc-files/dbUpdateSpec.png">
  * <p>
  * This element is provided by the Database to notify devices of an upcoming
  * change to the database URI.
@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.*;
  * +-------------------------------+
  * |DbUpdateSpec                   |
  * +---------------------+---------+       +--------------------------+
- * |databases:list       |REQUIRED |------>|DatabaseSpec              |
+ * |databases:list       |REQUIRED |------=|DatabaseSpec              |
  * +---------------------+---------+  1..* +---------------+----------+
  *                                         |name:string    | REQUIRED |
  *                                         |uri:string     | REQUIRED |

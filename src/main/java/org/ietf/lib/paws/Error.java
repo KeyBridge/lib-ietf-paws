@@ -20,7 +20,7 @@ import org.ietf.lib.paws.type.PawsErrorCode;
 /**
  * 5.17. Error Element
  * <p>
- * <img src="doc-files/error.png">
+ * <img alt="clazz" src="doc-files/error.png">
  * <p>
  * If the Database responds to a PAWS request message with an error, it MUST
  * include an Error element.
@@ -106,7 +106,6 @@ import org.ietf.lib.paws.type.PawsErrorCode;
  *  -32000 (reserved)       Reserved for JSON-RPC error codes.
  *  to
  *  -32768
- * <p>
  * </pre>
  *
  * @author Key Bridge LLC

@@ -19,7 +19,7 @@ import org.ietf.lib.paws.*;
 /**
  * 4.5.1. AVAIL_SPECTRUM_REQ
  * <p>
- * <img src="doc-files/avail_spectrum_req.png">
+ * <img alt="clazz" src="doc-files/avail_spectrum_req.png">
  * <p>
  * The request message for the Available Spectrum Query protocol MUST include a
  * geolocation. Rulesets may mandate that it be the device's current location or

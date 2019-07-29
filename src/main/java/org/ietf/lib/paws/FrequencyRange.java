@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.*;
 /**
  * 5.13. FrequencyRange
  * <p>
- * <img src="doc-files/frequencyRange.png">
+ * <img alt="clazz" src="doc-files/frequencyRange.png">
  * <p>
  * FrequencyRange specifies a frequency range.
  * <pre>

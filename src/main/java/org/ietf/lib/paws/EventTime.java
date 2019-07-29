@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 /**
  * 5.14. EventTime
  * <p>
- * <img src="doc-files/eventTime.png">
+ * <img alt="clazz" src="doc-files/eventTime.png">
  * <p>
  * The EventTime element specifies the start and stop times of an "event". This
  * is used to indicate the time period for which a Spectrum (Section 5.11) is

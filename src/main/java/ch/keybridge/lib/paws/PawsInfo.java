@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlType;
 /**
  * Key Bridge White Space information data transfer object.
  * <p>
- * <img src="doc-files/pawsInfo.png">
+ * <img alt="clazz" src="doc-files/pawsInfo.png">
  * <p>
  * A {@code PawInfo} channel information message providing a complete
  * description of spectrum availability and incumbent occupancy.

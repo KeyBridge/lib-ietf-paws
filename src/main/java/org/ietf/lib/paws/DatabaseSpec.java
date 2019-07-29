@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.*;
 /**
  * 5.8. DatabaseSpec
  * <p>
- * <img src="doc-files/databaseSpec.png">
+ * <img alt="clazz" src="doc-files/databaseSpec.png">
  * <p>
  * This element contains the name and URI of a Database.
  * <pre>

@@ -83,7 +83,7 @@ public enum PawsRulesetType {
    * <p>
    * White Space Devices (WSD); Wireless Access Systems operating in the 470 MHz
    * to 790 MHz TV broadcast band; Harmonized EN covering the essential
-   * requirements of article 3.2 of the R&TTE Directive
+   * requirements of article 3.2 of the R&amp;TTE Directive
    *
    * @see
    * <a href="http://www.etsi.org/deliver/etsi_en/301500_301599/301598/01.01.01_60/en_301598v010101p.pdf">ETSI-EN-301-598</a>

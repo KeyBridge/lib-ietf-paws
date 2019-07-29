@@ -25,7 +25,7 @@ import org.ietf.lib.paws.*;
  * <p>
  * 4.5.2. AVAIL_SPECTRUM_RESP
  * <p>
- * <img src="doc-files/avail_spectrum_resp.png">
+ * <img alt="clazz" src="doc-files/avail_spectrum_resp.png">
  * <p>
  * The response message for the Available Spectrum Query contains one or more
  * SpectrumSpec (Section 5.9) elements, one for each ruleset supported at the

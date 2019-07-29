@@ -19,7 +19,7 @@ import org.ietf.lib.paws.type.PawsRulesetType;
 /**
  * 5.2. DeviceDescriptor for {@code FCC_Part15H_2019} PAWS Ruleset.
  * <p>
- * <img src="doc-files/deviceDescriptorFcc.png">
+ * <img alt="clazz" src="doc-files/deviceDescriptorFcc.png">
  * <p>
  * The device descriptor contains parameters that identify the specific device,
  * such as its manufacturer serial number, manufacturer's ID, and any other
@@ -31,7 +31,7 @@ import org.ietf.lib.paws.type.PawsRulesetType;
  * |serialNumber:string  | OPTIONAL |
  * |manufacturerId:string| OPTIONAL |
  * |modelId:string       | OPTIONAL |  1..*
- * |rulesetIds:list      | OPTIONAL |------>string
+ * |rulesetIds:list      | OPTIONAL |------=string
  * |.....................|..........|
  * |*other:any           | OPTIONAL |
  * +---------------------+----------+

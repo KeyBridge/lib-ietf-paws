@@ -19,7 +19,7 @@ import org.ietf.lib.paws.type.PawsRulesetType;
 /**
  * 5.6. RulesetInfo
  * <p>
- * <img src="doc-files/rulesetInfo.png">
+ * <img alt="clazz" src="doc-files/rulesetInfo.png">
  * <p>
  * RulesetInfo contains parameters for the ruleset of a regulatory domain that
  * is communicated using the Initialization (Section 4.3), Device Registration

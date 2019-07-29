@@ -22,7 +22,7 @@ import org.locationtech.jts.geom.Polygon;
 /**
  * 5.1. GeoLocation
  * <p>
- * <img src="doc-files/geoLocation.png">
+ * <img alt="clazz" src="doc-files/geoLocation.png">
  * <p>
  * GeoLocation is used to specify a single point with optional uncertainty or a
  * region described by a polygon.

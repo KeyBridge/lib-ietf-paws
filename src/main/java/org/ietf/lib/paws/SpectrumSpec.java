@@ -21,7 +21,7 @@ import org.ietf.lib.paws.type.EtsiChannelRestrictionType;
 /**
  * 5.9. SpectrumSpec
  * <p>
- * <img src="doc-files/spectrumSpec.png">
+ * <img alt="clazz" src="doc-files/spectrumSpec.png">
  * <p>
  * The SpectrumSpec element encapsulates the schedule of available spectrum for
  * a ruleset.

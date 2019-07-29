@@ -20,7 +20,7 @@ import org.ietf.lib.paws.GeoLocation;
 /**
  * 4.3.1. INIT_REQ
  * <p>
- * <img src="doc-files/init_req.png">
+ * <img alt="clazz" src="doc-files/init_req.png">
  * <p>
  * The initialization request message allows the Master Device to initiate
  * exchange of capabilities with the Database.

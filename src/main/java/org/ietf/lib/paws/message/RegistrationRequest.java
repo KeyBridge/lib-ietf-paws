@@ -22,7 +22,7 @@ import org.ietf.lib.paws.GeoLocation;
 /**
  * 4.4.1. REGISTRATION_REQ
  * <p>
- * <img src="doc-files/registration_req.png">
+ * <img alt="clazz" src="doc-files/registration_req.png">
  * <p>
  * The registration request message contains the required registration
  * parameters. A parameter marked as optional may be required by some rulesets.

@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.*;
 /**
  * 5.16. DeviceValidity
  * <p>
- * <img src="doc-files/deviceValidity.png">
+ * <img alt="clazz" src="doc-files/deviceValidity.png">
  * <p>
  * The DeviceValidity element is used to indicate whether a device is valid. See
  * Section 4.6.2.
