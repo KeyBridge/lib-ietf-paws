@@ -15,6 +15,7 @@ package ch.keybridge.lib.paws;
 
 import ch.keybridge.lib.xml.adapter.XmlDouble02PrecisionAdapter;
 import ch.keybridge.lib.xml.adapter.XmlDouble06PrecisionAdapter;
+import java.util.Objects;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.EventTime;
@@ -78,11 +79,10 @@ public class PawsChannel implements Comparable<PawsChannel> {
   /**
    * The time range for which this specific channel is available.
    * <p>
-   * When specified, any gaps in time intervals within the element that overlap
-   * with the range specified by "timeRange" are interpreted by the device as
-   * time intervals in which there is no available spectrum.
+   * When specified, this is the only time range when the specified channel may
+   * be used.
    */
-  @XmlElement(name = "maxTimeRange", required = true)
+  @XmlElement(name = "maxTimeRange")
   private EventTime timeRange;
 
   /**
@@ -93,7 +93,11 @@ public class PawsChannel implements Comparable<PawsChannel> {
   }
 
   /**
-   * PAWS Channel constructor with minimum required configuration.
+   * PAWS Channel constructor with minimum required configuration. Sets
+   * `allowed` to TRUE and the `timeRange` to null.
+   * <p>
+   * Developer note: To finalize the returned channel the `maxPowerDBW` field
+   * must be set.
    *
    * @param name         The colloquial channel name. This corresponds to the
    *                     channel number identified in rule or regulation. e.g.
@@ -109,9 +113,13 @@ public class PawsChannel implements Comparable<PawsChannel> {
     pc.setName(name);
     pc.setFrequencyMax(frequencyMax);
     pc.setFrequencyMin(frequencyMin);
+
+    pc.setAllowed(true);
+
     return pc;
   }
 
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   public String getName() {
     return name;
   }
@@ -158,16 +166,38 @@ public class PawsChannel implements Comparable<PawsChannel> {
 
   public void setTimeRange(EventTime timeRange) {
     this.timeRange = timeRange;
+  }//</editor-fold>
+
+  /**
+   * Sort on the min frequency.
+   *
+   * @param o the other instance
+   * @return the sort order
+   */
+  @Override
+  public int compareTo(PawsChannel o) {
+    return frequencyMin.compareTo(o.getFrequencyMin());
   }
 
+  /**
+   * Channels are uniquely identified by the max and min frequencies.
+   *
+   * @return a hashcode
+   */
   @Override
   public int hashCode() {
     int hash = 7;
-    hash = 97 * hash + (int) (Double.doubleToLongBits(this.frequencyMax) ^ (Double.doubleToLongBits(this.frequencyMax) >>> 32));
-    hash = 97 * hash + (int) (Double.doubleToLongBits(this.frequencyMin) ^ (Double.doubleToLongBits(this.frequencyMin) >>> 32));
+    hash = 43 * hash + Objects.hashCode(this.frequencyMax);
+    hash = 43 * hash + Objects.hashCode(this.frequencyMin);
     return hash;
   }
 
+  /**
+   * Channels are uniquely identified by the max and min frequencies.
+   *
+   * @param obj the other instance
+   * @return equality status
+   */
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {
@@ -180,10 +210,10 @@ public class PawsChannel implements Comparable<PawsChannel> {
       return false;
     }
     final PawsChannel other = (PawsChannel) obj;
-    if (Double.doubleToLongBits(this.frequencyMax) != Double.doubleToLongBits(other.frequencyMax)) {
+    if (!Objects.equals(this.frequencyMax, other.frequencyMax)) {
       return false;
     }
-    return Double.doubleToLongBits(this.frequencyMin) == Double.doubleToLongBits(other.frequencyMin);
+    return Objects.equals(this.frequencyMin, other.frequencyMin);
   }
 
   /**
@@ -194,17 +224,6 @@ public class PawsChannel implements Comparable<PawsChannel> {
   @Override
   public String toString() {
     return name;
-  }
-
-  /**
-   * Sort on the min frequency.
-   *
-   * @param o the other instance
-   * @return the sort order
-   */
-  @Override
-  public int compareTo(PawsChannel o) {
-    return frequencyMin.compareTo(o.getFrequencyMin());
   }
 
 }
