@@ -13,12 +13,12 @@
  */
 package org.ietf.lib.paws;
 
-import ch.keybridge.lib.xml.adapter.XmlDateTimeAdapter;
 import ch.keybridge.lib.xml.adapter.XmlDurationAdapter;
+import ch.keybridge.lib.xml.adapter.XmlZonedDateTimeAdapter;
 import java.time.Duration;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -62,19 +62,29 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class EventTime {
 
   /**
+   * "UTC". The default time zone.
+   */
+  private static final ZoneId ZONE_ID = ZoneId.of("UTC");
+  /**
+   * 10800 seconds == three hours. The default time period for which a Spectrum
+   * is valid
+   */
+  private static final int DURATION_DEFAULT = 10800;
+
+  /**
    * The inclusive start of the event expressed using the format
    * "YYYY-MM-DDThh:mm:ssZ" in UTC.
    */
-  @XmlJavaTypeAdapter(XmlDateTimeAdapter.class)
+  @XmlJavaTypeAdapter(XmlZonedDateTimeAdapter.class)
   @XmlElement(required = true)
-  private Date startTime;
+  private ZonedDateTime startTime;
   /**
    * The exclusive end of the event expressed using the format
    * "YYYY-MM-DDThh:mm:ssZ" in UTC.
    */
-  @XmlJavaTypeAdapter(XmlDateTimeAdapter.class)
+  @XmlJavaTypeAdapter(XmlZonedDateTimeAdapter.class)
   @XmlElement(required = true)
-  private Date stopTime;
+  private ZonedDateTime stopTime;
 
   /**
    * Key Bridge: The calculated event duration.
@@ -82,39 +92,98 @@ public class EventTime {
   @XmlJavaTypeAdapter(XmlDurationAdapter.class)
   private Duration duration;
 
+  /**
+   * Default no-arg constructor. Sets the `startTime`.
+   */
   public EventTime() {
-    this.startTime = new Date();
+    this.startTime = ZonedDateTime.now(ZONE_ID);
+
   }
 
-  public void setInterval(int seconds) {
-    Calendar calendar = Calendar.getInstance();
-    calendar.setTime(startTime);
-    calendar.add(Calendar.SECOND, seconds);
-    this.stopTime = calendar.getTime();
-    this.duration = Duration.of(seconds, ChronoUnit.SECONDS);
+  /**
+   * Build a fully qualified EventTime instance having the default duration of 3
+   * hours.
+   *
+   * @return a fully qualified EventTime instance
+   */
+  public static EventTime getInstance() {
+    EventTime time = new EventTime();
+    time.setDuration(Duration.of(DURATION_DEFAULT, ChronoUnit.SECONDS));
+    return time;
+
   }
 
+  /**
+   * Build a fully qualified EventTime instance
+   *
+   * @param seconds the instance duration, in seconds
+   * @return a fully qualified EventTime instance
+   */
+  public static EventTime getInstance(int seconds) {
+    EventTime time = new EventTime();
+    time.setDuration(Duration.of(seconds, ChronoUnit.SECONDS));
+    return time;
+  }
+
+  /**
+   * Get the event duration.
+   *
+   * @return the event duration
+   */
   public Duration getDuration() {
     return duration;
   }
 
+  /**
+   * Set the event duration. Also sets the `stopTime`.
+   *
+   * @param duration the event duration
+   */
   public void setDuration(Duration duration) {
     this.duration = duration;
+    this.stopTime = startTime.plus(duration);
   }
 
-  public Date getStartTime() {
+  /**
+   * Get the inclusive start of the event.
+   *
+   * @return the inclusive start of the event
+   */
+  public ZonedDateTime getStartTime() {
     return startTime;
   }
 
-  public void setStartTime(Date startTime) {
+  /**
+   * Set the inclusive start of the event.
+   *
+   * @param startTime the inclusive start of the event
+   */
+  public void setStartTime(ZonedDateTime startTime) {
     this.startTime = startTime;
   }
 
-  public Date getStopTime() {
+  /**
+   * Get the exclusive end of the event.
+   *
+   * @return the exclusive end of the event
+   */
+  public ZonedDateTime getStopTime() {
     return stopTime;
   }
 
-  public void setStopTime(Date stopTime) {
+  /**
+   * Set the exclusive end of the event. Also sets the `duration`.
+   *
+   * @param stopTime the exclusive end of the event
+   */
+  public void setStopTime(ZonedDateTime stopTime) {
     this.stopTime = stopTime;
+    this.duration = Duration.between(startTime, stopTime);
   }
+
+  @Override
+  public String toString() {
+    return "EventTime{" + "startTime=" + startTime + ", stopTime=" + stopTime + ", duration=" + duration + '}';
+  }
+
 }
