@@ -64,7 +64,7 @@ public class DeviceOwner {
    * Key Bridge: This is an LDAP distinguished name ("DN").
    */
   @XmlElement(required = true)
-  public String owner;
+  private String owner;
   /**
    * The vCard contact information for the device operator is OPTIONAL but may
    * be required by specific rulesets.
@@ -78,9 +78,13 @@ public class DeviceOwner {
    * Key Bridge: This is an LDAP distinguished name ("DN"). For FIXED type
    * devices the DN should indicate the professional installer ID at the
    * attribute `installerId`.
+   * <p>
+   * Key Bridge: This is REQUIRED.
    */
-  public String operator;
+  @XmlElement(required = true)
+  private String operator;
 
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   /**
    * Get the owner information.
    * <p>
@@ -123,6 +127,44 @@ public class DeviceOwner {
    */
   public void setOperator(String operator) {
     this.operator = operator;
+  }//</editor-fold>
+
+  /**
+   * Affirm the object is correctly configured.
+   *
+   * @return true if the configuration is valid
+   */
+  public boolean isValid() {
+    return isSet(owner) && isSet(operator);
+  }
+
+  /**
+   * Inspect a string a determine it is not null and not empty.
+   *
+   * @param value the string value
+   * @return TRUE if not null and not empty
+   */
+  protected boolean isSet(String value) {
+    return value != null && !value.isEmpty();
+  }
+
+  /**
+   * Validate this instance.
+   *
+   * @throws Exception describing the invalid configuration
+   */
+  public void validate() throws Exception {
+    if (owner == null) {
+      throw new Exception("DeviceOwner::owner is required");
+    }
+    if (operator == null) {
+      throw new Exception("DeviceOwner::operator is required");
+    }
+  }
+
+  @Override
+  public String toString() {
+    return "DeviceOwner{" + "owner=" + owner + ", operator=" + operator + '}';
   }
 
 }
