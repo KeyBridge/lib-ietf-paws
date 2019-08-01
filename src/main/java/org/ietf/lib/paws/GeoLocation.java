@@ -16,8 +16,8 @@ package org.ietf.lib.paws;
 import ch.keybridge.lib.xml.adapter.XmlGeometryAdapter;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.geom.Polygon;
 
 /**
  * 5.1. GeoLocation
@@ -30,7 +30,7 @@ import org.locationtech.jts.geom.Polygon;
  * Key Bridge implementation: GeoLocation values are encoded using SFA Well
  * Known Text.
  * <p>
- * Deprecated: <em> These are represented using geometric shapes defined in
+ * Deprecated: <em> GeoLocation is represented using geometric shapes defined in
  * Section 5 of "GEOPRIV Presence Information Data Format Location Object"
  * [RFC5491], where a "point" with uncertainty is represented using the Ellipse
  * shape; and a region is represented using the Polygon shape.</em>
@@ -54,43 +54,78 @@ import org.locationtech.jts.geom.Polygon;
 public class GeoLocation {
 
   /**
-   * The GeoLocation as a point. Paradoxically, a "point" is parameterized using
-   * an Ellipse, where the center represents the location of the point and the
-   * distances along the major and minor axes represent the uncertainty. The
-   * uncertainty values may be required, depending on the ruleset. Exactly one
-   * of "point" or "region" MUST be present.
+   * The GeoLocation as a point.
+   * <p>
+   * Key Bridge: This represents the device instant geographic position and is
+   * always REQUIRED.
    */
   @XmlJavaTypeAdapter(XmlGeometryAdapter.class)
   @XmlElement(required = true)
   private Point point;
   /**
-   * The GeoLocation as a region. Exactly one of "point" or "region" MUST be
-   * present.
+   * The GeoLocation as a region.
+   * <p>
+   * Key Bridge: This represents the device operation area (/region). Valid
+   * geometries are: POLYGON to represent a contained operating area or
+   * LINESTRING to describe a route for mobile / transportable configurations.
    */
   @XmlJavaTypeAdapter(XmlGeometryAdapter.class)
-  private Polygon region;
+  private Geometry region;
   /**
    * The location confidence level, as a percentage, MAY be provided. When this
    * parameter is not provided, the default value is 95. Valid values range from
    * 0 to 100, but, in practice, 100% confidence is not achievable. The
    * confidence value is meaningful only when GeoLocation refers to a point with
    * uncertainty.
+   *
+   * @deprecated use {@code uncertainty} instead
    */
   private Integer confidence;
+  /**
+   * Key Bridge extension. (Optional)
+   * <p>
+   * The horizontal position uncertainty / error margin, in meters. For most GPS
+   * read positions this will be up to but typically not more than +- 50 meters.
+   */
+  private Integer uncertainty;
 
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
+  /**
+   * Get the instant device position.
+   *
+   * @return the device position
+   */
   public Point getPoint() {
     return point;
   }
 
+  /**
+   * Set the instant device position. This represents the device instant
+   * geographic position.
+   *
+   * @param point the device position
+   */
   public void setPoint(Point point) {
     this.point = point;
   }
 
-  public Polygon getRegion() {
+  /**
+   * Get the device operation area (/region).
+   *
+   * @return the device operation area
+   */
+  public Geometry getRegion() {
     return region;
   }
 
-  public void setRegion(Polygon region) {
+  /**
+   * Set the device operation area (/region). Valid geometries are: POLYGON to
+   * represent a contained operating area or LINESTRING to describe a route for
+   * mobile / transportable configurations.
+   *
+   * @param region the device operation area
+   */
+  public void setRegion(Geometry region) {
     this.region = region;
   }
 
@@ -100,6 +135,51 @@ public class GeoLocation {
 
   public void setConfidence(Integer confidence) {
     this.confidence = confidence;
+  }
+
+  /**
+   * Get the horizontal position uncertainty / error margin, in meters.
+   *
+   * @return the horizontal position uncertainty
+   */
+  public Integer getUncertainty() {
+    return uncertainty;
+  }
+
+  /**
+   * Set the horizontal position uncertainty / error margin, in meters. For most
+   * GPS read positions this will be up to but typically not more than +- 50
+   * meters.
+   *
+   * @param uncertainty the horizontal position uncertainty
+   */
+  public void setUncertainty(Integer uncertainty) {
+    this.uncertainty = uncertainty;
+  }//</editor-fold>
+
+  /**
+   * Determine if a point or region is specified.
+   *
+   * @return TRUE if either are specified.
+   */
+  public boolean isValid() {
+    return point != null || region != null;
+  }
+
+  /**
+   * Validate this instance.
+   *
+   * @throws Exception describing the invalid configuration
+   */
+  public void validate() throws Exception {
+    if (point == null) {
+      throw new Exception("GeoLocation::point is required");
+    }
+  }
+
+  @Override
+  public String toString() {
+    return "GeoLocation{" + "point=" + point + ", region=" + region + ", confidence=" + confidence + ", uncertainty=" + uncertainty + '}';
   }
 
 }
