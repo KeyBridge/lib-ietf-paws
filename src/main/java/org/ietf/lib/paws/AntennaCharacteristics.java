@@ -14,10 +14,8 @@
 package org.ietf.lib.paws;
 
 import java.util.Map;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import java.util.TreeMap;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.adapter.XmlRadiationPatternAdapter;
 import org.ietf.lib.paws.type.AntennaHeightType;
@@ -63,23 +61,27 @@ public class AntennaCharacteristics {
    * Key Bridge: Antenna height must be zero or a positive value. For negative
    * heights (e.g. when operating in a mine) use zero meters above ground level.
    */
-  private Double height;
+  @XmlElement(required = true)
+  private double height;
   /**
    * Antenna radiation center height (meters). Valid values are: AGL - Above
    * Ground Level (default); AMSL - Above Mean Sea Level
    */
+  @XmlElement(required = true)
   private AntennaHeightType heightType = AntennaHeightType.AGL;
   /**
-   * The height uncertainty in meters.
+   * The height uncertainty in meters. Default = 0 unless otherwise specified.
    */
-  private Double heightUncertainty;
+  private double heightUncertainty;
 
   /**
-   * The antenna polarization;
+   * The antenna polarization. Valid values are "H", "V". HORIZONTAL is presumed
+   * if not specified..
    *
    * @since v0.7.0 added to enhance FIXED type transmitter support
    */
-  private AntennaPolarizationType polarization;
+  @XmlElement(required = true)
+  private AntennaPolarizationType polarization = AntennaPolarizationType.H;
 
   /**
    * Key Bridge: The antenna radiation pattern.
@@ -103,7 +105,6 @@ public class AntennaCharacteristics {
    */
   @XmlJavaTypeAdapter(value = XmlRadiationPatternAdapter.class)
   private Map<Double, Double> radiationPattern;
-
   /**
    * Key Bridge: The antenna maximum gain (dBi relative to an isotropic
    * radiator). Default value is zero.
@@ -122,21 +123,31 @@ public class AntennaCharacteristics {
    * @since v0.7.0 added to enhance FIXED type transmitter support
    */
   private Double gain;
+  /**
+   * Key Bridge: The Elevation beam width (also Half Power beam width).
+   */
+  private Double beamWidthElevation;
+  /**
+   * Key Bridge: The azimuth beam width (also Half Power beam width).
+   */
+  private Double beamWidthAzimuth;
 
   /**
    * Key Bridge: The offset in degrees azimuth [0, 360] from true North that the
    * antenna radiation pattern should be rotated.
+   * <p>
+   * Default = 0 degrees unless otherwise specified.
    *
    * @since v0.7.0 added to enhance FIXED type transmitter support
    */
-  private Double rotation;
+  private double rotation;
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
-  public Double getHeight() {
+  public double getHeight() {
     return height;
   }
 
-  public void setHeight(Double height) {
+  public void setHeight(double height) {
     this.height = height;
   }
 
@@ -148,11 +159,11 @@ public class AntennaCharacteristics {
     this.heightType = heightType;
   }
 
-  public Double getHeightUncertainty() {
+  public double getHeightUncertainty() {
     return heightUncertainty;
   }
 
-  public void setHeightUncertainty(Double heightUncertainty) {
+  public void setHeightUncertainty(double heightUncertainty) {
     this.heightUncertainty = heightUncertainty;
   }
 
@@ -165,6 +176,9 @@ public class AntennaCharacteristics {
   }
 
   public Map<Double, Double> getRadiationPattern() {
+    if (radiationPattern == null) {
+      radiationPattern = new TreeMap<>();
+    }
     return radiationPattern;
   }
 
@@ -180,12 +194,64 @@ public class AntennaCharacteristics {
     this.gain = gain;
   }
 
-  public Double getRotation() {
+  public Double getBeamWidthElevation() {
+    return beamWidthElevation;
+  }
+
+  public void setBeamWidthElevation(Double beamWidthElevation) {
+    this.beamWidthElevation = beamWidthElevation;
+  }
+
+  public Double getBeamWidthAzimuth() {
+    return beamWidthAzimuth;
+  }
+
+  public void setBeamWidthAzimuth(Double beamWidthAzimuth) {
+    this.beamWidthAzimuth = beamWidthAzimuth;
+  }
+
+  public double getRotation() {
     return rotation;
   }
 
-  public void setRotation(Double rotation) {
+  public void setRotation(double rotation) {
     this.rotation = rotation;
   }//</editor-fold>
+
+  /**
+   * Affirm the height is greater than zero meters AGL or AMSL.
+   *
+   * @return true if the height is valid
+   */
+  public boolean isValid() {
+    return height > 0;
+  }
+
+  /**
+   * Validate this instance.
+   *
+   * @throws Exception describing the invalid configuration
+   */
+  public void validate() throws Exception {
+    if (height < 0) {
+      throw new Exception("AntennaCharacteristics::height must be greater than or equal to zero");
+    }
+    if (heightType == null) {
+      throw new Exception("AntennaCharacteristics::heightType is required");
+    }
+    if (!getRadiationPattern().isEmpty() && polarization == null) {
+      throw new Exception("AntennaCharacteristics::polarization is required when specifying a radiation pattern");
+    }
+  }
+
+  /**
+   * Determine if an antenna pattern is provided.
+   *
+   * @return TRUE if either a radiation pattern or a sector configuration is
+   *         provided.
+   */
+  public boolean hasPattern() {
+    return !getRadiationPattern().isEmpty() || (gain != null && beamWidthAzimuth != null);
+  }
 
 }
