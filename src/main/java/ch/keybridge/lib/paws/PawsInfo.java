@@ -47,20 +47,20 @@ public class PawsInfo extends PawsChannel {
    * should NOT be included in a channel availability list. When not configured
    * this may be assumed to be FALSE.
    */
-  private Boolean enforcementBlocking;
+  private boolean enforcementBlocking;
   /**
    * Indicator that this channel is subject to a FAST POLLING Enforcement record
    * and the default (48 hour maximum) schedule should be shortened. When not
    * configured this may be assumed to be FALSE.
    */
-  private Boolean enforcementFastPoll;
+  private boolean enforcementFastPoll;
 
   /**
    * Indicator that an exception occurred when calculating the availability of
    * this channel and it is therefore disabled. Inspect the messages for more
    * information. Default is FALSE.
    */
-  private Boolean exception;
+  private boolean exception;
 
   /**
    * A list of co-channel services.
@@ -111,7 +111,15 @@ public class PawsInfo extends PawsChannel {
     return pc;
   }
 
-  public Boolean getEnforcementBlocking() {
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
+  /**
+   * Get the indicator that this channel is subject to a BLOCKING Enforcement
+   * record and should NOT be included in a channel availability list. When not
+   * configured this may be assumed to be FALSE
+   *
+   * @return blocking enforcement flag
+   */
+  public boolean getEnforcementBlocking() {
     return enforcementBlocking;
   }
 
@@ -125,7 +133,7 @@ public class PawsInfo extends PawsChannel {
     this.enforcementBlocking = enforcementBlocking ? enforcementBlocking : null;
   }
 
-  public Boolean getEnforcementFastPoll() {
+  public boolean getEnforcementFastPoll() {
     return enforcementFastPoll;
   }
 
@@ -139,7 +147,7 @@ public class PawsInfo extends PawsChannel {
     this.enforcementFastPoll = enforcementFastPoll ? enforcementFastPoll : null;
   }
 
-  public Boolean getException() {
+  public boolean getException() {
     return exception;
   }
 
@@ -213,6 +221,12 @@ public class PawsInfo extends PawsChannel {
     this.services2ndAdj = (services2ndAdj == null || services2ndAdj.isEmpty()) ? null : services2ndAdj;
   }
 
+  /**
+   * Get Messages to provide information about the white space channel build
+   * process
+   *
+   * @return a collection of build messages
+   */
   public List<String> getMessages() {
     if (messages == null) {
       messages = new ArrayList<>();
@@ -220,6 +234,12 @@ public class PawsInfo extends PawsChannel {
     return messages;
   }
 
+  /**
+   * Set Messages to provide information about the white space channel build
+   * process.
+   *
+   * @param messages a collection of build messages
+   */
   public void setMessages(List<String> messages) {
     /**
      * Only set the collection if the source is not empty. This produces a
@@ -228,8 +248,14 @@ public class PawsInfo extends PawsChannel {
     this.messages = (messages == null || messages.isEmpty()) ? null : messages;
   }
 
+  /**
+   * Add a Messages to provide information about the white space channel build
+   * process
+   *
+   * @param message a build message
+   */
   public void addMessage(String message) {
     getMessages().add(message);
-  }
+  }//</editor-fold>
 
 }
