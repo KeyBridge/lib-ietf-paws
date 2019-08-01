@@ -199,6 +199,13 @@ public class RegistrationRequest {
     if (deviceOwner == null) {
       throw new Exception("RegistrationRequest::deviceOwner is required");
     }
+    /**
+     * Validate all my children.
+     */
+    deviceDesc.validate();
+    location.validate();
+    antenna.validate();
+    deviceOwner.validate();
   }
 
 }
