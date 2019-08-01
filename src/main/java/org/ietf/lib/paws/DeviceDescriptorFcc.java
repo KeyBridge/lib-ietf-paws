@@ -93,7 +93,7 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
   /**
    * Set the device's government certification ID (Section 9.2.2.1).
    *
-   * @param icId the device's Industry Canada Identification Number (IC ID).
+   * @param fccId the device's FCC certification identifier
    */
   public void setFccId(String fccId) {
     this.fccId = fccId;
@@ -119,7 +119,7 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
    * "MODE2_LP" (for low power), "MODE1".
    *
-   * @return the TV-band white-space Device Type
+   * @param fccTvbdDeviceType the TV-band white-space Device Type
    */
   public void setFccTvbdDeviceType(String fccTvbdDeviceType) {
     this.fccTvbdDeviceType = fccTvbdDeviceType;
