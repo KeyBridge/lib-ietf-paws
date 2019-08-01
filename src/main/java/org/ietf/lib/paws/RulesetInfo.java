@@ -45,6 +45,11 @@ import org.ietf.lib.paws.type.PawsRulesetType;
 public class RulesetInfo {
 
   /**
+   * 600 seconds = 5 minutes. The default maximum duration, in seconds, between
+   * requests for available spectrum.
+   */
+  private static final int MAX_POLLING_SECS = 600;
+  /**
    * A string that indicates the regulatory domain to which the ruleset applies
    * is REQUIRED. It will normally be a 2-letter country code defined by Country
    * Codes - ISO 3166 [ISO3166-1].
@@ -81,6 +86,22 @@ public class RulesetInfo {
    */
   @XmlElement(required = true)
   private Integer maxPollingSecs;
+
+  /**
+   * Build a RulesetInfo configuration. This created a complete configuration
+   * for all types except ETSI, which do not have country specific details.
+   *
+   * @param rulesetType the rule set type
+   * @return a new RulesetInfo configuration
+   */
+  public static RulesetInfo getInstance(PawsRulesetType rulesetType) {
+    RulesetInfo info = new RulesetInfo();
+    info.setAuthority(rulesetType.getIso2());
+    info.setRulesetId(rulesetType);
+    info.setMaxLocationChange(rulesetType.getMaxLocationChange());
+    info.setMaxPollingSecs(MAX_POLLING_SECS);
+    return info;
+  }
 
   public String getAuthority() {
     return authority;
