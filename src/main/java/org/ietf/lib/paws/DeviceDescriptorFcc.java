@@ -57,6 +57,8 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    * limited to 19 characters in the ASCII value range, as proposed in FCC
    * Administration Topics Review [FCC-Review-2012-10]. For the purposes of the
    * PAWS protocol, the maximum length of the fccId value is 32 octets.
+   *
+   * @deprecated consolidated in `DeviceDescriptor::deviceType` field
    */
   @XmlElement(required = true)
   private String fccId;
@@ -66,6 +68,8 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    * <p>
    * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
    * "MODE2_LP" (for low power), "MODE1".
+   *
+   * @deprecated consolidated in `DeviceDescriptor::deviceType` field
    */
   @XmlElement(required = true)
   private String fccTvbdDeviceType;
@@ -119,14 +123,6 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    */
   public void setFccTvbdDeviceType(String fccTvbdDeviceType) {
     this.fccTvbdDeviceType = fccTvbdDeviceType;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isValid() {
-    return isSet(fccId) && isSet(fccTvbdDeviceType);
   }
 
   @Override

@@ -60,6 +60,8 @@ public class DeviceDescriptorEtsi extends DeviceDescriptor {
    * types.
    * <p>
    * Reference 4.2.1 Equipment types
+   *
+   * @deprecated consolidated in `DeviceDescriptor::deviceType` field
    */
   @XmlElement(required = true)
   private EtsiEquipmentType etsiEnDeviceType;
@@ -185,7 +187,7 @@ public class DeviceDescriptorEtsi extends DeviceDescriptor {
    */
   @Override
   public boolean isValid() {
-    return etsiEnDeviceType != null && etsiEnDeviceCategory != null && isSet(etsiEnTechnologyId) && etsiEnDeviceEmissionsClass != null;
+    return super.isValid() && etsiEnDeviceCategory != null && isSet(etsiEnTechnologyId) && etsiEnDeviceEmissionsClass != null;
   }
 
   @Override

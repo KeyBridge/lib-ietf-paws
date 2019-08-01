@@ -41,7 +41,7 @@ import org.ietf.lib.paws.type.PawsRulesetType;
  * <a href="https://www.ic.gc.ca/eic/site/smt-gst.nsf/eng/sf10930.html">RSS-222</a>
  * @author Key Bridge LLC
  * @since v0.9.0 created 07/27/19 to support operation in Canada
- *
+ * @deprecated fields in this class are consolidated in `DeviceDescriptor`
  */
 @XmlRootElement(name = "DeviceDescriptorIsed")
 @XmlType(name = "DeviceDescriptorIsed")
@@ -59,6 +59,8 @@ public class DeviceDescriptorIsed extends DeviceDescriptor {
    * Specifies the device's Industry Canada Identification Number (IC ID). For
    * the purposes of the PAWS protocol, the maximum length of the fccId value is
    * 32 octets.
+   *
+   * @deprecated consolidated in `DeviceDescriptor::deviceType` field
    */
   @XmlElement(required = true)
   private String icId;
@@ -68,6 +70,8 @@ public class DeviceDescriptorIsed extends DeviceDescriptor {
    * <p>
    * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
    * "MODE2_LP" (for low power), "MODE1".
+   *
+   * @deprecated consolidated in `DeviceDescriptor::deviceType` field
    */
   @XmlElement(required = true)
   private String isedTvbdDeviceType;
@@ -122,16 +126,7 @@ public class DeviceDescriptorIsed extends DeviceDescriptor {
    */
   public void setIsedTvbdDeviceType(String isedTvbdDeviceType) {
     this.isedTvbdDeviceType = isedTvbdDeviceType;
-  }
-
-//</editor-fold>
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public boolean isValid() {
-    return isSet(icId) && isSet(isedTvbdDeviceType);
-  }
+  }//</editor-fold>
 
   @Override
   public String toString() {

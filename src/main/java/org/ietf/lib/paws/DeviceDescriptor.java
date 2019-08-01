@@ -13,9 +13,6 @@
  */
 package org.ietf.lib.paws;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.type.PawsRulesetType;
 
@@ -67,6 +64,9 @@ public abstract class DeviceDescriptor {
   private String modelId;
 
   /**
+   * Key Bridge modification. REQUIRED. Change from List to single instance. A
+   * device may only register and operate under ONE jurisdiction at a time.
+   * <p>
    * The list of identifiers for rulesets supported by the device (see Ruleset
    * ID Registry (Section 9.1)). A Database MAY require that the device provides
    * this list before servicing the device requests. If the Database supports
@@ -75,11 +75,32 @@ public abstract class DeviceDescriptor {
    * on ruleset identifiers. If present, the list MUST contain at least one
    * entry.
    */
-  @XmlList
-  private List<String> rulesetIds;
+  @XmlElement(required = true)
+  private PawsRulesetType rulesetId;
 
   /**
-   * Key Bridge extension.
+   * Key Bridge extension. REQUIRED. Consolidates FCC, ISED and ETSI fields.
+   * <p>
+   * Specifies a device's government certification ID (Section 9.2.2.1). This is
+   * the device's FCC certification identifier, Industry Canada Identification
+   * Number (IC ID), or other certification number for the operating
+   * jurisdiction.
+   */
+  @XmlElement(required = true)
+  private String deviceId;
+  /**
+   * Key Bridge extension. REQUIRED. Consolidates FCC, ISED and ETSI fields.
+   * <p>
+   * Specifies the Device Type (Section 9.2.2.2) of TV-band white-space device,
+   * as defined by rule. Valid values for US and Canada are "FIXED", "MODE2_HP"
+   * (for high power), "MODE2_LP" (for low power), "MODE1". For ETSI regions,
+   * valid values are "A", "B".
+   */
+  @XmlElement(required = true)
+  private String deviceType;
+
+  /**
+   * Key Bridge extension. OPTIONAL.
    * <p>
    * This transmitter's wireless emission designator.
    * <p>
@@ -113,7 +134,7 @@ public abstract class DeviceDescriptor {
    * @param rulesetId the device descriptor PawsRulesetType
    */
   public DeviceDescriptor(PawsRulesetType rulesetId) {
-    this.rulesetIds = Arrays.asList(rulesetId.getId());
+    this.rulesetId = rulesetId;
   }
 
   /**
@@ -176,34 +197,37 @@ public abstract class DeviceDescriptor {
   }
 
   /**
-   * Get the PAWS Ruleset ID Registry values.
+   * Get the PAWS Ruleset ID Registry value.
    *
-   * @return a non-null ArrayList
+   * @return the PAWS Ruleset ID
    */
-  public List<String> getRulesetIds() {
-    if (rulesetIds == null) {
-      rulesetIds = new ArrayList<>();
-    }
-    return rulesetIds;
+  public PawsRulesetType getRulesetId() {
+    return rulesetId;
   }
 
   /**
    * Set the PAWS Ruleset ID Registry values.
    *
-   * @param rulesetIds one or more IDs
+   * @param rulesetId the PAWS Ruleset ID
    */
-  public void setRulesetIds(List<String> rulesetIds) {
-    this.rulesetIds = rulesetIds;
+  public void setRulesetIds(PawsRulesetType rulesetId) {
+    this.rulesetId = rulesetId;
   }
 
-  /**
-   * Convenience method to set the PAWS Ruleset ID Registry values to a single
-   * enumerated type.
-   *
-   * @param rulesetId the enumerated PawsRulesetType
-   */
-  public void setRulesetId(PawsRulesetType rulesetId) {
-    this.rulesetIds = Arrays.asList(rulesetId.getId());
+  public String getDeviceId() {
+    return deviceId;
+  }
+
+  public void setDeviceId(String deviceId) {
+    this.deviceId = deviceId;
+  }
+
+  public String getDeviceType() {
+    return deviceType;
+  }
+
+  public void setDeviceType(String deviceType) {
+    this.deviceType = deviceType;
   }
 
   public String getEmissionDesignator() {
@@ -219,7 +243,26 @@ public abstract class DeviceDescriptor {
    *
    * @return TRUE if valid.
    */
-  public abstract boolean isValid();
+  public boolean isValid() {
+    return rulesetId != null && isSet(deviceId) && isSet(deviceType);
+  }
+
+  /**
+   * Validate this instance.
+   *
+   * @throws Exception describing the invalid configuration
+   */
+  public void validate() throws Exception {
+    if (rulesetId == null) {
+      throw new Exception("DeviceDescriptor::rulesetId is required");
+    }
+    if (deviceId == null) {
+      throw new Exception("DeviceDescriptor::deviceId is required");
+    }
+    if (deviceType == null) {
+      throw new Exception("DeviceDescriptor::deviceType is required");
+    }
+  }
 
   /**
    * Inspect a string a determine it is not null and not empty.
@@ -233,7 +276,7 @@ public abstract class DeviceDescriptor {
 
   @Override
   public String toString() {
-    return ",serialNumber=" + serialNumber + ", manufacturerId=" + manufacturerId + ", modelId=" + modelId + ", rulesetIds=" + rulesetIds + ", emissionDesignator=" + emissionDesignator;
+    return ",serialNumber=" + serialNumber + ", manufacturerId=" + manufacturerId + ", modelId=" + modelId + ", rulesetId=" + rulesetId + ", emissionDesignator=" + emissionDesignator;
   }
 
 }
