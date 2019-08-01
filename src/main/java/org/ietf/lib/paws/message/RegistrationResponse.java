@@ -13,11 +13,9 @@
  */
 package org.ietf.lib.paws.message;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.DbUpdateSpec;
-import org.ietf.lib.paws.RulesetInfo;
+import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
  * 4.4.2. REGISTRATION_RESP
@@ -51,6 +49,9 @@ import org.ietf.lib.paws.RulesetInfo;
 public class RegistrationResponse {
 
   /**
+   * Key Bridge modification. REQUIRED. Change from List to single instance. A
+   * device may only register and operate under ONE jurisdiction at a time.
+   * <p>
    * A RulesetInfo (Section 5.6) list MUST be included in the response. Each
    * entry corresponds to a ruleset for which the registration was accepted. The
    * list MUST contain at least one entry.
@@ -63,7 +64,7 @@ public class RegistrationResponse {
    * with the UNSUPPORTED code (see Table 1) in the error response.
    */
   @XmlElement(required = true)
-  private List<RulesetInfo> rulesetInfos;
+  private PawsRulesetType rulesetId;
   /**
    * The Database MAY include a DbUpdateSpec (Section 5.7) to notify the Master
    * Device of a change to the database URI, providing one or more alternate
@@ -73,15 +74,22 @@ public class RegistrationResponse {
    */
   private DbUpdateSpec databaseChange;
 
-  public List<RulesetInfo> getRulesetInfos() {
-    if (rulesetInfos == null) {
-      rulesetInfos = new ArrayList<>();
-    }
-    return rulesetInfos;
+  /**
+   * Get the PAWS Ruleset ID Registry value.
+   *
+   * @return the PAWS Ruleset ID
+   */
+  public PawsRulesetType getRulesetId() {
+    return rulesetId;
   }
 
-  public void setRulesetInfos(List<RulesetInfo> rulesetInfos) {
-    this.rulesetInfos = rulesetInfos;
+  /**
+   * Set the PAWS Ruleset ID Registry values.
+   *
+   * @param rulesetId the PAWS Ruleset ID
+   */
+  public void setRulesetIds(PawsRulesetType rulesetId) {
+    this.rulesetId = rulesetId;
   }
 
   public DbUpdateSpec getDatabaseChange() {
@@ -91,4 +99,10 @@ public class RegistrationResponse {
   public void setDatabaseChange(DbUpdateSpec databaseChange) {
     this.databaseChange = databaseChange;
   }
+
+  @Override
+  public String toString() {
+    return "RegistrationResponse{" + "rulesetId=" + rulesetId + ", databaseChange=" + databaseChange + '}';
+  }
+
 }
