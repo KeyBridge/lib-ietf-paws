@@ -180,4 +180,17 @@ public class DeviceDescriptorEtsi extends DeviceDescriptor {
     this.etsiEnDeviceEmissionsClass = etsiEnDeviceEmissionsClass == null ? null : etsiEnDeviceEmissionsClass.getCode();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isValid() {
+    return etsiEnDeviceType != null && etsiEnDeviceCategory != null && isSet(etsiEnTechnologyId) && etsiEnDeviceEmissionsClass != null;
+  }
+
+  @Override
+  public String toString() {
+    return "DeviceDescriptorEtsi{" + "etsiEnDeviceType=" + etsiEnDeviceType + ", etsiEnTechnologyId=" + etsiEnTechnologyId + ", etsiEnDeviceCategory=" + etsiEnDeviceCategory + ", etsiEnDeviceEmissionsClass=" + etsiEnDeviceEmissionsClass + super.toString() + '}';
+  }
+
 }

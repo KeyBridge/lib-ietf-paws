@@ -13,6 +13,7 @@
  */
 package org.ietf.lib.paws;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.xml.bind.annotation.*;
@@ -64,6 +65,7 @@ public abstract class DeviceDescriptor {
    * maximum length is 64 octets.
    */
   private String modelId;
+
   /**
    * The list of identifiers for rulesets supported by the device (see Ruleset
    * ID Registry (Section 9.1)). A Database MAY require that the device provides
@@ -99,11 +101,12 @@ public abstract class DeviceDescriptor {
    * 5 is a letter that represents the method of multiplexing. The 4 and 5
    * fields are optional.
    */
-  protected String emissionDesignator;
+  private String emissionDesignator;
 
   public DeviceDescriptor() {
   }
 
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   /**
    * Constructor declaring the PawsRulesetType of this device descriptor.
    *
@@ -113,31 +116,74 @@ public abstract class DeviceDescriptor {
     this.rulesetIds = Arrays.asList(rulesetId.getId());
   }
 
+  /**
+   * Get the manufacturer’s device serial number
+   *
+   * @return the manufacturer’s device serial number
+   */
   public String getSerialNumber() {
     return serialNumber;
   }
 
+  /**
+   * Set the manufacturer’s device serial number
+   *
+   * @param serialNumber the manufacturer’s device serial number
+   */
   public void setSerialNumber(String serialNumber) {
     this.serialNumber = serialNumber;
   }
 
+  /**
+   * Get the manufacturer’s ID. This represents the name of the device
+   * manufacturer, and therefore ought to be consistent across all devices from
+   * the same manufacturer and distinct from that of other manufacturers.
+   *
+   *
+   * @return the manufacturer’s ID
+   */
   public String getManufacturerId() {
     return manufacturerId;
   }
 
+  /**
+   * Set the manufacturer’s ID. This represents the name of the device
+   * manufacturer, and therefore ought to be consistent across all devices from
+   * the same manufacturer and distinct from that of other manufacturers.
+   *
+   * @param manufacturerId the manufacturer’s ID
+   */
   public void setManufacturerId(String manufacturerId) {
     this.manufacturerId = manufacturerId;
   }
 
+  /**
+   * Get the device’s model ID.
+   *
+   * @return the device’s model ID.
+   */
   public String getModelId() {
     return modelId;
   }
 
+  /**
+   * Set the device’s model ID.
+   *
+   * @param modelId the device’s model ID.
+   */
   public void setModelId(String modelId) {
     this.modelId = modelId;
   }
 
+  /**
+   * Get the PAWS Ruleset ID Registry values.
+   *
+   * @return a non-null ArrayList
+   */
   public List<String> getRulesetIds() {
+    if (rulesetIds == null) {
+      rulesetIds = new ArrayList<>();
+    }
     return rulesetIds;
   }
 
@@ -166,6 +212,28 @@ public abstract class DeviceDescriptor {
 
   public void setEmissionDesignator(String emissionDesignator) {
     this.emissionDesignator = emissionDesignator;
+  }//</editor-fold>
+
+  /**
+   * Inspect this configuration and determine if it is value.
+   *
+   * @return TRUE if valid.
+   */
+  public abstract boolean isValid();
+
+  /**
+   * Inspect a string a determine it is not null and not empty.
+   *
+   * @param value the string value
+   * @return TRUE if not null and not empty
+   */
+  protected boolean isSet(String value) {
+    return value != null && !value.isEmpty();
+  }
+
+  @Override
+  public String toString() {
+    return ",serialNumber=" + serialNumber + ", manufacturerId=" + manufacturerId + ", modelId=" + modelId + ", rulesetIds=" + rulesetIds + ", emissionDesignator=" + emissionDesignator;
   }
 
 }

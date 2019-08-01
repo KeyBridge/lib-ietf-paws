@@ -56,7 +56,7 @@ public class DeviceDescriptorIsed extends DeviceDescriptor {
   /**
    * Specifies a device's government certification ID (Section 9.2.2.1).
    * <p>
-   * Specifies the device's * Industry Canada Identification Number (IC ID). For
+   * Specifies the device's Industry Canada Identification Number (IC ID). For
    * the purposes of the PAWS protocol, the maximum length of the fccId value is
    * 32 octets.
    */
@@ -64,19 +64,10 @@ public class DeviceDescriptorIsed extends DeviceDescriptor {
   private String icId;
   /**
    * Specifies the Device Type (Section 9.2.2.2) of TV-band white-space device,
-   * as defined by rule. See 9.2.2.2. FCC Device Type:
-   * {@code fccTvbdDeviceType}: Specifies the TV-band white-space device type.
+   * as defined by rule.
    * <p>
-   * Deprecated: <i>FCC Valid values are "FIXED", "MODE_1", and for
-   * "MODE_2".</i>
-   * <p>
-   * See also 9.2.2.3. ETSI Device Type: Specification document(s): Specifies
-   * the white-space device type, as defined by the ETSI Harmonised Standard
-   * [ETSI-EN-301-598]. Valid values are single-letter strings, such as "A",
-   * "B", etc. Consult the documentation for details about the device types.
-   * <p>
-   * Key Bridge: Valid values are "FIXED", "MODE2_HP" for high power, "MODE2_LP"
-   * for low power, "MODE1".
+   * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
+   * "MODE2_LP" (for low power), "MODE1".
    */
   @XmlElement(required = true)
   private String isedTvbdDeviceType;
@@ -88,20 +79,63 @@ public class DeviceDescriptorIsed extends DeviceDescriptor {
     super(RULESET_TYPE);
   }
 
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
+  /**
+   * Get the device's government certification ID (Section 9.2.2.1).
+   *
+   * @return the device's Industry Canada Identification Number (IC ID).
+   */
   public String getIcId() {
     return icId;
   }
 
+  /**
+   * Set the device's government certification ID (Section 9.2.2.1).
+   *
+   * @param icId the device's Industry Canada Identification Number (IC ID).
+   */
   public void setIcId(String icId) {
     this.icId = icId;
   }
 
+  /**
+   * Get the Device Type (Section 9.2.2.2) of TV-band white-space device, as
+   * defined by rule.
+   * <p>
+   * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
+   * "MODE2_LP" (for low power), "MODE1".
+   *
+   * @return the TV-band white-space Device Type
+   */
   public String getIsedTvbdDeviceType() {
     return isedTvbdDeviceType;
   }
 
+  /**
+   * Set the Device Type (Section 9.2.2.2) of TV-band white-space device, as
+   * defined by rule.
+   * <p>
+   * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
+   * "MODE2_LP" (for low power), "MODE1".
+   *
+   * @param isedTvbdDeviceType the TV-band white-space Device Type
+   */
   public void setIsedTvbdDeviceType(String isedTvbdDeviceType) {
     this.isedTvbdDeviceType = isedTvbdDeviceType;
+  }
+
+//</editor-fold>
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isValid() {
+    return isSet(icId) && isSet(isedTvbdDeviceType);
+  }
+
+  @Override
+  public String toString() {
+    return "DeviceDescriptorIsed{" + "icId=" + icId + ", isedTvbdDeviceType=" + isedTvbdDeviceType + super.toString() + '}';
   }
 
 }

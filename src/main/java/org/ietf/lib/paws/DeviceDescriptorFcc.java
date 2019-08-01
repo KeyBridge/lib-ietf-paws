@@ -62,19 +62,10 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
   private String fccId;
   /**
    * Specifies the Device Type (Section 9.2.2.2) of TV-band white-space device,
-   * as defined by rule. See 9.2.2.2. FCC Device Type:
-   * {@code fccTvbdDeviceType}: Specifies the TV-band white-space device type.
+   * as defined by rule.
    * <p>
-   * Deprecated: <i>FCC Valid values are "FIXED", "MODE_1", and for
-   * "MODE_2".</i>
-   * <p>
-   * See also 9.2.2.3. ETSI Device Type: Specification document(s): Specifies
-   * the white-space device type, as defined by the ETSI Harmonised Standard
-   * [ETSI-EN-301-598]. Valid values are single-letter strings, such as "A",
-   * "B", etc. Consult the documentation for details about the device types.
-   * <p>
-   * Key Bridge: Valid values are "FIXED", "MODE2_HP" for high power, "MODE2_LP"
-   * for low power, "MODE1".
+   * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
+   * "MODE2_LP" (for low power), "MODE1".
    */
   @XmlElement(required = true)
   private String fccTvbdDeviceType;
@@ -86,20 +77,61 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
     super(RULESET_TYPE);
   }
 
+  /**
+   * Get the device's government certification ID (Section 9.2.2.1).
+   *
+   * @return the device's Industry Canada Identification Number (IC ID).
+   */
   public String getFccId() {
     return fccId;
   }
 
+  /**
+   * Set the device's government certification ID (Section 9.2.2.1).
+   *
+   * @param icId the device's Industry Canada Identification Number (IC ID).
+   */
   public void setFccId(String fccId) {
     this.fccId = fccId;
   }
 
+  /**
+   * Get the Device Type (Section 9.2.2.2) of TV-band white-space device, as
+   * defined by rule.
+   * <p>
+   * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
+   * "MODE2_LP" (for low power), "MODE1".
+   *
+   * @return the TV-band white-space Device Type
+   */
   public String getFccTvbdDeviceType() {
     return fccTvbdDeviceType;
   }
 
+  /**
+   * Set the Device Type (Section 9.2.2.2) of TV-band white-space device, as
+   * defined by rule.
+   * <p>
+   * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
+   * "MODE2_LP" (for low power), "MODE1".
+   *
+   * @return the TV-band white-space Device Type
+   */
   public void setFccTvbdDeviceType(String fccTvbdDeviceType) {
     this.fccTvbdDeviceType = fccTvbdDeviceType;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isValid() {
+    return isSet(fccId) && isSet(fccTvbdDeviceType);
+  }
+
+  @Override
+  public String toString() {
+    return "DeviceDescriptorFcc{" + "fccId=" + fccId + ", fccTvbdDeviceType=" + fccTvbdDeviceType + super.toString() + '}';
   }
 
 }
