@@ -13,6 +13,7 @@
  */
 package org.ietf.lib.paws;
 
+import java.util.Objects;
 import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.type.PawsRulesetType;
 
@@ -272,6 +273,45 @@ public abstract class DeviceDescriptor {
    */
   protected boolean isSet(String value) {
     return value != null && !value.isEmpty();
+  }
+
+  /**
+   * A DeviceDescriptor configuration is uniquely identified by its deviceId and
+   * serialNumber.
+   *
+   * @return the hash code
+   */
+  @Override
+  public int hashCode() {
+    int hash = 7;
+    hash = 47 * hash + Objects.hashCode(this.serialNumber);
+    hash = 47 * hash + Objects.hashCode(this.deviceId);
+    return hash;
+  }
+
+  /**
+   * A DeviceDescriptor configuration is uniquely identified by its deviceId and
+   * serialNumber.
+   *
+   * @param obj the other instance
+   * @return equality status
+   */
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final DeviceDescriptor other = (DeviceDescriptor) obj;
+    if (!Objects.equals(this.serialNumber, other.serialNumber)) {
+      return false;
+    }
+    return Objects.equals(this.deviceId, other.deviceId);
   }
 
   @Override
