@@ -67,16 +67,55 @@ public class RegistrationRequest {
   @XmlElement(required = true)
   private GeoLocation location;
   /**
+   * The AntennaCharacteristics (Section 5.3) is OPTIONAL.
+   * <p>
+   * Key Bridge: REQUIRED to provide antenna height above ground (meters).
+   */
+  @XmlElement(required = true)
+  private AntennaCharacteristics antenna;
+
+  /**
    * The DeviceOwner (Section 5.5) information is OPTIONAL. Some rulesets may
    * require deviceOwner information under certain conditions. See PAWS Ruleset
    * ID Registry (Section 9.1) for ruleset-specific requirements.
+   * <p>
+   * Key Bridge: REQUIRED to identify the responsible parties and bind with an
+   * account.
    */
+  @XmlElement(required = true)
   private DeviceOwner deviceOwner;
-  /**
-   * The AntennaCharacteristics (Section 5.3) is OPTIONAL.
-   */
-  private AntennaCharacteristics antenna;
 
+  /**
+   * Key Bridge extension. (Optional)
+   * <p>
+   * The user provided service group identifier. A service group identifier is
+   * specified by the registering user to inform the SAS that a collection of TV
+   * white space devices should be considered as part of a single extended
+   * service.
+   * <p>
+   * For example, a service group Id would be used when multiple devices are
+   * installed to service a campus.
+   * <p>
+   * If not provided a service group ID will be automatically generated for the
+   * Device Owner + Operator pair.
+   */
+  private String serviceGroupId;
+  /**
+   * Key Bridge extension. (Optional)
+   * <p>
+   * A brief service name. This is a human-readable name for this wireless
+   * service. For example, “Concert in the Park.”
+   */
+  private String serviceName;
+  /**
+   * Key Bridge extension. (Optional)
+   * <p>
+   * A human-readable description of this wireless service. For example, “Simon
+   * and Garfunkle Concert in New York's Central Park, Sept. 1981.”
+   */
+  private String serviceDescription;
+
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   public DeviceDescriptor getDeviceDesc() {
     return deviceDesc;
   }
@@ -93,6 +132,14 @@ public class RegistrationRequest {
     this.location = location;
   }
 
+  public AntennaCharacteristics getAntenna() {
+    return antenna;
+  }
+
+  public void setAntenna(AntennaCharacteristics antenna) {
+    this.antenna = antenna;
+  }
+
   public DeviceOwner getDeviceOwner() {
     return deviceOwner;
   }
@@ -101,12 +148,57 @@ public class RegistrationRequest {
     this.deviceOwner = deviceOwner;
   }
 
-  public AntennaCharacteristics getAntenna() {
-    return antenna;
+  public String getServiceGroupId() {
+    return serviceGroupId;
   }
 
-  public void setAntenna(AntennaCharacteristics antenna) {
-    this.antenna = antenna;
+  public void setServiceGroupId(String serviceGroupId) {
+    this.serviceGroupId = serviceGroupId;
+  }
+
+  public String getServiceName() {
+    return serviceName;
+  }
+
+  public void setServiceName(String serviceName) {
+    this.serviceName = serviceName;
+  }
+
+  public String getServiceDescription() {
+    return serviceDescription;
+  }
+
+  public void setServiceDescription(String serviceDescription) {
+    this.serviceDescription = serviceDescription;
+  }//</editor-fold>
+
+  /**
+   * Affirm this is a valid registration request message.
+   *
+   * @return TRUE if all required fields are configured
+   */
+  public boolean isValid() {
+    return deviceDesc.isValid() && location.isValid() && antenna.isValid() && deviceOwner.isValid();
+  }
+
+  /**
+   * Validate this instance.
+   *
+   * @throws Exception describing the invalid configuration
+   */
+  public void validate() throws Exception {
+    if (deviceDesc == null) {
+      throw new Exception("RegistrationRequest::deviceDesc is required");
+    }
+    if (location == null) {
+      throw new Exception("RegistrationRequest::location is required");
+    }
+    if (antenna == null) {
+      throw new Exception("RegistrationRequest::antenna is required");
+    }
+    if (deviceOwner == null) {
+      throw new Exception("RegistrationRequest::deviceOwner is required");
+    }
   }
 
 }
