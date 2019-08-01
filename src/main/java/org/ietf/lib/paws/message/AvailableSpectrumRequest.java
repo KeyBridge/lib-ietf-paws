@@ -15,6 +15,7 @@ package org.ietf.lib.paws.message;
 
 import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.*;
+import org.ietf.lib.paws.type.SpectrumRequestType;
 
 /**
  * 4.5.1. AVAIL_SPECTRUM_REQ
@@ -53,6 +54,27 @@ import org.ietf.lib.paws.*;
 public class AvailableSpectrumRequest {
 
   /**
+   * The request type is <strike>OPTIONAL</strike> REQUIRED; it may be used to
+   * modify the request, but its use depends on the applicable ruleset. The
+   * request type may be used, for example, to indicate that the response should
+   * include generic Slave Device parameters without having to specify the
+   * device descriptor for a specific device. When requestType is missing, the
+   * request is for a specific device (Master or Slave), so deviceDesc is
+   * REQUIRED.
+   * <p>
+   * 9.1.2.2. European Telecommunications Standards Institute (ETSI)
+   * <p>
+   * Modifies the available-spectrum request type. If specified, the only valid
+   * value is "Generic Slave" and the Database is required to respond with
+   * generic operating parameters for any Slave Device.
+   * <p>
+   * Key Bridge: `requestType` is REQUIRED. Changes from String to enumerated
+   * type.
+   */
+  @XmlElement(required = true)
+  private SpectrumRequestType requestType;
+
+  /**
    * The DeviceDescriptor (Section 5.2) for the device requesting available
    * spectrum. When the request is made by a Master Device on its own behalf,
    * the descriptor is that of the Master Device, and it is REQUIRED. When the
@@ -83,52 +105,55 @@ public class AvailableSpectrumRequest {
   @XmlElement(required = true)
   private GeoLocation location;
   /**
+   * The AntennaCharacteristics (Section 5.3) is OPTIONAL.
+   * <p>
+   * Key Bridge: AntennaCharacteristics is REQUIRED if submitted by a Master
+   * Device. Also required if the antenna height or rotation have changed.
+   */
+  private AntennaCharacteristics antenna;
+
+  /**
    * The DeviceOwner (Section 5.5) information MAY be included to register the
    * device with the Database. This enables the device to register and get
    * spectrum-availability information in a single request. Some rulesets
    * mandate registration for specific device types.
+   * <p>
+   * Key Bridge: Rename from `owner` to `deviceOwner` for consistency with other
+   * classes.
+   *
+   * @deprecated DeviceOwner for SLAVE devices is inherited from the Master.
    */
-  private DeviceOwner owner;
-  /**
-   * The AntennaCharacteristics (Section 5.3) is OPTIONAL.
-   */
-  private AntennaCharacteristics antenna;
-  /**
-   * The Master Device MAY include its DeviceCapabilities (Section 5.4) to limit
-   * the available-spectrum response to the spectrum that is compatible with its
-   * capabilities. The Database SHOULD NOT return spectrum that is not
-   * compatible with the specified capabilities.
-   */
-  private DeviceCapabilities capabilities;
+  private DeviceOwner deviceOwner;
 
   /**
    * When the request is made by a Master Device on behalf of a Slave Device,
    * the Master Device MAY provide its own descriptor.
+   * <p>
+   * Key Bridge: If submitted by a Master Device, the Master DeviceDescriptor is
+   * REQUIRED, but only the `deviceId` and `serialNumber` fields are necessary
+   * to identify the Master Device. Also note that the Master Device MUST be
+   * already registered.
    */
   private DeviceDescriptor masterDeviceDesc;
   /**
    * When the request is made by a Master Device on behalf of a Slave Device,
    * the Master Device MUST provide its own GeoLocation (Section 5.1).
+   * <p>
+   * Key Bridge: This is used to affirm the registered location.
    */
   private GeoLocation masterDeviceLocation;
   /**
-   * The request type is OPTIONAL; it may be used to modify the request, but its
-   * use depends on the applicable ruleset. The request type may be used, for
-   * example, to indicate that the response should include generic Slave Device
-   * parameters without having to specify the device descriptor for a specific
-   * device. When requestType is missing, the request is for a specific device
-   * (Master or Slave), so deviceDesc is REQUIRED. The maximum length of the
-   * value is 64 octets. See the specifics in the Initial Registry Contents
-   * (Section 9.1.2) for the Ruleset ID Registry.
+   * The Master Device MAY include its DeviceCapabilities (Section 5.4) to limit
+   * the available-spectrum response to the spectrum that is compatible with its
+   * capabilities. The Database SHOULD NOT return spectrum that is not
+   * compatible with the specified capabilities.
    * <p>
-   * 9.1.2.2. European Telecommunications Standards Institute (ETSI)
-   * <p>
-   * Modifies the available-spectrum request type. If specified, the only valid
-   * value is "Generic Slave" and the Database is required to respond with
-   * generic operating parameters for any Slave Device
+   * Key Bridge: rename from `capabilities` to `masterDeviceCapabilities` for
+   * consistency with other fields.
    */
-  private String requestType;
+  private DeviceCapabilities masterDeviceCapabilities;
 
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   public DeviceDescriptor getDeviceDesc() {
     return deviceDesc;
   }
@@ -145,12 +170,12 @@ public class AvailableSpectrumRequest {
     this.location = location;
   }
 
-  public DeviceOwner getOwner() {
-    return owner;
+  public DeviceOwner getDeviceOwner() {
+    return deviceOwner;
   }
 
-  public void setOwner(DeviceOwner owner) {
-    this.owner = owner;
+  public void setDeviceOwner(DeviceOwner deviceOwner) {
+    this.deviceOwner = deviceOwner;
   }
 
   public AntennaCharacteristics getAntenna() {
@@ -161,12 +186,12 @@ public class AvailableSpectrumRequest {
     this.antenna = antenna;
   }
 
-  public DeviceCapabilities getCapabilities() {
-    return capabilities;
+  public DeviceCapabilities getMasterDeviceCapabilities() {
+    return masterDeviceCapabilities;
   }
 
-  public void setCapabilities(DeviceCapabilities capabilities) {
-    this.capabilities = capabilities;
+  public void setMasterDeviceCapabilities(DeviceCapabilities masterDeviceCapabilities) {
+    this.masterDeviceCapabilities = masterDeviceCapabilities;
   }
 
   public DeviceDescriptor getMasterDeviceDesc() {
@@ -185,12 +210,12 @@ public class AvailableSpectrumRequest {
     this.masterDeviceLocation = masterDeviceLocation;
   }
 
-  public String getRequestType() {
+  public SpectrumRequestType getRequestType() {
     return requestType;
   }
 
-  public void setRequestType(String requestType) {
+  public void setRequestType(SpectrumRequestType requestType) {
     this.requestType = requestType;
-  }
+  }//</editor-fold>
 
 }
