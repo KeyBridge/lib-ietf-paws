@@ -56,7 +56,7 @@ public enum PawsRulesetType {
    */
   @Deprecated
   @XmlEnumValue("FccTvBandWhiteSpace-2010")
-  FCC_Part15H_2010("FccTvBandWhiteSpace-2010"),
+  FCC_Part15H_2010("FccTvBandWhiteSpace-2010", "USA", "US", 50),
 
   /**
    * Title 47: Telecommunication PART 15—RADIO FREQUENCY DEVICES Subpart H—White
@@ -67,7 +67,7 @@ public enum PawsRulesetType {
    * H—White Space Devices</a>
    */
   @XmlEnumValue("FCC-Part15H-2019")
-  FCC_Part15H_2019("FCC-Part15H-2019"),
+  FCC_Part15H_2019("FCC-Part15H-2019", "USA", "US", 50),
 
   /**
    * DBS-01 — White Space Database Specifications
@@ -76,7 +76,7 @@ public enum PawsRulesetType {
    * <a href="https://www.ic.gc.ca/eic/site/smt-gst.nsf/eng/sf10928.html">DBS-01</a>
    */
   @XmlEnumValue("ISED-DBS01-2015")
-  ISED_DBS01_2015("ISED-DBS01-2015"),
+  ISED_DBS01_2015("ISED-DBS01-2015", "CAN", "CA", 50),
 
   /**
    * ETSI EN 301 598 V1.1.1 (2014-04)
@@ -106,10 +106,42 @@ public enum PawsRulesetType {
   @XmlEnumValue("ETSI-EN-301-598-2.1.1")
   ETSI_EN301_598_211("ETSI-EN-301-598-2.1.1");
 
+  /**
+   * The id value.
+   */
   private final String id;
+
+  /**
+   * The ISO3 country code.
+   */
+  private final String iso3;
+  /**
+   * The ISO2 country code.
+   */
+  private final String iso2;
+  /**
+   * The maximum location change in meters is REQUIRED for the Initialization
+   * Response (Section 4.3.2), but OPTIONAL otherwise. Some regulatory domains
+   * mandate that, when the device changes location by more than this specified
+   * distance, it contact the Database to get the available spectrum for the new
+   * location. If this value is provided by the Database within the context of
+   * an Available Spectrum Response (Section 4.5.2), it takes precedence over
+   * the value within the Initialization Response (Section 4.3.2)
+   */
+  private final double maxLocationChange;
 
   private PawsRulesetType(String id) {
     this.id = id;
+    this.iso3 = null;
+    this.iso2 = null;
+    this.maxLocationChange = 0;
+  }
+
+  private PawsRulesetType(String id, String iso3, String iso2, double maxLocationChange) {
+    this.id = id;
+    this.iso3 = iso3;
+    this.iso2 = iso2;
+    this.maxLocationChange = maxLocationChange;
   }
 
   /**
@@ -119,6 +151,18 @@ public enum PawsRulesetType {
    */
   public String getId() {
     return id;
+  }
+
+  public String getIso3() {
+    return iso3;
+  }
+
+  public String getIso2() {
+    return iso2;
+  }
+
+  public double getMaxLocationChange() {
+    return maxLocationChange;
   }
 
   /**
