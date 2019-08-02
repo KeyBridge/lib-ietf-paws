@@ -70,6 +70,9 @@ public class AvailableSpectrumRequest {
    * <p>
    * Key Bridge: `requestType` is REQUIRED. Changes from String to enumerated
    * type.
+   * <p>
+   * Developer Note: For `LPA` type queries only the `location` field is
+   * required.
    */
   @XmlElement(required = true)
   private SpectrumRequestType requestType;
