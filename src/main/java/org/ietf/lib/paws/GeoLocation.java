@@ -16,8 +16,8 @@ package org.ietf.lib.paws;
 import ch.keybridge.lib.xml.adapter.XmlGeometryAdapter;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.Polygon;
 
 /**
  * 5.1. GeoLocation
@@ -66,11 +66,10 @@ public class GeoLocation {
    * The GeoLocation as a region.
    * <p>
    * Key Bridge: This represents the device operation area (/region). Valid
-   * geometries are: POLYGON to represent a contained operating area or
-   * LINESTRING to describe a route for mobile / transportable configurations.
+   * geometry is a POLYGON to represent a contained operating area or region.
    */
   @XmlJavaTypeAdapter(XmlGeometryAdapter.class)
-  private Geometry region;
+  private Polygon region;
   /**
    * The location confidence level, as a percentage, MAY be provided. When this
    * parameter is not provided, the default value is 95. Valid values range from
@@ -114,18 +113,17 @@ public class GeoLocation {
    *
    * @return the device operation area
    */
-  public Geometry getRegion() {
+  public Polygon getRegion() {
     return region;
   }
 
   /**
-   * Set the device operation area (/region). Valid geometries are: POLYGON to
-   * represent a contained operating area or LINESTRING to describe a route for
-   * mobile / transportable configurations.
+   * Set the device operation area (/region). Valid geometry is a POLYGON to
+   * represent a contained operating area or region.
    *
    * @param region the device operation area
    */
-  public void setRegion(Geometry region) {
+  public void setRegion(Polygon region) {
     this.region = region;
   }
 
