@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.EventTime;
 
 /**
- * Key Bridge PAWS channel description.
+ * Key Bridge PAWS spectrum channel description.
  * <p>
  * <img alt="clazz" src="doc-files/pawsChannel.png">
  * <p>
@@ -64,10 +64,10 @@ public class PawsChannel implements Comparable<PawsChannel> {
   private Double frequencyMin;
 
   /**
-   * Indicator that the device operation is allowed or forbidden.
+   * Indicator that the device operation is allowed (TRUE) or forbidden (FALSE).
    */
   @XmlElement(required = true)
-  private Boolean allowed;
+  private boolean allowed;
 
   /**
    * The maximum allowable EIRP value on this channel. (dBW)
@@ -93,7 +93,7 @@ public class PawsChannel implements Comparable<PawsChannel> {
   }
 
   /**
-   * PAWS Channel constructor with minimum required configuration. Sets
+   * PAWS Channel constructor with the minimum required configuration. Sets
    * `allowed` to TRUE and the `timeRange` to null.
    * <p>
    * Developer note: To finalize the returned channel the `maxPowerDBW` field
@@ -106,17 +106,12 @@ public class PawsChannel implements Comparable<PawsChannel> {
    *                     in MHz.
    * @param frequencyMax The maximum (or end) frequency of the indicated name in
    *                     MHz.
-   * @return a new PawsChannel instance
    */
-  public static PawsChannel getInstance(String name, double frequencyMin, double frequencyMax) {
-    PawsChannel pc = new PawsChannel();
-    pc.setName(name);
-    pc.setFrequencyMax(frequencyMax);
-    pc.setFrequencyMin(frequencyMin);
-
-    pc.setAllowed(true);
-
-    return pc;
+  public PawsChannel(String name, Double frequencyMax, Double frequencyMin) {
+    this.name = name;
+    this.frequencyMax = frequencyMax;
+    this.frequencyMin = frequencyMin;
+    this.allowed = true;
   }
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
