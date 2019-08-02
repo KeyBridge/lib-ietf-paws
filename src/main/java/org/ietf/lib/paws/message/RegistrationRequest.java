@@ -79,8 +79,8 @@ public class RegistrationRequest {
    * require deviceOwner information under certain conditions. See PAWS Ruleset
    * ID Registry (Section 9.1) for ruleset-specific requirements.
    * <p>
-   * Key Bridge: REQUIRED to identify the responsible parties and bind with an
-   * account.
+   * Key Bridge: DeviceOwner is REQUIRED for registration. It is used to
+   * identify the responsible parties and bind with an account.
    */
   @XmlElement(required = true)
   private DeviceOwner deviceOwner;

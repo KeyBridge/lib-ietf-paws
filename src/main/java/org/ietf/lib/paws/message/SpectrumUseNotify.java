@@ -118,6 +118,7 @@ public class SpectrumUseNotify {
   @XmlElement(name = "channels", required = true)
   private Collection<PawsChannel> channels;
 
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   public DeviceDescriptor getDeviceDesc() {
     return deviceDesc;
   }
@@ -174,6 +175,6 @@ public class SpectrumUseNotify {
 
   public void addChannel(PawsChannel channel) {
     getChannels().add(channel);
-  }
+  }//</editor-fold>
 
 }
