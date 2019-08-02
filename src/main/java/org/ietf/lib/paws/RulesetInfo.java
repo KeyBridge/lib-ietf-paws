@@ -49,6 +49,7 @@ public class RulesetInfo {
    * requests for available spectrum.
    */
   private static final int MAX_POLLING_SECS = 600;
+
   /**
    * A string that indicates the regulatory domain to which the ruleset applies
    * is REQUIRED. It will normally be a 2-letter country code defined by Country
