@@ -48,6 +48,9 @@ public enum PawsRulesetType {
    * Space Devices
    * <p>
    * Original rules ca. 2010.
+   * <p>
+   * Max movement before re-registration is 50 meters. <br>
+   * Max lease time is 48 hours (== 172800 seconds)
    *
    * @see
    * <a href="http://www.ecfr.gov/cgi-bin/text-idx?rgn=div6&view=text&node=47:1.0.1.1.16.8">Subpart
@@ -56,27 +59,33 @@ public enum PawsRulesetType {
    */
   @Deprecated
   @XmlEnumValue("FccTvBandWhiteSpace-2010")
-  FCC_Part15H_2010("FccTvBandWhiteSpace-2010", "USA", "US", 50),
+  FCC_Part15H_2010("FccTvBandWhiteSpace-2010", "USA", "US", 50, 172800),
 
   /**
    * Title 47: Telecommunication PART 15—RADIO FREQUENCY DEVICES Subpart H—White
    * Space Devices
+   * <p>
+   * Max movement before re-registration is 50 meters. <br>
+   * Max lease time is 48 hours (== 172800 seconds)
    *
    * @see
    * <a href="http://www.ecfr.gov/cgi-bin/text-idx?rgn=div6&view=text&node=47:1.0.1.1.16.8">Subpart
    * H—White Space Devices</a>
    */
   @XmlEnumValue("FCC-Part15H-2019")
-  FCC_Part15H_2019("FCC-Part15H-2019", "USA", "US", 50),
+  FCC_Part15H_2019("FCC-Part15H-2019", "USA", "US", 50, 172800),
 
   /**
    * DBS-01 — White Space Database Specifications
+   * <p>
+   * Max movement before re-registration is 50 meters. <br>
+   * Max lease time is 48 hours (== 172800 seconds)
    *
    * @see
    * <a href="https://www.ic.gc.ca/eic/site/smt-gst.nsf/eng/sf10928.html">DBS-01</a>
    */
   @XmlEnumValue("ISED-DBS01-2015")
-  ISED_DBS01_2015("ISED-DBS01-2015", "CAN", "CA", 50),
+  ISED_DBS01_2015("ISED-DBS01-2015", "CAN", "CA", 50, 172800),
 
   /**
    * ETSI EN 301 598 V1.1.1 (2014-04)
@@ -130,18 +139,25 @@ public enum PawsRulesetType {
    */
   private final double maxLocationChange;
 
+  /**
+   * The maximum channel lease time, in seconds. Defaults to 1 hour if not set.
+   */
+  private final int maxLeaseTime;
+
   private PawsRulesetType(String id) {
     this.id = id;
     this.iso3 = null;
     this.iso2 = null;
     this.maxLocationChange = 0;
+    this.maxLeaseTime = 1;
   }
 
-  private PawsRulesetType(String id, String iso3, String iso2, double maxLocationChange) {
+  private PawsRulesetType(String id, String iso3, String iso2, double maxLocationChange, int maxLeaseTime) {
     this.id = id;
     this.iso3 = iso3;
     this.iso2 = iso2;
     this.maxLocationChange = maxLocationChange;
+    this.maxLeaseTime = maxLeaseTime;
   }
 
   /**
@@ -153,16 +169,41 @@ public enum PawsRulesetType {
     return id;
   }
 
+  /**
+   * Get the ISO3 country code
+   *
+   * @return the ISO3 country code
+   */
   public String getIso3() {
     return iso3;
   }
 
+  /**
+   * Get the ISO2 country code
+   *
+   * @return the ISO2 country code
+   */
   public String getIso2() {
     return iso2;
   }
 
+  /**
+   * Get the maximum location change in meters
+   *
+   * @return the maximum location change in meters
+   */
   public double getMaxLocationChange() {
     return maxLocationChange;
+  }
+
+  /**
+   * Get the maximum channel lease time, in hours. Defaults to 1 hour if not
+   * set.
+   *
+   * @return the maximum channel lease time, in hours.
+   */
+  public int getMaxLeaseTime() {
+    return maxLeaseTime;
   }
 
   /**
