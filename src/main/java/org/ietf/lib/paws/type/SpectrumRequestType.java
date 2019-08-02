@@ -30,9 +30,8 @@ import javax.xml.bind.annotation.XmlEnum;
  * example, to indicate that the response should include generic Slave Device
  * parameters without having to specify the device descriptor for a specific
  * device. When requestType is missing, the request is for a specific device
- * (Master or Slave), so deviceDesc is REQUIRED. The maximum length of the value
- * is 64 octets. See the specifics in the Initial Registry Contents (Section
- * 9.1.2) for the Ruleset ID Registry.
+ * (Master or Slave), so deviceDesc is REQUIRED. See the specifics in the
+ * Initial Registry Contents (Section 9.1.2) for the Ruleset ID Registry.
  * <p>
  * 9.1.2.2. European Telecommunications Standards Institute (ETSI)
  * <p>
@@ -58,6 +57,9 @@ public enum SpectrumRequestType {
   /**
    * Requesting spectrum availability for LPA type devices (e.g. wireless
    * microphone).
+   * <p>
+   * Developer Note: For LPA queries only the
+   * `AvailableSpectrumRequest::location` field is required.
    */
   LPA,
   /**
@@ -65,6 +67,6 @@ public enum SpectrumRequestType {
    * spectrum inquiry, planning and evaluation. Results may not be used for
    * service.
    */
-  INFORMATION;
+  INFO;
 
 }
