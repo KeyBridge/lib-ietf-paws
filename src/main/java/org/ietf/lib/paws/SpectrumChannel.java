@@ -18,7 +18,6 @@ import ch.keybridge.lib.xml.adapter.XmlDouble06PrecisionAdapter;
 import java.util.Objects;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.ietf.lib.paws.EventTime;
 
 /**
  * Key Bridge proprietary white space spectrum channel data transfer object.
@@ -40,8 +39,8 @@ import org.ietf.lib.paws.EventTime;
  * @since v0.7.0 move informational fields to `PawsInfo` class
  * @since v0.13.0 rename from PawsChannel to SpectrumChannel
  */
-@XmlType(name = "PawsChannel")
-@XmlRootElement(name = "PawsChannel")
+@XmlType(name = "SpectrumChannel")
+@XmlRootElement(name = "SpectrumChannel")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SpectrumChannel implements Comparable<SpectrumChannel> {
 
