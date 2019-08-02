@@ -14,8 +14,13 @@
 package org.ietf.lib.paws.message;
 
 import ch.keybridge.lib.paws.PawsChannel;
-import ch.keybridge.lib.xml.adapter.XmlDateTimeAdapter;
-import java.util.*;
+import ch.keybridge.lib.xml.adapter.XmlZonedDateTimeAdapter;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.TreeSet;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.*;
@@ -99,12 +104,9 @@ import org.ietf.lib.paws.*;
 public class AvailableSpectrumResponse {
 
   /**
-   * Key Bridge Modification.
-   * <p>
-   * Messages provides information about the white space channel build process.
+   * "UTC". The default time zone.
    */
-  @XmlElement(name = "message")
-  private String message;
+  private static final ZoneId ZONE_ID = ZoneId.of("UTC");
 
   /**
    * Timestamp of the response is expressed in UTC using the form,
@@ -112,15 +114,24 @@ public class AvailableSpectrumResponse {
    * Timestamps" [RFC3339]. This can be used by the device as a reference for
    * the start and stop times in the spectrum schedules.
    */
-  @XmlJavaTypeAdapter(XmlDateTimeAdapter.class)
+  @XmlJavaTypeAdapter(XmlZonedDateTimeAdapter.class)
   @XmlElement(required = true)
-  private Date timestamp;
+  private ZonedDateTime timestamp;
   /**
    * The Database MUST include the DeviceDescriptor (Section 5.2) specified in
    * the AVAIL_SPECTRUM_REQ message.
    */
   @XmlElement(required = true)
   private DeviceDescriptor deviceDesc;
+  /**
+   * Key Bridge Modification: Added to provide clarity in the response.
+   * <p>
+   * The response `location` field specifically describes the geographic
+   * validity of the spectrum availability information.
+   */
+  @XmlElement(required = true)
+  private GeoLocation location;
+
   /**
    * Deprecated: <em> The SpectrumSpec (Section 5.9) list MUST include at least
    * one entry. Each entry contains the schedules of available spectrum for a
@@ -134,7 +145,6 @@ public class AvailableSpectrumResponse {
    * @deprecated This silly list of lists is deprecated. Reference instead the
    * {@code channels} collection of sorted {@code PawsChannel} instances.
    */
-//  @XmlElement(required = true)
   private List<SpectrumSpec> spectrumSpecs;
   /**
    * The Database MAY include a DbUpdateSpec (Section 5.7) to notify the device
@@ -144,9 +154,6 @@ public class AvailableSpectrumResponse {
    */
   private DbUpdateSpec databaseChange;
 
-  //
-  // Key Bridge Modifications.
-  //
   /**
    * Key Bridge Modification. This is moved from {@code SpectrumSpec}.
    * <p>
@@ -162,16 +169,17 @@ public class AvailableSpectrumResponse {
   /**
    * Key Bridge Modification. This is moved from {@code SpectrumSpec}.
    * <p>
-   * The time range for which the specification is comprehensive is OPTIONAL.
-   * When specified, any gaps in time intervals within the spectrumSchedules
-   * element that overlap with the range specified by "timeRange" are
-   * interpreted by the device as time intervals in which there is no available
-   * spectrum.
+   * Describes the maximum time range for which the spectrum information in this
+   * response is valid. Note that individual PawsChannel entries in the
+   * `channels` list may indicate a _shorter_ but never a longer time range.
+   * PawsChannel entries with no time range configuration must be interpreted as
+   * having this (parent) time range.
    */
   @XmlElement(required = true)
   private EventTime timeRange;
   /**
-   * Key Bridge Modification. This is moved from {@code SpectrumSpec}.
+   * Key Bridge Modification. This is moved from {@code SpectrumSpec} and is
+   * ALWAYS TRUE.
    * <p>
    * The Database MAY return true for this parameter if spectrumSchedules list
    * is non-empty; otherwise, the Database MAY omit this parameter altogether,
@@ -181,14 +189,8 @@ public class AvailableSpectrumResponse {
    * SPECTRUM_USE_NOTIFY message. Some rulesets mandate this value be set to
    * true.
    */
-  private Boolean needsSpectrumReport;
-
-  /**
-   * Key Bridge Modification. This is added.
-   * <p>
-   * The device query position, echoed back to the device.
-   */
-  private String position;
+  @XmlElement(required = true)
+  private boolean needsSpectrumReport;
 
   /**
    * Key Bridge Modification.
@@ -205,15 +207,16 @@ public class AvailableSpectrumResponse {
   private Collection<PawsChannel> channels;
 
   public AvailableSpectrumResponse() {
-    super();
-    this.timestamp = new Date();
+    this.timestamp = ZonedDateTime.now(ZONE_ID);
+    this.needsSpectrumReport = true;
   }
 
-  public Date getTimestamp() {
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
+  public ZonedDateTime getTimestamp() {
     return timestamp;
   }
 
-  public void setTimestamp(Date timestamp) {
+  public void setTimestamp(ZonedDateTime timestamp) {
     this.timestamp = timestamp;
   }
 
@@ -223,6 +226,14 @@ public class AvailableSpectrumResponse {
 
   public void setDeviceDesc(DeviceDescriptor deviceDesc) {
     this.deviceDesc = deviceDesc;
+  }
+
+  public GeoLocation getLocation() {
+    return location;
+  }
+
+  public void setLocation(GeoLocation location) {
+    this.location = location;
   }
 
   public List<SpectrumSpec> getSpectrumSpecs() {
@@ -260,20 +271,12 @@ public class AvailableSpectrumResponse {
     this.timeRange = timeRange;
   }
 
-  public Boolean getNeedsSpectrumReport() {
+  public boolean getNeedsSpectrumReport() {
     return needsSpectrumReport;
   }
 
-  public void setNeedsSpectrumReport(Boolean needsSpectrumReport) {
+  public void setNeedsSpectrumReport(boolean needsSpectrumReport) {
     this.needsSpectrumReport = needsSpectrumReport;
-  }
-
-  public String getPosition() {
-    return position;
-  }
-
-  public void setPosition(String position) {
-    this.position = position;
   }
 
   public Collection<PawsChannel> getChannels() {
@@ -294,15 +297,7 @@ public class AvailableSpectrumResponse {
    */
   public void addChannel(PawsChannel channel) {
     getChannels().add(channel);
-  }
-
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(String message) {
-    this.message = message;
-  }
+  }//</editor-fold>
 
   /**
    * Return a list of channels.
