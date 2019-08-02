@@ -11,7 +11,7 @@
  * Standard Product License Agreement. A copy of either Agreement can be
  * obtained upon request from: info@keybridgewireless.com
  */
-package ch.keybridge.lib.paws;
+package org.ietf.lib.paws;
 
 import ch.keybridge.lib.xml.adapter.XmlDouble02PrecisionAdapter;
 import ch.keybridge.lib.xml.adapter.XmlDouble06PrecisionAdapter;
@@ -21,11 +21,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.EventTime;
 
 /**
- * Key Bridge PAWS spectrum channel description.
+ * Key Bridge proprietary white space spectrum channel data transfer object.
  * <p>
- * <img alt="clazz" src="doc-files/pawsChannel.png">
+ * <img alt="clazz" src="doc-files/spectrumChannel.png">
  * <p>
- * The {@code PawsChannel} is used in the {@code AvailableSpectrumResponse}
+ * The {@code SpectrumChannel} is used in the {@code AvailableSpectrumResponse}
  * object to convey channel availability information.
  * <p>
  * Notes: This is a Key Bridge custom component replacing the twice-buried list
@@ -38,11 +38,12 @@ import org.ietf.lib.paws.EventTime;
  * @author Key Bridge LLC
  * @since v0.2.0 added 01/31/17
  * @since v0.7.0 move informational fields to `PawsInfo` class
+ * @since v0.13.0 rename from PawsChannel to SpectrumChannel
  */
 @XmlType(name = "PawsChannel")
 @XmlRootElement(name = "PawsChannel")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PawsChannel implements Comparable<PawsChannel> {
+public class SpectrumChannel implements Comparable<SpectrumChannel> {
 
   /**
    * The colloquial channel name. This corresponds to the channel number
@@ -89,7 +90,7 @@ public class PawsChannel implements Comparable<PawsChannel> {
    * Make the empty constructor protected to encourage use of the
    * {@code getInstance} constructor.
    */
-  protected PawsChannel() {
+  protected SpectrumChannel() {
   }
 
   /**
@@ -107,7 +108,7 @@ public class PawsChannel implements Comparable<PawsChannel> {
    * @param frequencyMax The maximum (or end) frequency of the indicated name in
    *                     MHz.
    */
-  public PawsChannel(String name, Double frequencyMax, Double frequencyMin) {
+  public SpectrumChannel(String name, Double frequencyMax, Double frequencyMin) {
     this.name = name;
     this.frequencyMax = frequencyMax;
     this.frequencyMin = frequencyMin;
@@ -170,7 +171,7 @@ public class PawsChannel implements Comparable<PawsChannel> {
    * @return the sort order
    */
   @Override
-  public int compareTo(PawsChannel o) {
+  public int compareTo(SpectrumChannel o) {
     return frequencyMin.compareTo(o.getFrequencyMin());
   }
 
@@ -204,7 +205,7 @@ public class PawsChannel implements Comparable<PawsChannel> {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    final PawsChannel other = (PawsChannel) obj;
+    final SpectrumChannel other = (SpectrumChannel) obj;
     if (!Objects.equals(this.frequencyMax, other.frequencyMax)) {
       return false;
     }

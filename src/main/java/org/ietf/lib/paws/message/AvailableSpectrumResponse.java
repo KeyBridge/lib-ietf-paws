@@ -13,7 +13,7 @@
  */
 package org.ietf.lib.paws.message;
 
-import ch.keybridge.lib.paws.PawsChannel;
+import org.ietf.lib.paws.SpectrumChannel;
 import ch.keybridge.lib.xml.adapter.XmlZonedDateTimeAdapter;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -204,7 +204,7 @@ public class AvailableSpectrumResponse {
    * This replaces the Spectrum list silliness (Section 5.11).
    */
   @XmlElement(name = "channels", required = true)
-  private Collection<PawsChannel> channels;
+  private Collection<SpectrumChannel> channels;
 
   public AvailableSpectrumResponse() {
     this.timestamp = ZonedDateTime.now(ZONE_ID);
@@ -279,14 +279,14 @@ public class AvailableSpectrumResponse {
     this.needsSpectrumReport = needsSpectrumReport;
   }
 
-  public Collection<PawsChannel> getChannels() {
+  public Collection<SpectrumChannel> getChannels() {
     if (channels == null) {
       channels = new TreeSet<>();
     }
     return channels;
   }
 
-  public void setChannels(Collection<PawsChannel> channels) {
+  public void setChannels(Collection<SpectrumChannel> channels) {
     this.channels = channels;
   }
 
@@ -295,7 +295,7 @@ public class AvailableSpectrumResponse {
    *
    * @param channel the PawsChannel instance to add
    */
-  public void addChannel(PawsChannel channel) {
+  public void addChannel(SpectrumChannel channel) {
     getChannels().add(channel);
   }//</editor-fold>
 

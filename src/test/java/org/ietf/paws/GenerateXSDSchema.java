@@ -9,8 +9,8 @@
  */
 package org.ietf.paws;
 
-import ch.keybridge.lib.paws.PawsChannel;
-import ch.keybridge.lib.paws.PawsInfo;
+import org.ietf.lib.paws.SpectrumChannel;
+import org.ietf.lib.paws.SpectrumInfo;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -82,8 +82,8 @@ public class GenerateXSDSchema {
     classes.add(SpectrumSpec.class);
 
     // key bridge proprietary
-    classes.add(PawsChannel.class);
-    classes.add(PawsInfo.class);
+    classes.add(SpectrumChannel.class);
+    classes.add(SpectrumInfo.class);
 
     JAXBContext jaxb = JAXBContext.newInstance(classes.toArray(new Class[classes.size()]));
     SchemaOutputResolver resolver = new MySchemaOutputResolver();

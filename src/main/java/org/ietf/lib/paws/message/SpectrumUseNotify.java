@@ -18,7 +18,7 @@
  */
 package org.ietf.lib.paws.message;
 
-import ch.keybridge.lib.paws.PawsChannel;
+import org.ietf.lib.paws.SpectrumChannel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeSet;
@@ -116,7 +116,7 @@ public class SpectrumUseNotify {
    * response only the channel name, frequency and max power are required.
    */
   @XmlElement(name = "channels", required = true)
-  private Collection<PawsChannel> channels;
+  private Collection<SpectrumChannel> channels;
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   public DeviceDescriptor getDeviceDesc() {
@@ -162,18 +162,18 @@ public class SpectrumUseNotify {
     this.spectra = spectra;
   }
 
-  public Collection<PawsChannel> getChannels() {
+  public Collection<SpectrumChannel> getChannels() {
     if (channels == null) {
       channels = new TreeSet<>();
     }
     return channels;
   }
 
-  public void setChannels(Collection<PawsChannel> channels) {
+  public void setChannels(Collection<SpectrumChannel> channels) {
     this.channels = channels;
   }
 
-  public void addChannel(PawsChannel channel) {
+  public void addChannel(SpectrumChannel channel) {
     getChannels().add(channel);
   }//</editor-fold>
 

@@ -11,7 +11,7 @@
  * Standard Product License Agreement. A copy of either Agreement can be
  * obtained upon request from: info@keybridgewireless.com
  */
-package ch.keybridge.lib.paws;
+package org.ietf.lib.paws;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,26 +21,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * Key Bridge White Space information data transfer object.
+ * Key Bridge proprietary white space spectrum information data transfer object.
  * <p>
- * <img alt="clazz" src="doc-files/pawsInfo.png">
+ * <img alt="clazz" src="doc-files/spectrumInfo.png">
  * <p>
- * A {@code PawInfo} channel information message providing a complete
+ * A {@code SpectrumInfo} channel information message providing a complete
  * description of spectrum availability and incumbent occupancy.
  * <p>
- * The {@code PawsInfo} is provided in the {@code AvailableSpectrumResponse}
+ * The {@code SpectrumInfo} is provided in the {@code AvailableSpectrumResponse}
  * object to convey channel availability information for non-WSD consumers such
  * as spectrum planning applications.
- * <p>
- * Notes: This is a Key Bridge custom component.
  *
  * @author Key Bridge LLC
  * @since v0.7.0 created 07/27/19 to support LPA channel detail inquiries
+ * @since v0.13.0 rename from PawsInfo to SpectrumInfo
  */
-@XmlType(name = "PawsInfo")
-@XmlRootElement(name = "PawsInfo")
+@XmlType(name = "SpectrumInfo")
+@XmlRootElement(name = "SpectrumInfo")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PawsInfo extends PawsChannel {
+public class SpectrumInfo extends SpectrumChannel {
 
   /**
    * Indicator that this channel is subject to a BLOCKING Enforcement record and
@@ -88,7 +87,7 @@ public class PawsInfo extends PawsChannel {
    * Make the empty constructor protected directing users to the
    * {@code getInstance} constructor.
    */
-  protected PawsInfo() {
+  protected SpectrumInfo() {
   }
 
   /**
@@ -103,8 +102,8 @@ public class PawsInfo extends PawsChannel {
    *                     MHz.
    * @return a new PawsChannel instance
    */
-  public static PawsInfo getInstance(String name, double frequencyMin, double frequencyMax) {
-    PawsInfo pc = new PawsInfo();
+  public static SpectrumInfo getInstance(String name, double frequencyMin, double frequencyMax) {
+    SpectrumInfo pc = new SpectrumInfo();
     pc.setName(name);
     pc.setFrequencyMax(frequencyMax);
     pc.setFrequencyMin(frequencyMin);
