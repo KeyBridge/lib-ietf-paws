@@ -71,13 +71,13 @@ public class PawsInfo extends PawsChannel {
    */
   private List<String> servicesAdj;
   /**
+   * A list of blocking second adjacent channel services. (RRBS only)
+   */
+  private List<String> servicesSecondAdjacent;
+  /**
    * A list of blocking taboo-channel services.
    */
   private List<String> servicesTaboo;
-  /**
-   * A list of blocking second adjacent channel services. (RRBS only)
-   */
-  private List<String> services2ndAdj;
 
   /**
    * Messages provides information about the white space channel build process.
@@ -206,19 +206,19 @@ public class PawsInfo extends PawsChannel {
     this.servicesTaboo = (servicesTaboo == null || servicesTaboo.isEmpty()) ? null : servicesTaboo;
   }
 
-  public List<String> getServices2ndAdj() {
-    if (services2ndAdj == null) {
-      services2ndAdj = new ArrayList<>();
+  public List<String> getServicesSecondAdjacent() {
+    if (servicesSecondAdjacent == null) {
+      servicesSecondAdjacent = new ArrayList<>();
     }
-    return services2ndAdj;
+    return servicesSecondAdjacent;
   }
 
-  public void setServices2ndAdj(List<String> services2ndAdj) {
+  public void setServicesSecondAdjacent(List<String> servicesSecondAdjacent) {
     /**
      * Only set the collection if the source is not empty. This produces a
      * cleaner XML output.
      */
-    this.services2ndAdj = (services2ndAdj == null || services2ndAdj.isEmpty()) ? null : services2ndAdj;
+    this.servicesSecondAdjacent = (servicesSecondAdjacent == null || servicesSecondAdjacent.isEmpty()) ? null : servicesSecondAdjacent;
   }
 
   /**
