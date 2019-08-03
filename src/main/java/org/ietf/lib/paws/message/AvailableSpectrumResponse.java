@@ -23,10 +23,9 @@ import java.util.TreeSet;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.*;
+import org.ietf.lib.paws.type.SpectrumRequestType;
 
 /**
- * Note: {@code spectrumSpec} is deprecated and replaced by {@code channels}.
- * <p>
  * 4.5.2. AVAIL_SPECTRUM_RESP
  * <p>
  * <img alt="clazz" src="doc-files/avail_spectrum_resp.png">
@@ -92,6 +91,8 @@ import org.ietf.lib.paws.*;
  * the response. The device MUST ignore any parameters that it does not
  * understand. Consult the PAWS Parameters Registry (Section 9.2) for possible
  * additional parameters and requirements they place on the device.
+ * <p>
+ * Note: {@code spectrumSpec} is deprecated and replaced by {@code channels}.
  *
  * @author Key Bridge LLC
  * @since v0.2.0 rewritten 01/31/17 to use a simple list of PawsChannel instead
@@ -106,6 +107,15 @@ public class AvailableSpectrumResponse {
    * "UTC". The default time zone.
    */
   private static final ZoneId ZONE_ID = ZoneId.of("UTC");
+
+  /**
+   * Key Bridge. The response type is REQUIRED; it is be used to specify how the
+   * provided spectrum information may be used.
+   *
+   * @since v0.16.0 - to specify how the spectrum information may be used
+   */
+  @XmlElement(required = true)
+  private SpectrumRequestType responseType;
 
   /**
    * Timestamp of the response is expressed in UTC using the form,
@@ -211,6 +221,14 @@ public class AvailableSpectrumResponse {
   }
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
+  public SpectrumRequestType getResponseType() {
+    return responseType;
+  }
+
+  public void setResponseType(SpectrumRequestType responseType) {
+    this.responseType = responseType;
+  }
+
   public ZonedDateTime getTimestamp() {
     return timestamp;
   }
