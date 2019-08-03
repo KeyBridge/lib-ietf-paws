@@ -213,7 +213,7 @@ public class AvailableSpectrumResponse {
    * This replaces the Spectrum list silliness (Section 5.11).
    */
   @XmlElement(name = "channels", required = true)
-  private Collection<SpectrumChannel> channels;
+  private Collection<AbstractChannel> channels;
 
   public AvailableSpectrumResponse() {
     this.timestamp = ZonedDateTime.now(ZONE_ID);
@@ -296,14 +296,14 @@ public class AvailableSpectrumResponse {
     this.needsSpectrumReport = needsSpectrumReport;
   }
 
-  public Collection<SpectrumChannel> getChannels() {
+  public Collection<AbstractChannel> getChannels() {
     if (channels == null) {
       channels = new TreeSet<>();
     }
     return channels;
   }
 
-  public void setChannels(Collection<SpectrumChannel> channels) {
+  public void setChannels(Collection<AbstractChannel> channels) {
     this.channels = channels;
   }
 

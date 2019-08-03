@@ -14,7 +14,7 @@
 package org.ietf.lib.paws;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "SpectrumInfo")
 @XmlRootElement(name = "SpectrumInfo")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SpectrumInfo extends SpectrumChannel {
+public class SpectrumInfo extends AbstractChannel {
 
   /**
    * Indicator that this channel is subject to a BLOCKING Enforcement record and
@@ -64,24 +64,24 @@ public class SpectrumInfo extends SpectrumChannel {
   /**
    * A list of co-channel services.
    */
-  private List<String> servicesCo;
+  private Collection<String> servicesCo;
   /**
    * A list of blocking adjacent channel services.
    */
-  private List<String> servicesAdj;
+  private Collection<String> servicesAdj;
   /**
    * A list of blocking second adjacent channel services. (RRBS only)
    */
-  private List<String> servicesSecondAdjacent;
+  private Collection<String> servicesSecondAdjacent;
   /**
    * A list of blocking taboo-channel services.
    */
-  private List<String> servicesTaboo;
+  private Collection<String> servicesTaboo;
 
   /**
    * Messages provides information about the white space channel build process.
    */
-  private List<String> messages;
+  private Collection<String> messages;
 
   /**
    * Make the empty constructor protected directing users to the
@@ -100,14 +100,9 @@ public class SpectrumInfo extends SpectrumChannel {
    *                     in MHz.
    * @param frequencyMax The maximum (or end) frequency of the indicated name in
    *                     MHz.
-   * @return a new PawsChannel instance
    */
-  public static SpectrumInfo getInstance(String name, double frequencyMin, double frequencyMax) {
-    SpectrumInfo pc = new SpectrumInfo();
-    pc.setName(name);
-    pc.setFrequencyMax(frequencyMax);
-    pc.setFrequencyMin(frequencyMin);
-    return pc;
+  public SpectrumInfo(String name, double frequencyMin, double frequencyMax) {
+    super(name, frequencyMin, frequencyMax);
   }
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
@@ -160,14 +155,14 @@ public class SpectrumInfo extends SpectrumChannel {
     this.exception = exception ? exception : null;
   }
 
-  public List<String> getServicesCo() {
+  public Collection<String> getServicesCo() {
     if (servicesCo == null) {
       servicesCo = new ArrayList<>();
     }
     return servicesCo;
   }
 
-  public void setServicesCo(List<String> servicesCo) {
+  public void setServicesCo(Collection<String> servicesCo) {
     /**
      * Only set the collection if the source is not empty. This produces a
      * cleaner XML output.
@@ -175,14 +170,14 @@ public class SpectrumInfo extends SpectrumChannel {
     this.servicesCo = (servicesCo == null || servicesCo.isEmpty()) ? null : servicesCo;
   }
 
-  public List<String> getServicesAdj() {
+  public Collection<String> getServicesAdj() {
     if (servicesAdj == null) {
       servicesAdj = new ArrayList<>();
     }
     return servicesAdj;
   }
 
-  public void setServicesAdj(List<String> servicesAdj) {
+  public void setServicesAdj(Collection<String> servicesAdj) {
     /**
      * Only set the collection if the source is not empty. This produces a
      * cleaner XML output.
@@ -190,14 +185,14 @@ public class SpectrumInfo extends SpectrumChannel {
     this.servicesAdj = (servicesAdj == null || servicesAdj.isEmpty()) ? null : servicesAdj;
   }
 
-  public List<String> getServicesTaboo() {
+  public Collection<String> getServicesTaboo() {
     if (servicesTaboo == null) {
       servicesTaboo = new ArrayList<>();
     }
     return servicesTaboo;
   }
 
-  public void setServicesTaboo(List<String> servicesTaboo) {
+  public void setServicesTaboo(Collection<String> servicesTaboo) {
     /**
      * Only set the collection if the source is not empty. This produces a
      * cleaner XML output.
@@ -205,14 +200,14 @@ public class SpectrumInfo extends SpectrumChannel {
     this.servicesTaboo = (servicesTaboo == null || servicesTaboo.isEmpty()) ? null : servicesTaboo;
   }
 
-  public List<String> getServicesSecondAdjacent() {
+  public Collection<String> getServicesSecondAdjacent() {
     if (servicesSecondAdjacent == null) {
       servicesSecondAdjacent = new ArrayList<>();
     }
     return servicesSecondAdjacent;
   }
 
-  public void setServicesSecondAdjacent(List<String> servicesSecondAdjacent) {
+  public void setServicesSecondAdjacent(Collection<String> servicesSecondAdjacent) {
     /**
      * Only set the collection if the source is not empty. This produces a
      * cleaner XML output.
@@ -226,7 +221,7 @@ public class SpectrumInfo extends SpectrumChannel {
    *
    * @return a collection of build messages
    */
-  public List<String> getMessages() {
+  public Collection<String> getMessages() {
     if (messages == null) {
       messages = new ArrayList<>();
     }
@@ -239,7 +234,7 @@ public class SpectrumInfo extends SpectrumChannel {
    *
    * @param messages a collection of build messages
    */
-  public void setMessages(List<String> messages) {
+  public void setMessages(Collection<String> messages) {
     /**
      * Only set the collection if the source is not empty. This produces a
      * cleaner XML output.

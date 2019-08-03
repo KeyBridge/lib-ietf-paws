@@ -13,11 +13,9 @@
  */
 package org.ietf.lib.paws;
 
-import java.util.Objects;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.adapter.XmlDouble02PrecisionAdapter;
-import org.ietf.lib.paws.adapter.XmlDouble06PrecisionAdapter;
 
 /**
  * Key Bridge proprietary white space spectrum channel data transfer object.
@@ -42,26 +40,7 @@ import org.ietf.lib.paws.adapter.XmlDouble06PrecisionAdapter;
 @XmlType(name = "SpectrumChannel")
 @XmlRootElement(name = "SpectrumChannel")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SpectrumChannel implements Comparable<SpectrumChannel> {
-
-  /**
-   * The colloquial channel name. This corresponds to the channel number
-   * identified in rule or regulation. e.g. "VHF4"
-   */
-  @XmlElement(required = true)
-  private String name;
-  /**
-   * The maximum (or end) frequency of the indicated name in MHz.
-   */
-  @XmlElement(required = true)
-  @XmlJavaTypeAdapter(XmlDouble06PrecisionAdapter.class)
-  private Double frequencyMax;
-  /**
-   * The minimum (or start) frequency of the indicated name in MHz.
-   */
-  @XmlElement(required = true)
-  @XmlJavaTypeAdapter(XmlDouble06PrecisionAdapter.class)
-  private Double frequencyMin;
+public class SpectrumChannel extends AbstractChannel {
 
   /**
    * Indicator that the device operation is allowed (TRUE) or forbidden (FALSE).
@@ -107,38 +86,12 @@ public class SpectrumChannel implements Comparable<SpectrumChannel> {
    * @param frequencyMax The maximum (or end) frequency of the indicated name in
    *                     MHz.
    */
-  public SpectrumChannel(String name, Double frequencyMax, Double frequencyMin) {
-    this.name = name;
-    this.frequencyMax = frequencyMax;
-    this.frequencyMin = frequencyMin;
+  public SpectrumChannel(String name, Double frequencyMin, Double frequencyMax) {
+    super(name, frequencyMin, frequencyMax);
     this.allowed = true;
   }
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public double getFrequencyMax() {
-    return frequencyMax;
-  }
-
-  public void setFrequencyMax(double frequencyMax) {
-    this.frequencyMax = frequencyMax;
-  }
-
-  public double getFrequencyMin() {
-    return frequencyMin;
-  }
-
-  public void setFrequencyMin(double frequencyMin) {
-    this.frequencyMin = frequencyMin;
-  }
-
   public boolean isAllowed() {
     return allowed;
   }
@@ -162,63 +115,5 @@ public class SpectrumChannel implements Comparable<SpectrumChannel> {
   public void setTimeRange(EventTime timeRange) {
     this.timeRange = timeRange;
   }//</editor-fold>
-
-  /**
-   * Sort on the min frequency.
-   *
-   * @param o the other instance
-   * @return the sort order
-   */
-  @Override
-  public int compareTo(SpectrumChannel o) {
-    return frequencyMin.compareTo(o.getFrequencyMin());
-  }
-
-  /**
-   * Channels are uniquely identified by the max and min frequencies.
-   *
-   * @return a hashcode
-   */
-  @Override
-  public int hashCode() {
-    int hash = 7;
-    hash = 43 * hash + Objects.hashCode(this.frequencyMax);
-    hash = 43 * hash + Objects.hashCode(this.frequencyMin);
-    return hash;
-  }
-
-  /**
-   * Channels are uniquely identified by the max and min frequencies.
-   *
-   * @param obj the other instance
-   * @return equality status
-   */
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj) {
-      return true;
-    }
-    if (obj == null) {
-      return false;
-    }
-    if (getClass() != obj.getClass()) {
-      return false;
-    }
-    final SpectrumChannel other = (SpectrumChannel) obj;
-    if (!Objects.equals(this.frequencyMax, other.frequencyMax)) {
-      return false;
-    }
-    return Objects.equals(this.frequencyMin, other.frequencyMin);
-  }
-
-  /**
-   * Return the channel name
-   *
-   * @return the name
-   */
-  @Override
-  public String toString() {
-    return name;
-  }
 
 }
