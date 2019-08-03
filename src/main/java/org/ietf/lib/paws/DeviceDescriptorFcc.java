@@ -13,8 +13,7 @@
  */
 package org.ietf.lib.paws;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.ietf.lib.paws.type.FccDeviceType;
@@ -46,7 +45,7 @@ import org.ietf.lib.paws.type.PawsRulesetType;
  */
 @XmlRootElement(name = "DeviceDescriptorFcc")
 @XmlType(name = "DeviceDescriptorFcc")
-@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlAccessorType(XmlAccessType.FIELD)
 public class DeviceDescriptorFcc extends DeviceDescriptor {
 
   /**
@@ -62,24 +61,6 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
   }
 
   /**
-   * Get the device's government certification ID (Section 9.2.2.1).
-   *
-   * @return the device's Industry Canada Identification Number (IC ID).
-   */
-  public String getFccId() {
-    return super.getDeviceId();
-  }
-
-  /**
-   * Set the device's government certification ID (Section 9.2.2.1).
-   *
-   * @param fccId the device's FCC certification identifier
-   */
-  public void setFccId(String fccId) {
-    super.setDeviceId(fccId);
-  }
-
-  /**
    * Get the Device Type (Section 9.2.2.2) of TV-band white-space device, as
    * defined by rule.
    * <p>
@@ -88,6 +69,7 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    *
    * @return the TV-band white-space Device Type
    */
+  @XmlElement(name = "FccDeviceType")
   public FccDeviceType getFccDeviceType() {
     return super.getDeviceType() == null ? null : FccDeviceType.valueOf(super.getDeviceType());
   }

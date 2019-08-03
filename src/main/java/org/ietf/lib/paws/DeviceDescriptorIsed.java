@@ -13,10 +13,7 @@
  */
 package org.ietf.lib.paws;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.type.IsedDeviceType;
 import org.ietf.lib.paws.type.PawsRulesetType;
 
@@ -63,25 +60,6 @@ public class DeviceDescriptorIsed extends DeviceDescriptor {
     super(RULESET_TYPE);
   }
 
-  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
-  /**
-   * Get the device's government certification ID (Section 9.2.2.1).
-   *
-   * @return the device's Industry Canada Identification Number (IC ID).
-   */
-  public String getIcId() {
-    return super.getDeviceId();
-  }
-
-  /**
-   * Set the device's government certification ID (Section 9.2.2.1).
-   *
-   * @param icId the device's Industry Canada Identification Number (IC ID).
-   */
-  public void setIcId(String icId) {
-    super.setDeviceId(icId);
-  }
-
   /**
    * Get the Device Type (Section 9.2.2.2) of TV-band white-space device, as
    * defined by rule.
@@ -91,6 +69,7 @@ public class DeviceDescriptorIsed extends DeviceDescriptor {
    *
    * @return the TV-band white-space Device Type
    */
+  @XmlElement(name = "IsedDeviceType")
   public IsedDeviceType getIsedTvbdDeviceType() {
     return super.getDeviceType() == null ? null : IsedDeviceType.valueOf(super.getDeviceType());
   }
@@ -106,6 +85,6 @@ public class DeviceDescriptorIsed extends DeviceDescriptor {
    */
   public void setIsedTvbdDeviceType(IsedDeviceType deviceType) {
     super.setDeviceType(deviceType == null ? null : deviceType.name());
-  }//</editor-fold>
+  }
 
 }
