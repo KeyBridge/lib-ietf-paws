@@ -13,7 +13,6 @@
  */
 package org.ietf.lib.paws.message;
 
-import org.ietf.lib.paws.SpectrumChannel;
 import ch.keybridge.lib.xml.adapter.XmlZonedDateTimeAdapter;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -98,8 +97,8 @@ import org.ietf.lib.paws.*;
  * @since v0.2.0 rewritten 01/31/17 to use a simple list of PawsChannel instead
  * of the SpectrumSpec list of lists of lists of lists of lists.
  */
-@XmlRootElement(name = "AVAIL_SPECTRUM_RESP")
-@XmlType(name = "AVAIL_SPECTRUM_RESP")
+@XmlRootElement(name = "AvailableSpectrumResponse")
+@XmlType(name = "AvailableSpectrumResponse")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class AvailableSpectrumResponse {
 

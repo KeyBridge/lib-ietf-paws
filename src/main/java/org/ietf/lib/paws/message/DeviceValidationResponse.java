@@ -44,8 +44,8 @@ import org.ietf.lib.paws.DeviceValidity;
  *
  * @author Key Bridge
  */
-@XmlRootElement(name = "DEV_VALID_RESP")
-@XmlType(name = "DEV_VALID_RESP")
+@XmlRootElement(name = "DeviceValidationResponse")
+@XmlType(name = "DeviceValidationResponse")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DeviceValidationResponse {
 

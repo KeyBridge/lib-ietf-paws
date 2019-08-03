@@ -48,8 +48,8 @@ import org.ietf.lib.paws.type.SpectrumRequestType;
  *
  * @author Key Bridge LLC
  */
-@XmlRootElement(name = "AVAIL_SPECTRUM_REQ")
-@XmlType(name = "AVAIL_SPECTRUM_REQ")
+@XmlRootElement(name = "AvailableSpectrumRequest")
+@XmlType(name = "AvailableSpectrumRequest")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class AvailableSpectrumRequest {
 

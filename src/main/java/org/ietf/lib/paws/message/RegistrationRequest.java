@@ -46,8 +46,8 @@ import org.ietf.lib.paws.GeoLocation;
  *
  * @author Key Bridge LLC
  */
-@XmlRootElement(name = "REGISTRATION_REQ")
-@XmlType(name = "REGISTRATION_REQ")
+@XmlRootElement(name = "RegistrationRequest")
+@XmlType(name = "RegistrationRequest")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RegistrationRequest {
 

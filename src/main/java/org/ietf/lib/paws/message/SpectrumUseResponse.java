@@ -43,8 +43,8 @@ import org.ietf.lib.paws.DbUpdateSpec;
  *
  * @author Key Bridge
  */
-@XmlRootElement(name = "SPECTRUM_USE_RESP")
-@XmlType(name = "SPECTRUM_USE_RESP")
+@XmlRootElement(name = "SpectrumUseResponse")
+@XmlType(name = "SpectrumUseResponse")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SpectrumUseResponse {
 

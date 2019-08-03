@@ -18,7 +18,6 @@
  */
 package org.ietf.lib.paws.message;
 
-import org.ietf.lib.paws.SpectrumChannel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeSet;
@@ -26,6 +25,7 @@ import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.DeviceDescriptor;
 import org.ietf.lib.paws.GeoLocation;
 import org.ietf.lib.paws.Spectrum;
+import org.ietf.lib.paws.SpectrumChannel;
 
 /**
  * 4.5.5. SPECTRUM_USE_NOTIFY
@@ -58,8 +58,8 @@ import org.ietf.lib.paws.Spectrum;
  *
  * @author Key Bridge
  */
-@XmlRootElement(name = "SPECTRUM_USE_NOTIFY")
-@XmlType(name = "SPECTRUM_USE_NOTIFY")
+@XmlRootElement(name = "SpectrumUseNotify")
+@XmlType(name = "SpectrumUseNotify")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SpectrumUseNotify {
 

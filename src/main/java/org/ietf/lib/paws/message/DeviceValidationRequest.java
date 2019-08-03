@@ -42,8 +42,8 @@ import org.ietf.lib.paws.DeviceDescriptor;
  *
  * @author Key Bridge
  */
-@XmlRootElement(name = "DEV_VALID_REQ")
-@XmlType(name = "DEV_VALID_REQ")
+@XmlRootElement(name = "DeviceValidationRequest")
+@XmlType(name = "DeviceValidationRequest")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DeviceValidationRequest {
 

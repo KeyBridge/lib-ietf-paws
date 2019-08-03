@@ -44,8 +44,8 @@ import org.ietf.lib.paws.GeoLocation;
  *
  * @author Key Bridge LLC
  */
-@XmlRootElement(name = "INIT_REQ")
-@XmlType(name = "INIT_REQ")
+@XmlRootElement(name = "InitializationRequest")
+@XmlType(name = "InitializationRequest")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class InitializationRequest {
 

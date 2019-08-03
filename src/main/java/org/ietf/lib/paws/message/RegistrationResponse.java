@@ -43,8 +43,8 @@ import org.ietf.lib.paws.type.PawsRulesetType;
  *
  * @author Key Bridge LLC
  */
-@XmlRootElement(name = "REGISTRATION_RESP")
-@XmlType(name = "REGISTRATION_RESP")
+@XmlRootElement(name = "RegistrationResponse")
+@XmlType(name = "RegistrationResponse")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RegistrationResponse {
 

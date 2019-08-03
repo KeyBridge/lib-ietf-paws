@@ -45,8 +45,8 @@ import org.ietf.lib.paws.RulesetInfo;
  *
  * @author Key Bridge LLC
  */
-@XmlRootElement(name = "INIT_RESP")
-@XmlType(name = "INIT_RESP")
+@XmlRootElement(name = "InitializationResponse")
+@XmlType(name = "InitializationResponse")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class InitializationResponse {
 
