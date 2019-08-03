@@ -47,12 +47,6 @@ public class SpectrumInfo extends AbstractSpectrum {
    * this may be assumed to be FALSE.
    */
   private boolean enforcementBlocking;
-  /**
-   * Indicator that this channel is subject to a FAST POLLING Enforcement record
-   * and the default (48 hour maximum) schedule should be shortened. When not
-   * configured this may be assumed to be FALSE.
-   */
-  private boolean enforcementFastPoll;
 
   /**
    * Indicator that an exception occurred when calculating the availability of
@@ -124,21 +118,7 @@ public class SpectrumInfo extends AbstractSpectrum {
    * @param enforcementBlocking blocking enforcement flag
    */
   public void setEnforcementBlocking(boolean enforcementBlocking) {
-    this.enforcementBlocking = enforcementBlocking ? enforcementBlocking : null;
-  }
-
-  public boolean getEnforcementFastPoll() {
-    return enforcementFastPoll;
-  }
-
-  /**
-   * Remark if there is a FAST POLL enforcement action on this channel. If FALSE
-   * set then leave empty.
-   *
-   * @param enforcementFastPoll blocking enforcement flag
-   */
-  public void setEnforcementFastPoll(boolean enforcementFastPoll) {
-    this.enforcementFastPoll = enforcementFastPoll ? enforcementFastPoll : null;
+    this.enforcementBlocking = enforcementBlocking;
   }
 
   public boolean getException() {
@@ -152,7 +132,7 @@ public class SpectrumInfo extends AbstractSpectrum {
    * @param exception blocking enforcement flag
    */
   public void setException(boolean exception) {
-    this.exception = exception ? exception : null;
+    this.exception = exception;
   }
 
   public Collection<String> getServicesCo() {

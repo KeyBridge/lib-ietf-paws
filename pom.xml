@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>keybridge.lib</groupId>
   <artifactId>ietf-paws</artifactId>
-  <version>0.18.0</version>
+  <version>0.19.0</version>
   <packaging>jar</packaging>
 
   <name>lib-ietf-paws</name>
@@ -34,7 +34,11 @@
     v0.16.0 - add AvailableSpectrumResponse::responseType field to specify how the spectrum information may be used
     - change scope of jts-core and xml-adapter to `provided`
     v0.17.0 - copy all xml adapters local into `adapter` package
-    v0.18.0 - add AbstractChannel to support Spectrum Channel and Info use</description>
+    v0.18.0 - add AbstractChannel to support Spectrum Channel and Info use
+    v0.19.0 - move fastPoll enforcement flag from Info to Channel
+
+
+  </description>
 
   <organization>
     <name>Key Bridge</name>
