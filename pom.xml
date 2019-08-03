@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>keybridge.lib</groupId>
   <artifactId>ietf-paws</artifactId>
-  <version>0.14.0</version>
+  <version>0.15.0</version>
   <packaging>jar</packaging>
 
   <name>lib-ietf-paws</name>
@@ -30,7 +30,7 @@
     v0.12.0 - rewrite several classes to better support operation; add validators
     v0.13.0 - rename PawsChannel and PawsInfo to SpectrumChannel and SpectrumInfo objects; move to PAWS package
     v0.14.0 - use camelcase xml types for messages; makes soap client mode sensible
-
+    v0.15.0 - add FCC and ISED enumerated device types; integrate into FCC and ISED device descriptors
   </description>
 
   <organization>

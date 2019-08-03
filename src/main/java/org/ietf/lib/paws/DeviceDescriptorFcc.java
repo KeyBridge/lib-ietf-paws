@@ -13,7 +13,11 @@
  */
 package org.ietf.lib.paws;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+import org.ietf.lib.paws.type.FccDeviceType;
 import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
@@ -51,30 +55,6 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
   private static final PawsRulesetType RULESET_TYPE = PawsRulesetType.FCC_Part15H_2019;
 
   /**
-   * Specifies a device's government certification ID (Section 9.2.2.1).
-   * <p>
-   * Specifies the device's FCC certification identifier. A valid FCC ID is
-   * limited to 19 characters in the ASCII value range, as proposed in FCC
-   * Administration Topics Review [FCC-Review-2012-10]. For the purposes of the
-   * PAWS protocol, the maximum length of the fccId value is 32 octets.
-   *
-   * @deprecated consolidated in `DeviceDescriptor::deviceType` field
-   */
-  @XmlElement(required = true)
-  private String fccId;
-  /**
-   * Specifies the Device Type (Section 9.2.2.2) of TV-band white-space device,
-   * as defined by rule.
-   * <p>
-   * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
-   * "MODE2_LP" (for low power), "MODE1".
-   *
-   * @deprecated consolidated in `DeviceDescriptor::deviceType` field
-   */
-  @XmlElement(required = true)
-  private String fccTvbdDeviceType;
-
-  /**
    * Default no-arg constructor. Sets the rule set type.
    */
   public DeviceDescriptorFcc() {
@@ -87,7 +67,7 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    * @return the device's Industry Canada Identification Number (IC ID).
    */
   public String getFccId() {
-    return fccId;
+    return super.getDeviceId();
   }
 
   /**
@@ -96,7 +76,7 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    * @param fccId the device's FCC certification identifier
    */
   public void setFccId(String fccId) {
-    this.fccId = fccId;
+    super.setDeviceId(fccId);
   }
 
   /**
@@ -108,8 +88,8 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    *
    * @return the TV-band white-space Device Type
    */
-  public String getFccTvbdDeviceType() {
-    return fccTvbdDeviceType;
+  public FccDeviceType getFccDeviceType() {
+    return super.getDeviceType() == null ? null : FccDeviceType.valueOf(super.getDeviceType());
   }
 
   /**
@@ -119,15 +99,10 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
    * "MODE2_LP" (for low power), "MODE1".
    *
-   * @param fccTvbdDeviceType the TV-band white-space Device Type
+   * @param deviceType the TV-band white-space Device Type
    */
-  public void setFccTvbdDeviceType(String fccTvbdDeviceType) {
-    this.fccTvbdDeviceType = fccTvbdDeviceType;
-  }
-
-  @Override
-  public String toString() {
-    return "DeviceDescriptorFcc{" + "fccId=" + fccId + ", fccTvbdDeviceType=" + fccTvbdDeviceType + super.toString() + '}';
+  public void setFccDeviceType(FccDeviceType deviceType) {
+    super.setDeviceType(deviceType.name());
   }
 
 }
