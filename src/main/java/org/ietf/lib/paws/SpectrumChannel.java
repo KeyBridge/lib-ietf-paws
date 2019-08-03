@@ -147,11 +147,11 @@ public class SpectrumChannel implements Comparable<SpectrumChannel> {
     this.allowed = allowed;
   }
 
-  public double getMaxPowerDBW() {
+  public Double getMaxPowerDBW() {
     return maxPowerDBW;
   }
 
-  public void setMaxPowerDBW(double maxPowerDBW) {
+  public void setMaxPowerDBW(Double maxPowerDBW) {
     this.maxPowerDBW = maxPowerDBW;
   }
 
