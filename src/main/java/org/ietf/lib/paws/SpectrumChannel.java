@@ -40,7 +40,7 @@ import org.ietf.lib.paws.adapter.XmlDouble02PrecisionAdapter;
 @XmlType(name = "SpectrumChannel")
 @XmlRootElement(name = "SpectrumChannel")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SpectrumChannel extends AbstractChannel {
+public class SpectrumChannel extends AbstractSpectrum {
 
   /**
    * Indicator that the device operation is allowed (TRUE) or forbidden (FALSE).
@@ -86,7 +86,7 @@ public class SpectrumChannel extends AbstractChannel {
    * @param frequencyMax The maximum (or end) frequency of the indicated name in
    *                     MHz.
    */
-  public SpectrumChannel(String name, Double frequencyMin, Double frequencyMax) {
+  public SpectrumChannel(String name, double frequencyMin, double frequencyMax) {
     super(name, frequencyMin, frequencyMax);
     this.allowed = true;
   }

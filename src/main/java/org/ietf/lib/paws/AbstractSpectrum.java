@@ -19,9 +19,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.adapter.XmlDouble06PrecisionAdapter;
 
 /**
- * Key Bridge proprietary white space spectrum channel data transfer object.
+ * Key Bridge proprietary white space spectrum data transfer object.
  * <p>
- * <img alt="clazz" src="doc-files/abstractChannel.png">
+ * <img alt="clazz" src="doc-files/sbstractSpectrum.png">
  * <p>
  * The {@code AbstractChannel} provides based spectrum information.
  *
@@ -31,11 +31,11 @@ import org.ietf.lib.paws.adapter.XmlDouble06PrecisionAdapter;
  * @since v0.13.0 rename from PawsChannel to SpectrumChannel
  * @since v0.18.0 added 08/03/19 to support SpectrumInfo and SpectrumChannel use
  */
-@XmlType(name = "AbstractChannel")
-@XmlRootElement(name = "AbstractChannel")
+@XmlType(name = "AbstractSpectrum")
+@XmlRootElement(name = "AbstractSpectrum")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({SpectrumChannel.class, SpectrumInfo.class})
-public abstract class AbstractChannel implements Comparable<AbstractChannel> {
+public abstract class AbstractSpectrum implements Comparable<AbstractSpectrum> {
 
   /**
    * The colloquial channel name. This corresponds to the channel number
@@ -60,7 +60,7 @@ public abstract class AbstractChannel implements Comparable<AbstractChannel> {
    * Make the empty constructor protected to encourage use of the
    * {@code getInstance} constructor.
    */
-  protected AbstractChannel() {
+  protected AbstractSpectrum() {
   }
 
   /**
@@ -78,7 +78,7 @@ public abstract class AbstractChannel implements Comparable<AbstractChannel> {
    * @param frequencyMax The maximum (or end) frequency of the indicated name in
    *                     MHz.
    */
-  public AbstractChannel(String name, Double frequencyMin, Double frequencyMax) {
+  public AbstractSpectrum(String name, Double frequencyMin, Double frequencyMax) {
     this.name = name;
     this.frequencyMin = frequencyMin;
     this.frequencyMax = frequencyMax;
@@ -116,7 +116,7 @@ public abstract class AbstractChannel implements Comparable<AbstractChannel> {
    * @return the sort order
    */
   @Override
-  public int compareTo(AbstractChannel o) {
+  public int compareTo(AbstractSpectrum o) {
     return frequencyMin.compareTo(o.getFrequencyMin());
   }
 
@@ -150,7 +150,7 @@ public abstract class AbstractChannel implements Comparable<AbstractChannel> {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    final AbstractChannel other = (AbstractChannel) obj;
+    final AbstractSpectrum other = (AbstractSpectrum) obj;
     if (!Objects.equals(this.frequencyMax, other.frequencyMax)) {
       return false;
     }

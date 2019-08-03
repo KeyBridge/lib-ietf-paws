@@ -152,7 +152,8 @@ public class AvailableSpectrumResponse {
    * the {@code channels} collection.
    *
    * @deprecated This silly list of lists is deprecated. Reference instead the
-   * {@code channels} collection of sorted {@code PawsChannel} instances.
+   * {@code spectrum} collection of sorted {@code SpectrumChannel} or
+   * {@code SpectrumInfo} instances.
    */
   private List<SpectrumSpec> spectrumSpecs;
   /**
@@ -205,15 +206,17 @@ public class AvailableSpectrumResponse {
    * Key Bridge Modification.
    * <p>
    * This is a custom component replacing the thrice-buried list of
-   * {@code SpectrumSpec / SpectrumSchedule / Spectrum}, and then on to another
-   * set of buried lists under {@code SpectrumProfile / SpectrumProfilePoint}.
-   * Seriously, who designed that garbage? Here we use a simple list to provide
-   * all the frequency information. Neat and easy.
+   * {@code SpectrumSpec / SpectrumSchedule / Spectrum} (Section 5.11), and then
+   * on to another set of buried lists under
+   * {@code SpectrumProfile / SpectrumProfilePoint}. Seriously, who designed
+   * that garbage? Here we use a simple list to provide all the frequency
+   * information. Neat and easy.
    * <p>
-   * This replaces the Spectrum list silliness (Section 5.11).
+   * This is a collection of {@code SpectrumChannel} or {@code SpectrumInfo}
+   * configurations.
    */
-  @XmlElement(name = "channels", required = true)
-  private Collection<AbstractChannel> channels;
+  @XmlElement(required = true)
+  private Collection<AbstractSpectrum> spectrum;
 
   public AvailableSpectrumResponse() {
     this.timestamp = ZonedDateTime.now(ZONE_ID);
@@ -296,15 +299,52 @@ public class AvailableSpectrumResponse {
     this.needsSpectrumReport = needsSpectrumReport;
   }
 
-  public Collection<AbstractChannel> getChannels() {
-    if (channels == null) {
-      channels = new TreeSet<>();
+  /**
+   * Get the spectrum collection. Note that each entry must be inspected to
+   * determine its implementation type.
+   *
+   * @return a non-null but possibly empty TreeSet
+   */
+  public Collection<AbstractSpectrum> getSpectrum() {
+    if (spectrum == null) {
+      spectrum = new TreeSet<>();
     }
-    return channels;
+    return spectrum;
   }
 
-  public void setChannels(Collection<AbstractChannel> channels) {
-    this.channels = channels;
+  /**
+   * Helper method to clear the spectrum collection.
+   */
+  public void clearSpectrum() {
+    this.spectrum = null;
+  }
+
+  /**
+   * Set the spectrum as a collection of SpectrumChannel configurations.
+   *
+   * @param spectrum a collection of SpectrumChannel configurations.
+   */
+  public void setSpectrumChannels(Collection<SpectrumChannel> spectrum) {
+    if (spectrum == null) {
+      this.spectrum = null;
+    } else {
+      this.spectrum = null; // first clear the list
+      spectrum.forEach(s -> addSpectrumEntry(s));
+    }
+  }
+
+  /**
+   * Set the spectrum as a collection of SpectrumInfo configurations.
+   *
+   * @param spectrum a collection of SpectrumInfo configurations.
+   */
+  public void setSpectrumInfos(Collection<SpectrumInfo> spectrum) {
+    if (spectrum == null) {
+      this.spectrum = null;
+    } else {
+      this.spectrum = null; // first clear the list
+      spectrum.forEach(s -> addSpectrumEntry(s));
+    }
   }
 
   /**
@@ -312,8 +352,8 @@ public class AvailableSpectrumResponse {
    *
    * @param channel the PawsChannel instance to add
    */
-  public void addChannel(SpectrumChannel channel) {
-    getChannels().add(channel);
+  public void addSpectrumEntry(AbstractSpectrum channel) {
+    getSpectrum().add(channel);
   }//</editor-fold>
 
   /**
@@ -323,7 +363,7 @@ public class AvailableSpectrumResponse {
    */
   @Override
   public String toString() {
-    return getChannels().toString();
+    return getSpectrum().toString();
   }
 
 }

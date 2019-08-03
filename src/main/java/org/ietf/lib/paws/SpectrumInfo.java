@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "SpectrumInfo")
 @XmlRootElement(name = "SpectrumInfo")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SpectrumInfo extends AbstractChannel {
+public class SpectrumInfo extends AbstractSpectrum {
 
   /**
    * Indicator that this channel is subject to a BLOCKING Enforcement record and
