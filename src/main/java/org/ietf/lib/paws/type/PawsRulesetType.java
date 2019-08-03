@@ -19,7 +19,6 @@
 package org.ietf.lib.paws.type;
 
 import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
 
 /**
  * PAWS Ruleset ID Registry
@@ -58,7 +57,6 @@ public enum PawsRulesetType {
    * @deprecated Part 15H updated ca. 2015-2019 fromm the 600 MHz repack.
    */
   @Deprecated
-  @XmlEnumValue("FccTvBandWhiteSpace-2010")
   FCC_Part15H_2010("FccTvBandWhiteSpace-2010", "USA", "US", 50, 172800),
 
   /**
@@ -72,7 +70,6 @@ public enum PawsRulesetType {
    * <a href="http://www.ecfr.gov/cgi-bin/text-idx?rgn=div6&view=text&node=47:1.0.1.1.16.8">Subpart
    * H—White Space Devices</a>
    */
-  @XmlEnumValue("FCC-Part15H-2019")
   FCC_Part15H_2019("FCC-Part15H-2019", "USA", "US", 50, 172800),
 
   /**
@@ -84,7 +81,6 @@ public enum PawsRulesetType {
    * @see
    * <a href="https://www.ic.gc.ca/eic/site/smt-gst.nsf/eng/sf10928.html">DBS-01</a>
    */
-  @XmlEnumValue("ISED-DBS01-2015")
   ISED_DBS01_2015("ISED-DBS01-2015", "CAN", "CA", 50, 172800),
 
   /**
@@ -99,7 +95,6 @@ public enum PawsRulesetType {
    * @deprecated superceded by "ETSI-EN-301-598-2.1.1"
    */
   @Deprecated
-  @XmlEnumValue("ETSI-EN-301-598-1.1.1")
   ETSI_EN301_598_111("ETSI-EN-301-598-1.1.1"),
 
   /**
@@ -112,7 +107,6 @@ public enum PawsRulesetType {
    * @see
    * <a href="https://www.etsi.org/deliver/etsi_en/301500_301599/301598/02.01.01_60/en_301598v020101p.pdf">ETSI-EN-301-598</a>
    */
-  @XmlEnumValue("ETSI-EN-301-598-2.1.1")
   ETSI_EN301_598_211("ETSI-EN-301-598-2.1.1");
 
   /**
