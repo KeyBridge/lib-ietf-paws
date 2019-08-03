@@ -13,9 +13,9 @@
  */
 package org.ietf.lib.paws;
 
-import ch.keybridge.lib.xml.adapter.XmlGeometryAdapter;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.ietf.lib.paws.adapter.XmlGeometryAdapter;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
 

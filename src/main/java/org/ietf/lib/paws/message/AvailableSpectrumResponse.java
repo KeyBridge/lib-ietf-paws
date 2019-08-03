@@ -13,7 +13,6 @@
  */
 package org.ietf.lib.paws.message;
 
-import ch.keybridge.lib.xml.adapter.XmlZonedDateTimeAdapter;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -23,6 +22,7 @@ import java.util.TreeSet;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.ietf.lib.paws.*;
+import org.ietf.lib.paws.adapter.XmlZonedDateTimeAdapter;
 import org.ietf.lib.paws.type.SpectrumRequestType;
 
 /**

@@ -13,14 +13,14 @@
  */
 package org.ietf.lib.paws;
 
-import ch.keybridge.lib.xml.adapter.XmlDurationAdapter;
-import ch.keybridge.lib.xml.adapter.XmlZonedDateTimeAdapter;
 import java.time.Duration;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.ietf.lib.paws.adapter.XmlDurationAdapter;
+import org.ietf.lib.paws.adapter.XmlZonedDateTimeAdapter;
 
 /**
  * 5.14. EventTime

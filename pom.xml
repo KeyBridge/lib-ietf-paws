@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>keybridge.lib</groupId>
   <artifactId>ietf-paws</artifactId>
-  <version>0.16.0</version>
+  <version>0.17.0</version>
   <packaging>jar</packaging>
 
   <name>lib-ietf-paws</name>
@@ -33,6 +33,7 @@
     v0.15.0 - add FCC and ISED enumerated device types; integrate into FCC and ISED device descriptors
     v0.16.0 - add AvailableSpectrumResponse::responseType field to specify how the spectrum information may be used
     - change scope of jts-core and xml-adapter to `provided`
+    v0.17.0 - copy all xml adapters local into `adapter` package
   </description>
 
   <organization>
@@ -53,12 +54,7 @@
       <version>1.16.1</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>xml-adapter</artifactId>
-      <version>3.0.1</version>
-      <scope>provided</scope>
-    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

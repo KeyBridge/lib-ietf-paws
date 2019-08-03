@@ -13,11 +13,11 @@
  */
 package org.ietf.lib.paws;
 
-import ch.keybridge.lib.xml.adapter.XmlDouble02PrecisionAdapter;
-import ch.keybridge.lib.xml.adapter.XmlDouble06PrecisionAdapter;
 import java.util.Objects;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.ietf.lib.paws.adapter.XmlDouble02PrecisionAdapter;
+import org.ietf.lib.paws.adapter.XmlDouble06PrecisionAdapter;
 
 /**
  * Key Bridge proprietary white space spectrum channel data transfer object.
