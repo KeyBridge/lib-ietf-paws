@@ -63,14 +63,6 @@ public class SpectrumChannel extends AbstractSpectrum {
    */
   @XmlElement(name = "maxTimeRange")
   private EventTime timeRange;
-  /**
-   * Indicator that this channel is subject to a FAST POLLING Enforcement record
-   * and the default (48 hour maximum) schedule should be shortened. When not
-   * configured this may be assumed to be FALSE.
-   *
-   * @since v0.20.0 - move to Channel from Info
-   */
-  private boolean fastPoll;
 
   /**
    * Make the empty constructor protected to encourage use of the
@@ -122,20 +114,6 @@ public class SpectrumChannel extends AbstractSpectrum {
 
   public void setTimeRange(EventTime timeRange) {
     this.timeRange = timeRange;
-  }
-
-  public boolean getFastPoll() {
-    return fastPoll;
-  }
-
-  /**
-   * Remark if there is a FAST POLL enforcement action on this channel. If FALSE
-   * set then leave empty.
-   *
-   * @param fastPoll blocking enforcement flag
-   */
-  public void setFastPoll(boolean fastPoll) {
-    this.fastPoll = fastPoll;
   }//</editor-fold>
 
 }

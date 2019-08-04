@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Key Bridge LLC
  * @since v0.7.0 created 07/27/19 to support LPA channel detail inquiries
  * @since v0.13.0 rename from PawsInfo to SpectrumInfo
+ * @since v0.20.0 rewrite 08/04/19 with SpectrumConsumer lists instead of UUID
  */
 @XmlType(name = "SpectrumInfo")
 @XmlRootElement(name = "SpectrumInfo")
@@ -47,6 +48,12 @@ public class SpectrumInfo extends AbstractSpectrum {
    * this may be assumed to be FALSE.
    */
   private boolean enforcementBlocking;
+  /**
+   * Indicator that this channel is subject to a FAST POLLING Enforcement record
+   * and the default (48 hour maximum) schedule should be shortened. When not
+   * configured this may be assumed to be FALSE.
+   */
+  private boolean enforcementFastPoll;
 
   /**
    * Indicator that an exception occurred when calculating the availability of
@@ -58,19 +65,19 @@ public class SpectrumInfo extends AbstractSpectrum {
   /**
    * A list of co-channel services.
    */
-  private Collection<String> servicesCo;
+  private Collection<SpectrumConsumer> servicesCo;
   /**
    * A list of blocking adjacent channel services.
    */
-  private Collection<String> servicesAdj;
+  private Collection<SpectrumConsumer> servicesAdj;
   /**
    * A list of blocking second adjacent channel services. (RRBS only)
    */
-  private Collection<String> servicesSecondAdjacent;
+  private Collection<SpectrumConsumer> servicesSecondAdjacent;
   /**
    * A list of blocking taboo-channel services.
    */
-  private Collection<String> servicesTaboo;
+  private Collection<SpectrumConsumer> servicesTaboo;
 
   /**
    * Messages provides information about the white space channel build process.
@@ -121,6 +128,20 @@ public class SpectrumInfo extends AbstractSpectrum {
     this.enforcementBlocking = enforcementBlocking;
   }
 
+  public boolean getEnforcementFastPoll() {
+    return enforcementFastPoll;
+  }
+
+  /**
+   * Remark if there is a FAST POLL enforcement action on this channel. If FALSE
+   * set then leave empty.
+   *
+   * @param enforcementFastPoll blocking enforcement flag
+   */
+  public void setEnforcementFastPoll(boolean enforcementFastPoll) {
+    this.enforcementFastPoll = enforcementFastPoll ? enforcementFastPoll : null;
+  }
+
   public boolean getException() {
     return exception;
   }
@@ -135,14 +156,14 @@ public class SpectrumInfo extends AbstractSpectrum {
     this.exception = exception;
   }
 
-  public Collection<String> getServicesCo() {
+  public Collection<SpectrumConsumer> getServicesCo() {
     if (servicesCo == null) {
       servicesCo = new ArrayList<>();
     }
     return servicesCo;
   }
 
-  public void setServicesCo(Collection<String> servicesCo) {
+  public void setServicesCo(Collection<SpectrumConsumer> servicesCo) {
     /**
      * Only set the collection if the source is not empty. This produces a
      * cleaner XML output.
@@ -150,14 +171,14 @@ public class SpectrumInfo extends AbstractSpectrum {
     this.servicesCo = (servicesCo == null || servicesCo.isEmpty()) ? null : servicesCo;
   }
 
-  public Collection<String> getServicesAdj() {
+  public Collection<SpectrumConsumer> getServicesAdj() {
     if (servicesAdj == null) {
       servicesAdj = new ArrayList<>();
     }
     return servicesAdj;
   }
 
-  public void setServicesAdj(Collection<String> servicesAdj) {
+  public void setServicesAdj(Collection<SpectrumConsumer> servicesAdj) {
     /**
      * Only set the collection if the source is not empty. This produces a
      * cleaner XML output.
@@ -165,14 +186,14 @@ public class SpectrumInfo extends AbstractSpectrum {
     this.servicesAdj = (servicesAdj == null || servicesAdj.isEmpty()) ? null : servicesAdj;
   }
 
-  public Collection<String> getServicesTaboo() {
+  public Collection<SpectrumConsumer> getServicesTaboo() {
     if (servicesTaboo == null) {
       servicesTaboo = new ArrayList<>();
     }
     return servicesTaboo;
   }
 
-  public void setServicesTaboo(Collection<String> servicesTaboo) {
+  public void setServicesTaboo(Collection<SpectrumConsumer> servicesTaboo) {
     /**
      * Only set the collection if the source is not empty. This produces a
      * cleaner XML output.
@@ -180,14 +201,14 @@ public class SpectrumInfo extends AbstractSpectrum {
     this.servicesTaboo = (servicesTaboo == null || servicesTaboo.isEmpty()) ? null : servicesTaboo;
   }
 
-  public Collection<String> getServicesSecondAdjacent() {
+  public Collection<SpectrumConsumer> getServicesSecondAdjacent() {
     if (servicesSecondAdjacent == null) {
       servicesSecondAdjacent = new ArrayList<>();
     }
     return servicesSecondAdjacent;
   }
 
-  public void setServicesSecondAdjacent(Collection<String> servicesSecondAdjacent) {
+  public void setServicesSecondAdjacent(Collection<SpectrumConsumer> servicesSecondAdjacent) {
     /**
      * Only set the collection if the source is not empty. This produces a
      * cleaner XML output.
