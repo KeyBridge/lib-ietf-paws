@@ -67,8 +67,10 @@ public class SpectrumChannel extends AbstractSpectrum {
    * Indicator that this channel is subject to a FAST POLLING Enforcement record
    * and the default (48 hour maximum) schedule should be shortened. When not
    * configured this may be assumed to be FALSE.
+   *
+   * @since v0.20.0 - move to Channel from Info
    */
-  private Boolean enforcementFastPoll;
+  private boolean fastPoll;
 
   /**
    * Make the empty constructor protected to encourage use of the
@@ -122,18 +124,18 @@ public class SpectrumChannel extends AbstractSpectrum {
     this.timeRange = timeRange;
   }
 
-  public Boolean getEnforcementFastPoll() {
-    return enforcementFastPoll;
+  public boolean getFastPoll() {
+    return fastPoll;
   }
 
   /**
    * Remark if there is a FAST POLL enforcement action on this channel. If FALSE
    * set then leave empty.
    *
-   * @param enforcementFastPoll blocking enforcement flag
+   * @param fastPoll blocking enforcement flag
    */
-  public void setEnforcementFastPoll(Boolean enforcementFastPoll) {
-    this.enforcementFastPoll = enforcementFastPoll;
+  public void setFastPoll(boolean fastPoll) {
+    this.fastPoll = fastPoll;
   }//</editor-fold>
 
 }
