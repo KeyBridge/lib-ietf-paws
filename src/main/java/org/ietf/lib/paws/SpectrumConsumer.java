@@ -47,9 +47,9 @@ public class SpectrumConsumer implements Comparable<SpectrumConsumer> {
   private String type;
   /**
    * The offset in degrees azimuth [0, 360] from true North from the inquiring
-   * position to the referenced service. (degrees)
+   * position to the referenced service. (degrees ranging between 0 - 359).
    */
-  private double heading;
+  private double azimuth;
   /**
    * The distance from the inquiring position to the referenced service. (km)
    */
@@ -86,12 +86,12 @@ public class SpectrumConsumer implements Comparable<SpectrumConsumer> {
     this.type = type;
   }
 
-  public double getHeading() {
-    return heading;
+  public double getAzimuth() {
+    return azimuth;
   }
 
-  public void setHeading(double heading) {
-    this.heading = heading;
+  public void setAzimuth(double azimuth) {
+    this.azimuth = azimuth;
   }
 
   public double getDistance() {
@@ -125,7 +125,7 @@ public class SpectrumConsumer implements Comparable<SpectrumConsumer> {
 
   @Override
   public String toString() {
-    return "SpectrumConsumer{" + "uuid=" + uuid + ", authorization=" + authorization + ", type=" + type + ", heading=" + heading + ", distance=" + distance + ", erp=" + erp + '}';
+    return "SpectrumConsumer{" + "uuid=" + uuid + ", authorization=" + authorization + ", type=" + type + ", heading=" + azimuth + ", distance=" + distance + ", erp=" + erp + '}';
   }
 
 }
