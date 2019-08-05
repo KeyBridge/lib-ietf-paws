@@ -61,12 +61,15 @@ public enum SpectrumRequestType {
    * Developer Note: For LPA queries only the
    * `AvailableSpectrumRequest::location` field is required.
    */
-  LPA,
+  LPA;
   /**
    * Requesting detailed spectrum availability information for the purposes of
    * spectrum inquiry, planning and evaluation. Results may not be used for
    * service.
+   * <p>
+   * DEPRECATED 0.21.0 - information is provided via a separate service end
+   * point
    */
-  INFO;
+//  INFO;
 
 }
