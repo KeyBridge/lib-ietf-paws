@@ -124,7 +124,8 @@ public class AvailableSpectrumRequest {
    * Key Bridge: Rename from `owner` to `deviceOwner` for consistency with other
    * classes.
    *
-   * @deprecated DeviceOwner for SLAVE devices is inherited from the Master.
+   * @deprecated DeviceOwner is NOT accepted in AvailableSpectrumRequest.
+   * DeviceOwner info for SLAVE devices is inherited from the Master.
    */
   private DeviceOwner deviceOwner;
 
@@ -220,5 +221,66 @@ public class AvailableSpectrumRequest {
   public void setRequestType(SpectrumRequestType requestType) {
     this.requestType = requestType;
   }//</editor-fold>
+
+  /**
+   * Validate this instance.
+   *
+   * @throws Exception describing the invalid configuration
+   */
+  public void validate() throws Exception {
+    if (requestType == null) {
+      throw new Exception("AvailableSpectrumRequest::requestType is required");
+    }
+    /**
+     * All require [requestType]
+     */
+//    boolean valid = requestType != null;
+
+    switch (requestType) {
+      /**
+       * SLAVE requires [masterDeviceDesc, masterDeviceLocation] + [deviceDesc,
+       * antenna] + [location]
+       */
+      case SLAVE:
+        if (masterDeviceDesc == null) {
+          throw new Exception("AvailableSpectrumRequest::masterDeviceDesc is required");
+        }
+        masterDeviceDesc.isValid();
+        if (masterDeviceLocation == null) {
+          throw new Exception("AvailableSpectrumRequest::masterDeviceLocation is required");
+        }
+        masterDeviceLocation.isValid();
+//        valid && valid && masterDeviceDesc != null && masterDeviceLocation != null;
+      /**
+       * SLAVE + MASTER requires [deviceDesc, antenna] + [location]
+       */
+      case MASTER:
+        if (antenna == null) {
+          throw new Exception("AvailableSpectrumRequest::antenna is required");
+        }
+        antenna.isValid();
+        if (deviceDesc == null) {
+          throw new Exception("AvailableSpectrumRequest::deviceDesc is required");
+        }
+        deviceDesc.isValid();
+      //        valid = valid && && antenna != null && deviceDesc != null;
+
+      /**
+       * SLAVE + MASTER + LPA requires [location]
+       */
+      case LPA:
+        if (location == null) {
+          throw new Exception("AvailableSpectrumRequest::location is required");
+        }
+        location.isValid();
+//        valid = valid && location != null;
+        break;
+
+      default:
+        throw new AssertionError(requestType.name());
+
+    }
+//    return false;
+  }
 
 }
