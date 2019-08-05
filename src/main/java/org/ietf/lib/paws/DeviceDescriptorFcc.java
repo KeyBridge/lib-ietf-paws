@@ -71,7 +71,7 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    */
   @XmlElement(name = "FccDeviceType")
   public FccDeviceType getFccDeviceType() {
-    return super.getDeviceType() == null ? null : FccDeviceType.valueOf(super.getDeviceType());
+    return super.getDeviceMode() == null ? null : FccDeviceType.valueOf(super.getDeviceMode());
   }
 
   /**
@@ -84,7 +84,7 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    * @param deviceType the TV-band white-space Device Type
    */
   public void setFccDeviceType(FccDeviceType deviceType) {
-    super.setDeviceType(deviceType.name());
+    super.setDeviceMode(deviceType.name());
   }
 
 }

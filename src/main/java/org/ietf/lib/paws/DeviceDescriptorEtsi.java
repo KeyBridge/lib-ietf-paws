@@ -61,7 +61,7 @@ public class DeviceDescriptorEtsi extends DeviceDescriptor {
    * <p>
    * Reference 4.2.1 Equipment types
    *
-   * @deprecated consolidated in `DeviceDescriptor::deviceType` field
+   * @deprecated consolidated into the `DeviceDescriptor::deviceType` field
    */
   @XmlElement(required = true)
   private EtsiEquipmentType etsiEnDeviceType;

@@ -47,23 +47,25 @@ import org.ietf.lib.paws.type.PawsRulesetType;
 public abstract class DeviceDescriptor {
 
   /**
-   * The manufacturer’s device serial number is OPTIONAL, although rulesets
-   * typically require it. Its maximum length is 64 octets.
+   * Key Bridge extension. REQUIRED. Consolidates FCC, ISED and ETSI fields.
+   * <p>
+   * Specifies a device's government certification ID (Section 9.2.2.1). This is
+   * the device's FCC certification identifier, Industry Canada Identification
+   * Number (IC ID), or other certification number for the operating
+   * jurisdiction.
    */
-  private String serialNumber;
+  @XmlElement(required = true)
+  private String deviceId;
   /**
-   * The manufacturer’s ID is OPTIONAL but may be required by some rulesets.
-   * This represents the name of the device manufacturer, and therefore ought to
-   * be consistent across all devices from the same manufacturer and distinct
-   * from that of other manufacturers. Its maximum length is 64 octets.
+   * Key Bridge extension. REQUIRED. Consolidates FCC, ISED and ETSI fields.
+   * <p>
+   * Specifies the Device operating mode (Section 9.2.2.2) of TV-band
+   * white-space device, as defined by rule. Valid values for US and Canada are
+   * "FIXED", "MODE2_HP" (for high power), "MODE2_LP" (for low power), "MODE1",
+   * "LPA". For ETSI regions, valid values are "A", "B".
    */
-  private String manufacturerId;
-  /**
-   * The device’s model ID is OPTIONAL but may be required by some rulesets. Its
-   * maximum length is 64 octets.
-   */
-  private String modelId;
-
+  @XmlElement(required = true)
+  private String deviceMode;
   /**
    * Key Bridge modification. REQUIRED. Change from List to single instance. A
    * device may only register and operate under ONE jurisdiction at a time.
@@ -80,25 +82,27 @@ public abstract class DeviceDescriptor {
   private PawsRulesetType rulesetId;
 
   /**
-   * Key Bridge extension. REQUIRED. Consolidates FCC, ISED and ETSI fields.
+   * The manufacturer’s device serial number is <strike>OPTIONAL</string>
+   * REQUIRED, although rulesets typically require it. Its maximum length is 64
+   * octets.
    * <p>
-   * Specifies a device's government certification ID (Section 9.2.2.1). This is
-   * the device's FCC certification identifier, Industry Canada Identification
-   * Number (IC ID), or other certification number for the operating
-   * jurisdiction.
+   * Key Bridge always requires the device serial number to be provided.
    */
   @XmlElement(required = true)
-  private String deviceId;
+  private String serialNumber;
+
   /**
-   * Key Bridge extension. REQUIRED. Consolidates FCC, ISED and ETSI fields.
-   * <p>
-   * Specifies the Device Type (Section 9.2.2.2) of TV-band white-space device,
-   * as defined by rule. Valid values for US and Canada are "FIXED", "MODE2_HP"
-   * (for high power), "MODE2_LP" (for low power), "MODE1". For ETSI regions,
-   * valid values are "A", "B".
+   * The manufacturer’s ID is OPTIONAL but may be required by some rulesets.
+   * This represents the name of the device manufacturer, and therefore ought to
+   * be consistent across all devices from the same manufacturer and distinct
+   * from that of other manufacturers. Its maximum length is 64 octets.
    */
-  @XmlElement(required = true)
-  private String deviceType;
+  private String manufacturerId;
+  /**
+   * The device’s model ID is OPTIONAL but may be required by some rulesets. Its
+   * maximum length is 64 octets.
+   */
+  private String modelId;
 
   /**
    * Key Bridge extension. OPTIONAL.
@@ -223,12 +227,12 @@ public abstract class DeviceDescriptor {
     this.deviceId = deviceId;
   }
 
-  public String getDeviceType() {
-    return deviceType;
+  public String getDeviceMode() {
+    return deviceMode;
   }
 
-  public void setDeviceType(String deviceType) {
-    this.deviceType = deviceType;
+  public void setDeviceMode(String deviceMode) {
+    this.deviceMode = deviceMode;
   }
 
   public String getEmissionDesignator() {
@@ -245,7 +249,7 @@ public abstract class DeviceDescriptor {
    * @return TRUE if valid.
    */
   public boolean isValid() {
-    return rulesetId != null && isSet(deviceId) && isSet(deviceType);
+    return rulesetId != null && isSet(deviceId) && deviceMode != null;
   }
 
   /**
@@ -260,7 +264,7 @@ public abstract class DeviceDescriptor {
     if (deviceId == null) {
       throw new Exception("DeviceDescriptor::deviceId is required");
     }
-    if (deviceType == null) {
+    if (deviceMode == null) {
       throw new Exception("DeviceDescriptor::deviceType is required");
     }
   }

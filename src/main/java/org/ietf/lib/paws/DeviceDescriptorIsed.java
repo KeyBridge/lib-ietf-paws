@@ -71,7 +71,7 @@ public class DeviceDescriptorIsed extends DeviceDescriptor {
    */
   @XmlElement(name = "IsedDeviceType")
   public IsedDeviceType getIsedTvbdDeviceType() {
-    return super.getDeviceType() == null ? null : IsedDeviceType.valueOf(super.getDeviceType());
+    return super.getDeviceMode() == null ? null : IsedDeviceType.valueOf(super.getDeviceMode());
   }
 
   /**
@@ -84,7 +84,7 @@ public class DeviceDescriptorIsed extends DeviceDescriptor {
    * @param deviceType the TV-band white-space Device Type
    */
   public void setIsedTvbdDeviceType(IsedDeviceType deviceType) {
-    super.setDeviceType(deviceType == null ? null : deviceType.name());
+    super.setDeviceMode(deviceType == null ? null : deviceType.name());
   }
 
 }
