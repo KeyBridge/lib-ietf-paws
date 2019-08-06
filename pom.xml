@@ -38,6 +38,7 @@
     v0.19.0 - (undone in v0.20.0) move fastPoll enforcement flag from Info to Channel
     v0.20.0 - rewrite SpectrumInfo to use new SpectrumConsumer class; provides improved detail
     - add additional validation checks
+    - rename DeviceDesc:deviceType to deviceMode
 
 
   </description>
