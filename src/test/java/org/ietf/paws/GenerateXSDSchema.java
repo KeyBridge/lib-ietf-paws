@@ -9,8 +9,6 @@
  */
 package org.ietf.paws;
 
-import org.ietf.lib.paws.SpectrumChannel;
-import org.ietf.lib.paws.SpectrumInfo;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -49,14 +47,23 @@ public class GenerateXSDSchema {
 
     List<Class> classes = new ArrayList<>();
     // message classes
-    classes.add(InitializationRequest.class);
-    classes.add(InitializationResponse.class);
-    classes.add(RegistrationRequest.class);
-    classes.add(RegistrationResponse.class);
     classes.add(AvailableSpectrumRequest.class);
     classes.add(AvailableSpectrumResponse.class);
 
+    classes.add(DeviceValidationRequest.class);
+    classes.add(DeviceValidationResponse.class);
+
+    classes.add(InitializationRequest.class);
+    classes.add(InitializationResponse.class);
+
+    classes.add(RegistrationRequest.class);
+    classes.add(RegistrationResponse.class);
+
+    classes.add(SpectrumUseNotify.class);
+    classes.add(SpectrumUseResponse.class);
+
     // object classes
+    classes.add(AbstractSpectrum.class);
     classes.add(AntennaCharacteristics.class);
     classes.add(DatabaseSpec.class);
     classes.add(DbUpdateSpec.class);
@@ -76,6 +83,11 @@ public class GenerateXSDSchema {
     classes.add(GeoSpectrumSpec.class);
     classes.add(RulesetInfo.class);
     classes.add(Spectrum.class);
+
+    classes.add(SpectrumChannel.class);
+    classes.add(SpectrumConsumer.class);
+    classes.add(SpectrumInfo.class);
+
     classes.add(SpectrumProfile.class);
     classes.add(SpectrumProfilePoint.class);
     classes.add(SpectrumSchedule.class);
