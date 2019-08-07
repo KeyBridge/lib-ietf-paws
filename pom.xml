@@ -39,6 +39,7 @@
     v0.20.0 - rewrite SpectrumInfo to use new SpectrumConsumer class; provides improved detail
     - add additional validation checks
     - rename DeviceDesc:deviceType to deviceMode
+    - add 'allowed' field to SpectrumInfo
 
 
   </description>

@@ -15,10 +15,7 @@ package org.ietf.lib.paws;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * Key Bridge proprietary white space spectrum information data transfer object.
@@ -43,11 +40,17 @@ import javax.xml.bind.annotation.XmlType;
 public class SpectrumInfo extends AbstractSpectrum {
 
   /**
+   * Indicator that the device operation is allowed (TRUE) or forbidden (FALSE).
+   */
+  @XmlElement(required = true)
+  private boolean allowed;
+
+  /**
    * Indicator that this channel is subject to a BLOCKING Enforcement record and
    * should NOT be included in a channel availability list. When not configured
    * this may be assumed to be FALSE.
    */
-  private boolean block;
+  private boolean blocked;
   /**
    * Indicator that this channel is subject to a FAST POLLING Enforcement record
    * and the default (48 hour maximum) schedule should be shortened. When not
@@ -107,6 +110,14 @@ public class SpectrumInfo extends AbstractSpectrum {
   }
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
+  public boolean isAllowed() {
+    return allowed;
+  }
+
+  public void setAllowed(boolean allowed) {
+    this.allowed = allowed;
+  }
+
   /**
    * Get the indicator that this channel is subject to a BLOCKING Enforcement
    * record and should NOT be included in a channel availability list. When not
@@ -115,17 +126,17 @@ public class SpectrumInfo extends AbstractSpectrum {
    * @return blocking enforcement flag
    */
   public boolean getEnforcementBlocking() {
-    return block;
+    return blocked;
   }
 
   /**
    * Remark if there is a BLOCKING enforcement action on this channel. If FALSE
    * set then leave empty.
    *
-   * @param block blocking enforcement flag
+   * @param blocked blocking enforcement flag
    */
-  public void setBlock(boolean block) {
-    this.block = block;
+  public void setBlocked(boolean blocked) {
+    this.blocked = blocked;
   }
 
   public boolean getEnforcementFastPoll() {
