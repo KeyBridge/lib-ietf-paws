@@ -152,10 +152,10 @@ public class AvailableSpectrumRequest {
    * capabilities. The Database SHOULD NOT return spectrum that is not
    * compatible with the specified capabilities.
    * <p>
-   * Key Bridge: rename from `capabilities` to `masterDeviceCapabilities` for
-   * consistency with other fields.
+   * Key Bridge: DeviceCapabilities is (optionally) used for LPA registrations
+   * to specify the desired lease duration.
    */
-  private DeviceCapabilities masterDeviceCapabilities;
+  private DeviceCapabilities capabilities;
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   public DeviceDescriptor getDeviceDesc() {
@@ -190,12 +190,12 @@ public class AvailableSpectrumRequest {
     this.antenna = antenna;
   }
 
-  public DeviceCapabilities getMasterDeviceCapabilities() {
-    return masterDeviceCapabilities;
+  public DeviceCapabilities getCapabilities() {
+    return capabilities;
   }
 
-  public void setMasterDeviceCapabilities(DeviceCapabilities masterDeviceCapabilities) {
-    this.masterDeviceCapabilities = masterDeviceCapabilities;
+  public void setCapabilities(DeviceCapabilities capabilities) {
+    this.capabilities = capabilities;
   }
 
   public DeviceDescriptor getMasterDeviceDesc() {
