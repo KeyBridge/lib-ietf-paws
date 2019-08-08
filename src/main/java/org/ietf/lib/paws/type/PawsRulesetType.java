@@ -18,6 +18,8 @@
  */
 package org.ietf.lib.paws.type;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import javax.xml.bind.annotation.XmlEnum;
 
 /**
@@ -57,7 +59,7 @@ public enum PawsRulesetType {
    * @deprecated Part 15H updated ca. 2015-2019 fromm the 600 MHz repack.
    */
   @Deprecated
-  FCC_Part15H_2010("FccTvBandWhiteSpace-2010", "USA", "US", 50, 172800),
+  FCC_Part15H_2010("FccTvBandWhiteSpace-2010", "USA", "US", 50, Duration.ofHours(48), Duration.of(1, ChronoUnit.YEARS)),
 
   /**
    * Title 47: Telecommunication PART 15—RADIO FREQUENCY DEVICES Subpart H—White
@@ -70,7 +72,7 @@ public enum PawsRulesetType {
    * <a href="http://www.ecfr.gov/cgi-bin/text-idx?rgn=div6&view=text&node=47:1.0.1.1.16.8">Subpart
    * H—White Space Devices</a>
    */
-  FCC_Part15H_2019("FCC-Part15H-2019", "USA", "US", 50, 172800),
+  FCC_Part15H_2019("FCC-Part15H-2019", "USA", "US", 50, Duration.ofHours(48), Duration.of(1, ChronoUnit.YEARS)),
 
   /**
    * DBS-01 — White Space Database Specifications
@@ -81,7 +83,7 @@ public enum PawsRulesetType {
    * @see
    * <a href="https://www.ic.gc.ca/eic/site/smt-gst.nsf/eng/sf10928.html">DBS-01</a>
    */
-  ISED_DBS01_2015("ISED-DBS01-2015", "CAN", "CA", 50, 172800),
+  ISED_DBS01_2015("ISED-DBS01-2015", "CAN", "CA", 50, Duration.ofHours(48), Duration.of(1, ChronoUnit.YEARS)),
 
   /**
    * ETSI EN 301 598 V1.1.1 (2014-04)
@@ -134,24 +136,32 @@ public enum PawsRulesetType {
   private final double maxLocationChange;
 
   /**
-   * The maximum channel lease time, in seconds. Defaults to 1 hour if not set.
+   * WSD (white space device) maximum channel lease time. Defaults to 1 hour if
+   * not set.
    */
-  private final int maxLeaseTime;
+  private final Duration wsdLeaseTime;
+  /**
+   * LPA (wireless microphone) maximum channel lease time. Defaults to 1 hour if
+   * not set.
+   */
+  private final Duration lpaLeaseTime;
 
   private PawsRulesetType(String id) {
     this.id = id;
     this.iso3 = null;
     this.iso2 = null;
     this.maxLocationChange = 0;
-    this.maxLeaseTime = 1;
+    this.wsdLeaseTime = Duration.ofHours(1); // Defaults to 1 hour.
+    this.lpaLeaseTime = Duration.ofHours(48); // Defaults to 48 hour.
   }
 
-  private PawsRulesetType(String id, String iso3, String iso2, double maxLocationChange, int maxLeaseTime) {
+  private PawsRulesetType(String id, String iso3, String iso2, double maxLocationChange, Duration wsdLeaseTime, Duration lpaLeaseTime) {
     this.id = id;
     this.iso3 = iso3;
     this.iso2 = iso2;
     this.maxLocationChange = maxLocationChange;
-    this.maxLeaseTime = maxLeaseTime;
+    this.wsdLeaseTime = wsdLeaseTime;
+    this.lpaLeaseTime = lpaLeaseTime;
   }
 
   /**
@@ -191,13 +201,23 @@ public enum PawsRulesetType {
   }
 
   /**
-   * Get the maximum channel lease time, in hours. Defaults to 1 hour if not
-   * set.
+   * Get the WSD (white space device) maximum channel lease time, in hours.
+   * Typical value is 48 hours. Defaults to 1 hour if not set.
    *
-   * @return the maximum channel lease time, in hours.
+   * @return the WSD maximum channel lease time.
    */
-  public int getMaxLeaseTime() {
-    return maxLeaseTime;
+  public Duration getWsdLeaseTime() {
+    return wsdLeaseTime;
+  }
+
+  /**
+   * Get the LPA (wireless microphone) maximum channel lease time, in hours.
+   * Typical value is 1 year. Defaults to 48 hour if not set.
+   *
+   * @return the WSD maximum channel lease time.
+   */
+  public Duration getLpaLeaseTime() {
+    return lpaLeaseTime;
   }
 
   /**
