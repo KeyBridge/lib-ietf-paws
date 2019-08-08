@@ -65,11 +65,12 @@ public class EventTime {
    * "UTC". The default time zone.
    */
   private static final ZoneId ZONE_ID = ZoneId.of("UTC");
+
   /**
-   * 10800 seconds == three hours. The default time period for which a Spectrum
-   * is valid
+   * 10800 seconds == 3 hours. The default time period for which a Spectrum is
+   * valid
    */
-  private static final int DURATION_DEFAULT = 10800;
+  private static final Duration DURATION_DEFAULT = Duration.ofHours(3);
 
   /**
    * The inclusive start of the event expressed using the format
@@ -108,7 +109,7 @@ public class EventTime {
    */
   public static EventTime getInstance() {
     EventTime time = new EventTime();
-    time.setDuration(Duration.of(DURATION_DEFAULT, ChronoUnit.SECONDS));
+    time.setDuration(DURATION_DEFAULT);
     return time;
 
   }
@@ -122,6 +123,18 @@ public class EventTime {
   public static EventTime getInstance(int seconds) {
     EventTime time = new EventTime();
     time.setDuration(Duration.of(seconds, ChronoUnit.SECONDS));
+    return time;
+  }
+
+  /**
+   * Build a fully qualified EventTime instance
+   *
+   * @param duration the instance duration
+   * @return a fully qualified EventTime instance
+   */
+  public static EventTime getInstance(Duration duration) {
+    EventTime time = new EventTime();
+    time.setDuration(duration);
     return time;
   }
 
