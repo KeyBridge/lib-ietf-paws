@@ -53,6 +53,14 @@ public enum IsedDeviceType {
    * <p>
    * Device is Mode 1 classification.
    */
-  MODE1;
+  MODE1,
+  /**
+   * Development license; similar to low power auxiliary.
+   */
+  DEV,
+  /**
+   * Low power auxiliary, wireless microphone.
+   */
+  LPA;
 
 }

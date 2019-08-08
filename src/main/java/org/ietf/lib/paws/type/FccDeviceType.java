@@ -52,6 +52,10 @@ public enum FccDeviceType {
    * <p>
    * Device is Mode 1 classification.
    */
-  MODE1;
+  MODE1,
+  /**
+   * Low power auxiliary, wireless microphone.
+   */
+  LPA;
 
 }
