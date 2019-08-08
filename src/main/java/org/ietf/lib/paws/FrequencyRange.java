@@ -38,29 +38,39 @@ import javax.xml.bind.annotation.*;
 public class FrequencyRange {
 
   /**
-   * The inclusive start of the frequency range (in hertz) is REQUIRED.
+   * The inclusive start of the frequency range (in megahertz) is REQUIRED.
+   * <p>
+   * Key Bridge: change unit of measure from Hertz to MegaHertz.
    */
   @XmlElement(required = true)
-  public Double startHz;
+  public Double startMHz;
   /**
-   * The exclusive end of the frequency range (in hertz) is REQUIRED.
+   * The exclusive end of the frequency range (in megahertz) is REQUIRED.
+   * <p>
+   * Key Bridge: change unit of measure from Hertz to MegaHertz.
    */
   @XmlElement(required = true)
-  public Double stopHz;
+  public Double stopMHz;
 
-  public Double getStartHz() {
-    return startHz;
+  public Double getStartMHz() {
+    return startMHz;
   }
 
-  public void setStartHz(Double startHz) {
-    this.startHz = startHz;
+  public void setStartMHz(Double startMHz) {
+    this.startMHz = startMHz;
   }
 
-  public Double getStopHz() {
-    return stopHz;
+  public Double getStopMHz() {
+    return stopMHz;
   }
 
-  public void setStopHz(Double stopHz) {
-    this.stopHz = stopHz;
+  public void setStopMHz(Double stopMHz) {
+    this.stopMHz = stopMHz;
   }
+
+  @Override
+  public String toString() {
+    return "FrequencyRange{" + "startMHz=" + startMHz + ", stopMHz=" + stopMHz + '}';
+  }
+
 }
