@@ -90,14 +90,15 @@ public class RegistrationRequest {
    * <p>
    * The user provided service group identifier. A service group identifier is
    * specified by the registering user to inform the SAS that a collection of TV
-   * white space devices should be considered as part of a single extended
-   * service.
+   * white space devices should be considered as part of a one service and not
+   * another.
    * <p>
-   * For example, a service group Id would be used when multiple devices are
-   * installed to service a campus.
+   * For example, service group Id would be used when devices are installed to
+   * service a campus at two different locations but administered by the same
+   * parties. e.g. using service groups "campus-1" and "campus-2".
    * <p>
-   * If not provided a service group ID will be automatically generated for the
-   * Device Owner + Operator pair.
+   * If not provided a service group ID will be automatically generated based
+   * upon the Device Owner + Operator pair.
    */
   private String serviceGroupId;
   /**
