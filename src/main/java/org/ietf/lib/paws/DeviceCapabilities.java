@@ -53,8 +53,23 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DeviceCapabilities {
 
+  /**
+   * Key Bridge addition.
+   * <p>
+   * Describes the maximum time range for which the spectrum information in this
+   * response is requested. Any WSD may request frequencies for a _shorter_ than
+   * normal duration.
+   *
+   * @since v0.21.0 added to support LPA registration
+   */
+  private EventTime timeRange;
+
+  /**
+   * A set of supported frequency ranges.
+   */
   private List<FrequencyRange> frequencyRanges;
 
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   public List<FrequencyRange> getFrequencyRanges() {
     if (frequencyRanges == null) {
       frequencyRanges = new ArrayList<>();
@@ -65,5 +80,13 @@ public class DeviceCapabilities {
   public void setFrequencyRanges(List<FrequencyRange> frequencyRanges) {
     this.frequencyRanges = frequencyRanges;
   }
+
+  public EventTime getTimeRange() {
+    return timeRange;
+  }
+
+  public void setTimeRange(EventTime timeRange) {
+    this.timeRange = timeRange;
+  }//</editor-fold>
 
 }
