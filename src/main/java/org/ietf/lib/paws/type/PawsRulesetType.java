@@ -19,7 +19,6 @@
 package org.ietf.lib.paws.type;
 
 import java.time.Duration;
-import java.time.temporal.ChronoUnit;
 import javax.xml.bind.annotation.XmlEnum;
 
 /**
@@ -59,7 +58,7 @@ public enum PawsRulesetType {
    * @deprecated Part 15H updated ca. 2015-2019 fromm the 600 MHz repack.
    */
   @Deprecated
-  FCC_Part15H_2010("FccTvBandWhiteSpace-2010", "USA", "US", 50, Duration.ofHours(48), Duration.of(1, ChronoUnit.YEARS)),
+  FCC_Part15H_2010("FccTvBandWhiteSpace-2010", "USA", "US", 50, Duration.ofHours(48), Duration.ofDays(365)),
 
   /**
    * Title 47: Telecommunication PART 15—RADIO FREQUENCY DEVICES Subpart H—White
@@ -72,7 +71,7 @@ public enum PawsRulesetType {
    * <a href="http://www.ecfr.gov/cgi-bin/text-idx?rgn=div6&view=text&node=47:1.0.1.1.16.8">Subpart
    * H—White Space Devices</a>
    */
-  FCC_Part15H_2019("FCC-Part15H-2019", "USA", "US", 50, Duration.ofHours(48), Duration.of(1, ChronoUnit.YEARS)),
+  FCC_Part15H_2019("FCC-Part15H-2019", "USA", "US", 50, Duration.ofHours(48), Duration.ofDays(365)),
 
   /**
    * DBS-01 — White Space Database Specifications
@@ -83,7 +82,7 @@ public enum PawsRulesetType {
    * @see
    * <a href="https://www.ic.gc.ca/eic/site/smt-gst.nsf/eng/sf10928.html">DBS-01</a>
    */
-  ISED_DBS01_2015("ISED-DBS01-2015", "CAN", "CA", 50, Duration.ofHours(48), Duration.of(1, ChronoUnit.YEARS)),
+  ISED_DBS01_2015("ISED-DBS01-2015", "CAN", "CA", 50, Duration.ofHours(48), Duration.ofDays(365)),
 
   /**
    * ETSI EN 301 598 V1.1.1 (2014-04)
