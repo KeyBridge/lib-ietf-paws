@@ -55,9 +55,11 @@ public class SpectrumConsumer implements Comparable<SpectrumConsumer> {
    */
   private double distance;
   /**
-   * The transmitting device’s current effective radiated power (ERP), measured
-   * in dBW (decibel Watt). For receiving stations this value should be set to
-   * NULL.
+   * The transmitting service’s current effective power (ERP), measured in dBW
+   * (decibel Watt), at the receiver. This is calculated to account for basic
+   * terrestrial path loss.
+   * <p>
+   * For receiving services this value is not provided.
    */
   private Double erp;
 
