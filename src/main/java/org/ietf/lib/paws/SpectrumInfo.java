@@ -15,7 +15,10 @@ package org.ietf.lib.paws;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Key Bridge proprietary white space spectrum information data transfer object.
@@ -40,12 +43,6 @@ import javax.xml.bind.annotation.*;
 public class SpectrumInfo extends AbstractSpectrum {
 
   /**
-   * Indicator that the device operation is allowed (TRUE) or forbidden (FALSE).
-   */
-  @XmlElement(required = true)
-  private boolean allowed;
-
-  /**
    * Indicator that this channel is subject to a BLOCKING Enforcement record and
    * should NOT be included in a channel availability list. When not configured
    * this may be assumed to be FALSE.
@@ -57,13 +54,6 @@ public class SpectrumInfo extends AbstractSpectrum {
    * configured this may be assumed to be FALSE.
    */
   private boolean fastPoll;
-
-  /**
-   * Indicator that an exception occurred when calculating the availability of
-   * this channel and it is therefore disabled. Inspect the messages for more
-   * information. Default is FALSE.
-   */
-  private boolean exception;
 
   /**
    * A list of co-channel services.
@@ -110,14 +100,6 @@ public class SpectrumInfo extends AbstractSpectrum {
   }
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
-  public boolean isAllowed() {
-    return allowed;
-  }
-
-  public void setAllowed(boolean allowed) {
-    this.allowed = allowed;
-  }
-
   /**
    * Get the indicator that this channel is subject to a BLOCKING Enforcement
    * record and should NOT be included in a channel availability list. When not
@@ -151,20 +133,6 @@ public class SpectrumInfo extends AbstractSpectrum {
    */
   public void setFastPoll(boolean fastPoll) {
     this.fastPoll = fastPoll;
-  }
-
-  public boolean getException() {
-    return exception;
-  }
-
-  /**
-   * Remark if there is an exception error on this channel. If FALSE set then
-   * leave empty.
-   *
-   * @param exception blocking enforcement flag
-   */
-  public void setException(boolean exception) {
-    this.exception = exception;
   }
 
   public Collection<SpectrumConsumer> getServicesCo() {

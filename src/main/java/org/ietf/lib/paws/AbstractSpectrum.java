@@ -16,6 +16,7 @@ package org.ietf.lib.paws;
 import java.util.Objects;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.ietf.lib.paws.adapter.XmlDouble02PrecisionAdapter;
 import org.ietf.lib.paws.adapter.XmlDouble06PrecisionAdapter;
 
 /**
@@ -57,6 +58,19 @@ public abstract class AbstractSpectrum implements Comparable<AbstractSpectrum> {
   protected Double frequencyMin;
 
   /**
+   * Indicator that the device operation is allowed (TRUE) or forbidden (FALSE).
+   */
+  @XmlElement(required = true)
+  private boolean allowed;
+  /**
+   * The maximum allowable EIRP value on this channel. (dBW) Defaults to NULL if
+   * not specified.
+   */
+  @XmlElement(required = true)
+  @XmlJavaTypeAdapter(XmlDouble02PrecisionAdapter.class)
+  private Double maxPower;
+
+  /**
    * Make the empty constructor protected to encourage use of the
    * {@code getInstance} constructor.
    */
@@ -82,6 +96,7 @@ public abstract class AbstractSpectrum implements Comparable<AbstractSpectrum> {
     this.name = name;
     this.frequencyMin = frequencyMin;
     this.frequencyMax = frequencyMax;
+    this.allowed = true;
   }
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
@@ -107,6 +122,27 @@ public abstract class AbstractSpectrum implements Comparable<AbstractSpectrum> {
 
   public void setFrequencyMin(double frequencyMin) {
     this.frequencyMin = frequencyMin;
+  }
+
+  public boolean isAllowed() {
+    return allowed;
+  }
+
+  public void setAllowed(boolean allowed) {
+    this.allowed = allowed;
+  }
+
+  public double getMaxPower() {
+    return maxPower;
+  }
+
+  /**
+   * Set the max power, ONLY if the provided value is a valid number.
+   *
+   * @param maxPower the max power value to set
+   */
+  public void setMaxPower(double maxPower) {
+    this.maxPower = Double.isNaN(maxPower) ? null : maxPower;
   }//</editor-fold>
 
   /**

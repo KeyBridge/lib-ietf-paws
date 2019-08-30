@@ -14,8 +14,6 @@
 package org.ietf.lib.paws;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import org.ietf.lib.paws.adapter.XmlDouble02PrecisionAdapter;
 
 /**
  * Key Bridge proprietary white space spectrum channel data transfer object.
@@ -41,19 +39,6 @@ import org.ietf.lib.paws.adapter.XmlDouble02PrecisionAdapter;
 @XmlRootElement(name = "SpectrumChannel")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SpectrumChannel extends AbstractSpectrum {
-
-  /**
-   * Indicator that the device operation is allowed (TRUE) or forbidden (FALSE).
-   */
-  @XmlElement(required = true)
-  private boolean allowed;
-
-  /**
-   * The maximum allowable EIRP value on this channel. (dBW)
-   */
-  @XmlElement(required = true)
-  @XmlJavaTypeAdapter(XmlDouble02PrecisionAdapter.class)
-  private Double maxPowerDBW;
 
   /**
    * The time range for which this specific channel is available.
@@ -88,26 +73,9 @@ public class SpectrumChannel extends AbstractSpectrum {
    */
   public SpectrumChannel(String name, double frequencyMin, double frequencyMax) {
     super(name, frequencyMin, frequencyMax);
-    this.allowed = true;
   }
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
-  public boolean isAllowed() {
-    return allowed;
-  }
-
-  public void setAllowed(boolean allowed) {
-    this.allowed = allowed;
-  }
-
-  public Double getMaxPowerDBW() {
-    return maxPowerDBW;
-  }
-
-  public void setMaxPowerDBW(Double maxPowerDBW) {
-    this.maxPowerDBW = maxPowerDBW;
-  }
-
   public EventTime getTimeRange() {
     return timeRange;
   }
