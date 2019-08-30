@@ -43,6 +43,7 @@
     - use Duration in EventTime; add default LPA durations to RuleSetInfo
     - change FrequencyRange unit of measure from Hertz to MHz
     - add EventTime `timeRange` field to DeviceCapabilities to better support LPA requests
+    - add `communicatingWith` device descriptor to support US Mode2 operation
 
   </description>
 

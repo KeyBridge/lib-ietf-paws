@@ -116,6 +116,19 @@ public class AvailableSpectrumRequest {
   private AntennaCharacteristics antenna;
 
   /**
+   * Key Bridge extension to support US Part 15 operation of Mode-2 devices.
+   * <p>
+   * The DeviceDescriptor for the downstream device that the requesting device
+   * intends to communicate with. This is required for MODE-2 operation, as
+   * different separation distances apply for communication with MODE-2 or
+   * MODE-1 downstream devices.
+   * <p>
+   * In this entry only the `deviceMode` is REQUIRED; all other fields are
+   * helpful if provided but optional.
+   */
+  private DeviceDescriptor communicatingWith;
+
+  /**
    * The DeviceOwner (Section 5.5) information MAY be included to register the
    * device with the Database. This enables the device to register and get
    * spectrum-availability information in a single request. Some rulesets
@@ -164,6 +177,14 @@ public class AvailableSpectrumRequest {
 
   public void setDeviceDesc(DeviceDescriptor deviceDesc) {
     this.deviceDesc = deviceDesc;
+  }
+
+  public DeviceDescriptor getCommunicatingWith() {
+    return communicatingWith;
+  }
+
+  public void setCommunicatingWith(DeviceDescriptor communicatingWith) {
+    this.communicatingWith = communicatingWith;
   }
 
   public GeoLocation getLocation() {
