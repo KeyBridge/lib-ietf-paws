@@ -14,6 +14,8 @@
 package org.ietf.lib.paws;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.ietf.lib.paws.adapter.XmlDouble06PrecisionAdapter;
 
 /**
  * 5.13. FrequencyRange
@@ -43,6 +45,7 @@ public class FrequencyRange {
    * Key Bridge: change unit of measure from Hertz to MegaHertz.
    */
   @XmlElement(required = true)
+  @XmlJavaTypeAdapter(XmlDouble06PrecisionAdapter.class)
   public Double startMHz;
   /**
    * The exclusive end of the frequency range (in megahertz) is REQUIRED.
@@ -50,6 +53,7 @@ public class FrequencyRange {
    * Key Bridge: change unit of measure from Hertz to MegaHertz.
    */
   @XmlElement(required = true)
+  @XmlJavaTypeAdapter(XmlDouble06PrecisionAdapter.class)
   public Double stopMHz;
 
   public Double getStartMHz() {
