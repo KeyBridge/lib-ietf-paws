@@ -203,6 +203,19 @@ public class AvailableSpectrumResponse {
   private boolean needsSpectrumReport;
 
   /**
+   * Key Bridge Modification. Indicator that an exception occurred when
+   * calculating the availability of the spectrum blocks and all channels are
+   * therefore disabled. Inspect the messages for more information. Default is
+   * FALSE.
+   */
+  private boolean exception = false;
+  /**
+   * Key Bridge Modification. Messages provides information about the white
+   * space channel build process.
+   */
+  private Collection<String> messages;
+
+  /**
    * Key Bridge Modification.
    * <p>
    * This is a custom component replacing the thrice-buried list of
@@ -297,6 +310,22 @@ public class AvailableSpectrumResponse {
 
   public void setNeedsSpectrumReport(boolean needsSpectrumReport) {
     this.needsSpectrumReport = needsSpectrumReport;
+  }
+
+  public boolean isException() {
+    return exception;
+  }
+
+  public void setException(boolean exception) {
+    this.exception = exception;
+  }
+
+  public Collection<String> getMessages() {
+    return messages;
+  }
+
+  public void setMessages(Collection<String> messages) {
+    this.messages = messages;
   }
 
   /**
