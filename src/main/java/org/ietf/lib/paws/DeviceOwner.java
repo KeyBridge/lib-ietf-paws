@@ -52,16 +52,15 @@ public class DeviceOwner {
 
   /**
    * The vCard contact information for the individual or business that owns the
-   * device is REQUIRED.
+   * device.
    * <p>
    * 9.1.2.1. Federal Communications Commission (FCC):
    * <p>
-   * The owner is required to contain the formatted name of an individual or
-   * organization using the "fn" property. When the name is that of an
-   * organization, the entry also is required to contain the "kind" property,
-   * with a value of "org".
-   * <p>
-   * Key Bridge: This is an LDAP distinguished name ("DN").
+   * Key Bridge: This is an LDAP distinguished name ("DN"). The owner is
+   * required to contain the formatted name of an individual or organization
+   * using the "fn" property. When the name is that of an organization, the
+   * entry also is required to contain the "kind" property, with a value of
+   * "org".
    */
   @XmlElement(required = true)
   private String owner;
@@ -71,22 +70,18 @@ public class DeviceOwner {
    * <p>
    * 9.1.2.1. Federal Communications Commission (FCC):
    * <p>
-   * The operator entry is required to contain the following properties for the
-   * contact person responsible for the device's operation: "fn", "adr", "tel",
-   * and "email".
-   * <p>
    * Key Bridge: This is an LDAP distinguished name ("DN"). For FIXED type
    * devices the DN should indicate the professional installer ID at the
-   * attribute `installerId`.
-   * <p>
-   * Key Bridge: This is REQUIRED.
+   * attribute `installerId`. The operator entry is required to contain the
+   * following properties for the contact person responsible for the device's
+   * operation: "fn", "adr", "tel", and "email".
    */
   @XmlElement(required = true)
   private String operator;
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   /**
-   * Get the owner information.
+   * Get the device owner information.
    * <p>
    * Key Bridge: This is an LDAP distinguished name ("DN").
    *
@@ -97,9 +92,13 @@ public class DeviceOwner {
   }
 
   /**
-   * Set the owner information.
+   * Set the device owner information.
    * <p>
-   * Key Bridge: This is an LDAP distinguished name ("DN").
+   * Key Bridge: This is an optional LDAP distinguished name ("DN"). The owner
+   * is required to contain the formatted name of an individual or organization
+   * using the "fn" property. When the name is that of an organization, the
+   * entry also is required to contain the "kind" property, with a value of
+   * "org".
    *
    * @param owner the owner information
    */
@@ -119,9 +118,13 @@ public class DeviceOwner {
   }
 
   /**
-   * Set the device operator information. Key Bridge: This is an LDAP
-   * distinguished name ("DN"). For FIXED type devices the DN should indicate
-   * the professional installer ID at the attribute `installerId`.
+   * Set the device operator information.
+   * <p>
+   * Key Bridge: This is a REQUIRED LDAP distinguished name ("DN"). For FIXED
+   * type devices the DN should indicate the professional installer ID at the
+   * attribute `installerId`. The operator entry is required to contain the
+   * following properties for the contact person responsible for the device's
+   * operation: "fn", "adr", "tel", and "email".
    *
    * @param operator the device operator information
    */
