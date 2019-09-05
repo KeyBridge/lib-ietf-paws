@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.ietf.lib.paws.adapter.XmlDouble02PrecisionAdapter;
 import org.ietf.lib.paws.adapter.XmlRadiationPatternAdapter;
 import org.ietf.lib.paws.type.AntennaHeightType;
 import org.ietf.lib.paws.type.AntennaPolarizationType;
@@ -62,17 +63,19 @@ public class AntennaCharacteristics {
    * heights (e.g. when operating in a mine) use zero meters above ground level.
    */
   @XmlElement(required = true)
-  private double height;
+  @XmlJavaTypeAdapter(value = XmlDouble02PrecisionAdapter.class)
+  private Double height;
   /**
    * Antenna radiation center height (meters). Valid values are: AGL - Above
    * Ground Level (default); AMSL - Above Mean Sea Level
    */
   @XmlElement(required = true)
-  private AntennaHeightType heightType = AntennaHeightType.AGL;
+  private AntennaHeightType heightType;
   /**
    * The height uncertainty in meters. Default = 0 unless otherwise specified.
    */
-  private double heightUncertainty;
+  @XmlJavaTypeAdapter(value = XmlDouble02PrecisionAdapter.class)
+  private Double heightUncertainty;
 
   /**
    * The antenna polarization. Valid values are "H", "V". HORIZONTAL is presumed
@@ -81,7 +84,7 @@ public class AntennaCharacteristics {
    * @since v0.7.0 added to enhance FIXED type transmitter support
    */
   @XmlElement(required = true)
-  private AntennaPolarizationType polarization = AntennaPolarizationType.H;
+  private AntennaPolarizationType polarization;
 
   /**
    * Key Bridge: The antenna radiation pattern.
@@ -122,14 +125,17 @@ public class AntennaCharacteristics {
    *
    * @since v0.7.0 added to enhance FIXED type transmitter support
    */
+  @XmlJavaTypeAdapter(value = XmlDouble02PrecisionAdapter.class)
   private Double gain;
   /**
    * Key Bridge: The Elevation beam width (also Half Power beam width).
    */
+  @XmlJavaTypeAdapter(value = XmlDouble02PrecisionAdapter.class)
   private Double beamWidthElevation;
   /**
    * Key Bridge: The azimuth beam width (also Half Power beam width).
    */
+  @XmlJavaTypeAdapter(value = XmlDouble02PrecisionAdapter.class)
   private Double beamWidthAzimuth;
 
   /**
@@ -140,7 +146,13 @@ public class AntennaCharacteristics {
    *
    * @since v0.7.0 added to enhance FIXED type transmitter support
    */
-  private double rotation;
+  @XmlJavaTypeAdapter(value = XmlDouble02PrecisionAdapter.class)
+  private Double rotation;
+
+  public AntennaCharacteristics() {
+    this.heightType = AntennaHeightType.AGL;
+    this.polarization = AntennaPolarizationType.H;
+  }
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   public double getHeight() {
