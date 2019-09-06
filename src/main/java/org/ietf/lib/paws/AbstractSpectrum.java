@@ -22,9 +22,9 @@ import org.ietf.lib.paws.adapter.XmlDouble06PrecisionAdapter;
 /**
  * Key Bridge proprietary white space spectrum data transfer object.
  * <p>
- * <img alt="clazz" src="doc-files/sbstractSpectrum.png">
- * <p>
- * The {@code AbstractChannel} provides based spectrum information.
+ * The abstract spectrum class describes a single channel and provides basic
+ * spectrum information. The fields in this class are inherited and used by
+ * other specific implementations.
  *
  * @author Key Bridge LLC
  * @since v0.2.0 added 01/31/17

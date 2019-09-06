@@ -42,7 +42,7 @@ public class FrequencyRange {
   /**
    * The inclusive start of the frequency range (in megahertz) is REQUIRED.
    * <p>
-   * Key Bridge: change unit of measure from Hertz to MegaHertz.
+   * Key Bridge: changed unit of measure from Hertz to MegaHertz.
    */
   @XmlElement(required = true)
   @XmlJavaTypeAdapter(XmlDouble06PrecisionAdapter.class)
@@ -50,7 +50,7 @@ public class FrequencyRange {
   /**
    * The exclusive end of the frequency range (in megahertz) is REQUIRED.
    * <p>
-   * Key Bridge: change unit of measure from Hertz to MegaHertz.
+   * Key Bridge: changed unit of measure from Hertz to MegaHertz.
    */
   @XmlElement(required = true)
   @XmlJavaTypeAdapter(XmlDouble06PrecisionAdapter.class)

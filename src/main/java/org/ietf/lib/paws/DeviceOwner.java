@@ -40,6 +40,12 @@ import javax.xml.bind.annotation.*;
  * the vCard specification defines maximum lengths for each parameter.
  * <p>
  * 9.1.2.1. Federal Communications Commission (FCC)
+ * <p>
+ * Key Bridge modifications: The PAWS specification calls for the use of the
+ * "vCard Format Specification" [RFC6350], encoded in JSON [RFC7095]. This
+ * format is poorly defined and easily subject to misinterpretation. Instead we
+ * update fields to contain and use LDAP distinguished names instead of the
+ * vCard format.
  *
  * @author Key Bridge LLC
  * @since v0.8.0 update fields to contain LDAP distinguished names instead of
@@ -51,8 +57,8 @@ import javax.xml.bind.annotation.*;
 public class DeviceOwner {
 
   /**
-   * The vCard contact information for the individual or business that owns the
-   * device.
+   * The <strike>vCard</strike> contact information for the individual or
+   * business that owns the device.
    * <p>
    * 9.1.2.1. Federal Communications Commission (FCC):
    * <p>
@@ -65,16 +71,16 @@ public class DeviceOwner {
   @XmlElement(required = true)
   private String owner;
   /**
-   * The vCard contact information for the device operator is OPTIONAL but may
-   * be required by specific rulesets.
+   * The <strike>vCard</strike> contact information for the device operator is
+   * OPTIONAL but may be required by specific rulesets.
    * <p>
    * 9.1.2.1. Federal Communications Commission (FCC):
    * <p>
    * Key Bridge: This is an LDAP distinguished name ("DN"). For FIXED type
    * devices the DN should indicate the professional installer ID at the
-   * attribute `installerId`. The operator entry is required to contain the
-   * following properties for the contact person responsible for the device's
-   * operation: "fn", "adr", "tel", and "email".
+   * attribute `installerId`. The operator MUST to contain the following
+   * properties for the contact person responsible for the device's operation:
+   * "fn", "adr", "tel", and "email".
    */
   @XmlElement(required = true)
   private String operator;

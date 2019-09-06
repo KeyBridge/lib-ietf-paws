@@ -69,11 +69,11 @@ public class SpectrumUseNotify {
   @XmlElement(required = true)
   private DeviceDescriptor deviceDesc;
   /**
-   * The GeoLocation (Section 5.1) for the device. When the notification is made
-   * by a Master Device on its own behalf, the location is that of the Master
-   * Device and is REQUIRED. When the notification is made by a Master Device on
-   * behalf of a Slave Device, the location is that of the Slave Device and is
-   * OPTIONAL but may be required by some rulesets.
+   * The GeoLocation (Section 5.1) for the reporting device. When the
+   * notification is made by a Master Device on its own behalf, the location is
+   * that of the Master Device and is REQUIRED. When the notification is made by
+   * a Master Device on behalf of a Slave Device, the location is that of the
+   * Slave Device and is OPTIONAL but may be required by some rulesets.
    */
   @XmlElement(required = true)
   private GeoLocation location;

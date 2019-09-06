@@ -56,19 +56,21 @@ public class SpectrumInfo extends AbstractSpectrum {
   private boolean fastPoll;
 
   /**
-   * A list of co-channel services.
+   * A list of co-channel services occupying the current channel.
    */
   private Collection<SpectrumConsumer> servicesCo;
   /**
-   * A list of blocking adjacent channel services.
+   * A list of blocking adjacent channel services occupying the current channel.
    */
   private Collection<SpectrumConsumer> servicesAdj;
   /**
-   * A list of blocking second adjacent channel services. (RRBS only)
+   * A list of blocking second adjacent channel services occupying the current
+   * channel. Applicable for protection of RRBS services in Canada.
    */
   private Collection<SpectrumConsumer> servicesSecondAdjacent;
   /**
-   * A list of blocking taboo-channel services.
+   * A list of blocking taboo-channel services occupying the current channel.
+   * Applicable for TVWS operation in Canada.
    */
   private Collection<SpectrumConsumer> servicesTaboo;
 

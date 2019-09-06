@@ -66,8 +66,10 @@ public class AntennaCharacteristics {
   @XmlJavaTypeAdapter(value = XmlDouble02PrecisionAdapter.class)
   private Double height;
   /**
-   * Antenna radiation center height (meters). Valid values are: AGL - Above
-   * Ground Level (default); AMSL - Above Mean Sea Level
+   * Antenna radiation center height measurement strategy. Valid values are: AGL
+   * - Above Ground Level (default); AMSL - Above Mean Sea Level
+   * <p>
+   * Key Bridge: Default is always `AGL` unless specified otherwise.
    */
   @XmlElement(required = true)
   private AntennaHeightType heightType;

@@ -210,8 +210,10 @@ public class AvailableSpectrumResponse {
    */
   private boolean exception = false;
   /**
-   * Key Bridge Modification. Messages provides information about the white
-   * space channel build process.
+   * Key Bridge Modification. A list of simple String messages to provide
+   * information about the white space channel build process. This is typically
+   * used only to explain exceptions encountered during processing and is
+   * intended to help the client quickly identify and fix issues.
    */
   private Collection<String> messages;
 

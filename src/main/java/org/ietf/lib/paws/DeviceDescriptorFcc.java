@@ -64,10 +64,9 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    * Get the Device Type (Section 9.2.2.2) of TV-band white-space device, as
    * defined by rule.
    * <p>
-   * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
-   * "MODE2_LP" (for low power), "MODE1".
+   * Key Bridge: Valid values are "FIXED", "MODE2", "MODE1".
    *
-   * @return the TV-band white-space Device Type
+   * @return The Part 15(H) device type of TV-band white-space device.
    */
   @XmlElement(name = "FccDeviceType")
   public FccDeviceType getFccDeviceType() {
@@ -78,8 +77,7 @@ public class DeviceDescriptorFcc extends DeviceDescriptor {
    * Set the Device Type (Section 9.2.2.2) of TV-band white-space device, as
    * defined by rule.
    * <p>
-   * Key Bridge: Valid values are "FIXED", "MODE2_HP" (for high power),
-   * "MODE2_LP" (for low power), "MODE1".
+   * Key Bridge: Valid values are "FIXED", "MODE2", "MODE1".
    *
    * @param deviceType the TV-band white-space Device Type
    */

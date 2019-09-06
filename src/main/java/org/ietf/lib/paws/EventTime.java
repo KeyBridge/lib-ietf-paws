@@ -88,7 +88,8 @@ public class EventTime {
   private ZonedDateTime stopTime;
 
   /**
-   * Key Bridge: The calculated event duration.
+   * Key Bridge addition: The calculated event duration. Shown for information
+   * only.
    */
   @XmlJavaTypeAdapter(XmlDurationAdapter.class)
   private Duration duration;

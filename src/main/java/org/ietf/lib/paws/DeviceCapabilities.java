@@ -57,15 +57,15 @@ public class DeviceCapabilities {
    * Key Bridge addition.
    * <p>
    * Describes the maximum time range for which the spectrum information in this
-   * response is requested. Any WSD may request frequencies for a _shorter_ than
-   * normal duration.
+   * response is requested. Any device may request frequencies for a _shorter_
+   * than normal duration.
    *
    * @since v0.21.0 added to support LPA registration
    */
   private EventTime timeRange;
 
   /**
-   * A set of supported frequency ranges.
+   * A set of supported or desired frequency ranges.
    */
   private List<FrequencyRange> frequencyRanges;
 

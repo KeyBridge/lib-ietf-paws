@@ -45,7 +45,7 @@ import org.ietf.lib.paws.type.PawsRulesetType;
 public class RulesetInfo {
 
   /**
-   * 600 seconds = 5 minutes. The default maximum duration, in seconds, between
+   * 600 seconds = 10 minutes. The default maximum duration, in seconds, between
    * requests for available spectrum.
    */
   private static final int MAX_POLLING_SECS = 600;

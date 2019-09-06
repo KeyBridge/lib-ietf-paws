@@ -58,26 +58,26 @@ import javax.xml.bind.annotation.*;
  * unavailability for those frequencies.
  * </ul>
  * <pre>
- * +-------------------------------+
- * |Spectrum                       |
- * +---------------------+---------+
- * |resolutionBwHz:float |REQUIRED |
- * |profiles:list        |REQUIRED |---+
- * +---------------------+---------+   |  0..*
- * V
- * +-----------------------------+
- * |SpectrumProfilePoint              |
- * +-------------------+---------+
- * |list               |REQUIRED |
- * +-------------------+---------+
- * |
- * V 2..*
- * +--------------------------+
- * |SpectrumProfilePoint      |
- * +----------------+---------+
- * |hz:float        |REQUIRED |
- * |dbm:float       |REQUIRED |
- * +----------------+---------+
+ *   +-------------------------------+
+ *   |Spectrum                       |
+ *   +---------------------+---------+
+ *   |resolutionBwHz:float |REQUIRED |
+ *   |profiles:list        |REQUIRED |---+
+ *   +---------------------+---------+   |  0..*
+ *                                       V
+ *                 +-----------------------------+
+ *                 |SpectrumProfile              |
+ *                 +-------------------+---------+
+ *                 |list               |REQUIRED |
+ *                 +-------------------+---------+
+ *                                       |
+ *                                       V 2..*
+ *                  +--------------------------+
+ *                  |SpectrumProfilePoint      |
+ *                  +----------------+---------+
+ *                  |hz:float        |REQUIRED |
+ *                  |dbm:float       |REQUIRED |
+ *                  +----------------+---------+
  * </pre>
  *
  * @author Key Bridge LLC

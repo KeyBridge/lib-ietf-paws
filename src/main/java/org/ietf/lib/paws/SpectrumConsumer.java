@@ -21,7 +21,6 @@ package org.ietf.lib.paws;
 /**
  * Key Bridge proprietary white space spectrum information data transfer object.
  * <p>
- * <p>
  * A {@code SpectrumConsumer} conveys information about a wireless service,
  * which may be a transmitter or receiver. This provides detail and context
  * about incumbent / blocking services in a SpectrumInfo response
@@ -32,8 +31,9 @@ package org.ietf.lib.paws;
 public class SpectrumConsumer implements Comparable<SpectrumConsumer> {
 
   /**
-   * The referenced service assigned UUID. This may be used to identify the
-   * service in the Key Bridge database if further details are required.
+   * The referenced service assigned UUID. This may be used to identify and
+   * download further details about the service from the Key Bridge database if
+   * required.
    */
   private String uuid;
   /**
