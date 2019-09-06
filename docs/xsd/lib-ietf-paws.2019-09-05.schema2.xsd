@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://ietf.org/lib/paws/message" xmlns:tns="http://ietf.org/lib/paws/message" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://ietf.org/lib/paws" xmlns:ns1="http://ietf.org/lib/paws/type">
+
+  <xs:import namespace="http://ietf.org/lib/paws/type" schemaLocation="lib-ietf-paws.2019-09-05.schema1.xsd"/>
+
+  <xs:import namespace="http://ietf.org/lib/paws" schemaLocation="lib-ietf-paws.2019-09-05.schema3.xsd"/>
+
+  <xs:element name="AvailableSpectrumRequest" type="tns:AvailableSpectrumRequest"/>
+
+  <xs:element name="AvailableSpectrumResponse" type="tns:AvailableSpectrumResponse"/>
+
+  <xs:element name="DeviceValidationRequest" type="tns:DeviceValidationRequest"/>
+
+  <xs:element name="DeviceValidationResponse" type="tns:DeviceValidationResponse"/>
+
+  <xs:element name="InitializationRequest" type="tns:InitializationRequest"/>
+
+  <xs:element name="InitializationResponse" type="tns:InitializationResponse"/>
+
+  <xs:element name="RegistrationRequest" type="tns:RegistrationRequest"/>
+
+  <xs:element name="RegistrationResponse" type="tns:RegistrationResponse"/>
+
+  <xs:element name="SpectrumUseNotify" type="tns:SpectrumUseNotify"/>
+
+  <xs:element name="SpectrumUseResponse" type="tns:SpectrumUseResponse"/>
+
+  <xs:complexType name="AvailableSpectrumRequest">
+    <xs:sequence>
+      <xs:element name="requestType" type="ns1:spectrumRequestType"/>
+      <xs:element name="deviceDesc" type="ns2:DeviceDescriptor"/>
+      <xs:element name="location" type="ns2:GeoLocation"/>
+      <xs:element name="antenna" type="ns2:AntennaCharacteristics" minOccurs="0"/>
+      <xs:element name="communicatingWith" type="ns2:DeviceDescriptor" minOccurs="0"/>
+      <xs:element name="deviceOwner" type="ns2:DeviceOwner" minOccurs="0"/>
+      <xs:element name="masterDeviceDesc" type="ns2:DeviceDescriptor" minOccurs="0"/>
+      <xs:element name="masterDeviceLocation" type="ns2:GeoLocation" minOccurs="0"/>
+      <xs:element name="capabilities" type="ns2:DeviceCapabilities" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AvailableSpectrumResponse">
+    <xs:sequence>
+      <xs:element name="responseType" type="ns1:spectrumRequestType"/>
+      <xs:element name="timestamp" type="xs:string"/>
+      <xs:element name="deviceDesc" type="ns2:DeviceDescriptor"/>
+      <xs:element name="location" type="ns2:GeoLocation"/>
+      <xs:element name="spectrumSpecs" type="ns2:SpectrumSpec" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="databaseChange" type="ns2:DbUpdateSpec" minOccurs="0"/>
+      <xs:element name="rulesetInfo" type="ns2:RulesetInfo"/>
+      <xs:element name="timeRange" type="ns2:EventTime"/>
+      <xs:element name="needsSpectrumReport" type="xs:boolean"/>
+      <xs:element name="exception" type="xs:boolean"/>
+      <xs:element name="messages" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="spectrum" type="ns2:AbstractSpectrum" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DeviceValidationRequest">
+    <xs:sequence>
+      <xs:element name="deviceDescs" type="ns2:DeviceDescriptor" maxOccurs="unbounded"/>
+      <xs:element name="masterDeviceDesc" type="ns2:DeviceDescriptor" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="DeviceValidationResponse">
+    <xs:sequence>
+      <xs:element name="deviceValidities" type="ns2:DeviceValidity" maxOccurs="unbounded"/>
+      <xs:element name="databaseChange" type="ns2:DbUpdateSpec" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="InitializationRequest">
+    <xs:sequence>
+      <xs:element name="deviceDesc" type="ns2:DeviceDescriptor"/>
+      <xs:element name="location" type="ns2:GeoLocation"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="InitializationResponse">
+    <xs:sequence>
+      <xs:element name="rulesetInfos" type="ns2:RulesetInfo" maxOccurs="unbounded"/>
+      <xs:element name="databaseChange" type="ns2:DbUpdateSpec" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RegistrationRequest">
+    <xs:sequence>
+      <xs:element name="deviceDesc" type="ns2:DeviceDescriptor"/>
+      <xs:element name="location" type="ns2:GeoLocation"/>
+      <xs:element name="antenna" type="ns2:AntennaCharacteristics"/>
+      <xs:element name="deviceOwner" type="ns2:DeviceOwner"/>
+      <xs:element name="serviceGroupId" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceName" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceDescription" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RegistrationResponse">
+    <xs:sequence>
+      <xs:element name="rulesetId" type="ns1:pawsRulesetType"/>
+      <xs:element name="databaseChange" type="ns2:DbUpdateSpec" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SpectrumUseNotify">
+    <xs:sequence>
+      <xs:element name="deviceDesc" type="ns2:DeviceDescriptor"/>
+      <xs:element name="location" type="ns2:GeoLocation"/>
+      <xs:element name="masterDeviceDesc" type="ns2:DeviceDescriptor" minOccurs="0"/>
+      <xs:element name="masterDeviceLocation" type="ns2:GeoLocation" minOccurs="0"/>
+      <xs:element name="spectra" type="ns2:Spectrum" maxOccurs="unbounded"/>
+      <xs:element name="channels" type="ns2:SpectrumChannel" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SpectrumUseResponse">
+    <xs:sequence>
+      <xs:element name="databaseChange" type="ns2:DbUpdateSpec" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+
