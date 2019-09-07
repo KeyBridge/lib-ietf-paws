@@ -22,6 +22,7 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.DbUpdateSpec;
 import org.ietf.lib.paws.DeviceValidity;
+import org.ietf.lib.paws.Error;
 
 /**
  * 4.6.2. DEV_VALID_RESP
@@ -54,6 +55,9 @@ public class DeviceValidationResponse {
    * Slave Devices and whether each listed device is valid. The number of
    * entries MUST match the number of DeviceDescriptors (Section 5.2) listed in
    * the DEV_VALID_REQ message.
+   * <p>
+   * Key Bridge: Changed from a list to single entry. Master devices can request
+   * device validation one device at a time.
    */
   @XmlElement(required = true)
   private List<DeviceValidity> deviceValidities;
@@ -62,9 +66,15 @@ public class DeviceValidationResponse {
    * of a change to the database URI, providing one or more alternate database
    * URIs. The device needs to update its preconfigured entry for the responding
    * Database with the alternate Databases listed in the DbUpdateSpec.
-   * <p>
+   *
+   * @deprecated not used by Key Bridge in this context.
    */
   private DbUpdateSpec databaseChange;
+
+  /**
+   * Error element describing any error encountered during processing.
+   */
+  private Error error;
 
   public List<DeviceValidity> getDeviceValidities() {
     return deviceValidities;
@@ -80,6 +90,14 @@ public class DeviceValidationResponse {
 
   public void setDatabaseChange(DbUpdateSpec databaseChange) {
     this.databaseChange = databaseChange;
+  }
+
+  public Error getError() {
+    return error;
+  }
+
+  public void setError(Error error) {
+    this.error = error;
   }
 
 }

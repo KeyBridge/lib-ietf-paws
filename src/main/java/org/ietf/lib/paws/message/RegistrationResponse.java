@@ -15,6 +15,7 @@ package org.ietf.lib.paws.message;
 
 import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.DbUpdateSpec;
+import org.ietf.lib.paws.Error;
 import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
@@ -71,8 +72,15 @@ public class RegistrationResponse {
    * database URIs. The device needs to update its preconfigured entry for the
    * responding Database with the alternate Databases listed in the
    * DbUpdateSpec.
+   *
+   * @deprecated not used by Key Bridge in this context.
    */
   private DbUpdateSpec databaseChange;
+
+  /**
+   * Error element describing any error encountered during processing.
+   */
+  private Error error;
 
   /**
    * Get the PAWS Ruleset ID Registry value.
@@ -98,6 +106,14 @@ public class RegistrationResponse {
 
   public void setDatabaseChange(DbUpdateSpec databaseChange) {
     this.databaseChange = databaseChange;
+  }
+
+  public Error getError() {
+    return error;
+  }
+
+  public void setError(Error error) {
+    this.error = error;
   }
 
   @Override

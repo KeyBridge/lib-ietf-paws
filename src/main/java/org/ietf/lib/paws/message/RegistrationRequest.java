@@ -69,7 +69,8 @@ public class RegistrationRequest {
   /**
    * The AntennaCharacteristics (Section 5.3) is OPTIONAL.
    * <p>
-   * Key Bridge: REQUIRED to provide antenna height above ground (meters).
+   * Key Bridge: AntennaCharacteristics are REQUIRED for FIXED devices to
+   * provide the necessary antenna height above ground value.
    */
   @XmlElement(required = true)
   private AntennaCharacteristics antenna;

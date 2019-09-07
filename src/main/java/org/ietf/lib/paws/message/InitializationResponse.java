@@ -13,11 +13,9 @@
  */
 package org.ietf.lib.paws.message;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.DbUpdateSpec;
+import org.ietf.lib.paws.Error;
 import org.ietf.lib.paws.RulesetInfo;
 
 /**
@@ -67,9 +65,12 @@ public class InitializationResponse {
    * If the Database does not support the device or supports none of the
    * rulesets specified in the DeviceDescriptor, it MUST instead return an error
    * with the UNSUPPORTED code (see Table 1) in the error response.
+   * <p>
+   * Key Bridge: Changed from List to single entry. Devices may only register
+   * and operate in one jurisdiction at a time.
    */
   @XmlElement(required = true)
-  private List<RulesetInfo> rulesetInfos;
+  private RulesetInfo rulesetInfo;
   /**
    * The Database MAY include a DbUpdateSpec (Section 5.7) to notify the Master
    * Device of a change to the database URI, providing one or more alternate
@@ -80,6 +81,11 @@ public class InitializationResponse {
   private DbUpdateSpec databaseChange;
 
   /**
+   * Error element describing any error encountered during processing.
+   */
+  private Error error;
+
+  /**
    * Make default no-arg constructor protected to encourage ruleset info
    * setting.
    */
@@ -87,18 +93,15 @@ public class InitializationResponse {
   }
 
   public InitializationResponse(RulesetInfo rulesetInfo) {
-    this.rulesetInfos = rulesetInfo == null ? null : Arrays.asList(rulesetInfo);
+    this.rulesetInfo = rulesetInfo;
   }
 
-  public List<RulesetInfo> getRulesetInfos() {
-    if (rulesetInfos == null) {
-      rulesetInfos = new ArrayList<>();
-    }
-    return rulesetInfos;
+  public RulesetInfo getRulesetInfo() {
+    return rulesetInfo;
   }
 
-  public void setRulesetInfos(List<RulesetInfo> rulesetInfos) {
-    this.rulesetInfos = rulesetInfos;
+  public void setRulesetInfo(RulesetInfo rulesetInfo) {
+    this.rulesetInfo = rulesetInfo;
   }
 
   public DbUpdateSpec getDatabaseChange() {
@@ -107,5 +110,13 @@ public class InitializationResponse {
 
   public void setDatabaseChange(DbUpdateSpec databaseChange) {
     this.databaseChange = databaseChange;
+  }
+
+  public Error getError() {
+    return error;
+  }
+
+  public void setError(Error error) {
+    this.error = error;
   }
 }

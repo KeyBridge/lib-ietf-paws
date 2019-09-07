@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.TreeSet;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.ietf.lib.paws.Error;
 import org.ietf.lib.paws.*;
 import org.ietf.lib.paws.adapter.XmlZonedDateTimeAdapter;
 import org.ietf.lib.paws.type.SpectrumRequestType;
@@ -233,6 +234,11 @@ public class AvailableSpectrumResponse {
   @XmlElement(required = true)
   private Collection<AbstractSpectrum> spectrum;
 
+  /**
+   * Error element describing any error encountered during processing.
+   */
+  private Error error;
+
   public AvailableSpectrumResponse() {
     this.timestamp = ZonedDateTime.now(ZONE_ID);
     this.needsSpectrumReport = true;
@@ -385,6 +391,14 @@ public class AvailableSpectrumResponse {
    */
   public void addSpectrumEntry(AbstractSpectrum channel) {
     getSpectrum().add(channel);
+  }
+
+  public Error getError() {
+    return error;
+  }
+
+  public void setError(Error error) {
+    this.error = error;
   }//</editor-fold>
 
   /**

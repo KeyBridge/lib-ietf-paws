@@ -18,7 +18,6 @@
  */
 package org.ietf.lib.paws.message;
 
-import java.util.List;
 import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.DeviceDescriptor;
 
@@ -48,22 +47,28 @@ import org.ietf.lib.paws.DeviceDescriptor;
 public class DeviceValidationRequest {
 
   /**
-   * A DeviceDescriptor (Section 5.2) list is REQUIRED; it specifies the list of
-   * Slave Devices that are to be validated.
+   * A DeviceDescriptor (Section 5.2) is REQUIRED; it describes a Slave Device
+   * to be validated.
+   * <p>
+   * Key Bridge: Changed from a list to single entry. Master devices can request
+   * device validation one device at a time.
    */
   @XmlElement(required = true)
-  private List<DeviceDescriptor> deviceDescs;
+  private DeviceDescriptor deviceDesc;
   /**
    * The Master Device MAY provide its own descriptor.
+   * <p>
+   * Key Bridge: The master device MUST identify itself.
    */
+  @XmlElement(required = true)
   private DeviceDescriptor masterDeviceDesc;
 
-  public List<DeviceDescriptor> getDeviceDescs() {
-    return deviceDescs;
+  public DeviceDescriptor getDeviceDesc() {
+    return deviceDesc;
   }
 
-  public void setDeviceDescs(List<DeviceDescriptor> deviceDescs) {
-    this.deviceDescs = deviceDescs;
+  public void setDeviceDesc(DeviceDescriptor deviceDesc) {
+    this.deviceDesc = deviceDesc;
   }
 
   public DeviceDescriptor getMasterDeviceDesc() {

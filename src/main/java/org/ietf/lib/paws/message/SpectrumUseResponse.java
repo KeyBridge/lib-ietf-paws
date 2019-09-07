@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import org.ietf.lib.paws.DbUpdateSpec;
+import org.ietf.lib.paws.Error;
 
 /**
  * 4.5.6. SPECTRUM_USE_RESP
@@ -56,12 +57,25 @@ public class SpectrumUseResponse {
    */
   private DbUpdateSpec databaseChange;
 
+  /**
+   * Error element describing any error encountered during processing.
+   */
+  private Error error;
+
   public DbUpdateSpec getDatabaseChange() {
     return databaseChange;
   }
 
   public void setDatabaseChange(DbUpdateSpec databaseChange) {
     this.databaseChange = databaseChange;
+  }
+
+  public Error getError() {
+    return error;
+  }
+
+  public void setError(Error error) {
+    this.error = error;
   }
 
 }
