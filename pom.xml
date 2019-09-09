@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>keybridge.lib</groupId>
   <artifactId>ietf-paws</artifactId>
-  <version>0.20.0</version>
+  <version>0.21.0</version>
   <packaging>jar</packaging>
 
   <name>lib-ietf-paws</name>
@@ -45,6 +45,7 @@
     - add EventTime `timeRange` field to DeviceCapabilities to better support LPA requests
     - add `communicatingWith` device descriptor to support US Mode2 operation
     - add Error element to all message responses
+    v0.21.0 - consolidate deviceDescriptor subclasses into one
 
   </description>
 
@@ -77,6 +78,27 @@
       <groupId>keybridge.lib</groupId>
       <artifactId>xml-adapter</artifactId>
       <version>3.0.1</version>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>keybridge.lib</groupId>
+      <artifactId>gis-common</artifactId>
+      <version>4.1.0</version>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>com.thedeanda</groupId>
+      <artifactId>lorem</artifactId>
+      <version>2.1</version>
+      <scope>test</scope>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>ch.keybridge</groupId>
+      <artifactId>json-adapter</artifactId>
+      <version>2.0.0</version>
       <scope>test</scope>
       <type>jar</type>
     </dependency>
