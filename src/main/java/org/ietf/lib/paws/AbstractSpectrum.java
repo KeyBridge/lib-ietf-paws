@@ -61,7 +61,7 @@ public abstract class AbstractSpectrum implements Comparable<AbstractSpectrum> {
    * Indicator that the device operation is allowed (TRUE) or forbidden (FALSE).
    */
   @XmlElement(required = true)
-  private boolean allowed;
+  private Boolean allowed;
   /**
    * The maximum allowable EIRP value on this channel. (dBW) Defaults to NULL if
    * not specified.
