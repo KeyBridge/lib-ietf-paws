@@ -103,7 +103,7 @@ public class SpectrumUseNotify {
    *
    * @deprecated Use the {@code channels} list instead.
    */
-  @XmlElement(required = true)
+  @Deprecated
   private Collection<Spectrum> spectra;
 
   /**
