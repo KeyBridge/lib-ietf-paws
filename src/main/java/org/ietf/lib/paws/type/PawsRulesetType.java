@@ -59,7 +59,7 @@ public enum PawsRulesetType {
    * @deprecated Part 15H updated ca. 2015-2019 fromm the 600 MHz repack.
    */
   @Deprecated
-  FCC_Part_15_H_2010("USA", "US", 50, Duration.ofHours(48), Duration.ofDays(365)),
+  FCC_PART_15_H_2010("USA", "US", 50, Duration.ofHours(48), Duration.ofDays(365)),
 
   /**
    * Title 47: Telecommunication PART 15—RADIO FREQUENCY DEVICES Subpart H—White
@@ -72,7 +72,7 @@ public enum PawsRulesetType {
    * <a href="http://www.ecfr.gov/cgi-bin/text-idx?rgn=div6&view=text&node=47:1.0.1.1.16.8">Subpart
    * H—White Space Devices</a>
    */
-  FCC_Part_15_H_2019("USA", "US", 50, Duration.ofHours(48), Duration.ofDays(365)),
+  FCC_PART_15_H_2019("USA", "US", 50, Duration.ofHours(48), Duration.ofDays(365)),
 
   /**
    * DBS-01 — White Space Database Specifications
