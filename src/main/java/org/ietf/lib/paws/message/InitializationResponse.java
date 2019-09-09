@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.DbUpdateSpec;
 import org.ietf.lib.paws.Error;
 import org.ietf.lib.paws.RulesetInfo;
+import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
  * 4.3.2. INIT_RESP
@@ -94,6 +95,16 @@ public class InitializationResponse {
 
   public InitializationResponse(RulesetInfo rulesetInfo) {
     this.rulesetInfo = rulesetInfo;
+  }
+
+  /**
+   * Convenience constructor. Creates a complete RulesetInfo instance based upon
+   * the specified rulesetType.
+   *
+   * @param rulesetType the PawsRulesetType
+   */
+  public InitializationResponse(PawsRulesetType rulesetType) {
+    this.rulesetInfo = RulesetInfo.getInstance(rulesetType);
   }
 
   public RulesetInfo getRulesetInfo() {
