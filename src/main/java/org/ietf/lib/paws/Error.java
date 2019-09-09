@@ -133,6 +133,14 @@ public class Error {
    */
   private Object data;
 
+  public Error() {
+  }
+
+  public Error(PawsErrorCode pawsError) {
+    this.code = pawsError.getCode();
+    this.message = pawsError.getDescription();
+  }
+
   public static Error getInstance(PawsErrorCode pawsError) {
     Error error = new Error();
     error.setCode(pawsError.getCode());
