@@ -22,10 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeSet;
 import javax.xml.bind.annotation.*;
-import org.ietf.lib.paws.DeviceDescriptor;
-import org.ietf.lib.paws.GeoLocation;
-import org.ietf.lib.paws.Spectrum;
-import org.ietf.lib.paws.SpectrumChannel;
+import org.ietf.lib.paws.*;
 
 /**
  * 4.5.5. SPECTRUM_USE_NOTIFY
@@ -118,6 +115,15 @@ public class SpectrumUseNotify {
   @XmlElement(name = "channels", required = true)
   private Collection<SpectrumChannel> channels;
 
+  /**
+   * Key Bridge addition: Added to support automated LPA spectrum registration.
+   * When a licensed LPA user wishes to register for interference protection
+   * they must indicate a usage schedule. When specified, this is the time range
+   * when the specified channels will be used.
+   */
+  @XmlElement(name = "maxTimeRange")
+  private EventTime timeRange;
+
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   public DeviceDescriptor getDeviceDesc() {
     return deviceDesc;
@@ -175,6 +181,14 @@ public class SpectrumUseNotify {
 
   public void addChannel(SpectrumChannel channel) {
     getChannels().add(channel);
+  }
+
+  public EventTime getTimeRange() {
+    return timeRange;
+  }
+
+  public void setTimeRange(EventTime timeRange) {
+    this.timeRange = timeRange;
   }//</editor-fold>
 
 }
