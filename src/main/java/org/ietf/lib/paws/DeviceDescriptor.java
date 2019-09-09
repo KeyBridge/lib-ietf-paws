@@ -15,6 +15,9 @@ package org.ietf.lib.paws;
 
 import java.util.Objects;
 import javax.xml.bind.annotation.*;
+import org.ietf.lib.paws.type.EtsiDeviceCategory;
+import org.ietf.lib.paws.type.EtsiEmissionClassType;
+import org.ietf.lib.paws.type.EtsiEquipmentType;
 import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
@@ -43,29 +46,8 @@ import org.ietf.lib.paws.type.PawsRulesetType;
 @XmlRootElement(name = "DeviceDescriptor")
 @XmlType(name = "DeviceDescriptor")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlSeeAlso({DeviceDescriptorEtsi.class, DeviceDescriptorFcc.class, DeviceDescriptorIsed.class})
-public abstract class DeviceDescriptor {
+public class DeviceDescriptor {
 
-  /**
-   * Key Bridge extension. REQUIRED. Consolidates FCC, ISED and ETSI fields.
-   * <p>
-   * Specifies a device's government certification ID (Section 9.2.2.1). This is
-   * the device's FCC certification identifier, Industry Canada Identification
-   * Number (IC ID), or other certification number for the operating
-   * jurisdiction.
-   */
-  @XmlElement(required = true)
-  private String deviceId;
-  /**
-   * Key Bridge extension. REQUIRED. Consolidates FCC, ISED and ETSI fields.
-   * <p>
-   * Specifies the Device operating mode (Section 9.2.2.2) of TV-band
-   * white-space device, as defined by rule. Valid values for US and Canada are
-   * "FIXED", "MODE2_HP" (for high power), "MODE2_LP" (for low power), "MODE1",
-   * "LPA". For ETSI regions, valid values are "A", "B".
-   */
-  @XmlElement(required = true)
-  private String deviceMode;
   /**
    * Key Bridge modification. REQUIRED. Change from List to single instance. A
    * device may only register and operate under ONE jurisdiction at a time.
@@ -80,6 +62,27 @@ public abstract class DeviceDescriptor {
    */
   @XmlElement(required = true)
   private PawsRulesetType rulesetId;
+  /**
+   * Key Bridge extension. REQUIRED. Consolidates FCC, ISED and ETSI fields.
+   * <p>
+   * Specifies the Device operating mode (Section 9.2.2.2) of TV-band
+   * white-space device, as defined by rule. Valid values for US and Canada are
+   * "FIXED", "MODE2", "MODE1", "LPA". For ETSI regions, valid values are "A",
+   * "B".
+   */
+  @XmlElement(required = true)
+  private String deviceMode;
+
+  /**
+   * Key Bridge extension. REQUIRED. Consolidates FCC, ISED and ETSI fields.
+   * <p>
+   * Specifies a device's government certification ID (Section 9.2.2.1). This is
+   * the device's FCC certification identifier, Industry Canada Identification
+   * Number (IC ID), or other certification number for the operating
+   * jurisdiction.
+   */
+  @XmlElement(required = true)
+  private String deviceId;
 
   /**
    * The manufacturer’s device serial number is <strike>OPTIONAL</string>
@@ -129,10 +132,59 @@ public abstract class DeviceDescriptor {
    */
   private String emissionDesignator;
 
+  //
+  // ETSI only fields
+  //
+  /**
+   * Specifies the white-space device type, as defined by the ETSI Harmonised
+   * Standard [ETSI-EN-301-598]. Valid values are single-letter strings, such as
+   * "A", "B", etc. Consult the documentation for details about the device
+   * types.
+   * <p>
+   * Reference 4.2.1 Equipment types
+   *
+   * @deprecated consolidated into the `DeviceDescriptor::deviceType` field
+   */
+  @XmlElement(required = true)
+  private EtsiEquipmentType etsiEnDeviceType;
+  /**
+   * Specifies the white-space device technology identifier, as defined by the
+   * ETSI Harmonised Standard [ETSI-EN-301-598]. The maximum length of the
+   * string value is 64 octets.
+   * <p>
+   * Table 3: Device Parameters. A set of characters representing that allows to
+   * uniquely identify the technology. This may include: name of the
+   * organization responsible for the technology specifications; specification
+   * number, version and issue date.
+   */
+  @XmlElement(required = true)
+  private String etsiEnTechnologyId;
+  /**
+   * Specifies the white-space device category, as defined by the ETSI
+   * Harmonised Standard [ETSI-EN-301-598]. Valid values are the strings
+   * "master" and "slave". It is case insensitive.
+   */
+  @XmlElement(required = true)
+  private EtsiDeviceCategory etsiEnDeviceCategory;
+
+  /**
+   * Specifies the white-space device emissions class, as defined by the ETSI
+   * Harmonised Standard [ETSI-EN-301-598], that characterizes the out-of-block
+   * emissions of the device. The values are represented by numeric strings,
+   * such as "1", "2", "3", etc.
+   * <p>
+   * Reference 4.2.4.2.2 Limits and Table 2: Adjacent Channel Leakage Ratios
+   * (ACLR) for different Device Emission Classes.
+   */
+  @XmlElement(required = true)
+  private Integer etsiEnDeviceEmissionsClass;
+
+  /**
+   * Default no-arg constructor.
+   */
   public DeviceDescriptor() {
   }
 
-  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   /**
    * Constructor declaring the PawsRulesetType of this device descriptor.
    *
@@ -142,6 +194,7 @@ public abstract class DeviceDescriptor {
     this.rulesetId = rulesetId;
   }
 
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
   /**
    * Get the manufacturer’s device serial number
    *
@@ -241,6 +294,85 @@ public abstract class DeviceDescriptor {
 
   public void setEmissionDesignator(String emissionDesignator) {
     this.emissionDesignator = emissionDesignator;
+  }//</editor-fold>
+
+  //<editor-fold defaultstate="collapsed" desc="ETSI Getter and Setter">
+  /**
+   * Get the white-space device type
+   *
+   * @return the white-space device type
+   */
+  public EtsiEquipmentType getEtsiEnDeviceType() {
+    return etsiEnDeviceType;
+  }
+
+  /**
+   * Set the white-space device type
+   *
+   * @param etsiEnDeviceType the white-space device type
+   */
+  public void setEtsiEnDeviceType(EtsiEquipmentType etsiEnDeviceType) {
+    this.etsiEnDeviceType = etsiEnDeviceType;
+  }
+
+  /**
+   * Get a string to uniquely identify the technology. This may include: name of
+   * the organization responsible for the technology specifications;
+   * specification number, version and issue date.
+   *
+   * @return the Technology identifier
+   */
+  public String getEtsiEnTechnologyId() {
+    return etsiEnTechnologyId;
+  }
+
+  /**
+   * Set a string to uniquely identify the technology. This may include: name of
+   * the organization responsible for the technology specifications;
+   * specification number, version and issue date.
+   *
+   * @param etsiEnTechnologyId the Technology identifier
+   */
+  public void setEtsiEnTechnologyId(String etsiEnTechnologyId) {
+    this.etsiEnTechnologyId = etsiEnTechnologyId;
+  }
+
+  /**
+   * Get the white-space device category. Valid values are "master" and "slave".
+   *
+   * @return the white-space device category.
+   */
+  public EtsiDeviceCategory getEtsiEnDeviceCategory() {
+    return etsiEnDeviceCategory;
+  }
+
+  /**
+   * Set the white-space device category. Valid values are "master" and "slave".
+   *
+   * @param etsiEnDeviceCategory the white-space device category.
+   */
+  public void setEtsiEnDeviceCategory(EtsiDeviceCategory etsiEnDeviceCategory) {
+    this.etsiEnDeviceCategory = etsiEnDeviceCategory;
+  }
+
+  /**
+   * Get the white-space device emissions class that characterizes the
+   * out-of-block emissions of the device.
+   *
+   * @return the white-space device emissions class
+   */
+  public EtsiEmissionClassType getEtsiEnDeviceEmissionsClass() {
+    return etsiEnDeviceEmissionsClass == null ? null : EtsiEmissionClassType.fromCode(etsiEnDeviceEmissionsClass);
+  }
+
+  /**
+   * Set the white-space device emissions class that characterizes the
+   * out-of-block emissions of the device.
+   *
+   * @param etsiEnDeviceEmissionsClass the white-space device emissions class
+   */
+  public void setEtsiEnDeviceEmissionsClass(EtsiEmissionClassType etsiEnDeviceEmissionsClass) {
+    this.etsiEnDeviceEmissionsClass = etsiEnDeviceEmissionsClass == null ? null : etsiEnDeviceEmissionsClass.getCode();
   }//</editor-fold>
 
   /**
