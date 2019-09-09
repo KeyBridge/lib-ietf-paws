@@ -20,6 +20,7 @@ package org.ietf.lib.paws.type;
 
 import java.time.Duration;
 import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
 
 /**
  * PAWS Ruleset ID Registry
@@ -58,7 +59,7 @@ public enum PawsRulesetType {
    * @deprecated Part 15H updated ca. 2015-2019 fromm the 600 MHz repack.
    */
   @Deprecated
-  FCC_Part15H_2010("FccTvBandWhiteSpace-2010", "USA", "US", 50, Duration.ofHours(48), Duration.ofDays(365)),
+  FCC_Part_15_H_2010("USA", "US", 50, Duration.ofHours(48), Duration.ofDays(365)),
 
   /**
    * Title 47: Telecommunication PART 15—RADIO FREQUENCY DEVICES Subpart H—White
@@ -71,7 +72,7 @@ public enum PawsRulesetType {
    * <a href="http://www.ecfr.gov/cgi-bin/text-idx?rgn=div6&view=text&node=47:1.0.1.1.16.8">Subpart
    * H—White Space Devices</a>
    */
-  FCC_Part15H_2019("FCC-Part15H-2019", "USA", "US", 50, Duration.ofHours(48), Duration.ofDays(365)),
+  FCC_Part_15_H_2019("USA", "US", 50, Duration.ofHours(48), Duration.ofDays(365)),
 
   /**
    * DBS-01 — White Space Database Specifications
@@ -82,7 +83,7 @@ public enum PawsRulesetType {
    * @see
    * <a href="https://www.ic.gc.ca/eic/site/smt-gst.nsf/eng/sf10928.html">DBS-01</a>
    */
-  ISED_DBS01_2015("ISED-DBS01-2015", "CAN", "CA", 50, Duration.ofHours(48), Duration.ofDays(365)),
+  ISED_DBS_01_2015("CAN", "CA", 50, Duration.ofHours(48), Duration.ofDays(365)),
 
   /**
    * ETSI EN 301 598 V1.1.1 (2014-04)
@@ -96,7 +97,8 @@ public enum PawsRulesetType {
    * @deprecated superceded by "ETSI-EN-301-598-2.1.1"
    */
   @Deprecated
-  ETSI_EN301_598_111("ETSI-EN-301-598-1.1.1"),
+  @XmlEnumValue("ETSI-EN-301-598-1.1.1")
+  ETSI_EN_301_598_111,
 
   /**
    * ETSI EN 301 598 V2.1.1 (2018-01)
@@ -108,12 +110,8 @@ public enum PawsRulesetType {
    * @see
    * <a href="https://www.etsi.org/deliver/etsi_en/301500_301599/301598/02.01.01_60/en_301598v020101p.pdf">ETSI-EN-301-598</a>
    */
-  ETSI_EN301_598_211("ETSI-EN-301-598-2.1.1");
-
-  /**
-   * The id value.
-   */
-  private final String id;
+  @XmlEnumValue("ETSI-EN-301-598-2.1.1")
+  ETSI_EN_301_598_211;
 
   /**
    * The ISO3 country code.
@@ -145,8 +143,7 @@ public enum PawsRulesetType {
    */
   private final Duration lpaLeaseTime;
 
-  private PawsRulesetType(String id) {
-    this.id = id;
+  private PawsRulesetType() {
     this.iso3 = null;
     this.iso2 = null;
     this.maxLocationChange = 0;
@@ -154,22 +151,12 @@ public enum PawsRulesetType {
     this.lpaLeaseTime = Duration.ofHours(48); // Defaults to 48 hour.
   }
 
-  private PawsRulesetType(String id, String iso3, String iso2, double maxLocationChange, Duration wsdLeaseTime, Duration lpaLeaseTime) {
-    this.id = id;
+  private PawsRulesetType(String iso3, String iso2, double maxLocationChange, Duration wsdLeaseTime, Duration lpaLeaseTime) {
     this.iso3 = iso3;
     this.iso2 = iso2;
     this.maxLocationChange = maxLocationChange;
     this.wsdLeaseTime = wsdLeaseTime;
     this.lpaLeaseTime = lpaLeaseTime;
-  }
-
-  /**
-   * Get the id.
-   *
-   * @return the id String
-   */
-  public String getId() {
-    return id;
   }
 
   /**
@@ -217,31 +204,6 @@ public enum PawsRulesetType {
    */
   public Duration getLpaLeaseTime() {
     return lpaLeaseTime;
-  }
-
-  /**
-   * Get the PawsRulesetType from its ID
-   *
-   * @param id the id
-   * @return the corresponding type
-   */
-  public static PawsRulesetType fromId(String id) {
-    for (PawsRulesetType type : PawsRulesetType.values()) {
-      if (type.getId().equalsIgnoreCase(id)) {
-        return type;
-      }
-    }
-    throw new IllegalArgumentException("RFC7545 unrecognized ruleset type: " + id);
-  }
-
-  /**
-   * Returns the ID value.
-   *
-   * @return the id string value
-   */
-  @Override
-  public String toString() {
-    return id;
   }
 
 }
