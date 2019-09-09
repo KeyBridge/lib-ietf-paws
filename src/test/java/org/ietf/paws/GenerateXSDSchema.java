@@ -70,9 +70,6 @@ public class GenerateXSDSchema {
     classes.add(DeviceCapabilities.class);
 
     classes.add(DeviceDescriptor.class);
-    classes.add(DeviceDescriptorEtsi.class);
-    classes.add(DeviceDescriptorFcc.class);
-    classes.add(DeviceDescriptorIsed.class);
 
     classes.add(DeviceOwner.class);
     classes.add(DeviceValidity.class);
