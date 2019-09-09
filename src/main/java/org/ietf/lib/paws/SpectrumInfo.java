@@ -47,13 +47,13 @@ public class SpectrumInfo extends AbstractSpectrum {
    * should NOT be included in a channel availability list. When not configured
    * this may be assumed to be FALSE.
    */
-  private boolean blocked;
+  private Boolean blocked;
   /**
    * Indicator that this channel is subject to a FAST POLLING Enforcement record
    * and the default (48 hour maximum) schedule should be shortened. When not
    * configured this may be assumed to be FALSE.
    */
-  private boolean fastPoll;
+  private Boolean fastPoll;
 
   /**
    * A list of co-channel services occupying the current channel.
@@ -109,7 +109,7 @@ public class SpectrumInfo extends AbstractSpectrum {
    *
    * @return blocking enforcement flag
    */
-  public boolean getEnforcementBlocking() {
+  public Boolean getEnforcementBlocking() {
     return blocked;
   }
 
@@ -119,11 +119,11 @@ public class SpectrumInfo extends AbstractSpectrum {
    *
    * @param blocked blocking enforcement flag
    */
-  public void setBlocked(boolean blocked) {
+  public void setBlocked(Boolean blocked) {
     this.blocked = blocked;
   }
 
-  public boolean getEnforcementFastPoll() {
+  public Boolean getEnforcementFastPoll() {
     return fastPoll;
   }
 
@@ -133,7 +133,7 @@ public class SpectrumInfo extends AbstractSpectrum {
    *
    * @param fastPoll blocking enforcement flag
    */
-  public void setFastPoll(boolean fastPoll) {
+  public void setFastPoll(Boolean fastPoll) {
     this.fastPoll = fastPoll;
   }
 
