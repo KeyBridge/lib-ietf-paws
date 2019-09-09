@@ -21,14 +21,17 @@ package org.ietf.paws;
 import ch.keybridge.lib.gis.common.GisCalculator;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 import org.ietf.lib.paws.*;
 import org.ietf.lib.paws.message.AvailableSpectrumRequest;
+import org.ietf.lib.paws.message.SpectrumUseNotify;
 import org.ietf.lib.paws.type.AntennaPolarizationType;
 import org.ietf.lib.paws.type.FccDeviceType;
+import org.ietf.lib.paws.type.PawsRulesetType;
 import org.ietf.lib.paws.type.SpectrumRequestType;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
@@ -130,13 +133,29 @@ public class EntityBuilder {
     return request;
   }
 
+  public SpectrumUseNotify buildSpectrumUseNotify() {
+    SpectrumUseNotify notify = new SpectrumUseNotify();
+    notify.setDeviceDesc(buildDeviceDesc(FccDeviceType.FIXED));
+    notify.setLocation(buildGeolocation());
+    for (int i = 0; i < 1 + r.nextInt(3); i++) {
+      notify.addChannel(buildSpectrumChannel(getRandomChannel()));
+    }
+    notify.setTimeRange(buildTimeRange());
+
+    return notify;
+  }
+
+  public TvChannel getRandomChannel() {
+    return TvChannel.values()[r.nextInt(TvChannel.values().length)];
+  }
+
   public SpectrumRequestType getRandomSpectrumRequestType() {
     return SpectrumRequestType.values()[r.nextInt(SpectrumRequestType.values().length)];
   }
 
   public DeviceDescriptor buildDeviceDesc(FccDeviceType deviceMode) {
     DeviceDescriptor device = new DeviceDescriptor();
-
+    device.setRulesetIds(PawsRulesetType.FCC_PART_15_H_2019);
     device.setSerialNumber(UUID.randomUUID().toString());
     device.setManufacturerId(l.getWords(2));
     device.setModelId(l.getWords(1));
@@ -292,5 +311,16 @@ public class EntityBuilder {
     }
 
     return capabilities;
+  }
+
+  private SpectrumChannel buildSpectrumChannel(TvChannel channel) {
+    return new SpectrumChannel(channel.name(), channel.getFrequencyMin(), channel.getFrequencyMax());
+  }
+
+  private EventTime buildTimeRange() {
+    EventTime eventTime = new EventTime();
+    eventTime.setStartTime(ZonedDateTime.now());
+    eventTime.setStopTime(ZonedDateTime.now().plusHours(12));
+    return eventTime;
   }
 }
