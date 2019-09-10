@@ -5,6 +5,7 @@ May 2015
                                                                 
 # Protocol to Access White-Space (PAWS) Databases
 
+**Clean room implementation in Java**
 
 Portions of the radio spectrum that are allocated to licensees are
 available for non-interfering use.  This available spectrum is called
@@ -14,6 +15,8 @@ provide opportunities for innovation, resulting in greater overall
 spectrum utilization.
 
 **Protocol Overview**
+
+![mermaid-diagram](docs/mermaid-diagram-20190910102258.svg)
 
     A Master Device uses PAWS to obtain a schedule of available spectrum
     at its location.
