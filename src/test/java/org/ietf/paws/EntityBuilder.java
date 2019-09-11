@@ -30,7 +30,7 @@ import org.ietf.lib.paws.*;
 import org.ietf.lib.paws.message.AvailableSpectrumRequest;
 import org.ietf.lib.paws.message.SpectrumUseNotify;
 import org.ietf.lib.paws.type.AntennaPolarizationType;
-import org.ietf.lib.paws.type.FccDeviceType;
+import org.ietf.lib.paws.type.FccDeviceMode;
 import org.ietf.lib.paws.type.PawsRulesetType;
 import org.ietf.lib.paws.type.SpectrumRequestType;
 import org.locationtech.jts.geom.Coordinate;
@@ -97,31 +97,31 @@ public class EntityBuilder {
        * MASTER must identify itself.
        */
       case SLAVE: {
-        request.setDeviceDesc(buildDeviceDesc(FccDeviceType.MODE2));
+        request.setDeviceDesc(buildDeviceDesc(FccDeviceMode.MODE2));
         request.setAntenna(buildAntennaCharacteristics());
         request.setLocation(buildGeolocation());
 
-        request.setMasterDeviceDesc(buildDeviceDesc(FccDeviceType.FIXED));
+        request.setMasterDeviceDesc(buildDeviceDesc(FccDeviceMode.FIXED));
         request.setMasterDeviceLocation(buildGeolocation());
         request.setCapabilities(buildDeviceCapabilities());
       }
       break;
 
       case MASTER: {
-        request.setDeviceDesc(buildDeviceDesc(FccDeviceType.FIXED));
+        request.setDeviceDesc(buildDeviceDesc(FccDeviceMode.FIXED));
         request.setAntenna(buildAntennaCharacteristics());
         request.setLocation(buildGeolocation());
       }
       break;
 
       case LPA: {
-        request.setDeviceDesc(buildDeviceDesc(FccDeviceType.LPA));
+        request.setDeviceDesc(buildDeviceDesc(FccDeviceMode.LPA));
         request.setLocation(buildGeolocation());
       }
       break;
 
       case INFO:
-        request.setDeviceDesc(buildDeviceDesc(FccDeviceType.LPA));
+        request.setDeviceDesc(buildDeviceDesc(FccDeviceMode.LPA));
         request.setLocation(buildGeolocation());
         break;
 
@@ -135,7 +135,7 @@ public class EntityBuilder {
 
   public SpectrumUseNotify buildSpectrumUseNotify() {
     SpectrumUseNotify notify = new SpectrumUseNotify();
-    notify.setDeviceDesc(buildDeviceDesc(FccDeviceType.FIXED));
+    notify.setDeviceDesc(buildDeviceDesc(FccDeviceMode.FIXED));
     notify.setLocation(buildGeolocation());
     for (int i = 0; i < 1 + r.nextInt(3); i++) {
       notify.addChannel(buildSpectrumChannel(getRandomChannel()));
@@ -153,7 +153,7 @@ public class EntityBuilder {
     return SpectrumRequestType.values()[r.nextInt(SpectrumRequestType.values().length)];
   }
 
-  public DeviceDescriptor buildDeviceDesc(FccDeviceType deviceMode) {
+  public DeviceDescriptor buildDeviceDesc(FccDeviceMode deviceMode) {
     DeviceDescriptor device = new DeviceDescriptor();
     device.setRulesetIds(PawsRulesetType.FCC_PART_15_H_2019);
     device.setSerialNumber(UUID.randomUUID().toString());

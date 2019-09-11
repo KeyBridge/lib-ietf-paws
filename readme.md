@@ -16,7 +16,7 @@ spectrum utilization.
 
 **Protocol Overview**
 
-![mermaid-diagram](docs/mermaid-diagram-20190910102258.svg)
+![sequence diagram](docs/mermaid-diagram-20190910102258.svg)
 
     A Master Device uses PAWS to obtain a schedule of available spectrum
     at its location.

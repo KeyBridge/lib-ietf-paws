@@ -18,16 +18,15 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * Enumerated white space device access point operating modes for operation in
- * Canada under ISED jurisdiction.
+ * the United States under FCC jurisdiction.
  *
  * @since v0.6.3 added 01/28/17 copied from lib-whitespace-messaging
- * @since v1.0.0 rename 07/22/19 DeviceModeType to TvwsDeviceModeType
  * @since v0.14.0 copy 08/03/19 to ietf-paws library
  */
 @XmlEnum
-@XmlType(name = "IsedDeviceType")
-public enum IsedDeviceType {
-  // Note: the list is in descending order. FORBIDDEN must be last in this list.
+@XmlType(name = "FccDeviceMode")
+public enum FccDeviceMode {
+
   /**
    * White Space Access Point (Fixed) operating at full power.
    * <p>
@@ -36,28 +35,18 @@ public enum IsedDeviceType {
    */
   FIXED,
   /**
-   * White Space Access Point (Unlicensed, Mode II) operating at full power.
+   * White Space Access Point (Unlicensed, Mode II) operating at full power or
+   * reduced power, (to enable operation on an adjacent channel).
    * <p>
    * Device is Mode 2 standard classification (transportable, not in-motion).
    */
-  MODE2_HP,
-  /**
-   * White Space Access Point (Unlicensed, Mode II) operating at reduced power,
-   * typically to enable operation on an adjacent channel.
-   * <p>
-   * Device is Mode 2 low-power classification (transportable, not in-motion).
-   */
-  MODE2_LP,
+  MODE2,
   /**
    * White Space Client Device (Unlicensed, Mode I) operating at low power.
    * <p>
    * Device is Mode 1 classification.
    */
   MODE1,
-  /**
-   * Development license; similar to low power auxiliary.
-   */
-  DEV,
   /**
    * Low power auxiliary, wireless microphone.
    */

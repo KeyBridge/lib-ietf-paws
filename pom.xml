@@ -46,6 +46,8 @@
     - add `communicatingWith` device descriptor to support US Mode2 operation
     - add Error element to all message responses
     v0.21.0 - consolidate deviceDescriptor subclasses into one
+    - rename enumerated deviceType to deviceMode
+
 
   </description>
 
