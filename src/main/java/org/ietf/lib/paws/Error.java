@@ -15,7 +15,7 @@ package org.ietf.lib.paws;
 
 import java.util.Objects;
 import javax.xml.bind.annotation.*;
-import org.ietf.lib.paws.type.PawsErrorCode;
+import org.ietf.lib.paws.type.PawsErrorType;
 
 /**
  * 5.17. Error Element
@@ -116,6 +116,11 @@ import org.ietf.lib.paws.type.PawsErrorCode;
 public class Error {
 
   /**
+   * Key Bridge extension. Indicates the enumerated error type.
+   */
+  private PawsErrorType type;
+
+  /**
    * An integer code that indicates the error type is REQUIRED. Values MUST be
    * within the range -32768 to 32767, inclusive.
    */
@@ -136,16 +141,25 @@ public class Error {
   public Error() {
   }
 
-  public Error(PawsErrorCode pawsError) {
+  public Error(PawsErrorType pawsError) {
     this.code = pawsError.getCode();
     this.message = pawsError.getDescription();
   }
 
-  public static Error getInstance(PawsErrorCode pawsError) {
+  public static Error getInstance(PawsErrorType pawsError) {
     Error error = new Error();
     error.setCode(pawsError.getCode());
     error.setMessage(pawsError.getDescription());
     return error;
+  }
+
+  //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
+  public PawsErrorType getType() {
+    return type;
+  }
+
+  public void setType(PawsErrorType type) {
+    this.type = type;
   }
 
   public Integer getCode() {
@@ -170,7 +184,7 @@ public class Error {
 
   public void setData(Object data) {
     this.data = data;
-  }
+  }//</editor-fold>
 
   @Override
   public int hashCode() {
@@ -192,6 +206,11 @@ public class Error {
     }
     final Error other = (Error) obj;
     return Objects.equals(this.code, other.code);
+  }
+
+  @Override
+  public String toString() {
+    return "Error{" + "code=" + code + ", message=" + message + '}';
   }
 
 }
