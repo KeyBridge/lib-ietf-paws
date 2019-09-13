@@ -16,8 +16,8 @@ package org.ietf.lib.paws;
 import java.util.Objects;
 import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.type.EtsiDeviceCategory;
+import org.ietf.lib.paws.type.EtsiDeviceMode;
 import org.ietf.lib.paws.type.EtsiEmissionClassType;
-import org.ietf.lib.paws.type.EtsiEquipmentType;
 import org.ietf.lib.paws.type.PawsRulesetType;
 
 /**
@@ -67,8 +67,17 @@ public class DeviceDescriptor {
    * <p>
    * Specifies the Device operating mode (Section 9.2.2.2) of TV-band
    * white-space device, as defined by rule. Valid values for US and Canada are
-   * "FIXED", "MODE2", "MODE1", "LPA". For ETSI regions, valid values are "A",
-   * "B".
+   * "FIXED", "MODE2", "MODE1", "LPA".
+   * <p>
+   * For ETSI regions, valid values are "A", "B", as defined by the ETSI
+   * Harmonised Standard [ETSI-EN-301-598]. Consult the documentation for
+   * details about the device types.
+   * <p>
+   * Reference 4.2.1 Equipment types
+   *
+   * @see FccDeviceMode
+   * @see IsedDeviceMode
+   * @see EtsiDeviceMode
    */
   @XmlElement(required = true)
   private String deviceMode;
@@ -135,18 +144,6 @@ public class DeviceDescriptor {
   //
   // ETSI only fields
   //
-  /**
-   * Specifies the white-space device type, as defined by the ETSI Harmonised
-   * Standard [ETSI-EN-301-598]. Valid values are single-letter strings, such as
-   * "A", "B", etc. Consult the documentation for details about the device
-   * types.
-   * <p>
-   * Reference 4.2.1 Equipment types
-   *
-   * @deprecated consolidated into the `DeviceDescriptor::deviceType` field
-   */
-  @XmlElement(required = true)
-  private EtsiEquipmentType etsiEnDeviceType;
   /**
    * Specifies the white-space device technology identifier, as defined by the
    * ETSI Harmonised Standard [ETSI-EN-301-598]. The maximum length of the
@@ -298,24 +295,6 @@ public class DeviceDescriptor {
 
   //<editor-fold defaultstate="collapsed" desc="ETSI Getter and Setter">
   /**
-   * Get the white-space device type
-   *
-   * @return the white-space device type
-   */
-  public EtsiEquipmentType getEtsiEnDeviceType() {
-    return etsiEnDeviceType;
-  }
-
-  /**
-   * Set the white-space device type
-   *
-   * @param etsiEnDeviceType the white-space device type
-   */
-  public void setEtsiEnDeviceType(EtsiEquipmentType etsiEnDeviceType) {
-    this.etsiEnDeviceType = etsiEnDeviceType;
-  }
-
-  /**
    * Get a string to uniquely identify the technology. This may include: name of
    * the organization responsible for the technology specifications;
    * specification number, version and issue date.
@@ -452,7 +431,7 @@ public class DeviceDescriptor {
 
   @Override
   public String toString() {
-    return ",serialNumber=" + serialNumber + ", manufacturerId=" + manufacturerId + ", modelId=" + modelId + ", rulesetId=" + rulesetId + ", emissionDesignator=" + emissionDesignator;
+    return rulesetId + " " + deviceMode + " (" + deviceId + ", " + serialNumber + ')';
   }
 
 }
