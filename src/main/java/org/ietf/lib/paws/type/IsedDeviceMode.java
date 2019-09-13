@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 @XmlType(name = "IsedDeviceMode")
 public enum IsedDeviceMode {
-  // Note: the list is in descending order. FORBIDDEN must be last in this list.
+
   /**
    * White Space Access Point (Fixed) operating at full power.
    * <p>
@@ -36,24 +36,17 @@ public enum IsedDeviceMode {
    */
   FIXED,
   /**
-   * White Space Access Point (Unlicensed, Mode II) operating at full power.
+   * White Space Access Point (Unlicensed, Mode II).
    * <p>
    * Device is Mode 2 standard classification (transportable, not in-motion).
    */
-  MODE2_HP,
-  /**
-   * White Space Access Point (Unlicensed, Mode II) operating at reduced power,
-   * typically to enable operation on an adjacent channel.
-   * <p>
-   * Device is Mode 2 low-power classification (transportable, not in-motion).
-   */
-  MODE2_LP,
+  MODE_2,
   /**
    * White Space Client Device (Unlicensed, Mode I) operating at low power.
    * <p>
    * Device is Mode 1 classification.
    */
-  MODE1,
+  MODE_1,
   /**
    * Development license; similar to low power auxiliary.
    */
