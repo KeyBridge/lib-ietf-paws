@@ -40,13 +40,13 @@ public enum FccDeviceMode {
    * <p>
    * Device is Mode 2 standard classification (transportable, not in-motion).
    */
-  MODE2,
+  MODE_2,
   /**
    * White Space Client Device (Unlicensed, Mode I) operating at low power.
    * <p>
    * Device is Mode 1 classification.
    */
-  MODE1,
+  MODE_1,
   /**
    * Low power auxiliary, wireless microphone.
    */
