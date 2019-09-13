@@ -97,7 +97,7 @@ public class EntityBuilder {
        * MASTER must identify itself.
        */
       case SLAVE: {
-        request.setDeviceDesc(buildDeviceDesc(FccDeviceMode.MODE2));
+        request.setDeviceDesc(buildDeviceDesc(FccDeviceMode.MODE_2));
         request.setAntenna(buildAntennaCharacteristics());
         request.setLocation(buildGeolocation());
 
