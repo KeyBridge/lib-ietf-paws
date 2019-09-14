@@ -27,6 +27,23 @@ import org.ietf.lib.paws.DeviceDescriptor;
  * This request is used by a Master Device to determine which Slave Devices are
  * permitted to operate.
  * <pre>
+ *      +------------+     +---------------+      +-------------------+
+ *      |Slave Device|     | Master Device |      | Spectrum Database |
+ *      +------------+     +---------------+      +-------------------+
+ *          | AVAIL_SPEC_REQ  |                           |
+ *          |................>|                           |
+ *          |                 |    DEV_VALID_REQ          |
+ *          |                 |-------------------------->|
+ *          |                 |    DEV_VALID_RESP         |
+ *          |                 |<--------------------------|
+ *          | AVAIL_SPEC_RESP |                           |
+ *          |<................|                           |
+ *          | SPECTRUM_USE    |                           |
+ *          |................>|    SPECTRUM_USE_NOTIFY    |
+ *          |                 |-------------------------->|
+ *          |                 |     SPECTRUM_USE_RESP     |
+ *          |                 |<--------------------------|
+ *
  *   +---------------------------------------------+
  *   |DEV_VALID_REQ                                |
  *   +----------------------------------+----------+
@@ -77,6 +94,29 @@ public class DeviceValidationRequest {
 
   public void setMasterDeviceDesc(DeviceDescriptor masterDeviceDesc) {
     this.masterDeviceDesc = masterDeviceDesc;
+  }
+
+  /**
+   * Validate a device validation request message.
+   *
+   * @throws Exception if the transmit channel power is not provided. The
+   *                   exception message will describe the invalid
+   *                   configuration.
+   * @since v0.21.0 added 09/14/19
+   */
+  public void validate() throws Exception {
+    if (deviceDesc == null) {
+      throw new Exception("deviceDesc is required.");
+    }
+    deviceDesc.validate();
+
+    if (masterDeviceDesc != null) {
+      try {
+        masterDeviceDesc.validate();
+      } catch (Exception exception) {
+        throw new Exception("masterDeviceDesc::" + exception.getMessage());
+      }
+    }
   }
 
 }

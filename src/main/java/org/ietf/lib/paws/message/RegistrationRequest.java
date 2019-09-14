@@ -89,6 +89,20 @@ public class RegistrationRequest {
   /**
    * Key Bridge extension. (Optional)
    * <p>
+   * The user provided government authorization information. This is typically a
+   * call sign or license number.
+   * <p>
+   * If not provided by the user then the registration request is interpreted to
+   * represent an unlicensed service.
+   *
+   * @since v0.22.0
+   */
+  private String authorization;
+
+  /**
+   * /**
+   * Key Bridge extension. (Optional)
+   * <p>
    * The user provided service group identifier. A service group identifier is
    * specified by the registering user to inform the SAS that a collection of TV
    * white space devices should be considered as part of a one service and not
@@ -172,6 +186,14 @@ public class RegistrationRequest {
 
   public void setServiceDescription(String serviceDescription) {
     this.serviceDescription = serviceDescription;
+  }
+
+  public String getAuthorization() {
+    return authorization;
+  }
+
+  public void setAuthorization(String authorization) {
+    this.authorization = authorization;
   }//</editor-fold>
 
   /**

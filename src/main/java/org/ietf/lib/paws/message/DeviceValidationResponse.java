@@ -18,7 +18,6 @@
  */
 package org.ietf.lib.paws.message;
 
-import java.util.List;
 import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.DbUpdateSpec;
 import org.ietf.lib.paws.DeviceValidity;
@@ -60,7 +59,7 @@ public class DeviceValidationResponse {
    * device validation one device at a time.
    */
   @XmlElement(required = true)
-  private List<DeviceValidity> deviceValidities;
+  private DeviceValidity deviceValidity;
   /**
    * The Database MAY include a DbUpdateSpec (Section 5.7) to notify the device
    * of a change to the database URI, providing one or more alternate database
@@ -76,12 +75,12 @@ public class DeviceValidationResponse {
    */
   private Error error;
 
-  public List<DeviceValidity> getDeviceValidities() {
-    return deviceValidities;
+  public DeviceValidity getDeviceValidity() {
+    return deviceValidity;
   }
 
-  public void setDeviceValidities(List<DeviceValidity> deviceValidities) {
-    this.deviceValidities = deviceValidities;
+  public void setDeviceValidity(DeviceValidity deviceValidity) {
+    this.deviceValidity = deviceValidity;
   }
 
   public DbUpdateSpec getDatabaseChange() {

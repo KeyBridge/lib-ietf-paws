@@ -246,17 +246,13 @@ public class AvailableSpectrumRequest {
   /**
    * Validate this instance.
    *
-   * @throws Exception describing the invalid configuration
+   * @throws Exception if any required values are not provided. The exception
+   *                   message will describe the invalid configuration.
    */
   public void validate() throws Exception {
     if (requestType == null) {
-      throw new Exception("AvailableSpectrumRequest::requestType is required");
+      throw new Exception("requestType is required");
     }
-    /**
-     * All require [requestType]
-     */
-//    boolean valid = requestType != null;
-
     switch (requestType) {
       /**
        * SLAVE requires [masterDeviceDesc, masterDeviceLocation] + [deviceDesc,
@@ -264,37 +260,42 @@ public class AvailableSpectrumRequest {
        */
       case SLAVE:
         if (masterDeviceDesc == null) {
-          throw new Exception("AvailableSpectrumRequest::masterDeviceDesc is required");
+          throw new Exception("masterDeviceDesc is required");
         }
-        masterDeviceDesc.isValid();
+        try {
+          masterDeviceDesc.isValid();
+        } catch (Exception exception) {
+          throw new Exception("masterDeviceDesc::" + exception.getMessage());
+        }
         if (masterDeviceLocation == null) {
-          throw new Exception("AvailableSpectrumRequest::masterDeviceLocation is required");
+          throw new Exception("masterDeviceLocation is required when masterDeviceDesc is present.");
         }
-        masterDeviceLocation.isValid();
-//        valid && valid && masterDeviceDesc != null && masterDeviceLocation != null;
+        try {
+          masterDeviceLocation.isValid();
+        } catch (Exception exception) {
+          throw new Exception("masterDeviceLocation::" + exception.getMessage());
+        }
       /**
        * SLAVE + MASTER requires [deviceDesc, antenna] + [location]
        */
       case MASTER:
         if (antenna == null) {
-          throw new Exception("AvailableSpectrumRequest::antenna is required");
+          throw new Exception("antenna is required");
         }
         antenna.isValid();
         if (deviceDesc == null) {
-          throw new Exception("AvailableSpectrumRequest::deviceDesc is required");
+          throw new Exception("deviceDesc is required");
         }
         deviceDesc.isValid();
-      //        valid = valid && && antenna != null && deviceDesc != null;
 
       /**
        * SLAVE + MASTER + LPA requires [location]
        */
       case LPA:
         if (location == null) {
-          throw new Exception("AvailableSpectrumRequest::location is required");
+          throw new Exception("location is required");
         }
         location.isValid();
-//        valid = valid && location != null;
         break;
 
       default:

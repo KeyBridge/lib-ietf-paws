@@ -210,15 +210,49 @@ public class SpectrumUseNotify {
    * Validate a spectrum use notify message. If a transmit channel is indicated,
    * the transmit channel power must also be declared.
    *
-   * @return true if value
-   * @throws Exception if the transmit channel power is not provided
+   * @throws Exception if the transmit channel power is not provided. The
+   *                   exception message will describe the invalid
+   *                   configuration.
    * @since v0.21.0 added 09/14/19
    */
-  public boolean validate() throws Exception {
-    if (transmitChannel != null && transmitChannel.getPower() == null) {
-      throw new Exception("Transmit channel power (dBW) is required.");
+  public void validate() throws Exception {
+    /**
+     * Confirm the device is properly described.
+     */
+    if (deviceDesc == null) {
+      throw new Exception("deviceDesc is required.");
     }
-    return true;
+    deviceDesc.validate();
+    if (location == null) {
+      throw new Exception("location is required.");
+    }
+    location.validate();
+    /**
+     * Ensure the transmit power is present when required.
+     */
+    if (transmitChannel != null && transmitChannel.getPower() == null) {
+      throw new Exception("transmitChannel::power (dBW) is required.");
+    }
+    /**
+     * Conditionally validate the master configuration.
+     */
+    if (masterDeviceDesc != null) {
+      try {
+        masterDeviceDesc.validate();
+      } catch (Exception exception) {
+        throw new Exception("masterDeviceDesc::" + exception.getMessage());
+      }
+
+      if (masterDeviceLocation == null) {
+        throw new Exception("masterDeviceLocation is required when masterDeviceDesc is present.");
+      }
+      try {
+        masterDeviceLocation.validate();
+      } catch (Exception exception) {
+        throw new Exception("masterDeviceLocation::" + exception.getMessage());
+      }
+
+    }
   }
 
 }

@@ -80,4 +80,23 @@ public class InitializationRequest {
   public void setLocation(GeoLocation location) {
     this.location = location;
   }
+
+  /**
+   * Validate a request message.
+   *
+   * @throws Exception if the transmit channel power is not provided. The
+   *                   exception message will describe the invalid
+   *                   configuration.
+   * @since v0.21.0 added 09/14/19
+   */
+  public void validate() throws Exception {
+    if (deviceDesc == null) {
+      throw new Exception("deviceDesc is required.");
+    }
+    deviceDesc.validate();
+    if (location == null) {
+      throw new Exception("location is required");
+    }
+    location.isValid();
+  }
 }
