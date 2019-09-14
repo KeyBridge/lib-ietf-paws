@@ -20,7 +20,6 @@ package org.ietf.lib.paws.message;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.TreeSet;
 import javax.xml.bind.annotation.*;
 import org.ietf.lib.paws.*;
 
@@ -101,19 +100,34 @@ public class SpectrumUseNotify {
    * then the "resolutionBwHz" value should be set to 100 kHz, even though the
    * actual bandwidth used can be 20 kHz.
    *
-   * @deprecated Use the {@code channels} list instead.
+   * @deprecated Use the {@code transmitChannel} and {@code receiveChannel}
+   * instead.
    */
   @Deprecated
   private Collection<Spectrum> spectra;
 
   /**
-   * Key Bridge Modification.
+   * Key Bridge Modification. Specifies the selected transmit channel
+   * configuration.
    * <p>
    * This is a custom component replacing the list of {@code Spectrum}. In the
    * response only the channel name, frequency and max power are required.
+   *
+   * @since v0.22.0
    */
-  @XmlElement(name = "channels", required = true)
-  private Collection<SpectrumChannel> channels;
+  @XmlElement(required = true)
+  private SpectrumChannel transmitChannel;
+  /**
+   * Key Bridge Modification. Specifies the selected receive channel
+   * configuration.
+   * <p>
+   * This is a custom component replacing the list of {@code Spectrum}. In the
+   * response only the channel name, frequency and max power are required.
+   *
+   * @since v0.22.0
+   */
+  @XmlElement(required = true)
+  private SpectrumChannel receiveChannel;
 
   /**
    * Key Bridge addition: Added to support automated LPA spectrum registration.
@@ -168,27 +182,43 @@ public class SpectrumUseNotify {
     this.spectra = spectra;
   }
 
-  public Collection<SpectrumChannel> getChannels() {
-    if (channels == null) {
-      channels = new TreeSet<>();
-    }
-    return channels;
-  }
-
-  public void setChannels(Collection<SpectrumChannel> channels) {
-    this.channels = channels;
-  }
-
-  public void addChannel(SpectrumChannel channel) {
-    getChannels().add(channel);
-  }
-
   public EventTime getTimeRange() {
     return timeRange;
   }
 
   public void setTimeRange(EventTime timeRange) {
     this.timeRange = timeRange;
+  }
+
+  public SpectrumChannel getTransmitChannel() {
+    return transmitChannel;
+  }
+
+  public void setTransmitChannel(SpectrumChannel transmitChannel) {
+    this.transmitChannel = transmitChannel;
+  }
+
+  public SpectrumChannel getReceiveChannel() {
+    return receiveChannel;
+  }
+
+  public void setReceiveChannel(SpectrumChannel receiveChannel) {
+    this.receiveChannel = receiveChannel;
   }//</editor-fold>
+
+  /**
+   * Validate a spectrum use notify message. If a transmit channel is indicated,
+   * the transmit channel power must also be declared.
+   *
+   * @return true if value
+   * @throws Exception if the transmit channel power is not provided
+   * @since v0.21.0 added 09/14/19
+   */
+  public boolean validate() throws Exception {
+    if (transmitChannel != null && transmitChannel.getPower() == null) {
+      throw new Exception("Transmit channel power (dBW) is required.");
+    }
+    return true;
+  }
 
 }
