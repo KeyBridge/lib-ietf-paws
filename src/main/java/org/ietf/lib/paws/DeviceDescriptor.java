@@ -370,13 +370,13 @@ public class DeviceDescriptor {
    */
   public void validate() throws Exception {
     if (rulesetId == null) {
-      throw new Exception("DeviceDescriptor::rulesetId is required");
+      throw new Exception("rulesetId is required");
     }
     if (deviceId == null) {
-      throw new Exception("DeviceDescriptor::deviceId is required");
+      throw new Exception("deviceId is required");
     }
     if (deviceMode == null) {
-      throw new Exception("DeviceDescriptor::deviceType is required");
+      throw new Exception("deviceType is required");
     }
   }
 
