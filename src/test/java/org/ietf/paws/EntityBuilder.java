@@ -137,9 +137,10 @@ public class EntityBuilder {
     SpectrumUseNotify notify = new SpectrumUseNotify();
     notify.setDeviceDesc(buildDeviceDesc(FccDeviceMode.FIXED));
     notify.setLocation(buildGeolocation());
-    for (int i = 0; i < 1 + r.nextInt(3); i++) {
-      notify.addChannel(buildSpectrumChannel(getRandomChannel()));
-    }
+//    for (int i = 0; i < 1 + r.nextInt(3); i++) {
+    notify.setTransmitChannel(buildSpectrumChannel(getRandomChannel()));
+    notify.setReceiveChannel(buildSpectrumChannel(getRandomChannel()));
+//    }
     notify.setTimeRange(buildTimeRange());
 
     return notify;
