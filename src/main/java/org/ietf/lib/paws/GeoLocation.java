@@ -79,6 +79,7 @@ public class GeoLocation {
    *
    * @deprecated use {@code uncertainty} instead
    */
+  @Deprecated
   private Integer confidence;
   /**
    * Key Bridge extension. (Optional)
@@ -138,7 +139,7 @@ public class GeoLocation {
   /**
    * Get the horizontal position uncertainty / error margin, in meters.
    *
-   * @return the horizontal position uncertainty
+   * @return the horizontal position uncertainty (m)
    */
   public Integer getUncertainty() {
     return uncertainty;
@@ -149,7 +150,7 @@ public class GeoLocation {
    * GPS read positions this will be up to but typically not more than +- 50
    * meters.
    *
-   * @param uncertainty the horizontal position uncertainty
+   * @param uncertainty the horizontal position uncertainty (m)
    */
   public void setUncertainty(Integer uncertainty) {
     this.uncertainty = uncertainty;
