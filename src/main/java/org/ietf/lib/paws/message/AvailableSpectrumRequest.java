@@ -258,7 +258,7 @@ public class AvailableSpectrumRequest {
        * SLAVE requires [masterDeviceDesc, masterDeviceLocation] + [deviceDesc,
        * antenna] + [location]
        */
-      case SLAVE:
+      case SLAVE: // flow through to master
         if (masterDeviceDesc == null) {
           throw new Exception("masterDeviceDesc is required");
         }
@@ -278,7 +278,7 @@ public class AvailableSpectrumRequest {
       /**
        * SLAVE + MASTER requires [deviceDesc, antenna] + [location]
        */
-      case MASTER:
+      case MASTER: // flow through from slave to lpa
         if (antenna == null) {
           throw new Exception("antenna is required");
         }
@@ -291,11 +291,22 @@ public class AvailableSpectrumRequest {
       /**
        * SLAVE + MASTER + LPA requires [location]
        */
-      case LPA:
+      case LPA: // flow through from master
         if (location == null) {
           throw new Exception("location is required");
         }
         location.isValid();
+        break;
+
+      /**
+       * INFO requires Location
+       */
+      case INFO:
+        if (location == null) {
+          throw new Exception("location is required");
+        }
+        location.isValid();
+
         break;
 
       default:
