@@ -63,12 +63,15 @@ public abstract class AbstractSpectrum implements Comparable<AbstractSpectrum> {
   @XmlElement(required = true)
   private Boolean allowed;
   /**
-   * The maximum allowable EIRP value on this channel. (dBW) Defaults to NULL if
-   * not specified.
+   * For available spectrum response: The maximum allowable EIRP value on this
+   * channel. (dBW) Defaults to NULL if not specified.
+   * <p>
+   * For spectrum use notify: Identifies the device transmit channel current
+   * output power (dBW).
    */
   @XmlElement(required = true)
   @XmlJavaTypeAdapter(XmlDouble02PrecisionAdapter.class)
-  private Double maxPower;
+  private Double power;
 
   /**
    * Make the empty constructor protected to encourage use of the
@@ -132,17 +135,22 @@ public abstract class AbstractSpectrum implements Comparable<AbstractSpectrum> {
     this.allowed = allowed;
   }
 
-  public double getMaxPower() {
-    return maxPower;
+  /**
+   * Get the power value
+   *
+   * @return the power value (dBW)
+   */
+  public Double getPower() {
+    return power;
   }
 
   /**
    * Set the max power, ONLY if the provided value is a valid number.
    *
-   * @param maxPower the max power value to set
+   * @param power the power value (dBW)
    */
-  public void setMaxPower(double maxPower) {
-    this.maxPower = Double.isNaN(maxPower) ? null : maxPower;
+  public void setPower(Double power) {
+    this.power = power == null ? null : power.isNaN() ? null : power;
   }//</editor-fold>
 
   /**
