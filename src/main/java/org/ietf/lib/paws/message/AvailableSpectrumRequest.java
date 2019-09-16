@@ -165,8 +165,8 @@ public class AvailableSpectrumRequest {
    * capabilities. The Database SHOULD NOT return spectrum that is not
    * compatible with the specified capabilities.
    * <p>
-   * Key Bridge: DeviceCapabilities is (optionally) used for LPA registrations
-   * to specify the desired lease duration.
+   * Key Bridge: For LPA registrations, the DeviceCapabilities is (optionally)
+   * used to specify the desired lease duration.
    */
   private DeviceCapabilities capabilities;
 
