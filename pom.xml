@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>keybridge.lib</groupId>
   <artifactId>ietf-paws</artifactId>
-  <version>0.21.0</version>
+  <version>0.22.0</version>
   <packaging>jar</packaging>
 
   <name>lib-ietf-paws</name>
@@ -49,6 +49,8 @@
     - rename enumerated deviceType to deviceMode
     - add spectrumUseNotify validate method to ensure transmit channel power is provided
     - add request message content validation methods
+    v0.22.0 - add `masterDeviceDesc` field to RegistrationRequest to support SLAVE device registrations
+    - deviceDesc `serialNumber` is required
 
 
   </description>

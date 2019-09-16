@@ -14,10 +14,7 @@
 package org.ietf.lib.paws.message;
 
 import javax.xml.bind.annotation.*;
-import org.ietf.lib.paws.AntennaCharacteristics;
-import org.ietf.lib.paws.DeviceDescriptor;
-import org.ietf.lib.paws.DeviceOwner;
-import org.ietf.lib.paws.GeoLocation;
+import org.ietf.lib.paws.*;
 
 /**
  * 4.4.1. REGISTRATION_REQ
@@ -85,7 +82,6 @@ public class RegistrationRequest {
    */
   @XmlElement(required = true)
   private DeviceOwner deviceOwner;
-
   /**
    * Key Bridge extension. (Optional)
    * <p>
@@ -98,6 +94,27 @@ public class RegistrationRequest {
    * @since v0.22.0
    */
   private String authorization;
+
+  /**
+   * Key Bridge addition. (Optional)
+   * <p>
+   * The registering device MAY include its DeviceCapabilities (Section 5.4) to
+   * limit the available-spectrum response to the spectrum that is compatible
+   * with its capabilities. The Database SHOULD NOT return spectrum that is not
+   * compatible with the specified capabilities.
+   */
+  private DeviceCapabilities capabilities;
+  /**
+   * Key Bridge addition.
+   * <p>
+   * When the registration request is made by a Master Device on behalf of a
+   * Slave Device, the Master Device MUST provide its own descriptor. Key
+   * Bridge: If submitted by a Master Device, the Master DeviceDescriptor is
+   * REQUIRED, but only the `deviceId` and `serialNumber` fields are necessary
+   * to identify the Master Device. Also note that the Master Device MUST be
+   * already registered.
+   */
+  private DeviceDescriptor masterDeviceDesc;
 
   /**
    * /**
@@ -164,6 +181,22 @@ public class RegistrationRequest {
     this.deviceOwner = deviceOwner;
   }
 
+  public DeviceCapabilities getCapabilities() {
+    return capabilities;
+  }
+
+  public void setCapabilities(DeviceCapabilities capabilities) {
+    this.capabilities = capabilities;
+  }
+
+  public DeviceDescriptor getMasterDeviceDesc() {
+    return masterDeviceDesc;
+  }
+
+  public void setMasterDeviceDesc(DeviceDescriptor masterDeviceDesc) {
+    this.masterDeviceDesc = masterDeviceDesc;
+  }
+
   public String getServiceGroupId() {
     return serviceGroupId;
   }
@@ -212,16 +245,16 @@ public class RegistrationRequest {
    */
   public void validate() throws Exception {
     if (deviceDesc == null) {
-      throw new Exception("RegistrationRequest::deviceDesc is required");
+      throw new Exception("deviceDesc is required");
     }
     if (location == null) {
-      throw new Exception("RegistrationRequest::location is required");
+      throw new Exception("location is required");
     }
     if (antenna == null) {
-      throw new Exception("RegistrationRequest::antenna is required");
+      throw new Exception("antenna is required");
     }
     if (deviceOwner == null) {
-      throw new Exception("RegistrationRequest::deviceOwner is required");
+      throw new Exception("deviceOwner is required");
     }
     /**
      * Validate all my children.
