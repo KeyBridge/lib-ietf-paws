@@ -92,7 +92,6 @@ public class DeviceDescriptor {
    */
   @XmlElement(required = true)
   private String deviceId;
-
   /**
    * The manufacturer’s device serial number is <strike>OPTIONAL</string>
    * REQUIRED, although rulesets typically require it. Its maximum length is 64
@@ -375,8 +374,11 @@ public class DeviceDescriptor {
     if (deviceId == null) {
       throw new Exception("deviceId is required");
     }
+    if (serialNumber == null) {
+      throw new Exception("serialNumber is required");
+    }
     if (deviceMode == null) {
-      throw new Exception("deviceType is required");
+      throw new Exception("deviceMode is required");
     }
   }
 
