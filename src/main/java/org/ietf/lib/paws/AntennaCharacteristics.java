@@ -157,11 +157,11 @@ public class AntennaCharacteristics {
   }
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">
-  public double getHeight() {
+  public Double getHeight() {
     return height;
   }
 
-  public void setHeight(double height) {
+  public void setHeight(Double height) {
     this.height = height;
   }
 
