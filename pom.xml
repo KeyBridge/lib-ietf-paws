@@ -52,6 +52,7 @@
     v0.22.0 - add `masterDeviceDesc` field to RegistrationRequest to support SLAVE device registrations
     - deviceDesc `serialNumber` is required
     - add channel validation for spectrum use notify message
+    - add NOT_INITIALIZED error type
 
 
 

@@ -137,9 +137,11 @@ public class AvailableSpectrumRequest {
    * Key Bridge: Rename from `owner` to `deviceOwner` for consistency with other
    * classes.
    *
-   * @deprecated DeviceOwner is NOT accepted in AvailableSpectrumRequest.
-   * DeviceOwner info for SLAVE devices is inherited from the Master.
+   * @deprecated DeviceOwner is NOT used in AvailableSpectrumRequest.
+   * DeviceOwner is exchanged during registration ONLY. Info for SLAVE devices
+   * is inherited from the Master.
    */
+  @Deprecated // established during registration; ignored if presented
   private DeviceOwner deviceOwner;
 
   /**
