@@ -104,6 +104,14 @@ public enum PawsErrorType {
   NOT_REGISTERED(-302, "Device registration required, but the device is not registered."),
 
   /**
+   * Device initialization required prior to receiving service.
+   * <p>
+   * Key Bridge extension.
+   */
+  @XmlEnumValue("-303")
+  NOT_INITIALIZED(-303, "Device initialization required prior to receiving service."),
+
+  /**
    * The request was invalid for some other reason. For example, the API key was
    * invalid.
    */
