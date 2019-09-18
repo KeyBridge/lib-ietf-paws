@@ -153,14 +153,14 @@ public class DeviceDescriptor {
    * organization responsible for the technology specifications; specification
    * number, version and issue date.
    */
-  @XmlElement(required = true)
+  @XmlElement
   private String etsiEnTechnologyId;
   /**
    * Specifies the white-space device category, as defined by the ETSI
    * Harmonised Standard [ETSI-EN-301-598]. Valid values are the strings
    * "master" and "slave". It is case insensitive.
    */
-  @XmlElement(required = true)
+  @XmlElement
   private EtsiDeviceCategory etsiEnDeviceCategory;
 
   /**
@@ -172,7 +172,7 @@ public class DeviceDescriptor {
    * Reference 4.2.4.2.2 Limits and Table 2: Adjacent Channel Leakage Ratios
    * (ACLR) for different Device Emission Classes.
    */
-  @XmlElement(required = true)
+  @XmlElement
   private Integer etsiEnDeviceEmissionsClass;
 
   /**
