@@ -6,23 +6,17 @@
       <xs:enumeration value="MASTER"/>
       <xs:enumeration value="SLAVE"/>
       <xs:enumeration value="LPA"/>
+      <xs:enumeration value="INFO"/>
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="pawsRulesetType">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="FCC_Part15H_2010"/>
-      <xs:enumeration value="FCC_Part15H_2019"/>
-      <xs:enumeration value="ISED_DBS01_2015"/>
-      <xs:enumeration value="ETSI_EN301_598_111"/>
-      <xs:enumeration value="ETSI_EN301_598_211"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="etsiEquipmentType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="A"/>
-      <xs:enumeration value="B"/>
+      <xs:enumeration value="FCC_PART_15_H_2010"/>
+      <xs:enumeration value="FCC_PART_15_H_2019"/>
+      <xs:enumeration value="ISED_DBS_01_2015"/>
+      <xs:enumeration value="ETSI-EN-301-598-1.1.1"/>
+      <xs:enumeration value="ETSI-EN-301-598-2.1.1"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -30,26 +24,6 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="MASTER"/>
       <xs:enumeration value="SLAVE"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="FccDeviceType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="FIXED"/>
-      <xs:enumeration value="MODE2"/>
-      <xs:enumeration value="MODE1"/>
-      <xs:enumeration value="LPA"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="IsedDeviceType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="FIXED"/>
-      <xs:enumeration value="MODE2_HP"/>
-      <xs:enumeration value="MODE2_LP"/>
-      <xs:enumeration value="MODE1"/>
-      <xs:enumeration value="DEV"/>
-      <xs:enumeration value="LPA"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -71,6 +45,24 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="0"/>
       <xs:enumeration value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="pawsErrorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="-101"/>
+      <xs:enumeration value="-102"/>
+      <xs:enumeration value="-103"/>
+      <xs:enumeration value="-104"/>
+      <xs:enumeration value="-105"/>
+      <xs:enumeration value="-201"/>
+      <xs:enumeration value="-202"/>
+      <xs:enumeration value="-301"/>
+      <xs:enumeration value="-302"/>
+      <xs:enumeration value="-303"/>
+      <xs:enumeration value="-400"/>
+      <xs:enumeration value="-403"/>
+      <xs:enumeration value="-500"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

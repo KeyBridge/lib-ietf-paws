@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://ietf.org/lib/paws/message" xmlns:tns="http://ietf.org/lib/paws/message" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://ietf.org/lib/paws" xmlns:ns1="http://ietf.org/lib/paws/type">
 
-  <xs:import namespace="http://ietf.org/lib/paws/type" schemaLocation="lib-ietf-paws.2019-09-05.schema1.xsd"/>
+  <xs:import namespace="http://ietf.org/lib/paws/type" schemaLocation="lib-ietf-paws.2019-09-18.schema1.xsd"/>
 
-  <xs:import namespace="http://ietf.org/lib/paws" schemaLocation="lib-ietf-paws.2019-09-05.schema3.xsd"/>
+  <xs:import namespace="http://ietf.org/lib/paws" schemaLocation="lib-ietf-paws.2019-09-18.schema3.xsd"/>
 
   <xs:element name="AvailableSpectrumRequest" type="tns:AvailableSpectrumRequest"/>
 
@@ -53,20 +53,22 @@
       <xs:element name="exception" type="xs:boolean"/>
       <xs:element name="messages" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="spectrum" type="ns2:AbstractSpectrum" maxOccurs="unbounded"/>
+      <xs:element name="error" type="ns2:Error" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="DeviceValidationRequest">
     <xs:sequence>
-      <xs:element name="deviceDescs" type="ns2:DeviceDescriptor" maxOccurs="unbounded"/>
-      <xs:element name="masterDeviceDesc" type="ns2:DeviceDescriptor" minOccurs="0"/>
+      <xs:element name="deviceDesc" type="ns2:DeviceDescriptor"/>
+      <xs:element name="masterDeviceDesc" type="ns2:DeviceDescriptor"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="DeviceValidationResponse">
     <xs:sequence>
-      <xs:element name="deviceValidities" type="ns2:DeviceValidity" maxOccurs="unbounded"/>
+      <xs:element name="deviceValidity" type="ns2:DeviceValidity"/>
       <xs:element name="databaseChange" type="ns2:DbUpdateSpec" minOccurs="0"/>
+      <xs:element name="error" type="ns2:Error" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -79,8 +81,9 @@
 
   <xs:complexType name="InitializationResponse">
     <xs:sequence>
-      <xs:element name="rulesetInfos" type="ns2:RulesetInfo" maxOccurs="unbounded"/>
+      <xs:element name="rulesetInfo" type="ns2:RulesetInfo"/>
       <xs:element name="databaseChange" type="ns2:DbUpdateSpec" minOccurs="0"/>
+      <xs:element name="error" type="ns2:Error" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -90,6 +93,9 @@
       <xs:element name="location" type="ns2:GeoLocation"/>
       <xs:element name="antenna" type="ns2:AntennaCharacteristics"/>
       <xs:element name="deviceOwner" type="ns2:DeviceOwner"/>
+      <xs:element name="authorization" type="xs:string" minOccurs="0"/>
+      <xs:element name="capabilities" type="ns2:DeviceCapabilities" minOccurs="0"/>
+      <xs:element name="masterDeviceDesc" type="ns2:DeviceDescriptor" minOccurs="0"/>
       <xs:element name="serviceGroupId" type="xs:string" minOccurs="0"/>
       <xs:element name="serviceName" type="xs:string" minOccurs="0"/>
       <xs:element name="serviceDescription" type="xs:string" minOccurs="0"/>
@@ -100,6 +106,7 @@
     <xs:sequence>
       <xs:element name="rulesetId" type="ns1:pawsRulesetType"/>
       <xs:element name="databaseChange" type="ns2:DbUpdateSpec" minOccurs="0"/>
+      <xs:element name="error" type="ns2:Error" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -109,14 +116,17 @@
       <xs:element name="location" type="ns2:GeoLocation"/>
       <xs:element name="masterDeviceDesc" type="ns2:DeviceDescriptor" minOccurs="0"/>
       <xs:element name="masterDeviceLocation" type="ns2:GeoLocation" minOccurs="0"/>
-      <xs:element name="spectra" type="ns2:Spectrum" maxOccurs="unbounded"/>
-      <xs:element name="channels" type="ns2:SpectrumChannel" maxOccurs="unbounded"/>
+      <xs:element name="spectra" type="ns2:Spectrum" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="transmitChannel" type="ns2:SpectrumChannel"/>
+      <xs:element name="receiveChannel" type="ns2:SpectrumChannel"/>
+      <xs:element name="maxTimeRange" type="ns2:EventTime" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="SpectrumUseResponse">
     <xs:sequence>
       <xs:element name="databaseChange" type="ns2:DbUpdateSpec" minOccurs="0"/>
+      <xs:element name="error" type="ns2:Error" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

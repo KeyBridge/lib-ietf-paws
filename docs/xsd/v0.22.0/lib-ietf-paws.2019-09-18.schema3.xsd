@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://ietf.org/lib/paws" xmlns:tns="http://ietf.org/lib/paws" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://ietf.org/lib/paws/type">
 
-  <xs:import namespace="http://ietf.org/lib/paws/type" schemaLocation="lib-ietf-paws.2019-09-03.schema1.xsd"/>
+  <xs:import namespace="http://ietf.org/lib/paws/type" schemaLocation="lib-ietf-paws.2019-09-18.schema1.xsd"/>
 
   <xs:element name="AbstractSpectrum" type="tns:AbstractSpectrum"/>
 
@@ -14,12 +14,6 @@
   <xs:element name="DeviceCapabilities" type="tns:DeviceCapabilities"/>
 
   <xs:element name="DeviceDescriptor" type="tns:DeviceDescriptor"/>
-
-  <xs:element name="DeviceDescriptorEtsi" type="tns:DeviceDescriptorEtsi"/>
-
-  <xs:element name="DeviceDescriptorFcc" type="tns:DeviceDescriptorFcc"/>
-
-  <xs:element name="DeviceDescriptorIsed" type="tns:DeviceDescriptorIsed"/>
 
   <xs:element name="DeviceOwner" type="tns:DeviceOwner"/>
 
@@ -51,49 +45,19 @@
 
   <xs:element name="SpectrumSpec" type="tns:SpectrumSpec"/>
 
-  <xs:complexType name="DeviceDescriptor" abstract="true">
+  <xs:complexType name="DeviceDescriptor">
     <xs:sequence>
-      <xs:element name="deviceId" type="xs:string"/>
-      <xs:element name="deviceMode" type="xs:string"/>
       <xs:element name="rulesetId" type="ns1:pawsRulesetType"/>
+      <xs:element name="deviceMode" type="xs:string"/>
+      <xs:element name="deviceId" type="xs:string"/>
       <xs:element name="serialNumber" type="xs:string"/>
       <xs:element name="manufacturerId" type="xs:string" minOccurs="0"/>
       <xs:element name="modelId" type="xs:string" minOccurs="0"/>
       <xs:element name="emissionDesignator" type="xs:string" minOccurs="0"/>
+      <xs:element name="etsiEnTechnologyId" type="xs:string" minOccurs="0"/>
+      <xs:element name="etsiEnDeviceCategory" type="ns1:etsiDeviceCategory" minOccurs="0"/>
+      <xs:element name="etsiEnDeviceEmissionsClass" type="xs:int" minOccurs="0"/>
     </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="DeviceDescriptorEtsi">
-    <xs:complexContent>
-      <xs:extension base="tns:DeviceDescriptor">
-        <xs:sequence>
-          <xs:element name="etsiEnDeviceType" type="ns1:etsiEquipmentType"/>
-          <xs:element name="etsiEnTechnologyId" type="xs:string"/>
-          <xs:element name="etsiEnDeviceCategory" type="ns1:etsiDeviceCategory"/>
-          <xs:element name="etsiEnDeviceEmissionsClass" type="xs:int"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-
-  <xs:complexType name="DeviceDescriptorFcc">
-    <xs:complexContent>
-      <xs:extension base="tns:DeviceDescriptor">
-        <xs:sequence>
-          <xs:element name="FccDeviceType" type="ns1:FccDeviceType" minOccurs="0"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-
-  <xs:complexType name="DeviceDescriptorIsed">
-    <xs:complexContent>
-      <xs:extension base="tns:DeviceDescriptor">
-        <xs:sequence>
-          <xs:element name="IsedDeviceType" type="ns1:IsedDeviceType" minOccurs="0"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="GeoLocation">
@@ -109,13 +73,13 @@
     <xs:sequence>
       <xs:element name="height" type="xs:double"/>
       <xs:element name="heightType" type="ns1:antennaHeightType"/>
-      <xs:element name="heightUncertainty" type="xs:double"/>
+      <xs:element name="heightUncertainty" type="xs:double" minOccurs="0"/>
       <xs:element name="polarization" type="ns1:antennaPolarizationType"/>
       <xs:element name="radiationPattern" type="xs:string" minOccurs="0"/>
       <xs:element name="gain" type="xs:double" minOccurs="0"/>
       <xs:element name="beamWidthElevation" type="xs:double" minOccurs="0"/>
       <xs:element name="beamWidthAzimuth" type="xs:double" minOccurs="0"/>
-      <xs:element name="rotation" type="xs:double"/>
+      <xs:element name="rotation" type="xs:double" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -216,7 +180,7 @@
       <xs:element name="frequencyMax" type="xs:double"/>
       <xs:element name="frequencyMin" type="xs:double"/>
       <xs:element name="allowed" type="xs:boolean"/>
-      <xs:element name="maxPower" type="xs:double"/>
+      <xs:element name="power" type="xs:double"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -234,8 +198,8 @@
     <xs:complexContent>
       <xs:extension base="tns:AbstractSpectrum">
         <xs:sequence>
-          <xs:element name="blocked" type="xs:boolean"/>
-          <xs:element name="fastPoll" type="xs:boolean"/>
+          <xs:element name="blocked" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="fastPoll" type="xs:boolean" minOccurs="0"/>
           <xs:element name="servicesCo" type="tns:spectrumConsumer" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="servicesAdj" type="tns:spectrumConsumer" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="servicesSecondAdjacent" type="tns:spectrumConsumer" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
@@ -257,19 +221,20 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="Error">
+    <xs:sequence>
+      <xs:element name="type" type="ns1:pawsErrorType" minOccurs="0"/>
+      <xs:element name="code" type="xs:int"/>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+      <xs:element name="data" type="xs:anyType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
   <xs:complexType name="DeviceValidity">
     <xs:sequence>
       <xs:element name="deviceDesc" type="tns:DeviceDescriptor"/>
       <xs:element name="isValid" type="xs:boolean"/>
       <xs:element name="reason" type="xs:string" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="Error">
-    <xs:sequence>
-      <xs:element name="code" type="xs:int"/>
-      <xs:element name="message" type="xs:string" minOccurs="0"/>
-      <xs:element name="data" type="xs:anyType" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
