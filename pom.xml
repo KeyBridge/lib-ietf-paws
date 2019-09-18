@@ -51,6 +51,8 @@
     - add request message content validation methods
     v0.22.0 - add `masterDeviceDesc` field to RegistrationRequest to support SLAVE device registrations
     - deviceDesc `serialNumber` is required
+    - add channel validation for spectrum use notify message
+
 
 
   </description>
