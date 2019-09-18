@@ -154,6 +154,22 @@ public abstract class AbstractSpectrum implements Comparable<AbstractSpectrum> {
   }//</editor-fold>
 
   /**
+   * Validate a spectrum container. At a minimum, the min/max frequencies must
+   * be configured.
+   *
+   * @throws Exception if the minimum or maximum frequencies are not provided
+   * @since v0.23.0 added 09/17/19
+   */
+  public void validate() throws Exception {
+    if (frequencyMax == null) {
+      throw new Exception("frequencyMax is required");
+    }
+    if (frequencyMin == null) {
+      throw new Exception("frequencyMin is required");
+    }
+  }
+
+  /**
    * Sort on the min frequency.
    *
    * @param o the other instance

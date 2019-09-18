@@ -51,6 +51,9 @@ import org.ietf.lib.paws.*;
  * simplify its logic, the device MAY include the union of all parameters
  * required by all supported rulesets. The Database MUST ignore all parameters
  * it does not understand.
+ * <p>
+ * Key Bridge: To release spectrum back to the database a device submits this
+ * message with the `transmitChannel` and/or `receiveChannel` set to null.
  *
  * @author Key Bridge
  */
@@ -223,16 +226,12 @@ public class SpectrumUseNotify {
       throw new Exception("deviceDesc is required.");
     }
     deviceDesc.validate();
+
     if (location == null) {
       throw new Exception("location is required.");
     }
     location.validate();
-    /**
-     * Ensure the transmit power is present when required.
-     */
-    if (transmitChannel != null && transmitChannel.getPower() == null) {
-      throw new Exception("transmitChannel::power (dBW) is required.");
-    }
+
     /**
      * Conditionally validate the master configuration.
      */
@@ -253,6 +252,33 @@ public class SpectrumUseNotify {
       }
 
     }
+
+    /**
+     * Ensure that either a transmit channel or receive channel is provided. If
+     * a transmit channel is indicated, then tnsure the transmit power is
+     * present when required.
+     */
+    if (transmitChannel == null && receiveChannel == null) {
+      throw new Exception("no channel provided");
+    }
+    if (transmitChannel != null) {
+      try {
+        transmitChannel.validate();
+      } catch (Exception exception) {
+        throw new Exception("transmitChannel::" + exception.getMessage());
+      }
+      if (transmitChannel.getPower() == null) {
+        throw new Exception("transmitChannel::power (dBW) is required.");
+      }
+    }
+    if (receiveChannel != null) {
+      try {
+        receiveChannel.validate();
+      } catch (Exception exception) {
+        throw new Exception("receiveChannel::" + exception.getMessage());
+      }
+    }
+
   }
 
 }
