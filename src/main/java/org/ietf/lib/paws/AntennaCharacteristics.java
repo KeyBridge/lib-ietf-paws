@@ -173,11 +173,11 @@ public class AntennaCharacteristics {
     this.heightType = heightType;
   }
 
-  public double getHeightUncertainty() {
+  public Double getHeightUncertainty() {
     return heightUncertainty;
   }
 
-  public void setHeightUncertainty(double heightUncertainty) {
+  public void setHeightUncertainty(Double heightUncertainty) {
     this.heightUncertainty = heightUncertainty;
   }
 
@@ -224,11 +224,11 @@ public class AntennaCharacteristics {
     this.beamWidthAzimuth = beamWidthAzimuth;
   }
 
-  public double getRotation() {
+  public Double getRotation() {
     return rotation;
   }
 
-  public void setRotation(double rotation) {
+  public void setRotation(Double rotation) {
     this.rotation = rotation;
   }//</editor-fold>
 
