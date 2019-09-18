@@ -138,7 +138,7 @@ public class SpectrumUseNotify {
    * they must indicate a usage schedule. When specified, this is the time range
    * when the specified channels will be used.
    */
-  @XmlElement(name = "maxTimeRange")
+  @XmlElement
   private EventTime timeRange;
 
   //<editor-fold defaultstate="collapsed" desc="Getter and Setter">

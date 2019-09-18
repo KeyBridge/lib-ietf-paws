@@ -119,7 +119,7 @@
       <xs:element name="spectra" type="ns2:Spectrum" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="transmitChannel" type="ns2:SpectrumChannel"/>
       <xs:element name="receiveChannel" type="ns2:SpectrumChannel"/>
-      <xs:element name="maxTimeRange" type="ns2:EventTime" minOccurs="0"/>
+      <xs:element name="timeRange" type="ns2:EventTime" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
