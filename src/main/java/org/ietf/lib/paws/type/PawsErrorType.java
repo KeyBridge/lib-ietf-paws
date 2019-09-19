@@ -88,6 +88,13 @@ public enum PawsErrorType {
    */
   @XmlEnumValue("-202")
   INVALID_VALUE(-202, "A parameter value is invalid in some way."),
+  /**
+   * A master device cannot move (change its position) between slave device
+   * registrations. The master device must update its registered position.
+   *
+   * @since v0.22.0 Key Bridge extension added 09/19/19
+   */
+  UNREPORTED_MOVE(-203, "A master device cannot move between slave device registrations. The master device must update its registered position."),
 
   /**
    * The device is not authorized to used the Database. Authorization may be
@@ -102,11 +109,10 @@ public enum PawsErrorType {
    */
   @XmlEnumValue("-302")
   NOT_REGISTERED(-302, "Device registration required, but the device is not registered."),
-
   /**
    * Device initialization required prior to receiving service.
    * <p>
-   * Key Bridge extension.
+   * @since v0.22.0 Key Bridge extension added 09/18/19
    */
   @XmlEnumValue("-303")
   NOT_INITIALIZED(-303, "Device initialization required prior to receiving service."),
